@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Dashboard</title>
+    <link rel="stylesheet" href="Reports.css">
+</head>
+<body>
+    <!-- Header -->
+    <iframe 
+        src="../Profile/profile.html" 
+        id="headerFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Header">
+    </iframe>
+
+    <!-- Sidebar -->
+    <iframe 
+        src="../Sidebar/sidebar.html" 
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
+
+    <!-- Reports Content -->
+     <div class="dark-mode">
+    <div class="container">
+        <div class="row outer-border">
+            <button class="card teal">
+                <div class="image-box" onclick="window.location.href='./Departmental_Planned_Initiative_Report/dpir.php'"><img src="/coordinator/Report/reportcardpic/dpir.png"></div>
+                <p>DEPARTMENTAL PLANNED INITIATIVE REPORT</p>
+            </button>
+            <button class="card olive">
+                <div class="image-box" onclick="window.location.href='./ConsolidatedReport/cnacr.php?type=Consolidated Report'"><img src="/coordinator/Report/reportcardpic/cnacr.png"></div>
+                <p>Community Needs Assessment Consolidated Report</p>
+            </button>
+            <button class="card red"onclick="window.location.href='./3ydpreport/3ydpreport.php'">
+                <div class="image-box"><img src="/coordinator/Report/reportcardpic/3ydp.png"></div>
+                <p>3 year Development Plan</p>
+            </button>
+            <button class="card purple" onclick="window.location.href='./MonthlyAccomplishmentReport/mar.php'">
+                <div class="image-box"><img src="/coordinator/Report/reportcardpic/mar.png"></div>
+                <p>MONTHLY ACCOMPLISHMENT REPORT</p>
+            </button>
+            <button class="card orange"onclick="window.location.href='./ProgramDesign/programdesign.php'">
+                <div class="image-box"><img src="/coordinator/Report/reportcardpic/pd.png"></div>
+                <p>PROGRAM DESIGN</p>
+            </button>
+        </div>
+    </div>
+    </div>
+    <script src="darkmode.js"></script>
+</body>
+</html>

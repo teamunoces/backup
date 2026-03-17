@@ -1,0 +1,712 @@
+/* ===== 1. VARIABLES & CORE SETUP ===== */
+:root {
+    --sidebar-w: 150px;
+    --header-h: 60px;
+    --primary-green: #59af29;
+    --secondary-green: #254911;
+    --light-header: #DDEBF7;
+    --border-dark: #333;
+    --print-header-h: 1.2in;
+    --print-footer-h: 0.6in;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+/* ===== 2. IFRAMES (UI Navigation) ===== */
+#sidebarFrame {
+    width: var(--sidebar-w);
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 1001;
+    border-right: 1px solid #ddd;
+}
+
+#headerFrame {
+    height: var(--header-h);
+    border: none;
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-w);
+    width: calc(100% - var(--sidebar-w));
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===== 3. REPORT HEADER ===== */
+.report-header {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    text-align: center;
+    padding: 5px 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #000; 
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+}
+
+.logo.left {
+    margin-right: 15px;
+}
+
+.logo.right {
+    margin-left: 15px;
+}
+
+.header-text {
+    flex: 1;
+}
+
+.header-text h1 {
+    color: #003366; 
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 2px;
+    font-family: 'Times New Roman', serif; 
+    line-height: 1.1;
+}
+
+.header-text p {
+    margin: 1px 0;
+    font-size: 15px;
+    color: #0066cc; 
+}
+
+.header-text .website {
+    color: #0066cc;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.header-text h2 {
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 8px;
+    letter-spacing: 0.3px;
+}
+
+.header-text h2 + p {
+    font-size: 12px;
+    font-weight: normal;
+    color: #333;
+    margin-top: 2px;
+}
+
+/* ===== 4. MAIN CONTENT LAYOUT ===== */
+.main-wrapper {
+    margin-left: var(--sidebar-w);
+    margin-top: var(--header-h);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: calc(100% - var(--sidebar-w));
+}
+
+.act {
+    width: 100%;
+    max-width: 1100px;
+    background: linear-gradient(135deg, #3d8317, #59AF29);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.table-card label {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.table-card select {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(0,0,0,0.2);
+    color: white;
+    font-size: 14px;
+    width: 250px;
+}
+
+.table-card select option {
+    background: var(--secondary-green);
+    color: white;
+}
+
+/* ===== 5. REPORT CONTAINER ===== */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    background: white;
+    padding: 50px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Banners and Labels */
+.section-banner, .green-banner, .banner {
+    background: linear-gradient(to right, var(--secondary-green), var(--primary-green));
+    color: white;
+    padding: 12px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-top: 30px;
+    border-left: 5px solid #1a330c;
+}
+
+.main-profile-label, .pill-label {
+    background: var(--primary-green);
+    color: white;
+    text-align: center;
+    padding: 15px 40px;
+    margin: 40px auto 20px auto;
+    width: fit-content;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== 6. TABLE STYLING ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border: 1.5px solid var(--border-dark);
+}
+
+thead th {
+    background-color: var(--light-header);
+    color: #333;
+    border: 1px solid var(--border-dark);
+    padding: 12px 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+tbody td {
+    border: 1px solid var(--border-dark);
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+tbody td:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* ===== 7. HEADER CONTENT ===== */
+.header_content {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header_content .intro-header {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.intro-header h1 {
+    font-weight: bold;
+    color: #6482C0; 
+    font-size: 24px;
+    margin: 0 0 2px 0;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.intro-header h2, 
+.intro-header h3 {
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase; 
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+#titleH3Semester, #titleH3Date {
+    text-transform: none; 
+    font-size: 16px;
+}
+
+/* ===== 8. TEXTAREA STYLING ===== */
+.header_content .intro-textarea {
+    display: block;
+    width: 100%;
+    max-width: 1000px; 
+    margin: 20px auto; 
+    min-height: 150px;
+    padding: 15px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: justify;
+    color: #333;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical; 
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fafafa;
+}
+
+.header_content .intro-textarea:focus {
+    border-color: #59af29;
+    box-shadow: 0 0 5px rgba(89, 175, 41, 0.4);
+}
+
+.header_content .intro-textarea::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+/* ===== 9. TEXT DISPLAY ===== */
+.intro-text-display {
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    border: none;
+    background-color: transparent;
+}
+
+p {
+    font-weight: bold;
+}
+
+/* ===== 10. BUTTONS ===== */
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 20px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.buttons button {
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons button[onclick] {
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(37, 73, 17, 0.2);
+}
+
+.buttons button[onclick]:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 73, 17, 0.3);
+}
+
+.buttons a {
+    text-decoration: none;
+}
+
+.buttons a button {
+    background-color: transparent;
+    color: #254911;
+    border: 2px solid #59AF29;
+    box-shadow: none;
+}
+
+.buttons a button:hover {
+    background-color: #f0fdf4;
+    border-color: #254911;
+    transform: translateY(-2px);
+}
+
+.buttons button:active {
+    transform: scale(0.96);
+}
+
+/* ===== 11. FOOTER ===== */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+
+
+/* --- APPROVALS LAYOUT --- */
+.approvals {
+    display: flex;
+    flex-direction: column; /* Stacks sections vertically */
+    gap: 40px;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* "Prepared by:", etc. */
+.approvals .label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* Center the signature names and titles */
+.ces-head-block, .signature-block {
+    text-align: center;
+    align-self: center; /* Centers the block itself */
+    width: 100%;
+}
+
+.name {
+    display: block;
+    font-weight: bold;
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+
+.title, .ces-head {
+    display: block;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-top: 2px;
+}
+
+/* Specific spacing for the CES Head line as seen in image */
+#ces_head {
+    border-bottom: 2px solid black;
+    width: 250px;
+    margin: 0 auto;
+    min-height: 20px;
+}
+
+/* --- DOCUMENT INFORMATION TABLE --- */
+.form-section {
+    margin-top: 50px;
+}
+
+.section-title {
+    display: none; /* Hidden based on the reference image */
+}
+
+.doc-header {
+    border-collapse: collapse;
+    font-size: 12px;
+    border: 1px solid #000;
+}
+
+.doc-header tr td {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+}
+
+/* The dark blue labels on the left */
+.doc-header .label {
+    background-color: #002060; /* Dark Navy */
+    color: #ffffff;
+    font-weight: normal;
+    width: 120px;
+}
+
+.doc-header .separator {
+    width: 10px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.doc-header .value .document_type {
+    background-color: #fff;
+    min-width: 150px;
+}
+
+.doc-header input:disabled {
+    border: none;
+    background: transparent;
+    color: #000;
+    width: 100%;
+    font-family: inherit;
+}
+
+/* ===== 12. PRINT STYLES ===== */
+@media print {
+    /* Hide UI elements */
+    .buttons, 
+    #headerFrame, 
+    #sidebarFrame, 
+    .act, 
+    .sidebar, 
+    .header-nav,
+    .table-card select,
+    .header_content .intro-textarea {
+        display: none !important;
+    }
+
+    /* Page setup */
+    @page {
+          margin: 0.1in 0.5in 0.6in 0.4in; 
+    /* top = header height */
+    }
+
+    body {
+        background-color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Fixed header for all pages */
+    .report-header {
+        position: relative !important;
+        page-break-after: avoid;
+        left: 0;
+        right: 0;
+        height: var(--print-header-h);
+        background: white !important;
+        border-bottom: 2px solid #000;
+        display: flex !important;
+        align-items: center;
+        padding: 0.2in 0.4in;
+        margin: 0;
+    
+    }
+
+    /* Fixed footer for all pages */
+    .footer-bottom {
+       position: relative !important;
+    page-break-before: avoid;
+    
+        left: 0;
+        right: 0;
+        height: var(--print-footer-h);
+        background: white !important;
+        border-top: 1px solid #000;
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 0.4in;
+      
+    }
+
+    /* Main container adjustments */
+    .main-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    .container {
+    max-width: 100% !important;
+    padding: 20px 0.4in !important;
+
+    /* THIS FIXES OVERLAP */
+    margin-top: var(--print-header-h) !important;
+    margin-bottom: var(--print-footer-h) !important;
+
+    box-shadow: none !important;
+    background: white !important;
+    position: relative;
+}
+
+    /* Header text scaling */
+    .logo {
+        height: 0.8in !important;
+        width: auto !important;
+    }
+
+    .header-text h1 {
+        font-size: 15pt !important;
+        margin: 0 !important;
+    }
+
+    .header-text h2 {
+        font-size: 9pt !important;
+        margin: 2px 0 !important;
+    }
+
+    .header-text p,
+    .header-text .website {
+        font-size: 7pt !important;
+        margin: 1px 0 !important;
+    }
+
+    /* Table improvements for print */
+    table {
+        page-break-inside: auto;
+        border: 1px solid #000 !important;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+
+    /* Prevent breaks after headers */
+    h1, h2, h3, h4,
+    .section-banner, 
+    .green-banner, 
+    .banner,
+    .main-profile-label,
+    .pill-label {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* Ensure images print properly */
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+
+    /* Text display for print */
+    .intro-text-display {
+        font-size: 11pt !important;
+        line-height: 1.4 !important;
+        padding: 0 !important;
+    }
+
+    /* Footer logos scaling */
+    .footer-logos img {
+        height: 0.3in !important;
+        width: auto !important;
+    }
+
+    /* Background colors and gradients */
+    .section-banner,
+    .green-banner,
+    .banner {
+        background: var(--secondary-green) !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    thead th {
+        background-color: var(--light-header) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* ===== 13. RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-w: 120px;
+    }
+
+    .header-text h1 {
+        font-size: 30px;
+    }
+
+    .header-text .website {
+        font-size: 16px;
+    }
+
+    .container {
+        padding: 30px 20px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .header_content .intro-header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .header_content .intro-textarea {
+        width: 95%;
+    }
+
+    .report-header {
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        width: 120px;
+    }
+}

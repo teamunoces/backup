@@ -1,0 +1,5 @@
+[14-Mar-2026 12:55:32 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'title_of_program' in 'field list' in C:\Users\ELSIE DANUCO\OneDrive\Desktop\SYSTEM VERSION !\coordinator\Dashboard\PHP\getPending.php:66
+Stack trace:
+#0 C:\Users\ELSIE DANUCO\OneDrive\Desktop\SYSTEM VERSION !\coordinator\Dashboard\PHP\getPending.php(66): mysqli->prepare('\r\n    SELECT id...')
+#1 {main}
+  thrown in C:\Users\ELSIE DANUCO\OneDrive\Desktop\SYSTEM VERSION !\coordinator\Dashboard\PHP\getPending.php on line 66

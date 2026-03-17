@@ -1,0 +1,186 @@
+/* ===== GENERAL ===== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* ===== HEADER ===== */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #38761d; /* dark green */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+/* Change background on scroll */
+body.scrolled .main-header {
+    background-color: #2f5a1d;
+}
+
+/* ===== PROFILE CONTAINER ===== */
+.profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #fff;
+    user-select: none;
+}
+
+/* Profile picture */
+.profile-pic {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    margin-right: 10px;
+    transition: transform 0.2s ease;
+}
+
+.profile-container:hover .profile-pic {
+    transform: scale(1.05);
+}
+
+/* Username + arrow */
+.username {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+/* ===== DROPDOWN MENU ===== */
+.dropdown {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    min-width: 160px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+    transition: all 0.25s ease;
+    z-index: 999;
+    overflow: hidden;
+}
+
+/* Show dropdown */
+.dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dropdown buttons */
+.dropdown button {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect */
+.dropdown button:hover {
+    background-color: #f4f4f4;
+}
+
+/* Different styles for profile and logout */
+.dropdown-btn {
+    color: #38761d;
+    font-weight: 600;
+}
+
+.logout-btn {
+    color: #d30019;
+    font-weight: 600;
+    border-top: 1px solid #eee;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .main-header {
+        padding: 0 10px;
+    }
+
+    .profile-pic {
+        width: 36px;
+        height: 36px;
+        margin-right: 6px;
+    }
+
+    .username {
+        font-size: 14px;
+    }
+
+    .dropdown {
+        min-width: 140px;
+        top: 50px;
+    }
+
+    .dropdown button {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+/* Add these to your existing header.css */
+
+/* Dropdown arrow styling */
+.dropdown-arrow {
+    font-size: 12px;
+    margin-left: 2px;
+    transition: transform 0.2s ease;
+}
+
+/* Rotate arrow when dropdown is open */
+.profile-container.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Profile button specific style */
+.profile-btn {
+    color: #38761d;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+}
+
+/* Add focus styles for accessibility */
+.profile-container:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.dropdown button:focus {
+    outline: 2px solid #38761d;
+    outline-offset: -2px;
+}
+
+/* Active state for profile container */
+.profile-container.active .username {
+    opacity: 0.9;
+}
+
+/* Smooth transition for header */
+.main-header {
+    transition: background-color 0.3s ease;
+}

@@ -1,0 +1,100 @@
+/* ===== General Body ===== */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    color: #333;
+    margin: 20px;
+    background-color: #fff;
+}
+
+/* ===== Header Layout ===== */
+.main-header {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Vertical centering */
+    gap: 15px;
+    border-bottom: 1px solid #eee; /* Light separation */
+    padding-bottom: 15px;
+}
+
+/* ===== Logo Containers ===== */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0; /* Prevents logos from squishing */
+}
+
+.school-logo, .ces-logo, .socotec-box img {
+    width: 90px;        
+    height: 90px;       
+    object-fit: contain;
+}
+
+/* ===== Center Text Styles ===== */
+.header-text {
+    flex-grow: 1;
+}
+
+.school-name {
+    font-size: 26px;
+    color: #4a708b; /* Professional dusty blue */
+    margin: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.underline {
+    text-decoration: underline;
+    text-decoration-color: #d62828; /* Professional red */
+}
+
+.address, .contact {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.website {
+    color: #0000ee;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.website:hover {
+    text-decoration: underline;
+}
+
+/* ===== Right Side Accreditation ===== */
+.accreditation-container {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    border-left: 2px solid #a3c1da; /* Vertical divider */
+    height: 80px; /* Aligns divider height */
+}
+
+/* ===== Bottom Section ===== */
+.header-bottom {
+    margin-top: 20px;
+}
+
+.office-title {
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    color: #222;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.double-line {
+    border-top: 4px double #4a708b; /* Double line effect */
+    width: 100%;
+    margin: 0 auto;
+}

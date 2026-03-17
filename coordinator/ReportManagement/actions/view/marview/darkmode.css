@@ -1,0 +1,244 @@
+/* ================= DARK MODE STYLES ================= */
+
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+/* Report Container */
+body.dark-mode .report-container {
+    background-color: #2d2d2d;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Header Section */
+body.dark-mode .header-content {
+    border-bottom-color: #404040;
+}
+
+body.dark-mode .college-info h1 {
+    color: #fff;
+}
+
+body.dark-mode .college-info p,
+body.dark-mode .college-info a {
+    color: #b0b0b0;
+}
+
+body.dark-mode .office-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .double-line {
+    border-bottom-color: #404040;
+}
+
+/* Main Title */
+body.dark-mode h1 {
+    color: #fff;
+}
+
+/* Input Fields */
+body.dark-mode input[type="text"] {
+    background-color: #3d3d3d;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode input[type="text"]:focus {
+    border-color: #777;
+    outline: none;
+}
+
+body.dark-mode input[type="text"]::placeholder {
+    color: #888;
+}
+
+body.dark-mode .input_cell input {
+    background-color: #3d3d3d;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+/* Tables */
+body.dark-mode .header-table,
+body.dark-mode .main-table,
+body.dark-mode .doc-header {
+    border-color: #404040;
+}
+
+body.dark-mode .header-table td,
+body.dark-mode .main-table th,
+body.dark-mode .main-table td,
+body.dark-mode .doc-header td {
+    border-color: #404040;
+}
+
+body.dark-mode .header-table .label {
+    color: #b0b0b0;
+}
+
+body.dark-mode .main-table th {
+    background-color: #3d3d3d;
+    color: #fff;
+    border-color: #555;
+}
+
+body.dark-mode .main-table td {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #404040;
+}
+
+body.dark-mode .main-table tr:hover td {
+    background-color: #3d3d3d;
+}
+
+/* Editable Cells */
+body.dark-mode [contenteditable="true"] {
+    background-color: #3d3d3d;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    padding: 5px;
+}
+
+body.dark-mode [contenteditable="true"]:focus {
+    border-color: #777;
+    outline: none;
+}
+
+/* Approval Sections */
+body.dark-mode .signature-group {
+    color: #e0e0e0;
+}
+
+body.dark-mode .signature-line {
+    border-bottom: 2px solid #555;
+    color: #fff;
+}
+
+body.dark-mode .title {
+    color: #b0b0b0;
+}
+
+body.dark-mode .label {
+    color: #b0b0b0;
+}
+
+body.dark-mode .admin-block {
+    color: #e0e0e0;
+}
+
+body.dark-mode .name-underlined {
+    border-bottom: 2px solid #555;
+    color: #fff;
+}
+
+/* Document Information Section */
+body.dark-mode .document-info {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+}
+
+body.dark-mode .document-info .label {
+    color: #b0b0b0;
+}
+
+body.dark-mode .document-info .value {
+    color: #e0e0e0;
+}
+
+body.dark-mode .document-info input[type="text"]:disabled {
+    background-color: #3d3d3d;
+    border: 1px solid #555;
+    color: #b0b0b0;
+}
+
+/* Form Code Display */
+body.dark-mode .document_type {
+    color: #e0e0e0;
+    background-color: #3d3d3d;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+/* Buttons */
+body.dark-mode .buttons button {
+    background-color: #3d3d3d;
+    color: #e0e0e0;
+    border: 1px solid #555;
+}
+
+body.dark-mode .buttons button:hover {
+    background-color: #4d4d4d;
+    border-color: #666;
+}
+
+body.dark-mode .buttons button.btn-download {
+    background-color: #2c5282;
+    border-color: #2d3748;
+}
+
+body.dark-mode .buttons button.btn-download:hover {
+    background-color: #2b6cb0;
+}
+
+/* Footer */
+body.dark-mode footer {
+    border-top-color: #404040;
+}
+
+/* Iframes */
+body.dark-mode iframe {
+    background-color: #2d2d2d;
+}
+
+/* Additional Elements */
+body.dark-mode .approvals-container {
+    border-color: #404040;
+}
+
+body.dark-mode hr {
+    border-color: #404040;
+}
+
+/* Print Styles - Keep original print styles */
+@media print {
+    body.dark-mode {
+        background-color: #fff;
+        color: #000;
+    }
+    
+    body.dark-mode .report-container {
+        background-color: #fff;
+        box-shadow: none;
+    }
+    
+    body.dark-mode input[type="text"] {
+        border: none;
+        background-color: transparent;
+        color: #000;
+    }
+    
+    body.dark-mode .main-table td {
+        background-color: #fff;
+        color: #000;
+        border-color: #000;
+    }
+}
+
+/* Dark mode transitions */
+body, 
+body *,
+.report-container,
+input,
+button,
+table,
+td,
+th,
+.signature-line,
+.name-underlined {
+    transition: background-color 0.3s ease, 
+                color 0.2s ease, 
+                border-color 0.2s ease;
+}

@@ -1,0 +1,66 @@
+/* ================= DARK MODE ================= */
+
+body.dark-mode{
+    background:linear-gradient(135deg,#0f1720,#1c2633);
+    color:#e4e4e4;
+}
+
+/* Main container */
+
+body.dark-mode .main{
+    background:#1e1e1e;
+    box-shadow:0 10px 30px rgba(0,0,0,0.7);
+}
+
+/* Card sections */
+
+body.dark-mode .card-section{
+    background:#1e1e1e;
+    border:1px solid #333;
+}
+
+/* Section header */
+
+body.dark-mode .section-header{
+    border-bottom:3px solid #333;
+}
+
+/* Tables */
+
+body.dark-mode .report-table th,
+body.dark-mode .report-table td{
+    border:1px solid #333;
+    color:#e4e4e4;
+}
+
+/* Text */
+
+body.dark-mode .no-reports{
+    color:#aaa;
+}
+
+/* Dropdown */
+
+body.dark-mode select{
+    background:#2a2a2a;
+    color:#e4e4e4;
+    border:1px solid #444;
+}
+
+/* Banner */
+
+body.dark-mode .header-banner.green{
+    background:#8a6000;
+}
+
+/* Badge */
+
+body.dark-mode .type-badge.green{
+    background:#8a6000;
+}
+
+/* Scrollbar */
+
+body.dark-mode ::-webkit-scrollbar-track{
+    background:#1e1e1e;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard Header</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-left">
+            <i class="fas fa-th-large dashboard-icon"></i>
+            <h1 class="header-title"></h1>
+        </div>
+
+        <div class="header-right">
+            <img src="../../login/images/ces.png" alt="School Logo" class="admin-logo">
+            <span class="admin-text" id="admin-toggle">Coordinator</span>
+
+            <!-- Moved inside .header-right for proper dropdown positioning -->
+            <div class="menu-card" id="menu-card">
+                <div class="menu-item">
+                    <label class="switch">
+                        <input type="checkbox" id="mode-toggle">
+                        <span class="slider">
+                            <i class="fa-solid fa-sun icon-sun"></i>
+                            <i class="fa-solid fa-moon icon-moon"></i>
+                        </span>
+                    </label>
+                    <span class="menu-text">System mode</span>
+                </div>
+
+                <div class="menu-item" id="profileBtn">
+                    <div class="icon-circle">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="menu-text">Profile</div>
+
+                </div>
+
+                <div class="menu-item" id="logoutBtn">
+                    <div class="icon-logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </div>
+                    <span class="menu-text">Log out</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+   <div id="overlay" class="overlay" style="display:none;">
+        <div id="profileModal" class="profile-modal">
+            <h2>Edit Profile</h2>
+
+            <input type="hidden" id="userId">
+
+            <label>Username</label>
+            <input type="text" id="username">
+
+            <label>Name</label>
+            <input type="text" id="name">
+
+            <label>Email</label>
+            <input type="email" id="email">
+
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Leave blank if unchanged">
+
+            <label>Role</label>
+            <input type="text" id="role">
+
+            <label>Department</label>
+            <input type="text" id="department">
+
+            <button onclick="updateProfile()">Save Changes</button>
+            <button onclick="closeProfile()">Cancel</button>
+    </div>
+
+    <script src="menu.js"></script>
+    <script src="edit/edit.js"></script>
+
+</body>
+</html>

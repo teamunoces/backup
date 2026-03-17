@@ -1,0 +1,227 @@
+/* =====================================================
+   GLOBAL RESET & BASE
+===================================================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding-top: 80px;      /* Header space */
+    padding-left: 150px;    /* Sidebar space */
+   
+}
+
+/* ===== Header ===== */
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+#sidebarFrame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 100vh;
+    border: none;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+/* =====================================================
+   FORM CONTAINER
+===================================================== */
+.form-container {
+    width: min(95%, 1100px);
+    margin: 30px auto;
+    background-color: #fff;
+    border: 15px solid #4CAF50;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* =====================================================
+   HEADER ACTION (EDIT / SAVE)
+===================================================== */
+.header-action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+}
+
+/* Edit Button */
+.edit-btn {
+    background-color: #e6c543;
+    border: 1px solid #888;
+    border-radius: 20px;
+    padding: 8px 25px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s ease;
+}
+
+.edit-btn:hover {
+    background-color: #d6b836;
+}
+
+/* Save Button (hidden by default) */
+.save-btn {
+    display: none;
+    background-color: #2e7d32;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 25px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.save-btn:hover {
+    background-color: #256428;
+}
+
+/* =====================================================
+   FORM CONTENT
+===================================================== */
+.form-content {
+    margin: 10px 20px 20px;
+    border: 1px solid #999;
+}
+
+/* =====================================================
+   FORM SECTIONS
+===================================================== */
+.form-section:not(:last-child) {
+    border-bottom: 1px solid #999;
+}
+
+.section-title {
+    background-color: #ccc;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 15px;
+    margin: 0;
+    border-bottom: 1px solid #999;
+}
+
+/* =====================================================
+   INPUT ROWS
+===================================================== */
+.input-row {
+    display: flex;
+    gap: 40px;
+    align-items: flex-end;
+    padding: 20px clamp(20px, 4vw, 40px);
+}
+
+/* =====================================================
+   INPUT GROUPS
+===================================================== */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 180px;
+}
+
+.input-group label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    height: 32px;
+    width: 100%;
+    padding: 0 8px;
+    border: 1px solid #666;
+}
+
+/* Disabled input styling */
+input:disabled {
+    background-color: #f2f2f2;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* =====================================================
+   FIXED SMALL FIELD (SUFFIX)
+===================================================== */
+.suffix {
+    flex: 0 0 140px;
+}
+
+.suffix input {
+    width: 100%;
+}
+
+/* =====================================================
+   DOCUMENT HEADER TABLE
+===================================================== */
+.doc-header {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+    background-color: #fff;
+}
+
+.doc-header td {
+    height: 30px;
+    vertical-align: middle;
+    font-size: 14px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.doc-header tr:last-child td {
+    border-bottom: none;
+}
+
+/* Left Labels */
+.label {
+    width: 30%;
+    padding: 0 15px;
+    background-color: #001f5c;
+    color: #fff;
+    font-weight: bold;
+    border-right: 1px solid #000;
+}
+
+/* Middle Separator */
+.separator {
+    width: 20px;
+    text-align: center;
+    font-weight: bold;
+    border-right: 1px dashed #ccc;
+}
+
+/* Right Values */
+.value {
+    padding-left: 15px;
+    font-weight: bold;
+    color: #000;
+}

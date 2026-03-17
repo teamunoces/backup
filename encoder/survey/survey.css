@@ -1,0 +1,227 @@
+/* =========================
+   Modern Fluid Reset & Variables
+========================= */
+:root {
+    --primary: #2e7d32;
+    --primary-hover: #1b5e20;
+    --accent: #0984e3;
+    --bg-body: #f3f6f9;
+    --bg-card: #ffffff;
+    --radius: 12px;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+    --header-height: 150px;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg-body);
+    color: #333;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* =========================
+   Header
+========================= */
+#headerFrame {
+    height: var(--header-height);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: none;
+    z-index: 1000;
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+}
+
+/* =========================
+   Main Container
+========================= */
+.container {
+    margin: calc(var(--header-height) + 20px) auto 40px;
+    width: 92%;
+    max-width: 850px;
+    background: var(--bg-card);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+}
+
+/* =========================
+   Typography
+========================= */
+h1, h2 {
+    text-align: center;
+    color: #111;
+}
+
+h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+h2 { font-size: clamp(1.3rem, 4.5vw, 2rem); }
+
+h3 {
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary);
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+}
+
+p {
+    font-weight: bold;
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+}
+
+/* =========================
+   Grid Layout for Forms
+========================= */
+.row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem 1.5rem;
+    margin-bottom: 1.2rem;
+    align-items: start;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: clamp(10px, 2vw, 14px);
+    border: 1.5px solid #dde1e5;
+    border-radius: 8px;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(9,132,227,0.1);
+}
+
+input.short, input.long {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px 12px;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    display: block;
+    margin-top: 4px;
+}
+
+/* =========================
+   Checkbox Groups
+========================= */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+    padding: clamp(0.8rem, 2vw, 1.2rem);
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #edf2f7;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: clamp(18px, 3vw, 22px);
+    height: clamp(18px, 3vw, 22px);
+    margin-right: 10px;
+    accent-color: var(--primary);
+}
+
+.checkbox-group input.short {
+    grid-column: 1 / -1; /* span full width */
+}
+
+/* =========================
+   Dropdown Groups
+========================= */
+.dropbox-group {
+    display: block;
+    width: 100%;
+    background: #f1f3f5;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border-radius: var(--radius);
+    margin: clamp(1rem, 3vw, 1.5rem) 0;
+}
+
+.dropbox-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* =========================
+   Submit Button
+========================= */
+.submit-btn {
+    width: 100%;
+    max-width: 300px;
+    margin: 2rem auto 0;
+    display: block;
+    padding: clamp(0.8rem, 2.5vw, 1rem);
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.submit-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   Responsive Media Queries
+========================= */
+@media (max-width: 1024px) {
+    :root { --header-height: 130px; }
+    .container { width: 95%; padding: clamp(1rem,3vw,1.8rem); }
+    .row { grid-template-columns: 1fr; }
+    .checkbox-group { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    :root { --header-height: 120px; }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.3rem; }
+    .container { padding: clamp(0.8rem,3vw,1.5rem); }
+}
+
+@media (max-width: 480px) {
+    :root { --header-height: 100px; }
+    .container { margin-top: calc(var(--header-height)+10px); border-radius:0; width:100%; box-shadow:none; padding: clamp(0.8rem,4vw,1.2rem); }
+    h1,h2 { font-size: 1.2rem; text-align:center; }
+    .checkbox-group input[type="checkbox"] { width:20px; height:20px; }
+}

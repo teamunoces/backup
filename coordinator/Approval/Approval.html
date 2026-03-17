@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approval Form</title>
+    <link rel="stylesheet" href="Approval.css">
+    <link rel="stylesheet" href="darkmode.css">
+</head>
+<body>
+
+<!-- Header -->
+<iframe 
+    src="/coordinator/Profile/profile.html" 
+    id="headerFrame"
+    frameborder="0"
+    scrolling="no"
+    title="Header">
+</iframe>
+
+<!-- Sidebar -->
+<iframe 
+    src="/coordinator/Sidebar/sidebar.html" 
+    id="sidebarFrame"
+    frameborder="0"
+    scrolling="no"
+    title="Navigation Sidebar">
+</iframe>
+
+<div class="form-container">
+
+    <!-- ACTION BUTTONS -->
+    <div class="header-action">
+        <button class="edit-btn">Edit <span>&#9998;</span></button>
+        <button class="save-btn">Save 💾</button>
+    </div>
+
+    <div class="form-content">
+
+        <!-- ================= NOTED BY ================= -->
+        <section class="form-section">
+            <h2 class="section-title">Noted by:</h2>
+            <div class="input-row">
+                 <div class="input-group">
+                    <label>Dean</label>
+                    <input type="text" name="dean" disabled>
+                </div>
+                <div class="input-group suffix">
+                  
+                </div>
+                <div class="input-group">
+                    <label>CES Head</label>
+                    <input type="text" name="ces_head" disabled>
+                </div>
+                <div class="input-group suffix">
+                    <label>Suffix</label>
+                    <input type="text" name="ces_head_suffix" disabled>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RECOMMENDING ================= -->
+        <section class="form-section">
+            <h2 class="section-title">Recommending Approval:</h2>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Vice-President for Administrative Affairs and Research</label>
+                    <input type="text" name="vp_acad" disabled>
+                </div>
+                <div class="input-group suffix">
+                    <label>Suffix</label>
+                    <input type="text" name="vp_acad_suffix" disabled>
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Vice-President for Administrative Affairs</label>
+                    <input type="text" name="vp_admin" disabled>
+                </div>
+                <div class="input-group suffix">
+                    <label>Suffix</label>
+                    <input type="text" name="vp_admin_suffix" disabled>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= APPROVED BY ================= -->
+        <section class="form-section">
+            <h2 class="section-title">Approved by:</h2>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>School President</label>
+                    <input type="text" name="school_president" disabled>
+                </div>
+                <div class="input-group suffix">
+                    <label>Suffix</label>
+                    <input type="text" name="school_president_suffix" disabled>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DOCUMENT INFO ================= -->
+        <section class="form-section">
+            <h2 class="section-title">Document Information</h2>
+            <div class="input-row">
+                <table class="doc-header">
+                    
+                    <tr>
+                        <td class="label">Issue Status</td>
+                        <td class="separator">:</td>
+                        <td class="value">
+                            <input type="text" name="issue_status" value="02" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Revision No.</td>
+                        <td class="separator">:</td>
+                        <td class="value">
+                            <input type="text" name="revision_number" value="00" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Date Effective</td>
+                        <td class="separator">:</td>
+                        <td class="value">
+                            <input type="text" name="date_effective" value="02 April 2021" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Approved By</td>
+                        <td class="separator">:</td>
+                        <td class="value">
+                            <input type="text" name="approved_by" value="President" disabled>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script src="Approval.js"></script>
+<script src="darkmode.js"></script>
+</body>
+</html>

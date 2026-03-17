@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coordinator Dashboard</title>
+ 
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="darkmode.css">
+</head>
+<body>
+
+<!-- Header -->
+   <iframe 
+        src="/coordinator/Profile/profile.html" 
+        id="headerFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Header">
+    </iframe>
+
+    <!-- Sidebar -->
+    <iframe 
+        src="/coordinator/Sidebar/sidebar.html" 
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
+
+
+    <div class="dashboard-wrapper">
+       
+        <div class="main">
+      
+            <main>
+
+                      <!-- Community Needs Assessment -->
+                <div class="community-assessment-section">
+                    <div class="section-header">
+                        <h2>COMMUNITY NEEDS ASSESSMENT CONSOLIDATED RESULT</h2>
+                        <button class="view-all-btn"onclick="window.location.href='./consolidated_result/cnacr.html'">
+                            <i class="fas fa-external-link-alt"></i> View All
+                        </button>
+                    </div>
+
+                    <h3 class="barangay-title">BARANGAY</h3>
+                    <div class="chart-container" style="width:100%; height:400px;">
+                            <canvas id="barangayChart"></canvas>
+                    </div>
+
+                </div>
+                
+               <!-- PENDING -->
+                  <section class="card-section">
+                      <div class="header-banner green">PENDING APPROVAL</div>
+
+                      <div class="table-outer">
+                          <div class="filter-row">
+                              <span class="type-badge green">Type:</span>
+                              <select id="pendingTypeFilter" onchange="applyFilter('pending', 'pendingTableBody')">
+                                  <option value="All">All Types</option>
+                                  <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
+                                  <option value="3-year Development Plan">3-year Development Plan</option>
+                                  <option value="Program Design">Program Design</option>    
+                                  <option value="Departamental Planned Initiative Report">Departamental Planned Initiative Report</option>
+                                  <option value="Monthly Report">Monthly Accomplishment Report</option>
+                              </select>
+                          </div>
+
+                          <table class="report-table">
+                              <thead>
+                                  <tr>
+                                      <th class="green-text">Type</th>
+                                      <th class="green-text">Title</th>
+                                      <th class="green-text">Created by</th>
+                                      <th class="green-text">Department</th>
+                                      <th class="green-text">Date</th>
+                                      <th class="green-text">Status</th>
+                            
+                                  </tr>
+                              </thead>
+                              <tbody id="pendingTableBody">
+                                  <tr>
+                                      <td colspan="6" class="no-reports">No pending reports to display.</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </section>
+            </main>
+        </div>
+    </div>
+    <script src="/coordinator/Dashboard/JS/getPending.js"></script>
+    <script src="barangay-table.js"></script>
+    <script src="darkmode.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

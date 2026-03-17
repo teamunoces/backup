@@ -1,0 +1,195 @@
+/* ===== 1. VARIABLES & RESET ===== */
+:root {
+  --sidebar-w: 150px; 
+  --header-h: 60px;
+  --primary-color: #59af29;
+  --secondary-color: #254911;
+  --header-muted: #acc6aa;
+  --border-dark: #333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* ===== 2. IFRAMES (Fixed UI) ===== */
+#sidebarFrame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: #fff;
+  z-index: 1001;
+  border-right: 1px solid #ddd;
+}
+
+#headerFrame {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);
+  width: calc(100% - var(--sidebar-w));
+  height: var(--header-h);
+  background: #fff;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===== 3. MAIN WRAPPER (Centers everything) ===== */
+.main-wrapper {
+  margin-left: var(--sidebar-w);
+  margin-top: var(--header-h);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: calc(100% - var(--sidebar-w));
+}
+
+/* ===== 4. THE ACTION PANEL (Select Barangay) ===== */
+.act {
+  width: 100%;
+  max-width: 1100px; /* LANDSCAPE WIDTH */
+  background: linear-gradient(135deg, #3d8317, #59AF29);
+  padding: 20px;
+  color: #fff;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.table-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.table-card label {
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.table-card select {
+  background: rgba(0, 0, 0, 0.2);
+  color: #000000;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.button-container button {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 8px 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* ===== 5. THE REPORT CONTAINER ===== */
+.container {
+  width: 100%;
+  max-width: 1100px; /* LANDSCAPE WIDTH */
+  background-color: #fff;
+  padding: 40px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.main-profile-label, .pill-label {
+  background: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  padding: 12px 45px;
+  margin: 20px auto 40px auto;
+  width: fit-content;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.green-banner, .section-banner, .banner {
+  background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 0.85em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 25px;
+  border: 1px solid #1a330c;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1.5px solid var(--border-dark);
+  margin-bottom: 10px;
+}
+
+th {
+  background-color: var(--header-muted);
+  color: #000;
+  padding: 12px 8px;
+  border: 1px solid var(--border-dark);
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 10px;
+  border: 1px solid var(--border-dark);
+  text-align: center;
+  font-size: 0.95em; /* Slightly larger for landscape */
+}
+
+td:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+
+/* ===== 6. LANDSCAPE PRINT OPTIMIZATION ===== */
+@media print {
+  @page {
+    size: landscape; /* Force printer to landscape */
+    margin: 5mm;
+  }
+
+  #sidebarFrame, #headerFrame, .act {
+    display: none !important;
+  }
+
+  body, .main-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  table, tr {
+    page-break-inside: avoid !important;
+  }
+}

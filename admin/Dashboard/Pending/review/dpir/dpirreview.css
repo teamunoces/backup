@@ -1,0 +1,381 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    padding-top: 80px; /* Space for your fixed header */
+    padding-left: 170px; /* Space for your fixed sidebar */
+    display: flex;
+    justify-content: center;
+    background-color: #f0f0f0;
+}
+
+
+
+/* ===== Frames (Layout Shell) ===== */
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+
+/*----------------------- Document Header-------------------------------------*/
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* Office Title and Double Line */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+/* ===== Main Form Container ===== */
+
+.report-container {
+    background-color: white;
+    width: 800px;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+
+    /* KEY CHANGES */
+    height: auto;        /* Allows it to grow with content */
+    min-height: 1000px;  /* Optional: keeps it looking like a full page even when empty */
+    overflow: visible;   /* Ensures content doesn't get clipped */
+    margin-bottom: 50px; /* Adds space at the very bottom so it doesn't touch the screen edge */
+}
+h1 {
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Header Table Styling */
+.header-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+.header-table td {
+    border: 1px solid black;
+    height: 30px;
+    padding: 5px 10px;
+}
+
+.label-cell {
+    background-color: #b3b3b3;
+    font-weight: bold;
+    width: 15%;
+    font-size: 14px;
+}
+
+/* Styling for the actual input boxes */
+.input-cell input[type="text"] {
+    width: 250px;           /* Adjust this to match your desired width */
+    height: 22px;           /* Matches the height in your screenshot */
+    border:none; /* Thin, grey border */
+    border-radius: 3px;     /* Slight rounding on the corners */
+    padding: 0 5px;         /* Keeps text from touching the edges */
+    font-family: Arial, sans-serif;
+    outline: none;          /* Removes the highlight when clicked */
+}
+
+/* Optional: Ensure the cell centers the input */
+.input-cell {
+    width: 35%;
+    vertical-align: middle;
+    text-align: left; /* Or 'center' if you want it in the middle of the cell */
+}
+
+
+/* Section Header Styling */
+.section-header {
+    background-color: #b3b3b3;
+    border: 1px solid black;
+    padding: 8px 20px;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+/* Content and Lines */
+.section-content {
+    height: auto;
+    overflow: visible;
+    width: 100%;
+    padding: 10px 5px;
+}
+
+.section-content p {
+    margin: 15px 0 5px 0;
+    font-size: 14px;
+}
+
+.line {
+    display: inline-block;
+    border-bottom: 1.5px solid black;
+    min-width: 200px;
+    margin-left: 5px;
+    vertical-align: bottom;
+}
+
+.line.full {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+    height: 1px;
+}
+
+.line-group {
+    margin-top: 10px;
+}
+
+.line-textarea, .auto-expand {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    width: 50%;
+    padding: 1px;
+    font-family: inherit;
+    font-size: inherit;
+    resize: none;  /* Prevents manual resizing */
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.line-textarea:focus, .auto-expand:focus {
+    border-bottom: 2px solid #007bff;
+}
+
+/* Make the container layout better */
+.section-content p {
+    display: flex;
+    align-items: flex-start;
+    margin: 15px 0;
+}
+
+/*----------------------second section----------------------------*/
+
+#prevailing_needs {
+    padding: 5px 0;
+}
+
+.paper-lines {
+    width: 100%;
+    min-height: 93px; /* Starts with 3 lines */
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    
+    /* Notebook background lines */
+    line-height: 31px;
+    background-image: linear-gradient(transparent 30px, #000 31px);
+    background-size: 100% 31px;
+    background-attachment: local;
+    
+    display: block;
+    padding: 5PX;
+    margin: 0;
+    
+    /* This ensures the height calculation is accurate */
+    box-sizing: border-box;
+}
+
+/* Optional: Removes the border when clicking the box */
+.paper-lines:focus {
+    outline: none;
+}
+
+
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+
+
+/*__________________________________________________BUTTON___________________________________________*/
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Pushes buttons to opposite sides */
+    gap: 200px; /* Optional spacing between buttons */
+    margin-top: 10px; /* spacing from top */
+}
+
+/* Keep individual button styling */
+.rejectbtn, .approvebtn, .needFixes{
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 4px 15px rgba(61, 112, 37, 0.3);
+    width: fit-content;
+}
+
+/* Optional: different colors for reject/approve */
+
+.rejectbtn {
+    background: linear-gradient(to right, #d9534f, #c12d2d); /* red gradient */
+}
+.needFixes {
+    background: linear-gradient(to right, #f0ad4e, #d58512); /* orange gradient */
+}
+.approvebtn {
+    background: linear-gradient(to right, #63b32e, #3d7025); /* green gradient */
+}
+
+/* Hover effect */
+.button-container button:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+    box-shadow: 0 6px 20px rgba(61, 112, 37, 0.4);
+}
+
+.admin-comment-label{
+  font-weight: bold;
+  font-size: 35px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  
+}
+#admincomment{
+    display: block; 
+    width: 100%;          /* Increased slightly for better paragraph width */
+    max-width: 1000px; 
+    margin: 20px auto; 
+    min-height: 150px;   /* Increased height to invite paragraph entry */
+    padding: 15px;
+    
+    /* Typography for Paragraphs */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;    /* Essential for reading long paragraphs */
+    text-align: justify; /* Optional: gives a clean "block" look to paragraphs */
+    color: #333;
+
+    /* Behavior */
+    white-space: pre-wrap; /* Ensures line breaks and spaces are preserved */
+    overflow-wrap: break-word;
+    
+    /* Aesthetics */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical; 
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fafafa; /* Subtle background color change */
+}

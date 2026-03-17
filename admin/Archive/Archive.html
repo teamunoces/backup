@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Account Dashboard</title>
+    <link rel="stylesheet" href="Archive.css">
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Include jQuery for AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <iframe 
+        src="../Profile/profile.html" 
+        id="headerFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Header">
+    </iframe>
+
+    <!-- Sidebar -->
+    <iframe 
+        src="../Nav/navigation.html" 
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
+
+    <div class="container">
+        <div class="header-action">
+            <button class="btn-restore">Restore All</button>
+        </div>
+
+        <div class="card">
+        <div class="card-title">Users Account</div>
+        <div class="card-header">
+            <span>INACTIVE ACCOUNTS</span>
+        </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Department</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inactiveAccountsBody">
+                            <tr>
+                                <td colspan="6">Loading inactive accounts...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        <div class="card">
+            <div class="filter-bar">
+                <div class="type-filter">
+                    <label>Type:</label>
+                    <select>
+                        <option>Records</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <input type="text">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+            <div class="card-header">
+                <span>ARCHIVED REPORTS</span>
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Department</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                     <tbody id="archivedReportsBody">
+                            <tr>
+                                <td colspan="6">Loading inactive accounts...</td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for restore actions -->
+ <script src="Archive.js"></script>
+ <script src="darkmode.js"></script>
+
+
+</body>
+</html>

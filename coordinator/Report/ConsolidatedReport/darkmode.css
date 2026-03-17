@@ -1,0 +1,59 @@
+/* ================= REPORT PAGE DARK MODE ================= */
+
+/* The "Back" of the page */
+body.dark-mode {
+    background-color: #000000; /* Pure black background */
+    color: #e4e4e4;
+}
+
+/* The Container (Gray) */
+body.dark-mode .report-container {
+    background: #2c2c2c; /* Medium gray container */
+    color: #e4e4e4;
+    border: 1px solid #444;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8); /* Stronger shadow for depth */
+}
+
+/* Form Headings and Labels */
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode label,
+body.dark-mode .section-header {
+    color: #ffffff;
+}
+
+/* Horizontal lines */
+body.dark-mode .double-line,
+body.dark-mode .section-header {
+    border-color: #555;
+}
+
+/* Input Fields and Textareas */
+/* We make these slightly darker than the container so they "sink" in */
+body.dark-mode input[type="text"],
+body.dark-mode .paper-lines {
+    background-color: #1e1e1e; 
+    color: #ffffff;
+    border-bottom: 1px solid #555; /* The "paper line" effect */
+}
+
+body.dark-mode .paper-lines::placeholder {
+    color: #888;
+}
+
+/* Gray label boxes (Department/Date) */
+body.dark-mode .bg-gray {
+    background-color: #1a1a1a !important;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+/* Logo filtering */
+body.dark-mode img {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* Footer adjustment */
+body.dark-mode footer {
+    border-top: 1px solid #444;
+}

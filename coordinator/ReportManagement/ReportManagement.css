@@ -1,0 +1,145 @@
+/* =========================================================
+   VARIABLES & THEMES
+========================================================= */
+:root {
+    --sidebar-w: 150px;
+    --header-h: 60px;
+    
+    /* Light Mode */
+    --bg-page: #f0f0f0;
+    --bg-card: #ffffff;
+    --text-main: #333333;
+    --border-color: #cccccc;
+    --table-row-even: #f9f9f9;
+    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+    
+    /* Colors */
+    --green-primary: #5fa337;
+    --green-header: #72bd44;
+    --red-primary: #b53737;
+    --orange-primary: #f59e0b; /* New: Need Fixes Primary */
+    --orange-archive: #e6a23c;
+}
+
+body.dark-mode {
+    /* Dark Mode */
+    --bg-page: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #e0e0e0;
+    --border-color: #333333;
+    --table-row-even: #252525;
+    --shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+/* =========================================================
+   BASE LAYOUT
+========================================================= */
+* { box-sizing: border-box; }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    margin: 0;
+    padding: calc(var(--header-h) + 20px) 20px 20px calc(var(--sidebar-w) + 20px);
+}
+
+/* ===== Frames (Layout Shell) ===== */
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* =========================================================
+   COMPONENTS
+========================================================= */
+.container {
+    max-width: 1000px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 25px; width: 100%;
+}
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+/* Search Bar */
+.search-section { display: flex; justify-content: flex-end; }
+.search-container {
+    border: 2px solid var(--green-primary);
+    border-radius: 25px; padding: 5px 15px;
+    display: flex; align-items: center; width: 300px;
+    background: var(--bg-card);
+}
+.search-container input {
+    border: none; outline: none; width: 100%; height: 25px;
+    background: transparent; color: var(--text-main);
+}
+.search-container i { color: var(--green-primary); font-size: 1.2rem; }
+
+/* Filter Row & Table */
+.filter-row { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.label { color: white; padding: 5px 15px; font-weight: bold; }
+
+/* Section Label Colors */
+.section-green .label { background-color: var(--green-primary); }
+.section-red .label { background-color: var(--red-primary); }
+.section-Orange .label { background-color: var(--orange-primary); }
+
+select {
+    padding: 5px 10px; border-radius: 4px; min-width: 150px;
+    background: var(--bg-card); color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+/* Header Background Colors */
+.table-header {
+    padding: 10px 15px; color: white; font-weight: bold;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.header-green { background-color: var(--green-header); }
+.header-red { background-color: var(--red-primary); }
+.header-Orange { background-color: var(--orange-primary); }
+
+/* Table Content */
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color); }
+
+/* Table Header Text Colors */
+.section-green th { color: var(--green-header); }
+.section-red th { color: var(--red-primary); }
+.section-Orange th { color: var(--orange-primary); }
+
+tbody tr:nth-child(even) { background-color: var(--table-row-even); }
+
+/* Actions */
+.actions { display: flex; justify-content: center; gap: 12px; font-size: 1.1rem; }
+.actions i { color: var(--green-primary); cursor: pointer; }
+
+.archive-icon {
+    background-color: var(--orange-archive);
+    color: white !important; padding: 3px;
+    border-radius: 3px; font-size: 0.8rem;
+}

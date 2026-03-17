@@ -1,0 +1,85 @@
+/* =====================================================
+   DARK MODE OVERRIDES (Slate Gray on Pure Black)
+===================================================== */
+
+/* 1. Page Background */
+body.dark-mode {
+    background-color: #000000 !important;
+}
+
+/* 2. Fix for IFrames (Sidebar/Header) */
+body.dark-mode #sidebarFrame, 
+body.dark-mode #headerFrame {
+    background-color: #1a1a1a !important;
+    border-color: #333 !important;
+}
+
+/* 3. The Action Panel (The Green Gradient Section) */
+body.dark-mode .act {
+    background: linear-gradient(135deg, #1a330c, #2c2c2c) !important;
+    border: 1px solid #444 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .table-card select {
+    background: #121212 !important;
+    color: #ffffff !important;
+    border: 1px solid #555 !important;
+}
+
+/* 4. The Main Container (The "Paper") */
+body.dark-mode .container {
+    background-color: #2c2c2c !important; /* Professional Slate Gray */
+    color: #e4e4e4 !important;
+    border: 1px solid #444 !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8) !important;
+}
+
+/* 5. Table Fixes (Removing the Black & White effect) */
+body.dark-mode table {
+    border: 1.5px solid #444 !important;
+    background-color: #1e1e1e !important;
+}
+
+body.dark-mode th {
+    background-color: #1a1a1a !important; /* Darker than the container */
+    color: #00ff88 !important; /* Neon Green for contrast */
+    border: 1px solid #444 !important;
+}
+
+/* Reset all rows to dark first */
+body.dark-mode tr {
+    background-color: #1e1e1e !important;
+}
+
+/* Override the alternating rows to a subtle gray (Stops the white blinking) */
+body.dark-mode tr:nth-child(even) {
+    background-color: #252525 !important; 
+}
+
+body.dark-mode td {
+    border: 1px solid #333 !important;
+    color: #e4e4e4 !important;
+    background-color: transparent !important; /* Allows row color to show */
+}
+
+/* 6. Banners and Labels */
+body.dark-mode .main-profile-label, 
+body.dark-mode .pill-label,
+body.dark-mode .green-banner, 
+body.dark-mode .section-banner, 
+body.dark-mode .banner {
+    background: linear-gradient(to right, #008f4c, #00ff88) !important;
+    color: #000 !important; /* Black text on neon green for readability */
+    border: 1px solid #444 !important;
+}
+
+/* 7. Button styling */
+body.dark-mode .button-container button {
+    border-color: #00ff88 !important;
+    color: #00ff88 !important;
+}
+
+body.dark-mode .button-container button:hover {
+    background-color: rgba(0, 255, 136, 0.1) !important;
+}

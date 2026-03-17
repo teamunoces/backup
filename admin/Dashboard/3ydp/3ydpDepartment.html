@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Submission Status</title>
+    <link rel="stylesheet" href="3ydpDepartment.css">
+</head>
+<body>
+
+<!-- ===== PAGE LAYOUT ===== -->
+<div class="page-wrapper">
+
+        <!-- ===== SIDEBAR ===== -->
+        <iframe 
+            src="../../Nav/navigation.html"
+            id="sidebarFrame"
+            title="Navigation Sidebar">
+        </iframe>
+         <!-- ===== HEADER ===== -->
+        <iframe 
+            src="../../Profile/profile.html" 
+            id="headerFrame"
+            title="Header">
+        </iframe>
+
+        <!-- ===== CONTENT AREA ===== -->
+        <div class="content-area">
+
+       
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="main-wrapper">
+
+            <div class="green-banner">DEPARTMENTS</div>
+
+            <div class="toolbar">
+
+                <div class="legend">
+                    <span class="legend-label">LEGEND:</span>
+
+                    <div class="legend-item">
+                        <div class="legend-box submitted"></div>
+                        <span>SUBMITTED</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <div class="legend-box pending"></div>
+                        <span>DID NOT SUBMIT</span>
+                    </div>
+                </div>
+
+                <div class="year-selector">
+                    <div class="year-tag">YEAR</div>
+                    <select class="year-dropdown">
+                        <option>2025</option>
+                        <option>2024</option>
+                        <option>2023</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- ===== GRID ===== -->
+            <section class="department-grid">
+
+                <button class="dept-card" onclick="location.href='/admin/Dashboard/3ydp/status.html'">
+                    <div class="pill submitted"></div>
+                    <div class="dept-name">CCIS</div>
+                    <div class="dept-date">DATE: JANUARY 5, 2025</div>
+                </button>
+
+                <button class="dept-card" onclick="location.href='/admin/Dashboard/3ydp/status.html'">
+                    <div class="pill pending"></div>
+                    <div class="dept-name">CTHM</div>
+                    <div class="dept-date">&nbsp;</div>
+                </button>
+
+                <button class="dept-card" onclick="location.href='/admin/Dashboard/3ydp/status.html'">
+                    <div class="pill submitted"></div>
+                    <div class="dept-name">CAS</div>
+                    <div class="dept-date">DATE: DECEMBER 25, 2025</div>
+                </button>
+
+                <button class="dept-card" onclick="location.href='/admin/Dashboard/3ydp/status.html'">
+                    <div class="pill pending"></div>
+                    <div class="dept-name">CBM</div>
+                    <div class="dept-date">&nbsp;</div>
+                </button>
+
+                <button class="dept-card" onclick="location.href='/admin/Dashboard/3ydp/status.html'">
+                    <div class="pill submitted"></div>
+                    <div class="dept-name">JHS</div>
+                    <div class="dept-date">DATE: MARCH 5, 2025</div>
+                </button>
+
+                <button class="dept-card" onclick="location.href='/admin/Dashboard/3ydp/status.html'">
+                    <div class="pill pending"></div>
+                    <div class="dept-name">SHS</div>
+                    <div class="dept-date">&nbsp;</div>
+                </button>
+
+                <button class="dept-card" onclick="location.href='/admin/Dashboard/3ydp/status.html'">
+                    <div class="pill submitted"></div>
+                    <div class="dept-name">CTE</div>
+                    <div class="dept-date">DATE: AUGUST 5, 2025</div>
+                </button>
+
+                <button class="dept-card" onclick="location.href='/admin/Dashboard/3ydp/status.html'">
+                    <div class="pill pending"></div>
+                    <div class="dept-name">CCJE</div>
+                    <div class="dept-date">&nbsp;</div>
+                </button>
+
+            </section>
+
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

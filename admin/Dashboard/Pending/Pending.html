@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Report Status</title>
+
+    <link rel="stylesheet" href="Pending.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <!-- Sidebar -->
+    <iframe 
+        src="../../Nav/navigation.html"
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
+
+    <!-- Header -->
+    <iframe 
+        src="../../Profile/profile.html" 
+        id="headerFrame"
+        title="Header">
+    </iframe>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- PENDING -->
+        <section class="card-section">
+            <div class="header-banner green">PENDING</div>
+
+            <div class="table-outer">
+                <div class="filter-row">
+                    <span class="type-badge green">Type:</span>
+                    <select id="pendingTypeFilter" onchange="applyFilter('pending', 'pendingTableBody')">
+                        <option value="All">All Types</option>
+                        <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
+                        <option value="3-year Development Plan">3-year Development Plan</option>
+                        <option value="Program Design">Program Design</option>    
+                        <option value="Departamental Planned Initiative Report">Departamental Planned Initiative Report</option>
+                        <option value="Monthly Report">Monthly Report</option>
+                    </select>
+                </div>
+
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th class="green-text">Type</th>
+                            <th class="green-text">Title</th>
+                            <th class="green-text">Created by</th>
+                            <th class="green-text">Department</th>
+                            <th class="green-text">Date</th>
+                            <th class="green-text">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pendingTableBody">
+                        <tr>
+                            <td colspan="6" class="no-reports">No pending reports to display.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- NEED FIXES -->
+        <section class="card-section mt-20">
+            <div class="header-banner red">NEED FIXES</div>
+
+            <div class="table-outer">
+                <div class="filter-row">
+                    <span class="type-badge red">Type:</span>
+                    <select id="needFixTypeFilter" onchange="applyFilter('need fix', 'needFixesTableBody')">
+                        <option value="All">All Types</option>
+                        <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
+                        <option value="3-year Development Plan">3-year Development Plan</option>
+                        <option value="Program Design">Program Design</option>   
+                        <option value="Departamental Planned Initiative  Report">Departamental Planned Initiative Report</option>
+                        <option value="Monthly Report">Monthly Report</option>
+                    </select>
+                </div>
+
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th class="green-text">Type</th>
+                            <th class="green-text">Title</th>
+                            <th class="green-text">Created by</th>
+                            <th class="green-text">Department</th>
+                            <th class="green-text">Date</th>
+                            <th class="green-text">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="needFixesTableBody">
+                        <tr>
+                            <td colspan="6" class="no-reports">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="./js/getPending.js"></script>
+<script src="darkmode.js"></script>
+
+</body>
+</html>

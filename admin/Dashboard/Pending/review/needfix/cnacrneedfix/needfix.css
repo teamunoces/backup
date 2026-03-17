@@ -1,0 +1,463 @@
+/* ===== 1. VARIABLES & CORE SETUP ===== */
+:root {
+    --sidebar-w: 150px;
+    --header-h: 60px;
+    --primary-green: #59af29;
+    --secondary-green: #254911;
+    --light-header: #DDEBF7;
+    --border-dark: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+/* ===== 2. IFRAMES (UI Navigation) ===== */
+#sidebarFrame {
+    width: var(--sidebar-w);
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 1001;
+    border-right: 1px solid #ddd;
+}
+
+#headerFrame {
+    height: var(--header-h);
+    border: none;
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-w);
+    width: calc(100% - var(--sidebar-w));
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* --- ------------------------------------REPORT HEADER -------------------------------- */
+
+.report-header {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    text-align: center;
+    padding: 5px 0;         /* Reduced padding */
+    margin-bottom: 15px;    /* Half the original margin */
+    border-bottom: 1px solid #000; 
+}
+
+.logo {
+    width: 200px;           /* Scaled down from 200px */
+    height: auto;
+}
+
+.logo.left {
+    margin-right: 15px;
+}
+
+.logo.right {
+    margin-left: 15px;
+}
+
+.header-text {
+    flex: 1;
+}
+
+.header-text h1 {
+    color: #003366; 
+    font-size: 40px;        /* Smaller title */
+    font-weight: bold;
+    margin-bottom: 2px;     /* Tightened gap */
+    font-family: 'Times New Roman', serif; 
+    line-height: 1.1;
+}
+
+.header-text p {
+    margin: 1px 0;          /* Minimal spacing between lines */
+    font-size: 15px;        /* Smaller detail text */
+    color: #0066cc; 
+}
+
+.header-text .website {
+    color: #0066cc;
+    font-weight: 500;
+    margin-bottom: 5px;     /* Reduced gap */
+    font-size: 20px;
+}
+
+.header-text h2 {
+    font-size: 14px;        /* Scaled down subheader */
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 8px;        /* Reduced gap */
+    letter-spacing: 0.3px;
+}
+
+.header-text h2 + p {
+    font-size: 12px;        /* Smaller secondary text */
+    font-weight: normal;
+    color: #333;
+    margin-top: 2px;
+}
+
+/*Main content______________________________________________________________________*/
+.main-wrapper {
+    margin-left: var(--sidebar-w);
+    margin-top: var(--header-h);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: calc(100% - var(--sidebar-w));
+}
+
+
+.act {
+    width: 100%;
+    max-width: 1100px; /* Landscape width */
+    background: linear-gradient(135deg, #3d8317, #59AF29);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.table-card label {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.table-card select {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(0,0,0,0.2);
+    color: white;
+    font-size: 14px;
+    width: 250px;
+}
+
+
+
+/* ===== 5. THE REPORT CONTAINER (.container) ===== */
+.container {
+    width: 100%;
+    max-width: 1100px; /* Landscape width */
+    background: white;
+    padding: 50px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Banners and Labels */
+.section-banner, .green-banner, .banner {
+    background: linear-gradient(to right, var(--secondary-green), var(--primary-green));
+    color: white;
+    padding: 12px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-top: 30px;
+    border-left: 5px solid #1a330c;
+}
+
+.main-profile-label, .pill-label {
+    background: var(--primary-green);
+    color: white;
+    text-align: center;
+    padding: 15px 40px;
+    margin: 40px auto 20px auto;
+    width: fit-content;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== 6. TABLE STYLING ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border: 1.5px solid var(--border-dark);
+}
+
+thead th {
+    background-color: var(--light-header);
+    color: #333;
+    border: 1px solid var(--border-dark);
+    padding: 12px 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+tbody td {
+    border: 1px solid var(--border-dark);
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+tbody td:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+/* Zebra Striping */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+
+/* ===== Main Container Centering ===== */
+.header_content {
+    text-align: center; /* This centers the text and inline-block elements */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures the textarea and header stack in the center */
+}
+
+/* ===== Header Styling ===== */
+.header_content .intro-header {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    /* Removed fixed color here so the H1/H2 specific colors work */
+    line-height: 1.2; /* Tightened to match the screenshot better */
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.intro-header h1 {
+    font-weight: bold;
+    color: #6482C0; 
+    font-size: 24px;
+    
+    margin: 0 0 2px 0;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.intro-header h2, 
+.intro-header h3 {
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase; 
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Overriding the date and semester to be Title Case as per image */
+#titleH3Semester, #titleH3Date {
+    text-transform: none; 
+    font-size: 16px;
+}
+
+/* ===== Textarea Styling ===== */
+.header_content .intro-textarea {
+    display: block;
+    width: 100%;          /* Increased slightly for better paragraph width */
+    max-width: 1000px; 
+    margin: 20px auto; 
+    min-height: 150px;   /* Increased height to invite paragraph entry */
+    padding: 15px;
+    
+    /* Typography for Paragraphs */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;    /* Essential for reading long paragraphs */
+    text-align: justify; /* Optional: gives a clean "block" look to paragraphs */
+    color: #333;
+
+    /* Behavior */
+    white-space: pre-wrap; /* Ensures line breaks and spaces are preserved */
+    overflow-wrap: break-word;
+    
+    /* Aesthetics */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical; 
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fafafa; /* Subtle background color change */
+}
+/* Focus state for textarea */
+.header_content .intro-textarea:focus {
+    border-color: #59af29;
+    box-shadow: 0 0 5px rgba(89, 175, 41, 0.4);
+}
+
+/* Placeholder styling */
+.header_content .intro-textarea::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .header_content .intro-header h1 {
+        font-size: 1.2rem;
+    }
+    .header_content .intro-textarea {
+        width: 95%;
+    }
+}
+
+.intro-textarea{
+    
+     /* Make non-editable */
+    pointer-events: none;  /* disables editing/clicking */
+    resize: none; 
+}
+
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+
+
+/*__________________________________________________BUTTON___________________________________________*/
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Pushes buttons to opposite sides */
+    gap: 200px; /* Optional spacing between buttons */
+    margin-top: 30px; /* spacing from top */
+}
+
+/* Keep individual button styling */
+.rejectbtn, .approvebtn, .needFixes{
+    padding: 12px 60px;
+    border-radius: 50px;
+    border: none;
+    color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 4px 15px rgba(61, 112, 37, 0.3);
+    width: fit-content;
+}
+
+/* Optional: different colors for reject/approve */
+
+.rejectbtn {
+    background: linear-gradient(to right, #d9534f, #c12d2d); /* red gradient */
+}
+.needFixes {
+    background: linear-gradient(to right, #f0ad4e, #d58512); /* orange gradient */
+}
+.approvebtn {
+    background: linear-gradient(to right, #63b32e, #3d7025); /* green gradient */
+}
+
+/* Hover effect */
+.button-container button:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+    box-shadow: 0 6px 20px rgba(61, 112, 37, 0.4);
+}
+
+textarea{
+    display: block; 
+    width: 100%;          /* Increased slightly for better paragraph width */
+    max-width: 1000px; 
+    margin: 20px auto; 
+    min-height: 150px;   /* Increased height to invite paragraph entry */
+    padding: 15px;
+    
+    /* Typography for Paragraphs */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;    /* Essential for reading long paragraphs */
+    text-align: justify; /* Optional: gives a clean "block" look to paragraphs */
+    color: #333;
+
+    /* Behavior */
+    white-space: pre-wrap; /* Ensures line breaks and spaces are preserved */
+    overflow-wrap: break-word;
+    
+    /* Aesthetics */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical; 
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fafafa; /* Subtle background color change */
+
+    
+    pointer-events: none;  /* disables editing/clicking */
+    resize: none; 
+}
+.admin-comment-label{
+  font-weight: bold;
+  font-size: 35px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  
+}
+#admincomment{
+  pointer-events: auto;  /* enables editing/clicking */
+  border: 1px solid #333;
+  background-color: #fafafa;
+}
+#feedback { 
+    /* High Visibility Background & Border */
+    background-color: #fff9db;    /* Soft Warning Yellow */
+    color: #856404;               /* Deep Brown/Gold Text for readability */
+    border: 2px solid #f59e0b;    /* Thick Amber Border */
+    border-left: 8px solid #f59e0b; /* Extra thick left accent for importance */
+    
+    /* Shadow for depth */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    
+    /* Typography */
+    font-weight: 600;             /* Semi-bold text */
+    font-style: italic;           /* Differentiates feedback from data */
+    padding: 20px;
+    
+    /* Animation to grab attention */
+    border-radius: 4px 12px 12px 4px;
+    transition: transform 0.2s ease;
+}
+

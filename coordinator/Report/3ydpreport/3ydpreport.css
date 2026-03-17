@@ -1,0 +1,537 @@
+/* ===== Header ===== */
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===== Sidebar ===== */
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* Office Title and Double Line */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+/* ===== General Styles ===== */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.011em; /* Tightens the document look */
+    line-height: 1.6;
+    color: #1a202c; /* Deep document-ink gray */
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 100px auto 0 400px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    width: calc(100vw - 250px);
+}
+
+header h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* ===== Input Group Styles ===== */
+.form-section {
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    background-color: #f9fbff;
+}
+
+/* ===== Table Section ===== */
+.table-section {
+    margin: 40px 0;
+}
+
+/* ===== Table Section Fixes ===== */
+.table-wrapper {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+    position: relative; /* Contain the sticky elements */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse usually handles borders better than separate */
+    min-width: 1200px;
+    table-layout: fixed; /* Prevents columns from jumping when typing */
+}
+
+table thead th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 16px 12px;
+    border-bottom: 2px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 20; /* High z-index to stay above focused inputs */
+}
+
+table td {
+    border-bottom: 1px solid #f1f5f9;
+    border-right: 1px solid #f1f5f9;
+    padding: 0;
+    vertical-align: top;
+    height: 1px; /* Important: Allows the textarea to fill the 100% height */
+}
+
+table td textarea,
+table td input {
+    field-sizing: content; /* The "Magic" property */
+    min-height: 50px;
+    width: 100%;
+    min-height: 50px; 
+    border: none;
+    padding: 15px;
+    background: transparent;
+    font-size: 0.95rem;
+    color: #1e293b;
+    line-height: 1.5;
+    display: block;
+    box-sizing: border-box;
+    outline: none;
+    overflow: hidden; /* Hide scrollbars as it grows */
+    resize: none;      /* Disable manual resize to keep it clean */
+    transition: background 0.2s;
+}
+
+/* Fixes the "Overlapping" on Focus */
+table td textarea:focus,
+table td input:focus {
+    background-color: #ffffff;
+    /* Use a solid inset shadow to avoid clipping against cell borders */
+    box-shadow: inset 0 0 0 2px #3498db; 
+    z-index: 10;
+    position: relative; 
+}
+
+/* Specific Column Alignment */
+table td:first-child textarea,
+table td:last-child input {
+    text-align: center;
+    font-weight: 600;
+}
+/* ===== Add Row Button ===== */
+.add-row-btn {
+    margin-top: 15px;
+    background-color: #f8fafc;
+    color: #3498db;
+    border: 2px dashed #cbd5e1;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-row-btn:hover {
+    background-color: #eff6ff;
+    border-color: #3498db;
+    color: #2980b9;
+}
+/* Delete Row Button */
+.delete-row-btn {
+    margin-top: 10px;
+    background-color: #fef2f2;
+    color: #e74c3c;
+    border: 2px dashed #fecaca;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-row-btn:hover {
+    background-color: #fdecea;
+    border-color: #e74c3c;
+    color: #c0392b;
+}
+
+/* ===== Form Buttons ===== */
+.form-actions {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.btn {
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 180px;
+    border: none;
+}
+
+.btn-submit {
+    background: linear-gradient(to right, #64c233, #45752f);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.recommendation-btn {
+    background: linear-gradient(to right, #00b4db, #2b32b2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+.btn-clear {
+    /* Inherits .btn properties (padding, radius, etc.) */
+    background: linear-gradient(to right, #e0e0e0, #bdbdbd);
+    color: #444; /* Darker text for contrast against light gray */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05); /* Optional: adds a tiny bit of definition */
+}
+
+/* If you want a "Ghost" style instead (Hollow) */
+.btn-clear-outline {
+    background: transparent;
+    color: #666;
+    border: 2px solid #bdbdbd;
+    box-shadow: none;
+}
+
+.btn-clear-outline:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.ai-search-bar {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#ai-input {
+    width: 100%;
+    max-width: 600px; /* Limits width for better readability */
+    padding: 14px 25px;
+    font-size: 1rem;
+    border-radius: 50px; /* Matches your .btn pill shape */
+    border: 2px solid #e0e0e0;
+    background: #ffffff;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    color: #333;
+}
+
+/* AI Focus State: Matches your blue button colors */
+#ai-input:focus {
+    border-color: #00b4db; 
+    box-shadow: 0 0 12px rgba(0, 180, 219, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Custom Placeholder styling */
+#ai-input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* ===== AI Recommendation Section ===== */
+#recommendation-container {
+    margin-top: 50px;
+    padding: 30px;
+    background: linear-gradient(145deg, #ffffff 0%, #f0f7ff 100%);
+    border: 1px solid rgba(52, 152, 219, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 4px 10px rgba(52,152,219,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+#recommendation-container::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(0,180,219,0.1) 0%, transparent 70%);
+    z-index: 0;
+}
+
+#recommendation-container h3 {
+    font-size: 1.4rem;
+    color: #1a3a5a;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#recommendation-container h3::before {
+    content: '✨';
+    font-size: 1.2rem;
+}
+
+.recommendation-intro {
+    font-size: 15px;
+    color: #5d7891;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* Recommendation List */
+#recommendation-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#recommendation-list li {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #eef2f7;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#recommendation-list li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 40%;
+    background: linear-gradient(to bottom, #00b4db, #2b32b2);
+    border-radius: 0 4px 4px 0;
+    transition: height 0.3s ease;
+}
+
+#recommendation-list li:hover {
+    background-color: #fff;
+    transform: translateX(8px) translateY(-2px);
+    box-shadow: 0 12px 20px rgba(52,152,219,0.15);
+    border-color: #3498db;
+}
+
+#recommendation-list li:hover::after {
+    height: 80%;
+}
+
+.rec-title {
+    font-weight: 700;
+    font-size: 17px;
+    color: #2c3e50;
+    margin-bottom: 6px;
+}
+
+#recommendation-list li:hover .rec-title {
+    color: #3498db;
+}
+
+.rec-description {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.paper-lines {
+    width: 100%;
+    min-height: 50x; /* Starts with 3 lines */
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    
+    /* Notebook background lines */
+    line-height: 31px;
+    background-image: linear-gradient(transparent 30px, #000 31px);
+    background-size: 100% 31px;
+    background-attachment: local;
+    
+    display: block;
+    padding: 0;
+    margin: 0;
+    
+    /* This ensures the height calculation is accurate */
+    box-sizing: border-box;
+}
+
+/* Optional: Removes the border when clicking the box */
+.paper-lines:focus {
+    outline: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+    #sidebarFrame { width: 200px; }
+    #headerFrame { left: 200px; width: calc(100% - 200px); }
+    .container { margin-left: 200px; width: calc(100vw - 200px); }
+}
+
+@media (max-width: 900px) {
+    #sidebarFrame { width: 150px; }
+    #headerFrame { left: 150px; width: calc(100% - 150px); }
+    .container { margin-left: 150px; width: calc(100vw - 150px); }
+    table { min-width: 700px; }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame { transform: translateX(-100%); }
+    #headerFrame { left: 0; width: 100%; }
+    .container { margin-left: 0; margin-top: 80px; width: 100vw; padding: 20px; }
+    .form-actions { flex-direction: column; align-items: center; }
+    .btn { width: 100%; min-width: unset; }
+    table { min-width: 600px; }
+}
+
+@media (max-width: 600px) {
+    .form-actions { flex-direction: column; align-items: center; }
+    .btn { width: 100%; }
+    table { min-width: 500px; }
+}

@@ -1,0 +1,142 @@
+/* ================= GLOBAL DARK MODE ================= */
+
+/* The "Back" of the page - Pure Black */
+body.dark-mode {
+    background-color: #000000 !important;
+    color: #e4e4e4;
+}
+
+/* ================= CONTAINER (Gray) ================= */
+
+/* Targets the .form-container in programdesign.php */
+body.dark-mode .form-container,
+body.dark-mode .container,
+body.dark-mode .report-container {
+    background-color: #2c2c2c !important; /* Professional Slate Gray */
+    color: #e4e4e4;
+    border: 1px solid #444;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* ================= HEADERS & TEXT ================= */
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3,
+body.dark-mode label,
+body.dark-mode .section-header {
+    color: #ffffff !important;
+}
+
+/* Adjust college info text */
+body.dark-mode .college-info p {
+    color: #bbb;
+}
+
+/* ================= PROGRAM DESIGN TABLE ================= */
+
+/* Main Table Structure */
+body.dark-mode table {
+    border-color: #444 !important;
+    background-color: #1e1e1e;
+}
+
+/* Header Cells (originally light gray/d9d9d9) */
+body.dark-mode th {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+}
+
+/* Editable Data Cells */
+body.dark-mode td {
+    border: 1px solid #444 !important;
+    color: #e4e4e4;
+}
+
+/* Transition from white background to dark for editable cells */
+body.dark-mode td[contenteditable="true"] {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode td[contenteditable="true"]:focus {
+    background-color: #252525 !important;
+    outline: 2px solid #3498db !important; /* Blue glow for focus */
+    position: relative;
+    z-index: 5;
+}
+
+/* ================= BUTTONS ================= */
+
+/* Add & Delete Row Buttons */
+body.dark-mode .add-row-btn,
+body.dark-mode .delete-row-btn {
+    background-color: #1e1e1e !important;
+    border: 2px dashed #444 !important;
+}
+
+body.dark-mode .add-row-btn { color: #3498db !important; }
+body.dark-mode .delete-row-btn { color: #e74c3c !important; }
+
+body.dark-mode .add-row-btn:hover,
+body.dark-mode .delete-row-btn:hover {
+    background-color: #252525 !important;
+    border-style: solid;
+}
+
+/* Submit Button */
+body.dark-mode .submit-button {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5) !important;
+    filter: saturate(0.9);
+}
+
+/* ================= FOOTER & LOGOS ================= */
+
+body.dark-mode footer {
+    border-top: 1px solid #444;
+}
+
+body.dark-mode img {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* ================= INPUT FIELDS DARK MODE ================= */
+
+/* The wrapper for multiple input groups */
+body.dark-mode .input-fields {
+    background-color: #2c2c2c !important; /* Matches the main gray container */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+/* Individual labels within the section */
+body.dark-mode .input-fields label {
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+/* Standard text inputs and textareas within this section */
+body.dark-mode .input-fields input[type="text"],
+body.dark-mode .input-fields textarea,
+body.dark-mode .input-fields select {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+    padding: 12px;
+}
+
+/* Hover and Focus states for better interactivity */
+body.dark-mode .input-fields input:focus,
+body.dark-mode .input-fields textarea:focus {
+    background-color: #252525 !important;
+    border-color: #3498db !important;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    outline: none;
+}
+
+/* Placeholder text contrast */
+body.dark-mode .input-fields ::placeholder {
+    color: #888 !important;
+}

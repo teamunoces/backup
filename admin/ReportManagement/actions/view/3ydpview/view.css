@@ -1,0 +1,485 @@
+/* ===== 1. Layout Adjustments ===== */
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto 40px 180px; /* Adjusted margin to avoid overlap with sidebar */
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    width: calc(100vw - 200px);
+}
+/* ===== Report Header ===== */
+#reportHeaderFrame {
+    width: 100%;
+    height: 200px;
+    border: none;
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+/* ===== General Styles ===== */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.011em; /* Tightens the document look */
+    line-height: 1.6;
+    color: #1a202c; /* Deep document-ink gray */
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 50px auto 0 400px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    width: calc(100vw - 250px);
+}
+
+header h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* ===== Input Group Styles ===== */
+.form-section {
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    background-color: #f9fbff;
+}
+
+/* ===== Table Section ===== */
+.table-section {
+    margin: 40px 0;
+    width: 100%;
+}
+
+/* ===== Table Section Fixes ===== */
+.table-wrapper {
+    overflow-x: visible; /* Remove horizontal scroll */
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Removed min-width: 1200px to prevent sliding */
+    table-layout: fixed; /* Keeps columns equal width so they don't "jump" */
+    word-wrap: break-word; /* Ensures long text breaks to new lines */
+}
+
+table thead th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-size: 0.7rem; /* Smaller font to help 9 columns fit better */
+    padding: 8px 4px;
+    border: 1px solid #cbd5e1;
+    text-transform: uppercase;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+table td {
+    border: 1px solid #cbd5e1;
+    padding: 0;
+    vertical-align: top;
+}
+
+table td textarea {
+    field-sizing: content; /* Grows height automatically */
+    width: 100%;
+    min-height: 60px; 
+    border: none;
+    padding: 10px 5px; /* Reduced side padding to maximize text space */
+    background: transparent;
+    font-size: 0.85rem; /* Slightly smaller for dense data view */
+    color: #1e293b;
+    line-height: 1.4;
+    display: block;
+    box-sizing: border-box;
+    outline: none;
+    overflow: hidden; 
+    resize: none;
+    white-space: pre-wrap; /* Ensures line breaks in data are preserved */
+}
+
+/* Fixes the "Overlapping" on Focus */
+table td textarea:focus {
+    background-color: #f0f7ff;
+    box-shadow: inset 0 0 0 2px #3498db; 
+    z-index: 10;
+    position: relative; 
+}
+
+/* Column-specific widths if you want to prioritize certain data */
+/* Example: Making the "Program" or "Objectives" column slightly wider */
+table th:nth-child(1), table td:nth-child(1) { width: 12%; } /* Program */
+table th:nth-child(3), table td:nth-child(3) { width: 15%; } /* Objectives */
+
+/* Specific Column Alignment */
+table td:first-child textarea {
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+.approvals {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.approval-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.signature-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center names/titles */
+    text-align: center;
+}
+
+.signature-block .label {
+    align-self: flex-start; /* "Noted by" stays left */
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.signature-block .name {
+    width: 80%;
+    border-bottom: 1px solid #000; /* Signature Line */
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    min-height: 20px;
+}
+
+.signature-block .title {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* ===== 4. Document Info Table (The Navy Blue Style) ===== */
+.doc-header {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.doc-header td {
+    border: 1px solid #000;
+    padding: 5px 10px;
+}
+
+.doc-header .label {
+    background-color: #002060;
+    color: #fff;
+    width: 25%;
+    font-size: 11px;
+}
+
+.doc-header .value {
+    width: 75%;
+    font-size: 11px;
+}
+
+/* --- DOCUMENT INFORMATION TABLE (Compact) --- */
+.form-section {
+    margin-top: 20px; /* smaller top spacing */
+}
+
+.section-title {
+    display: none; /* keep hidden */
+}
+
+.doc-header {
+    border-collapse: collapse;
+    font-size: 10px; /* smaller font */
+    border: 1px solid #000;
+}
+
+.doc-header tr td {
+    border: 1px solid #ccc;
+    padding: 2px 6px; /* reduce padding */
+}
+
+.doc-header .label {
+    background-color: #002060; /* Dark Navy */
+    color: #ffffff;
+    font-weight: normal;
+    width: 100px; /* smaller width */
+    font-size: 10px;
+}
+
+.doc-header .separator {
+    width: 8px; /* narrower */
+    text-align: center;
+    background-color: #fff;
+}
+
+.doc-header .value .document_type {
+    background-color: #fff;
+    min-width: 120px; /* smaller */
+    font-size: 10px;
+}
+
+.doc-header input:disabled {
+    border: none;
+    background: transparent;
+    color: #000;
+    width: 100%;
+    font-family: inherit;
+    font-size: 10px; /* smaller text inside inputs */
+    padding: 2px 4px;
+}
+
+/* ===== 10. BUTTONS (Center Top of Container) ===== */
+.buttons {
+    position: relative;           /* relative to container wrapper */
+    display: flex;
+    justify-content: center;      /* horizontal center */
+    margin: 100px auto 5px auto; /* move above container, space below */
+    gap: 15px;
+    z-index: 100;                 /* above container content */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.buttons button {
+
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons button[onclick] {
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(37, 73, 17, 0.2);
+}
+
+.buttons button[onclick]:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 73, 17, 0.3);
+}
+
+.buttons a {
+    text-decoration: none;
+}
+
+.buttons a button {
+    background-color: transparent;
+    color: #254911;
+    border: 2px solid #59AF29;
+    box-shadow: none;
+}
+
+.buttons a button:hover {
+    background-color: #f0fdf4;
+    border-color: #254911;
+    transform: translateY(-2px);
+}
+
+.buttons button:active {
+    transform: scale(0.96);
+}
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+    #sidebarFrame { width: 200px; }
+    #headerFrame { left: 200px; width: calc(100% - 200px); }
+    .container { margin-left: 200px; width: calc(100vw - 200px); }
+}
+
+@media (max-width: 900px) {
+    #sidebarFrame { width: 150px; }
+    #headerFrame { left: 150px; width: calc(100% - 150px); }
+    .container { margin-left: 150px; width: calc(100vw - 150px); }
+    table { min-width: 700px; }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame { transform: translateX(-100%); }
+    #headerFrame { left: 0; width: 100%; }
+    .container { margin-left: 0; margin-top: 80px; width: 100vw; padding: 20px; }
+    .form-actions { flex-direction: column; align-items: center; }
+    .btn { width: 100%; min-width: unset; }
+    table { min-width: 600px; }
+}
+
+@media (max-width: 600px) {
+    .form-actions { flex-direction: column; align-items: center; }
+    .btn { width: 100%; }
+    table { min-width: 500px; }
+}
+
+@media print {
+    /* Hide navigation and buttons */
+    #sidebarFrame,
+    #headerFrame,
+    .buttons {
+        display: none !important;
+    }
+
+    /* --- GENERAL CONTAINER SETUP --- */
+    .container {
+        position: relative !important;
+        margin: 0 !important;
+        padding: 0 0 120px 0 !important; /* space for footer */
+        width: 100% !important;
+        min-height: 100%;
+        display: block !important;
+    }
+
+    body {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    #header h1 {
+    font-size: 15px; /* Change this value */
+    font-weight: bold; /* Optional */
+}
+
+    .input-group{
+      font-size: 12px;
+    }
+
+    /* --- HEADER --- */
+    .report-header {
+        height: auto !important;
+        margin-bottom: 0 !important;
+    }
+
+    .report-header iframe {
+        width: 100%;
+        height: 50% !important;
+        border: none;
+    }
+    .approvals{
+      font-size: 12px;
+    }
+
+    textarea {
+    font-size: 12px !important;
+    border: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    resize: none;
+    }
+
+    table, tr, td { page-break-inside: avoid !important; }
+
+    /* --- PORTRAIT ORIENTATION --- */
+    @page :portrait {
+        size: A4 portrait; /* or letter portrait */
+        margin: 0.5in !important;
+    }
+
+    /* --- LANDSCAPE ORIENTATION --- */
+    @page :landscape {
+        size: A4 landscape; /* or letter landscape */
+        margin: 0.5in !important;
+    }
+}
+

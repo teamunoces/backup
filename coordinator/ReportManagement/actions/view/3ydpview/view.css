@@ -1,0 +1,663 @@
+/* ===== 1. Layout Adjustments ===== */
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto 40px 180px; /* Adjusted margin to avoid overlap with sidebar */
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    width: calc(100vw - 200px);
+}
+/* ===== Report Header ===== */
+#reportHeaderFrame {
+    width: 100%;
+    height: 200px;
+    border: none;
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+/* ===== General Styles ===== */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.011em; /* Tightens the document look */
+    line-height: 1.6;
+    color: #1a202c; /* Deep document-ink gray */
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    max-width: 1100px;
+    margin: 50px auto 0 400px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    width: calc(100vw - 250px);
+}
+
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    padding-right: 10px;
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* Office Title and Double Line */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+/* ===== Form Title ===== */
+header h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* ===== Input Group Styles ===== */
+.form-section {
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    background-color: #f9fbff;
+}
+
+/* ===== Table Section ===== */
+.table-section {
+    margin: 40px 0;
+    width: 100%;
+}
+
+/* ===== Table Section Fixes ===== */
+.table-wrapper {
+    overflow-x: visible; /* Remove horizontal scroll */
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Removed min-width: 1200px to prevent sliding */
+    table-layout: fixed; /* Keeps columns equal width so they don't "jump" */
+    word-wrap: break-word; /* Ensures long text breaks to new lines */
+}
+
+table thead th {
+    font-weight: bold;
+    background-color: #f8fafc;
+    color: #475569;
+    font-size: 0.9rem; /* Smaller font to help 9 columns fit better */
+    padding: 8px 4px;
+    border: 1px solid #cbd5e1;
+    text-transform: uppercase;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+table td {
+    border: 1px solid #cbd5e1;
+    padding: 0;
+    vertical-align: top;
+}
+
+table td textarea {
+    field-sizing: content; 
+    width: 100% !important;
+    min-height: 60px; 
+    border: none !important;
+    padding: 10px 5px !important;
+    background: transparent !important; /* Ensure no gradient background */
+    background-image: none !important;  /* Explicitly remove any inherited lines */
+    font-size: 0.85rem;
+    color: #1e293b;
+    line-height: 1.4;
+    display: block;
+    box-sizing: border-box;
+    outline: none;
+    overflow: hidden; 
+    resize: none;
+    white-space: pre-wrap;
+    pointer-events: none;
+}
+
+/* Fixes the "Overlapping" on Focus */
+table td textarea:focus {
+    background-color: #f0f7ff;
+    box-shadow: inset 0 0 0 2px #3498db; 
+    z-index: 10;
+    position: relative; 
+}
+
+/* Column-specific widths if you want to prioritize certain data */
+/* Example: Making the "Program" or "Objectives" column slightly wider */
+table th:nth-child(1), table td:nth-child(1) { width: 12%; } /* Program */
+table th:nth-child(3), table td:nth-child(3) { width: 15%; } /* Objectives */
+
+/* Specific Column Alignment */
+table td:first-child textarea {
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+.approvals-container {
+    margin-top: 30px;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #000;
+}
+
+.approval-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.signature-group {
+  width: 35%; /* Adjust width to match the line lengths in your image */
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 35px; /* Creates space for the signature signature */
+}
+
+.signature-line {
+  border-bottom: 1.5px solid #000 !important; /* The actual line */
+    min-height: 25px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.title {
+  font-size: 14px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.left-align {
+  text-align: left;
+  width: 100%;
+}
+
+/* Centered Layout for VP and President */
+.approval-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-block {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.name-underlined {
+ font-weight: bold;
+    border-bottom: 1.5px solid #000 !important; /* The actual line for VP/President */
+    text-decoration: none !important; /* Remove standard browser underline */
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0 15px;
+    min-width: 250px;
+}
+
+/* ===== 4. Document Info Table (The Navy Blue Style) ===== */
+.doc-header {
+    width: auto; /* Shrinks the table to fit the content */
+    margin-right: auto; /* Keeps it pushed to the left */
+}
+
+.doc-header td {
+    border: 1px solid #000;
+    padding: 5px 10px;
+}
+
+.doc-header .label {
+    background-color: #002060;
+    color: #fff;
+    width: 25%;
+    font-size: 11px;
+}
+
+.doc-header .value {
+    /* Reduced from 75% to 50% or 30% depending on how narrow you want it */
+    width: 70%; 
+    font-size: 11px;
+    /* This ensures the text stays aligned left within that narrower space */
+    text-align: left; 
+}
+/*------------------------------------------ Container positioning */
+.document-info {
+    margin-top: 50px; /* Adjust based on space needed after approvals */
+    width: 30%;
+}
+
+/* Table Styling */
+.doc-header {
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 11px; /* Matches the compact look of the screenshot */
+    border: 1px solid #d1d1d1;
+}
+
+/* The first column (Dark Blue Background) */
+.doc-header td.label {
+    background-color: #002060; /* Dark Navy Blue */
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    border: 1px solid #d1d1d1;
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
+}
+
+/* The middle colon column */
+.doc-header td:nth-child(2) {
+    width: 2%;
+    padding: 0 1px;
+    font-weight: bold;
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+/* The value column */
+.doc-header td.value {
+    padding: 4px 10px;
+    border: 1px solid #d1d1d1;
+    min-width: 120px;
+}
+
+/* Styling the inputs/text inside the value cell */
+.doc-header td.value input, 
+.doc-header td.value p {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Remove default focus outline for disabled inputs */
+.doc-header td.value input:disabled {
+    color: black;
+    cursor: default;
+}
+
+/* ===== 10. BUTTONS (Center Top of Container) ===== */
+.buttons {
+    position: relative;           /* relative to container wrapper */
+    display: flex;
+    justify-content: center;      /* horizontal center */
+    margin: 100px auto 5px auto; /* move above container, space below */
+    gap: 15px;
+    z-index: 100;                 /* above container content */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.buttons button {
+
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons button[onclick] {
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(37, 73, 17, 0.2);
+}
+
+.buttons button[onclick]:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 73, 17, 0.3);
+}
+
+.buttons a {
+    text-decoration: none;
+}
+
+.buttons a button {
+    background-color: transparent;
+    color: #254911;
+    border: 2px solid #59AF29;
+    box-shadow: none;
+}
+
+.buttons a button:hover {
+    background-color: #f0fdf4;
+    border-color: #254911;
+    transform: translateY(-2px);
+}
+
+.buttons button:active {
+    transform: scale(0.96);
+}
+/* ===== Optimized Paper Lines Fix ===== */
+.paper-lines {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 31px;
+    /* Notebook lines - Only applied to elements with this specific class */
+    background-image: linear-gradient(transparent 30px, #000 31px);
+    background-size: 100% 31px;
+    background-attachment: local;
+    display: block;
+    padding: 5px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+
+
+/* 4. Ensure lines render in Print Mode */
+@media print {
+    .paper-lines {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        background-image: linear-gradient(transparent 29px, #ccc 30px) !important; /* Lighter lines for ink saving */
+    }
+}
+
+/* Optional: Removes the border when clicking the box */
+.paper-lines:focus {
+    outline: none;
+}
+/* Tablet and Small Laptops */
+@media (max-width: 1024px) {
+    .container {
+        margin-left: 170px;
+        width: calc(100% - 190px);
+        padding: 20px;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    /* Hide sidebar or move it to top if necessary */
+    #sidebarFrame {
+        display: none; /* Usually hidden on mobile in favor of a hamburger menu */
+    }
+
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+
+    .container {
+        margin: 80px 10px 20px 10px; /* Center container and remove sidebar gap */
+        width: calc(100% - 20px);
+        padding: 15px;
+    }
+
+    /* Stack approval signatures vertically */
+    .signature-group {
+        width: 100%;
+    }
+
+    .buttons {
+        flex-direction: column; /* Stack buttons on top of each other */
+        align-items: center;
+        margin-top: 80px;
+    }
+
+    .buttons button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* Adjust document info table for small screens */
+    .doc-header {
+        width: 100%;
+    }
+}
+
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    /* 1. Hide Web UI Elements */
+    .buttons,
+    #sidebarFrame,
+    #headerFrame,
+    #reportHeaderFrame {
+        display: none !important;
+    }
+
+    /* 2. Reset Container for Paper */
+    body {
+        background-color: #fff !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    /* 3. Force Color and Background Rendering */
+    * {
+        -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+        print-color-adjust: exact !important;         /* Firefox */
+    }
+
+    /* 4. Maintain Header and Typography Colors */
+    .college-info h1 {
+        color: #4f81bd !important;
+    }
+
+    .double-line {
+        border-top: 4px double #4f81bd !important;
+    }
+
+    .doc-header td.label {
+        background-color: #002060 !important;
+        color: #fff !important;
+    }
+
+    /* 5. Handle Textareas and Notebook Lines */
+   table td textarea {
+        background: none !important;
+        -webkit-print-color-adjust: economy;
+    }
+
+    /* 6. Table Layout */
+    table {
+        width: 100% !important;
+        table-layout: fixed !important;
+        border-collapse: collapse !important;
+    }
+
+   table, th, td {
+        border: 1px solid #000 !important;
+    }
+
+    /* 7. Page Breaks */
+    h1, h2, .form-section {
+        page-break-after: avoid;
+    }
+    
+    .table-section, .approvals-container {
+        page-break-inside: avoid;
+    }
+    .paper-lines {
+        -webkit-print-color-adjust: exact !important;
+    }
+    
+}

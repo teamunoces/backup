@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay Selection</title>
+    <link rel="stylesheet" href="encoder.css">
+</head>
+<body>
+    <header>
+        Barangay Location
+    </header>
+    
+    <!-- Toggle Button -->
+    <div class="toggle-button-container">
+        <button id="toggleDataEntry" class="btn-toggle">
+            <span class="toggle-icon">+</span>
+            <span class="toggle-text">Add Barangay Data</span>
+        </button>
+    </div>
+    
+    <!-- Data Entry Section (Hidden by default) -->
+    <div class="data-entry-section" id="dataEntrySection" style="display: none;">
+        <div class="section-header">
+            <h2>Barangay Data Entry</h2>
+            <button class="btn-close-section" onclick="toggleDataEntry()">×</button>
+        </div>
+        <form id="barangayDataForm">
+            <div class="form-group">
+                <label for="barangaySelect">Select Barangay:</label>
+                <select id="barangaySelect" required>
+                    <option value="">-- Select Barangay --</option>
+                    <option value="aclan">Aclan</option>
+                    <option value="amontay">Amontay</option>
+                    <option value="ataatahon">Ata-Atahon</option>
+                    <option value="barangay1">Barangay 1 Apagan (Poblacion)</option>
+                    <option value="barangay2">Barangay 2 Apagan (Poblacion)</option>
+                    <option value="barangay3">Barangay 3 (Poblacion)</option>
+                    <option value="barangay4">Barangay 4 (Poblacion)</option>
+                    <option value="barangay5">Barangay 5 (Poblacion)</option>
+                    <option value="barangay6">Barangay 6 (Poblacion)</option>
+                    <option value="barangay7">Barangay 7 (Poblacion)</option>
+                    <option value="camagong">Camagong</option>
+                    <option value="cubicubi">Cubi-Cubi</option>
+                    <option value="culit">Culit</option>
+                    <option value="jaguimitan">Jaguimitan</option>
+                    <option value="kinajabangan">Kinabajangan</option>
+                    <option value="punta">Punta</option>
+                    <option value="santaana">Santa Ana</option>
+                    <option value="talisay">Talisay</option>
+                    <option value="triangulo">Triangulo</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="totalPopulation">Total Population:</label>
+                <input type="number" id="totalPopulation" placeholder="Enter total population" min="0" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="households">Number of Households:</label>
+                <input type="number" id="households" placeholder="Enter number of households" min="0" required>
+            </div>
+            
+           
+            
+            <div class="button-group">
+                <button type="submit" class="btn-save">Save Data</button>
+                <button type="button" class="btn-clear" onclick="clearForm()">Clear</button>
+                <button type="button" class="btn-view" onclick="viewSavedData()">View Saved Data</button>
+            </div>
+        </form>
+    </div>
+            <!-- ================= SAVED DATA SECTION ================= -->
+              <div id="savedDataSection" class="saved-data-section" style="display:none;">
+                    <div class="saved-data-header">
+                        <h3>Saved Barangay Data</h3>
+                        <button class="btn-close" onclick="closeSavedData()">×</button>
+                    </div>
+
+                    <div id="savedDataTableWrapper">
+                        <table id="savedDataTable">
+                            <thead>
+                                <tr>
+                                    <th>Barangay</th>
+                                    <th>Population</th>
+                                    <th>Households</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    
+    
+    
+    <div class="container">
+        <div class="card">
+            <a href="./survey/Aclan.php?barangay=aclan">
+               
+                <span>Aclan</span>
+            </a>
+        </div>
+
+        <div class="card">
+            <a href="./survey/Amontay.php?barangay=aclan">
+               
+                <span>Amontay</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Ataatahon.php?barangay=ataatahon">
+                
+                <span>Ata-Atahon</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Barangay1.php?barangay=barangay1">
+               
+                <span>Barangay 1 Apagan (Poblacion)</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Barangay2.php?barangay=barangay2">
+              
+                <span>Barangay 2 Apagan (Poblacion)</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Barangay3.php?barangay=barangay3">
+                
+                <span>Barangay 3 (Poblacion)</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Barangay4.php?barangay=barangay4">
+                
+                <span>Barangay 4 (Poblacion)</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Barangay5.php?barangay=barangay5">
+               
+                <span>Barangay 5 (Poblacion)</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Barangay6.php?barangay=barangay6">
+               
+                <span>Barangay 6 (Poblacion)</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Barangay7.php?barangay=barangay7">
+               
+                <span>Barangay 7 (Poblacion)</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Camagong.php?barangay=camagong">
+               
+                <span>Camagong</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Cubicubi.php?barangay=cubicubi">
+                
+                <span>Cubi-Cubi</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Culit.php?barangay=culit">
+               
+                <span>Culit</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Jaguimitan.php?barangay=jaguimitan">
+                
+                <span>Jaguimitan</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Kinabjangan.php?barangay=kinabjangan">
+                
+                <span>Kinabjangan</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Punta.php?barangay=punta">
+                
+                <span>Punta</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/SantaAna.php?barangay=santaana">
+               
+                <span>Santa Ana</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Talisay.php?barangay=talisay">
+                
+                <span>Talisay</span>
+            </a>
+        </div>
+        <div class="card">
+            <a href="./survey/Triangulo.php?barangay=triangulo">
+               
+                <span>Triangulo</span>
+            </a>
+        </div>
+    </div>
+    <script src="encoder.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMCC CES - Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-box login">
+            <form id="loginForm">
+                <h1>Login</h1>
+                
+                <div id="errorMessage" class="alert alert-error" style="display:none;"></div>
+                
+                <div class="input-box">
+                    <input type="text" placeholder="Username" name="username" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                
+                <div class="input-box">
+                    <input type="password" placeholder="Password" name="password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="btn">Login</button>
+                
+                <p class="reminder"><strong>Gentle Reminder:</strong> Keep your login details private. Do not share your username or password with anyone.</p>
+            </form>
+        </div>
+
+        <div class="toggle-box">
+            <div class="toggle-panel toggle-left">
+                <div class="logo-container">
+                    <img src="images/smcc.png" alt="SMCC Logo" class="toggle-logo">
+                    <img src="images/ces.png" alt="CES Logo" class="toggle-logo ces-logo">
+                </div>
+                <h1>Hello, Welcome to SMCC CES System</h1>
+                <p>Only administrators can create new accounts. Contact your system administrator if you need access</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 <a href="https://www.smccnasipit.edu.ph/" target="_blank">SMCC</a></p>
+    </footer>
+
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+/* DARK MODE GLOBAL STYLES */
+
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .card,
+body.dark-mode .container,
+body.dark-mode .table,
+body.dark-mode .sidebar {
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #2a2a2a !important;
+    color: white !important;
+    border-color: #555 !important;
+}
+
+/* HEADER DARK MODE */
+body.dark-mode .main-header {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid #333;
+}
+
+body.dark-mode .admin-text,
+body.dark-mode .header-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .menu-card {
+    background-color: #1e1e1e !important;
+    color: white !important;
+}

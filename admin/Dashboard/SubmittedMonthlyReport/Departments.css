@@ -1,0 +1,256 @@
+:root {
+    --primary-green: #689f38;
+    --dark-green: #33691e;
+    --status-red: #d32f2f;
+    --dark-red: #8b0000;
+    --bg-gray: #f0f0f0;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-gray);
+}
+
+/* ===== Layout ===== */
+.page-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.content-wrapper {
+    flex: 1;
+    padding: 100px 20px 20px 20px; /* Added top padding to account for fixed header (80px + 20px buffer) */
+    overflow-y: auto;
+}
+
+/* ===== Header ===== */
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===== Sidebar ===== */
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+/* ===== Main Container ===== */
+.main-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 8px; /* Added for better fit and visual cohesion */
+    overflow: hidden; /* Ensures content doesn't spill out */
+}
+
+/* ===== Section Header ===== */
+.section-header {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 12px 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px 8px 0 0; /* Matches main-container border-radius */
+}
+
+/* ===== Toolbar ===== */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    font-size: 12px;
+    border-bottom: 1px solid #eee; /* Added separator for better structure */
+}
+
+.legend {
+    display: flex;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.box {
+    width: 25px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+.box.green {
+    background: var(--primary-green);
+}
+
+.box.red {
+    background: var(--status-red);
+}
+
+/* ===== Year Selector ===== */
+.year-selector {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.year-label {
+    background: var(--dark-green);
+    color: white;
+    padding: 5px 10px;
+}
+
+.year-selector select {
+    border: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    outline: none;
+}
+
+/* ===== Month Grid ===== */
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.month-card {
+    border: 1.5px solid #333;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+    background: #fff; /* Ensures cards stand out */
+}
+
+/* Status Bars */
+.status-bar {
+    height: 45px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+.status-bar.submitted {
+    background: linear-gradient(to right, var(--primary-green), var(--dark-green));
+}
+
+.status-bar.pending {
+    background: linear-gradient(to right, #ff1744, var(--dark-red));
+}
+
+.month-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.date-sub {
+    font-size: 10px;
+    color: #666;
+    text-transform: uppercase;
+}
+
+/* ===== View Toggle ===== */
+.view-toggle {
+    display: flex;
+    background: #fff;
+    color: #333;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #ccc; /* Added border for consistency */
+}
+
+.view-icon {
+    padding: 5px 10px;
+    border-right: 1px solid #ccc;
+    cursor: pointer; /* Added for interactivity */
+}
+
+.view-icon.active {
+    background: #ddd;
+}
+
+/* ===== Department Buttons ===== */
+.dept-footer {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    border-top: 1px solid #eee; /* Added separator */
+}
+
+.dept-btn {
+    padding: 10px 30px;
+    border: 1.5px solid #333;
+    border-radius: 25px;
+    background: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dept-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.15);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    #sidebarFrame {
+        display: none;
+    }
+
+    .content-wrapper {
+        padding: 90px 10px 10px 10px; /* Adjusted for mobile, accounting for header */
+    }
+
+    .toolbar {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    #headerFrame {
+        left: 0; /* Full width on mobile since sidebar is hidden */
+        width: 100%;
+    }
+}

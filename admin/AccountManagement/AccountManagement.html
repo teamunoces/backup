@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Management System</title>
+    <link rel="stylesheet" href="AccMan.css">
+    <link rel="stylesheet" href="darkmode.css">
+</head>
+<body>
+    <!-- Header -->
+    <iframe 
+        src="../Profile/profile.html" 
+        id="headerFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Header">
+    </iframe>
+
+    <!-- Sidebar -->
+    <iframe 
+        src="../Nav/navigation.html" 
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
+
+    <div class="container">
+        <div class="top-action">
+            <button class="btn-main" id="createAccountBtn">Create Account</button>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="filter-group">
+                    <label>Type:</label>
+                    <select id="filterSelect">
+                        <option value="">All</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search by username or email">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+
+            <div class="table-title">ACCOUNTS</div>
+
+            <table class="account-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="accountTableBody">
+                    <!-- Dynamic rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+                <h3>CREATE ACCOUNT</h3>
+                <form class="modal-form" id="createAccountForm">
+                    <div class="form-group">
+                        <label>Username:</label>
+                        <input type="text" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Role:</label>
+                        <select name="role" required>
+                            <option value="admin">admin</option>
+                            <option value="coordinator">coordinator</option>
+                            <option value="encoder">encoder</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Department:</label>
+                        <select name="department" required>
+                            <option value="CCIS">CCIS</option>
+                            <option value="CTHM">CTHM</option>
+                            <option value="CAS">CAS</option>
+                            <option value="CBM">CBM</option>
+                            <option value="JHS">JHS</option>
+                            <option value="SHS">SHS</option>
+                            <option value="CTE">CTE</option>
+                            <option value="CCJE">CCJE</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn-create">CREATE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="AccMan.js"></script>
+    <script src="darkmode.js"></script>
+</body>
+</html>

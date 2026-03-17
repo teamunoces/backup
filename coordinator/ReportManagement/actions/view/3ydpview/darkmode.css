@@ -1,0 +1,104 @@
+/* Body and Container */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .container {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: #ffffff;
+}
+
+/* Form Elements */
+body.dark-mode .paper-lines, 
+body.dark-mode textarea {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-bottom: 1px solid #444;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+/* Tables */
+body.dark-mode table {
+    border-color: #444;
+}
+
+body.dark-mode th {
+    background-color: #2c2c2c;
+    color: #ffffff;
+}
+
+body.dark-mode td {
+    border-color: #444;
+}
+
+/* Buttons */
+body.dark-mode button {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+body.dark-mode button:hover {
+    background-color: #444;
+}
+/* Apply styles only when .dark-mode is active on body */
+body.dark-mode .approvals-container {
+    color: #e0e0e0; /* Off-white for better readability */
+}
+
+/* 1. Signature Lines */
+body.dark-mode .signature-line {
+    border-bottom: 1.5px solid #ffffff; /* White line for visibility */
+}
+
+/* 2. Admin Blocks & Underlines */
+body.dark-mode .name-underlined {
+    color: #ffffff;
+    text-decoration-color: #ffffff; /* Ensures the underline matches text */
+}
+
+/* 3. Document Info Table (Adjusting the Navy Blue) */
+body.dark-mode .doc-header {
+    border: 1px solid #444; /* Darker border for the table */
+}
+
+body.dark-mode .doc-header td {
+    border: 1px solid #444;
+}
+
+/* The Label Column: Keep it blue but slightly desaturated for dark mode */
+body.dark-mode .doc-header td.label {
+    background-color: #1a3a6d; /* Slightly lighter Navy to stand out from black */
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+/* The Value Column */
+body.dark-mode .doc-header td.value {
+    background-color: #1e1e1e; /* Dark background for input cells */
+    border: 1px solid #444;
+}
+
+/* Input/Text inside the value cell */
+body.dark-mode .doc-header td.value input, 
+body.dark-mode .doc-header td.value p {
+    color: #e0e0e0; /* Light text for form values */
+}
+
+/* Middle colon column */
+body.dark-mode .doc-header td:nth-child(2) {
+    color: #e0e0e0;
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+}
+
+/* Reset disabled input colors for dark mode */
+body.dark-mode .doc-header td.value input:disabled {
+    color: #b0b0b0; /* Dimmed text for disabled fields */
+}

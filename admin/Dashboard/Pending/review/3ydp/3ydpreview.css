@@ -1,0 +1,284 @@
+/* ===== Header ===== */
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===== Sidebar ===== */
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+/* ===== Report Header ===== */
+#reportHeaderFrame {
+    width: 100%;
+    height: 200px;
+    border: none;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* ===== General Styles ===== */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.011em; /* Tightens the document look */
+    line-height: 1.6;
+    color: #1a202c; /* Deep document-ink gray */
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 100px auto 0 400px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    width: calc(100vw - 250px);
+}
+
+header h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* ===== Input Group Styles ===== */
+.form-section {
+    margin-bottom: 30px;
+}
+
+.input-group {
+    pointer-events: none;  /* disables editing/clicking */
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    background-color: #f9fbff;
+}
+
+/* ===== Table Section ===== */
+.table-section {
+    margin: 40px 0;
+}
+
+/* ===== Table Section Fixes ===== */
+.table-wrapper {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+    position: relative; /* Contain the sticky elements */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse usually handles borders better than separate */
+    min-width: 1200px;
+    table-layout: fixed; /* Prevents columns from jumping when typing */
+}
+
+table thead th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 16px 12px;
+    border-bottom: 2px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 20; /* High z-index to stay above focused inputs */
+}
+
+table td {
+    border-bottom: 1px solid #f1f5f9;
+    border-right: 1px solid #f1f5f9;
+    padding: 0;
+    vertical-align: top;
+    height: 1px; /* Important: Allows the textarea to fill the 100% height */
+}
+
+table td textarea,
+table td input {
+    field-sizing: content; /* The "Magic" property */
+    min-height: 50px;
+    width: 100%;
+    min-height: 50px; 
+    border: none;
+    padding: 15px;
+    background: transparent;
+    font-size: 0.95rem;
+    color: #1e293b;
+    line-height: 1.5;
+    display: block;
+    box-sizing: border-box;
+    outline: none;
+    overflow: hidden; /* Hide scrollbars as it grows */
+    resize: none;      /* Disable manual resize to keep it clean */
+    transition: background 0.2s;
+    pointer-events: none;  /* disables editing/clicking */;
+}
+
+/* Fixes the "Overlapping" on Focus */
+table td textarea:focus,
+table td input:focus {
+    background-color: #ffffff;
+    /* Use a solid inset shadow to avoid clipping against cell borders */
+    box-shadow: inset 0 0 0 2px #3498db; 
+    z-index: 10;
+    position: relative; 
+}
+
+/* Specific Column Alignment */
+table td:first-child textarea,
+table td:last-child input {
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+
+/*__________________________________________________BUTTON___________________________________________*/
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Pushes buttons to opposite sides */
+    gap: 200px; /* Optional spacing between buttons */
+    margin-top: 30px; /* spacing from top */
+}
+
+/* Keep individual button styling */
+.rejectbtn, .approvebtn, .needFixes{
+    padding: 12px 60px;
+    border-radius: 50px;
+    border: none;
+    color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 4px 15px rgba(61, 112, 37, 0.3);
+    width: fit-content;
+}
+
+/* Optional: different colors for reject/approve */
+
+.rejectbtn {
+    background: linear-gradient(to right, #d9534f, #c12d2d); /* red gradient */
+}
+.needFixes {
+    background: linear-gradient(to right, #f0ad4e, #d58512); /* orange gradient */
+}
+.approvebtn {
+    background: linear-gradient(to right, #63b32e, #3d7025); /* green gradient */
+}
+
+/* Hover effect */
+.button-container button:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+    box-shadow: 0 6px 20px rgba(61, 112, 37, 0.4);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+    #sidebarFrame { width: 200px; }
+    #headerFrame { left: 200px; width: calc(100% - 200px); }
+    .container { margin-left: 200px; width: calc(100vw - 200px); }
+}
+
+@media (max-width: 900px) {
+    #sidebarFrame { width: 150px; }
+    #headerFrame { left: 150px; width: calc(100% - 150px); }
+    .container { margin-left: 150px; width: calc(100vw - 150px); }
+    table { min-width: 700px; }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame { transform: translateX(-100%); }
+    #headerFrame { left: 0; width: 100%; }
+    .container { margin-left: 0; margin-top: 80px; width: 100vw; padding: 20px; }
+    .form-actions { flex-direction: column; align-items: center; }
+    .btn { width: 100%; min-width: unset; }
+    table { min-width: 600px; }
+}
+
+@media (max-width: 600px) {
+    .form-actions { flex-direction: column; align-items: center; }
+    .btn { width: 100%; }
+    table { min-width: 500px; }
+}

@@ -1,0 +1,423 @@
+/* =========================================================
+   RESET
+========================================================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    background:#f8fafc;
+    color:#333;
+}
+
+/* =========================================================
+   LAYOUT VARIABLES
+========================================================= */
+:root{
+    --sidebar-width:150px;
+    --header-height:60px;
+}
+
+/* =========================================================
+   WRAPPER
+========================================================= */
+.page-wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+#sidebarFrame{
+    position:fixed;
+    top:0;
+    left:0;
+    width:var(--sidebar-width);
+    height:100vh;
+    border:none;
+    background:#fff;
+    z-index:1000;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+#headerFrame{
+    position:fixed;
+    top:0;
+    left:var(--sidebar-width);
+    height:var(--header-height);
+    width:calc(100% - var(--sidebar-width));
+    border:none;
+    background:#fff;
+    z-index:1001;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+.dashboard-main-content{
+    width: 80%;
+    margin-left:250px;
+    margin-top:var(--header-height);
+    padding:30px;
+    display:flex;
+    justify-content:center;
+}
+
+.container{
+    width:100%;
+    max-width:1300px;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+/* =========================================================
+   DASHBOARD HEADER + STATS
+========================================================= */
+.dashboard-row{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    align-items:stretch;
+}
+
+.dashboard-header{
+    padding:25px;
+    border-radius:12px;
+    background:linear-gradient(to right,#41801E,#63C02F);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.dashboard-header h1{
+    font-size:clamp(1.5rem,2vw,2.2rem);
+}
+
+/* =========================================================
+   STAT CARDS + BUTTON
+========================================================= */
+.stats-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.stat-card,
+.stat-button{
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 4px 20px rgba(0,0,0,.05);
+    transition:.2s;
+    cursor:pointer;
+    border:none;
+    width:100%;
+    max-width:300px;
+    margin:auto;
+}
+
+.stat-card:hover,
+.stat-button:hover{
+    transform:translateY(-3px);
+    background:#f0f0f0;
+}
+
+.stat-card h3,
+.stat-button h3{
+    color:#254911;
+    font-size:1.1rem;
+    margin-bottom:8px;
+}
+
+.stat-number{
+    font-size:2rem;
+    font-weight:bold;
+    color:#59AF29;
+}
+
+.stat-label{
+    font-size:.9rem;
+    color:#666;
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    padding:20px;
+    border-radius:12px;
+    background:linear-gradient(to right,#41801E,#63C02F);
+    color:white;
+}
+
+.view-all-btn{
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    background:rgba(255,255,255,.15);
+    color:white;
+    cursor:pointer;
+}
+
+.view-all-btn:hover{
+    background:rgba(255,255,255,.25);
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+.development-plan-section,
+.community-assessment-section{
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+/* =========================================================
+   COMMUNITY GRAPH STYLING
+========================================================= */
+
+.community-assessment-section .chart-container {
+    margin-top: 20px;
+    background: linear-gradient(145deg,#f8fafc,#ffffff);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+
+    /* FIX FOR DISTORTION */
+    width: 100%;
+    height: 400px;        /* fixed height */
+    max-height: 450px;    /* optional */
+    position: relative;
+}
+
+.community-assessment-section canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* Smooth hover animation feel */
+.community-assessment-section:hover{
+    transform:translateY(-2px);
+    transition:.2s ease-in-out;
+}
+
+/* =========================================================
+   DEPARTMENT LIST
+========================================================= */
+.department-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.department-item{
+    background:white;
+    border:1px solid #999;
+    border-radius:15px;
+    padding:15px;
+    text-align:center;
+    box-shadow:5px 5px 10px rgba(0,0,0,.2);
+}
+
+.department-status{
+    height:40px;
+    border-radius:20px;
+    margin-bottom:10px;
+}
+
+.department-status.submitted{
+    background:linear-gradient(to right,#64b234,#2d5a1a);
+}
+
+.department-status.pending{
+    background:linear-gradient(to right,#f40b22,#9b0413);
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+.assessment-table{
+    width:100%;
+    border-collapse:collapse;
+    overflow-x:auto;
+}
+
+.assessment-table th,
+.assessment-table td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+}
+
+.assessment-table th{
+    background:#f4f4f4;
+}
+
+.percentage-cell{
+    color:#59AF29;
+    font-weight:bold;
+}
+
+/* =========================================================
+   DARK MODE STYLES
+========================================================= */
+
+/* Base Body & Text */
+body.dark-mode {
+    background: #121212;
+    color: #e2e8f0; /* Softer white for better readability */
+}
+
+/* Cards, Sections, and Buttons */
+body.dark-mode .stat-card,
+body.dark-mode .stat-button,
+body.dark-mode .development-plan-section,
+body.dark-mode .community-assessment-section,
+body.dark-mode .department-item {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* Typography Adjustments */
+body.dark-mode .stat-card h3,
+body.dark-mode .stat-button h3 {
+    color: #8ade5d; /* Lighter green for dark background */
+}
+
+body.dark-mode .stat-label,
+body.dark-mode .stat-number {
+    color: #cbd5e1;
+}
+
+/* Hover States */
+body.dark-mode .stat-card:hover,
+body.dark-mode .stat-button:hover {
+    background: #2d2d2d;
+    border-color: #41801E;
+}
+
+/* Tables */
+body.dark-mode .assessment-table th {
+    background: #252525;
+    color: #fff;
+    border-bottom: 2px solid #333;
+}
+
+body.dark-mode .assessment-table td {
+    border-bottom: 1px solid #333;
+    color: #ccc;
+}
+
+body.dark-mode .percentage-cell {
+    color: #63C02F;
+}
+
+/* =========================================================
+   DARK MODE - GRAPH
+========================================================= */
+
+body.dark-mode .community-assessment-section .chart-container{
+    background:linear-gradient(145deg,#1e1e1e,#252525);
+    box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+
+/* Iframes Background */
+/* This ensures that if the iframe content is shorter than the frame, 
+   the background doesn't stay white */
+body.dark-mode #sidebarFrame,
+body.dark-mode #headerFrame {
+    background: #1e1e1e;
+}
+
+/* Inputs/Buttons (if any) */
+body.dark-mode .view-all-btn {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================================
+   DARK MODE - HEADER & SIDEBAR SPECIFIC
+========================================================= */
+
+/* 1. Target the iframe containers in the main document */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame {
+    background: #1e1e1e; /* Matches card background */
+    border-color: #333;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* 2. Specific styles for the header iframe's border */
+body.dark-mode #headerFrame {
+    border-bottom: 1px solid #333;
+}
+
+/* 3. Specific styles for the sidebar iframe's border */
+body.dark-mode #sidebarFrame {
+    border-right: 1px solid #333;
+}
+
+/* 4. Ensure the main content wrapper adjusts if needed */
+body.dark-mode .dashboard-main-content {
+    background: #121212;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+/* Small Laptop */
+@media(max-width:1200px){
+    :root{--sidebar-width:200px;}
+}
+
+/* Tablet */
+@media(max-width:992px){
+    :root{--sidebar-width:0px;}
+
+    #sidebarFrame{
+        transform:translateX(-100%);
+    }
+
+    #headerFrame{
+        left:0;
+        width:100%;
+    }
+
+    .dashboard-main-content{
+        margin-left:0;
+        padding:20px;
+    }
+}
+
+/* Phone */
+@media(max-width:600px){
+    .dashboard-main-content{
+        padding:15px;
+    }
+
+    .stat-number{
+        font-size:1.5rem;
+    }
+
+    .dashboard-header h1{
+        font-size:1.3rem;
+    }
+}

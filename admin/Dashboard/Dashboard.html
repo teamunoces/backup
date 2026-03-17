@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Overview Dashboard</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        
+     
+
+        <!-- Header -->
+        <iframe 
+            src="../Profile/profile.html" 
+            id="headerFrame"
+            frameborder="0"
+            scrolling="no"
+            title="Header">
+        </iframe>
+
+        <!-- Sidebar -->
+        <iframe 
+            src="../Nav/navigation.html" 
+            id="sidebarFrame"
+            frameborder="0"
+            scrolling="no"
+            title="Navigation Sidebar">
+        </iframe>
+
+        <!-- Main Content -->
+        <main class="dashboard-main-content">
+            <div class="container">
+                <!-- Header + Stats -->
+                <div class="dashboard-row">
+                    <div class="dashboard-header">
+                        <h1>DATA OVERVIEW</h1>
+                    </div>
+
+                    <div class="stats-container">
+                        <button class="stat-card stat-button" onclick="window.location.href='./SubmittedMonthlyReport/SubmittedMonthly.html'">
+                            <h3>SUBMITTED MONTHLY REPORT</h3>
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Total Submitted Reports</div>
+                        </button>
+
+                        <button class="stat-card stat-button" onclick="window.location.href='./Pending/Pending.html'">
+                            <h3>PENDING REPORTS</h3>
+                            <div class="stat-number" id="pendingCount">0</div>
+                            <div class="stat-label">Requires Attention</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="divider"></div>
+
+
+
+
+                   <!-- Community Needs Assessment -->
+                <div class="community-assessment-section">
+                    <div class="section-header">
+                        <h2>COMMUNITY NEEDS ASSESSMENT CONSOLIDATED RESULT</h2>
+                        <button class="view-all-btn"onclick="window.location.href='./consolidated_result/cnacr.html'">
+                            <i class="fas fa-external-link-alt"></i> View All
+                        </button>
+                    </div>
+
+                    <h3 class="barangay-title">BARANGAY</h3>
+                    <div class="chart-container" style="width:100%; height:400px;">
+                            <canvas id="barangayChart"></canvas>
+                    </div>
+
+                </div>
+
+                <!-- 3 Year Development Plan -->
+                <div class="development-plan-section">
+                    <div class="section-header">
+                        <h2>3 YEAR DEVELOPMENT PLAN</h2>
+                        <button class="view-all-btn" onclick="window.location.href='./3ydp/3ydpDepartment.html'">
+                            <i class="fas fa-external-link-alt"></i> View All
+                        </button>
+                    </div>
+
+                    <div class="department-list">
+                        <button class="department-item">
+                            <div class="department-name">CCIS</div>
+                            <span class="department-status submitted"></span> <!-- Example: Submitted (green) -->
+                        </button>
+                        <button class="department-item">
+                            <div class="department-name">CTHM</div>
+                            <span class="department-status pending"></span> <!-- Example: Pending (red) -->
+                        </button>
+                        <button class="department-item">
+                            <div class="department-name">JHS</div>
+                            <span class="department-status submitted"></span> <!-- Example: Submitted (green) -->
+                        </button>
+                        <button class="department-item">
+                            <div class="department-name">CAS</div>
+                            <span class="department-status pending"></span> <!-- Example: Pending (red) -->
+                        </button>
+                    </div>
+                </div>
+
+             
+            </div>
+        </main>
+    </div>
+    
+    <script src="darkmode.js"></script>
+    <script src="Dashboard.js"></script>
+    <script src="barangay-table.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    
+</body>
+</html>

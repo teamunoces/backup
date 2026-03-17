@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Dashboard</title>
+    <link rel="stylesheet" href="ReportManagement.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+    <iframe 
+        src="../Profile/profile.html" 
+        id="headerFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Header">
+    </iframe>
+
+    <!-- Sidebar -->
+    <iframe 
+        src="../Nav/navigation.html" 
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
+
+    <div class="container">
+        <div class="card search-section">
+            <div class="search-container">
+                <input type="text" placeholder="">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div class="card section-green">
+            <div class="filter-row">
+                <span class="label">Type:</span>
+                <select>
+                    <option>All Types</option>
+                </select>
+            </div>
+            
+            <div class="admin-table-container">
+                <div class="table-header header-green">
+                    <span> ADMIN'S REPORTS</span>
+                    <i class="fas fa-bars"></i>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Department</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <!-- Rows will be dynamically added by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card section-red">
+            <div class="filter-row">
+                <span class="label">Type:</span>
+                <select class="select-red">
+                    <option>All Types</option>
+                </select>
+            </div>
+            
+            <div class="table-container">
+                <div class="table-header header-red">
+                    <span>REJECTED REPORT</span>
+                    <i class="fas fa-bars"></i>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Department</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rejectedTableBody">
+                        <!-- Rows will be dynamically added by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="darkmode.js"></script>
+    <script src="./js/get.js"></script>
+   
+</body>
+</html>

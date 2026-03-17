@@ -1,0 +1,235 @@
+:root {
+    --main-green: #689f38;
+    --dark-green: #33691e;
+    --main-red: #c62828;
+    --bg-light: #ffffff;
+    --border-gray: #ccc;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+}
+
+/* ===== PAGE LAYOUT ===== */
+.page-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+/* ===== Header ===== */
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+/* ===== SIDEBAR ===== */
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+    margin-top: 80px;  /* match header height */
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* ===== CARD SECTION ===== */
+.card-section {
+    background: white;
+    border: 1px solid var(--border-gray);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+/* ===== HEADERS ===== */
+.header-banner {
+    padding: 12px 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.header-banner.green { background: #55a630; }
+.header-banner.red { background: #b91d1d; }
+
+.mt-20 { margin-top: 20px; }
+
+/* ===== TABLE AREA ===== */
+.table-outer {
+    padding: 15px 20px;
+}
+
+.filter-row {
+    margin-bottom: 10px;
+}
+
+.type-badge {
+    color: white;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.type-badge.green { background: #558b2f; }
+.type-badge.red { background: #b91d1d; }
+
+.table-header {
+    padding: 8px 15px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.green-bg { background: #6dbd45; }
+.red-bg { background: #b03a2e; }
+
+/* ===== TABLE ===== */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+.report-table th,
+.report-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.green-text { color: #558b2f; }
+.red-text { color: #b91d1d; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    /* Hide sidebar */
+    #sidebarFrame {
+        display: none;
+    }
+
+    /* Make main content full width */
+    .main-content {
+        padding: 15px;
+    }
+
+    /* Adjust toolbar layout */
+    .toolbar {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    /* Adjust section headers */
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Monthly / status grids adjust */
+    .status-grid,
+    .month-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    /* Tables smaller font */
+    .report-table th,
+    .report-table td {
+        font-size: 11px;
+        padding: 8px;
+    }
+
+    /* Header banners smaller */
+    .header-banner {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 600px) {
+    .status-grid,
+    .month-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar {
+        width: 100%;
+    }
+
+    .section-header {
+        width: 100%;
+    }
+}
+
+/* GLOBAL PAGE DARK MODE */
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #f5f5f5 !important;
+}
+
+/* Page wrapper */
+body.dark-mode .page-wrapper {
+    background-color: #121212 !important;
+}
+
+/* Cards */
+body.dark-mode .card-section {
+    background-color: #1e1e1e !important;
+    color: white !important;
+}
+
+/* Table */
+body.dark-mode .report-table {
+    background-color: #1e1e1e !important;
+    color: white !important;
+}
+
+body.dark-mode .report-table th,
+body.dark-mode .report-table td {
+    border-color: #333 !important;
+}
+
+/* Select dropdown */
+body.dark-mode select {
+    background-color: #2a2a2a !important;
+    color: white !important;
+    border: 1px solid #555 !important;
+}
+
+/* Header banners */
+body.dark-mode .header-banner.green {
+    background-color: #2e7d32 !important;
+}
+
+body.dark-mode .header-banner.red {
+    background-color: #c62828 !important;
+}
+

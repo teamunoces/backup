@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monthly Accomplishment Report</title>
+  <link rel="stylesheet" href="mar.css">
+</head>
+<body>
+    <!-- Header -->
+   <iframe 
+        src="../../Profile/profile.html" 
+        id="headerFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Header">
+    </iframe>
+
+    <!-- Sidebar -->
+    <iframe 
+        src="../../Nav/navigation.html" 
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
+    
+    <div class="report-container">
+        <iframe 
+            src="../ReportHeader/header.html" 
+            id="reportHeaderFrame"
+            frameborder="0"
+            scrolling="no"
+            title="Report Header">
+        </iframe>
+        
+        <h1>MONTHLY ACCOMPLISHMENT REPORT</h1>
+
+        <form action="/submit-report" method="post"> <!-- Added form wrapper; adjust action and method as needed for your backend -->
+            <table class="header-table">
+                <tr>
+                    <td class="label">Department:</td>
+                    <td class="input-field"><input type="text" name="department" placeholder="Enter department" required></td>
+                </tr>
+                <tr>
+                    <td class="label">Title of Activity</td>
+                    <td class="input-field"><input type="text" name="title" placeholder="Enter title of activity" required></td>
+                </tr>
+                <tr>
+                    <td class="label">Location:</td>
+                    <td class="input-field"><input type="text" name="location" placeholder="Enter location" required></td>
+                </tr>
+                <tr>
+                    <td class="label">Beneficiaries:</td>
+                    <td class="input-field"><input type="text" name="beneficiaries" placeholder="Enter beneficiaries" required></td>
+                </tr>
+            </table>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 12%;">Date</th>
+                        <th style="width: 25%;">Activities</th>
+                        <th style="width: 15%;">Status</th>
+                        <th style="width: 23%;">Issues and Concerns</th>
+                        <th style="width: 25%;">Recommendations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="date" name="date1" required></td>
+                        <td><textarea name="activities1" placeholder="Enter activities" rows="2" required></textarea></td>
+                        <td><input type="text" name="status1" placeholder="Enter status" required></td>
+                        <td><textarea name="issues1" placeholder="Enter issues and concerns" rows="2" required></textarea></td>
+                        <td><textarea name="recommendations1" placeholder="Enter recommendations" rows="2" required></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="date" name="date2"></td>
+                        <td><textarea name="activities2" placeholder="Enter activities" rows="2"></textarea></td>
+                        <td><input type="text" name="status2" placeholder="Enter status"></td>
+                        <td><textarea name="issues2" placeholder="Enter issues and concerns" rows="2"></textarea></td>
+                        <td><textarea name="recommendations2" placeholder="Enter recommendations" rows="2"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="date" name="date3"></td>
+                        <td><textarea name="activities3" placeholder="Enter activities" rows="2"></textarea></td>
+                        <td><input type="text" name="status3" placeholder="Enter status"></td>
+                        <td><textarea name="issues3" placeholder="Enter issues and concerns" rows="2"></textarea></td>
+                        <td><textarea name="recommendations3" placeholder="Enter recommendations" rows="2"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="date" name="date4"></td>
+                        <td><textarea name="activities4" placeholder="Enter activities" rows="2"></textarea></td>
+                        <td><input type="text" name="status4" placeholder="Enter status"></td>
+                        <td><textarea name="issues4" placeholder="Enter issues and concerns" rows="2"></textarea></td>
+                        <td><textarea name="recommendations4" placeholder="Enter recommendations" rows="2"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="date" name="date5"></td>
+                        <td><textarea name="activities5" placeholder="Enter activities" rows="2"></textarea></td>
+                        <td><input type="text" name="status5" placeholder="Enter status"></td>
+                        <td><textarea name="issues5" placeholder="Enter issues and concerns" rows="2"></textarea></td>
+                        <td><textarea name="recommendations5" placeholder="Enter recommendations" rows="2"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="submit" class="submit-button">Submit Report</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

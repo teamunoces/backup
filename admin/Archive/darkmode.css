@@ -1,0 +1,136 @@
+/* =====================================================
+   DARK MODE VARIABLES
+===================================================== */
+body.dark-mode {
+    --green-primary: #5cb85c;
+    --green-dark: #589b37;
+    --bg-light: #1e1e1e;
+    --text-color: #e2e8f0;
+    --border-color: #444;
+    --red-badge: #b04b4b;
+}
+
+/* =====================================================
+   BODY, HEADER, SIDEBAR
+===================================================== */
+body.dark-mode {
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    padding-top: 80px;
+    padding-left: 150px;
+}
+
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame {
+    background-color: #1a1a1a;
+    border-color: #333;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+body.dark-mode .container {
+    background-color: #1e1e1e;
+    color: var(--text-color);
+}
+
+/* =====================================================
+   HEADER ACTION BUTTONS
+===================================================== */
+body.dark-mode .btn-restore {
+    background-color: var(--green-dark);
+    color: #e2e8f0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .btn-restore:hover {
+    background-color: var(--green-primary);
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+body.dark-mode .card {
+    background-color: #1e1e1e;
+    border-color: var(--green-primary);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.6);
+}
+
+body.dark-mode .card-title {
+    color: var(--green-primary);
+}
+
+body.dark-mode .card-header {
+    background-color: var(--green-dark);
+    color: #fff;
+}
+
+/* =====================================================
+   FILTERS & SEARCH
+===================================================== */
+body.dark-mode .filter-bar {
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+body.dark-mode .type-filter {
+    background-color: var(--green-dark);
+    color: #fff;
+}
+
+body.dark-mode .type-filter select {
+    background-color: #333;
+    color: #e2e8f0;
+}
+
+body.dark-mode .search-box input {
+    background-color: #2a2a2a;
+    color: #e2e8f0;
+    border: 1px solid var(--green-dark);
+}
+
+body.dark-mode .search-box i {
+    color: var(--green-primary);
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+body.dark-mode table {
+    background-color: #1e1e1e;
+    color: var(--text-color);
+}
+
+body.dark-mode th {
+    color: var(--green-primary);
+    border-bottom: 2px solid #555;
+}
+
+body.dark-mode td {
+    border-bottom: 1px solid #444;
+}
+
+/* =====================================================
+   BADGES
+===================================================== */
+body.dark-mode .badge-active {
+    background-color: var(--green-primary);
+}
+
+body.dark-mode .badge-inactive,
+body.dark-mode .badge-rejected {
+    background-color: var(--red-badge);
+}
+
+/* =====================================================
+   ACTION ICONS
+===================================================== */
+body.dark-mode .action-icon {
+    color: #ccc;
+}
+
+body.dark-mode .action-icon:hover {
+    color: var(--green-primary);
+}

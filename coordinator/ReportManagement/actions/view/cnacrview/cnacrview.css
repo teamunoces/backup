@@ -1,0 +1,388 @@
+/* General Reset */
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f4f4f4;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ===== Frames (Layout Shell) ===== */
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* Office Title and Double Line */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+.report-container {
+    margin-top: 60px;
+    background-color: #fff;
+    width: 850px; /* Standard A4 width-ish */
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+/* Header Grid Table */
+.header-grid {
+    display: grid;
+    grid-template-columns: 150px 1fr 150px 1fr;
+    border: 1px solid #000;
+    margin-bottom: 30px;
+}
+
+.label-box {
+    padding: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    border-right: 1px solid #000;
+}
+
+.input-box {
+    padding: 8px;
+}
+
+.bg-gray {
+    background-color: #b3b3b3;
+}
+
+.border-right {
+    border-right: 1px solid #000;
+}
+
+/* Section Styling */
+.section-header {
+    background-color: #b3b3b3;
+    border: 1px solid #000;
+    padding: 8px 15px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 20px;
+    display: flex;
+}
+
+.roman-num {
+    width: 30px;
+}
+
+.section-content {
+    padding: 15px 0 10px 40px;
+}
+
+/* Container for the label and input */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Stacks label above the lines */
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* The textarea styling */
+.paper-lines {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 16px;
+    line-height: 30px; /* This must match the gradient size below */
+    padding: 0;
+    background-attachment: local;
+    
+    /* Creates the horizontal lines */
+    background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
+    background-size: 100% 30px; /* 30px height matches line-height */
+    
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.paper-lines::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+
+/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+.approvals-container {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #000;
+}
+
+.approval-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.signature-group {
+  width: 35%; /* Adjust width to match the line lengths in your image */
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 35px; /* Creates space for the signature signature */
+}
+
+.signature-line {
+  border-bottom: 1.5px solid black;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-size: 14px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.left-align {
+  text-align: left;
+  width: 100%;
+}
+
+/* Centered Layout for VP and President */
+.approval-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-block {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.name-underlined {
+  font-weight: bold;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-size: 16px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+/* ===== 4. Document Info Table (The Navy Blue Style) ===== */
+.doc-header {
+    width: auto; /* Shrinks the table to fit the content */
+    margin-right: auto; /* Keeps it pushed to the left */
+}
+
+.doc-header td {
+    border: 1px solid #000;
+    padding: 5px 10px;
+}
+
+.doc-header .label {
+    background-color: #002060;
+    color: #fff;
+    width: 25%;
+    font-size: 11px;
+}
+
+.doc-header .value {
+    /* Reduced from 75% to 50% or 30% depending on how narrow you want it */
+    width: 70%; 
+    font-size: 11px;
+    /* This ensures the text stays aligned left within that narrower space */
+    text-align: left; 
+}
+/*------------------------------------------ Container positioning */
+.document-info {
+    margin-top: 50px; /* Adjust based on space needed after approvals */
+    width: 30%;
+}
+
+/* Table Styling */
+.doc-header {
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 11px; /* Matches the compact look of the screenshot */
+    border: 1px solid #d1d1d1;
+}
+
+/* The first column (Dark Blue Background) */
+.doc-header td.label {
+    background-color: #002060; /* Dark Navy Blue */
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    border: 1px solid #d1d1d1;
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
+}
+
+/* The middle colon column */
+.doc-header td:nth-child(2) {
+    width: 2%;
+    padding: 0 1px;
+    font-weight: bold;
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+/* The value column */
+.doc-header td.value {
+    padding: 4px 10px;
+    border: 1px solid #d1d1d1;
+    min-width: 120px;
+}
+
+/* Styling the inputs/text inside the value cell */
+.doc-header td.value input, 
+.doc-header td.value p {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Remove default focus outline for disabled inputs */
+.doc-header td.value input:disabled {
+    color: black;
+    cursor: default;
+}
+

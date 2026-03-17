@@ -1,0 +1,77 @@
+/* =========================================================
+   DARK MODE OVERRIDES (DarkMode.css)
+   ========================================================= */
+
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+/* Frames */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame {
+    background-color: #1e1e1e !important;
+    border-color: #333 !important;
+}
+
+/* Main Card */
+body.dark-mode .card {
+    background-color: #1e1e1e !important;
+    border-color: #5eb533 !important; /* Keep the green border brand */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Tables */
+body.dark-mode .account-table th {
+    background-color: #252525 !important;
+    color: #5eb533 !important; /* Green text for headers */
+    border-bottom: 1px solid #333 !important;
+}
+
+body.dark-mode .account-table td {
+    border-bottom: 1px solid #333 !important;
+    color: #cccccc !important;
+}
+
+body.dark-mode .account-table tr:hover {
+    background-color: #2a2a2a !important;
+}
+
+/* Search and Select Inputs */
+body.dark-mode .search-bar input,
+body.dark-mode .form-group input,
+body.dark-mode .form-group select,
+body.dark-mode #filterSelect {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+    border-color: #444 !important;
+}
+
+/* Modal */
+body.dark-mode .modal-overlay {
+    background: rgba(0, 0, 0, 0.85) !important;
+}
+
+body.dark-mode .modal {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .modal h3 {
+    border-bottom: 1px solid #333 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .form-group label {
+    color: #9ca3af !important;
+}
+
+/* Close Button */
+body.dark-mode .close-btn {
+    color: #6b7280 !important;
+}
+
+body.dark-mode .close-btn:hover {
+    background-color: #333 !important;
+    color: #ffffff !important;
+}

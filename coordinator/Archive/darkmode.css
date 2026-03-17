@@ -1,0 +1,123 @@
+/* =====================================================
+   DARK MODE VARIABLES
+===================================================== */
+body.dark-mode {
+    --green-primary: #00ff88;  /* Vibrant green for high contrast */
+    --green-dark: #008f4c;
+    --bg-pure-black: #000000;  /* Pure black for the page background */
+    --container-gray: #2c2c2c; /* Slate gray for the report cards/containers */
+    --input-dark: #1e1e1e;     /* Deep charcoal for sunken inputs */
+    --text-color: #e4e4e4;
+    --border-muted: #444;
+    --red-badge: #b04b4b;
+}
+
+/* =====================================================
+   BODY, HEADER, SIDEBAR
+===================================================== */
+body.dark-mode {
+    background-color: var(--bg-pure-black) !important;
+    color: var(--text-color);
+    margin: 0;
+}
+
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid var(--border-muted);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+/* =====================================================
+   MAIN CONTAINER & CARDS
+===================================================== */
+body.dark-mode .container,
+body.dark-mode .card,
+body.dark-mode .report-container,
+body.dark-mode .form-container {
+    background-color: var(--container-gray) !important;
+    color: var(--text-color);
+    border: 1px solid var(--border-muted);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .card-header {
+    background-color: #1a1a1a !important; /* Header is darker than card body */
+    color: #ffffff;
+    border-bottom: 2px solid var(--border-muted);
+}
+
+body.dark-mode .card-title {
+    color: var(--green-primary);
+}
+
+/* =====================================================
+   INPUTS & EDITABLE CELLS
+===================================================== */
+body.dark-mode input[type="text"],
+body.dark-mode textarea,
+body.dark-mode .paper-lines,
+body.dark-mode td[contenteditable="true"] {
+    background-color: var(--input-dark) !important;
+    color: #ffffff !important;
+    border: 1px solid var(--border-muted) !important;
+}
+
+body.dark-mode .paper-lines {
+    background-image: linear-gradient(transparent 30px, var(--border-muted) 31px);
+}
+
+/* =====================================================
+   TABLES
+===================================================== */
+body.dark-mode table {
+    background-color: var(--input-dark);
+    border-color: var(--border-muted);
+}
+
+body.dark-mode th {
+    color: var(--green-primary) !important; 
+    background-color: #1a1a1a !important;
+    border-bottom: 2px solid var(--green-primary) !important;
+    text-transform: uppercase;
+}
+
+body.dark-mode td {
+    border-bottom: 1px solid var(--border-muted) !important;
+    color: var(--text-color) !important;
+}
+
+/* ================= TABLE ZEBRA STRIPING FIX ================= */
+
+/* Ensure all rows start with a dark background */
+body.dark-mode tr {
+    background-color: #1e1e1e !important;
+}
+
+/* Override the light-mode alternating row color (usually white or light gray) */
+body.dark-mode tr:nth-child(even) {
+    background-color: #252525 !important; /* Slightly lighter gray for the stripe */
+}
+
+/* Ensure data cells don't have their own background overriding the row */
+body.dark-mode td {
+    background-color: transparent !important;
+    color: #e4e4e4 !important;
+    border-bottom: 1px solid #333 !important;
+}
+
+/* Keep the hover effect subtle */
+body.dark-mode tr:hover td {
+    background-color: #2c2c2c !important;
+}
+
+/* =====================================================
+   ACTION ICONS
+===================================================== */
+body.dark-mode .action-icon {
+    color: #888;
+}
+
+body.dark-mode .action-icon:hover {
+    color: var(--green-primary);
+}
