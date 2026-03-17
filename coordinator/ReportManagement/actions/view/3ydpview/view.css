@@ -590,8 +590,7 @@ footer {
     /* 1. Hide Web UI Elements */
     .buttons,
     #sidebarFrame,
-    #headerFrame,
-    #reportHeaderFrame {
+    #headerFrame {
         display: none !important;
     }
 
@@ -639,6 +638,7 @@ footer {
 
     /* 6. Table Layout */
     table {
+        table-layout: fixed !important;
         width: 100% !important;
         table-layout: fixed !important;
         border-collapse: collapse !important;
@@ -659,5 +659,8 @@ footer {
     .paper-lines {
         -webkit-print-color-adjust: exact !important;
     }
-    
+    /* Prevent the first section from jumping to page 2 */
+    .report-form {
+        display: block !important;
+    }
 }

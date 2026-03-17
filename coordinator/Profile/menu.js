@@ -90,12 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
         '3ydpview.php': { title: '3 Year Development Plan View', icon: 'fa-file-alt' },
         'programdesign.php': { title: 'Program Design', icon: 'fa-file-alt' },
         'pdview.php': { title: 'Program Design View', icon: 'fa-file-alt' },
-        'dpir.php': { title: 'Departmental Planned Initiative Report', icon: 'fa-file-alt' }
-
-
-
-
-
+        'dpir.php': { title: 'Departmental Planned Initiative Report', icon: 'fa-file-alt' },
+        'pdview.php': { title: 'Program Design View', icon: 'fa-file-alt' },
+        'marview.php' : { title: 'Monthly Accomplishment Report View', icon: 'fa-file-alt' },
+        'cnacrview.php': { title: 'Community Needs Assessment Consolidated Report View', icon: 'fa-file-alt' 
+}
+        
     };
 
     const currentPage = currentPath.split('/').pop();

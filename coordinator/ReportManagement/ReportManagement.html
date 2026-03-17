@@ -175,6 +175,60 @@
             </div>
         </div>
     </div>
+
+<!-- Upload Modal -->
+<div id="uploadModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-file-pdf"></i> Manage Report Files</h2>
+            <span class="close" onclick="closeUploadModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <!-- Simplified report info -->
+            <div class="report-info">
+                <div class="report-title">
+                    <strong>Report:</strong> <span id="modalReportTitle"></span>
+                </div>
+                <div class="file-count">
+                    <strong>Files:</strong> <span id="fileCount" class="file-count-ok">0/4</span>
+                </div>
+            </div>
+            
+            <!-- Current Files Section -->
+            <div class="files-section">
+                <h3><i class="fas fa-folder-open"></i> Current Files</h3>
+                <div id="fileList" class="files-grid">
+                    <p class="loading">Loading files...</p>
+                </div>
+            </div>
+            
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <h3><i class="fas fa-cloud-upload-alt"></i> Upload New Files</h3>
+                <p class="upload-info">Select up to 4 PDF files (max 10MB each)</p>
+                
+                <div class="file-input-container">
+                    <input type="file" id="fileInput" accept=".pdf" multiple onchange="handleFileSelect(this)">
+                    <label for="fileInput" class="file-input-label">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose Files
+                    </label>
+                    <p class="file-input-hint">Hold Ctrl (or Cmd on Mac) to select multiple files</p>
+                </div>
+                
+                <!-- Selected Files List -->
+                <div id="selectedFilesList" class="selected-files-list">
+                    <p class="no-files">No files selected</p>
+                </div>
+                
+                <!-- Upload Button -->
+                <button onclick="uploadFiles()" class="upload-btn" style="display: none;">
+                    <i class="fas fa-upload"></i> Upload Selected Files
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="darkmode.js"></script>
     <script src="./js/get.js"></script>

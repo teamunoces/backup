@@ -49,7 +49,7 @@ body {
 }
 /* Ensure the table doesn't get squashed */
 .form-container table {
-    width: 100%;
+    width: 95%;
     border-collapse: collapse;
     table-layout: fixed; /* Helps keep columns aligned */
 }
@@ -66,7 +66,7 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 15px;
-    width: 100%;
+    width: 95%;
 }
 
 .logo-left {
@@ -75,6 +75,7 @@ body {
 }
 
 .logos-right {
+
     display: flex;
     gap: 20px;
     align-items: center;
@@ -142,7 +143,7 @@ body {
 /* Input Fields Section */
 .input-fields {
     margin-bottom: 30px;
-    width: 100%;
+    width: 95%;
 }
 
 .field {
@@ -163,6 +164,7 @@ body {
 /* Input boxes for typing */
 .field input,
 .field textarea {
+    width: 100%;;
     pointer-events: none; /* para dili ma edit  */
     flex-grow: 1;
     padding: 6px 10px;
@@ -237,35 +239,45 @@ footer {
 
 
 
-.buttons {
-    position: fixed;
-    top: 80px; /* adjust depending on header height */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
 
+/* ===== 10. BUTTONS (Centered Above Container) ===== */
+.buttons {
     display: flex;
-    gap: 12px; /* space between buttons */
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: calc(100% - 150px); /* Subtracts sidebar width */
+    position: absolute; 
+    top: 90px;         /* Sits between Header (60px) and Form (160px) */
+    left: 150px;       /* Starts after the sidebar */
+    z-index: 101;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Base button style */
-.buttons button {
-    padding: 12px 24px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
+/* Print Guard: Hides buttons when printing or saving as PDF */
+@media print {
+    .buttons {
+        display: none !important;
+    }
 }
 
-/* Primary button (onclick button) */
+/* Keep your existing button colors below... */
 .buttons button[onclick] {
     background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
     color: white;
-    box-shadow: 0 4px 6px rgba(37, 73, 17, 0.2);
 }
 
 .buttons button[onclick]:hover {
@@ -274,7 +286,6 @@ footer {
     box-shadow: 0 6px 15px rgba(37, 73, 17, 0.3);
 }
 
-/* Link button */
 .buttons a {
     text-decoration: none;
 }
@@ -292,11 +303,9 @@ footer {
     transform: translateY(-2px);
 }
 
-/* Click effect */
 .buttons button:active {
-    transform: translateY(0) scale(0.96);
+    transform: scale(0.96);
 }
-
 
 /* ===== 3. Approvals Section (The "Professional" Look) ===== */
 .approvals-container {
@@ -449,114 +458,7 @@ footer {
     cursor: default;
 }
 
-/* ===== Print Optimization ===== */
-@media print {
 
-    /* Hide navigation and buttons */
-    #sidebarFrame,
-    #headerFrame,
-    .buttons {
-        display: none !important;
-    }
-
-    body {
-        background-color: white;
-        padding: 0;
-        margin: 0;
-        position: relative;
-    }
-
-    .form-container {
-        box-shadow: none;
-        width: 100%;
-        max-width: 100%;
-        padding: 20px;
-        margin: 0;
-        padding-bottom: 100px; /* Create space for footer + document-info */
-    }
-
-    .program-table th,
-    .program-table td {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-
-    .doc-header td.label {
-        background-color: #002060 !important;
-        color: white !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-
-    /* Ensures the signature lines (borders) are visible */
-    .signature-block .name {
-        border-bottom: 1px solid #000 !important;
-    }
-
-    /* Prevents the approval section from being split across two pages */
-    .approvals {
-        font-size: 12px;
-        page-break-inside: avoid;
-    }
-
-    /* ===== Document Info at bottom-left of last page ===== */
-    .document-info {
-        bottom: 50px; /* Position above the footer */
-        left: 20px;
-        font-size: 12px;
-        margin: 0;
-        padding: 0;
-        z-index: 999;
-        background-color: white; /* Ensure readability */
-    }
-
-    /* ===== Footer at bottom of last page ===== */
-    footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 40px;
-        background-color: white;
-        border-top: 1px solid #ccc; /* Optional: adds a separator line */
-        z-index: 1000;
-        display: block !important; /* Force footer to display */
-        visibility: visible !important; /* Ensure visibility */
-    }
-
-    /* Make sure footer content is visible */
-    footer * {
-        visibility: visible !important;
-        display: block !important;
-    }
-
-    /* Ensure footer appears on every page */
-    @page {
-        @bottom-center {
-            content: element(footerContent);
-        }
-    }
-
-    /* Alternative approach: duplicate footer for print */
-    .print-footer {
-        display: none;
-    }
-    
-    @media print {
-        .print-footer {
-            display: block;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background-color: white;
-            border-top: 1px solid #ccc;
-            text-align: center;
-            z-index: 1000;
-        }
-    }
-}
 
 /* ===== Responsive Adjustments ===== */
 @media screen and (max-width: 768px) {

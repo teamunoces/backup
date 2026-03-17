@@ -25,9 +25,10 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
         <!-- ACTION BUTTONS -->
                           <div class="buttons">
-                            <button onclick="window.print()">Print this Page</button>
-                            <button id="downloadPDF" class="btn-download" type="button">Download PDF</button>
-                          </div>
+                                <button  onclick="printReport()">Print this Page</button>
+                                <button id="downloadPDF" type="button">Download PDF</button>
+                            </div>
+
 
     <div class="form-container">
 
@@ -207,7 +208,9 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <script>const reportType = "<?php echo $reportType; ?>";console.log(reportType);</script>
     <script src="./get.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="download.js"></script>
     <script src="/admin/ReportManagement/actions/js/getapproval.js"></script>
+    <script src="./print.js"></script>
+    <script src="./download.js"></script>
+
 </body>
 </html>

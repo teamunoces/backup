@@ -134,50 +134,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Monthly 
         </footer>
 
 
-         <!-- Attachment -->
-
-                        <div class="upload-container">
-                            <header class="attach-header">
-                                <h2>ATTACHED FILE</h2>
-                                <a href="monthly-reports.php" class="back-link">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </header>
-
-                            <div class="form-card">
-                                <div class="file-info">
-                                    <p>File Type: doc, docx, pdf</p>
-                                    <p>Limit: 45 MB | Max 5 files</p>
-                                </div>
-
-                                <form action="submit_monthly_report.php" method="post" enctype="multipart/form-data">
-                                    <div class="input-group">
-                                        <select id="submission-type" name="submission-type" class="custom-select">
-                                            <option value="file" selected>File</option>
-                                            <option value="link">Link</option>
-                                        </select>
-                                    </div>
-
-                                    <p id="instruction-text" class="alert-text hidden">Please submit your link inside the box.</p>
-
-                                    <div id="upload-area" class="drop-zone">
-                                        <p class="primary-text">Drop file(s) or click here to browse.</p>
-                                        <input type="file" id="file-upload" name="files[]" multiple accept=".doc,.docx,.pdf" class="hidden">
-                                        <div id="file-list"></div>
-                                    </div>
-
-                                    <div id="link-area" class="link-zone hidden">
-                                        <div class="flex-row">
-                                            <input type="url" name="link" class="custom-input" placeholder="Enter a secured https:// URL">
-                                        </div>
-                                        <p class="alert-text small">Ensure the URL starts with https</p>
-                                    </div>
-
-                                    <div class="actions">
-                                        <button type="submit" class="btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
+                      
 </div>
     </div>
 

@@ -26,10 +26,17 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
   <!-- SIDEBAR -->
   <iframe src="/coordinator/Sidebar/sidebar.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+
+
+                 
     <div class="report-container">
 
+                                   <!-- ACTION BUTTONS -->
+                        <div class="buttons">
+                            <button  onclick="printReport()">Print this Page</button>
+                            <button id="downloadPDF" type="button">Download PDF</button>
+                        </div>
 
-                                
         <header>
             <div class="header-content">
                 <img src="/coordinator/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
@@ -299,10 +306,13 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
         });
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="./print.js"></script>
     <SCript src="./viewget.js"></SCript>
     <script src="/admin/ReportManagement/actions/js/getapproval.js"></script>
     <script src="./darkmode.js"></script>
+    <script src="./download.js"></script>
 
 </body>
 </html>

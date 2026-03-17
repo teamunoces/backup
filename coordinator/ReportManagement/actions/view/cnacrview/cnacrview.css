@@ -110,11 +110,11 @@ body {
 }
 
 .report-container {
-    margin-top: 60px;
-    background-color: #fff;
-    width: 850px; /* Standard A4 width-ish */
-    padding: 40px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    margin: auto;
+    background: white;
 }
 
 h1 {
@@ -384,5 +384,59 @@ footer {
 .doc-header td.value input:disabled {
     color: black;
     cursor: default;
+}
+
+/* ===== 10. BUTTONS (Center Top of Container) ===== */
+.buttons {
+    position: relative;           /* relative to container wrapper */
+    display: flex;
+    justify-content: center;      /* horizontal center */
+    margin: 10px auto 5px auto; /* move above container, space below */
+    gap: 15px;
+    z-index: 100;                 /* above container content */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.buttons button {
+
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons button[onclick] {
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(37, 73, 17, 0.2);
+}
+
+.buttons button[onclick]:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 73, 17, 0.3);
+}
+
+.buttons a {
+    text-decoration: none;
+}
+
+.buttons a button {
+    background-color: transparent;
+    color: #254911;
+    border: 2px solid #59AF29;
+    box-shadow: none;
+}
+
+.buttons a button:hover {
+    background-color: #f0fdf4;
+    border-color: #254911;
+    transform: translateY(-2px);
 }
 

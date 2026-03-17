@@ -3,6 +3,12 @@ let approvedReports = [];
 let needFixReports = [];
 let rejectedReports = [];
 
+// Add these variables at the top with other global variables
+let currentUploadReportId = null;
+let currentUploadTable = null;
+let currentExistingFiles = []; // Track existing files
+const MAX_FILES = 4; // Maximum number of files allowed
+
 async function loadReports() {
     try {
         
@@ -36,11 +42,11 @@ async function loadReports() {
                 index: index
             };
 
-            if (status === "approve") {
+            if (status === "approve" || status === "approved") {
                 approvedReports.push(reportWithMeta);
             } else if (status === "need fix") {
                 needFixReports.push(reportWithMeta);
-            } else if (status === "rejected") {
+            } else if (status === "reject" || status === "rejected") {
                 rejectedReports.push(reportWithMeta);
             }
         });
@@ -65,14 +71,16 @@ function displayNoReportsMessage() {
     const rejectedTable = document.getElementById("rejectedTableBody");
     
     const noDataRow = `<tr><td colspan="5" style="text-align:center;">No reports found.</td></tr>`;
-    approvedTable.innerHTML = noDataRow;
-    needfixTable.innerHTML = noDataRow;
-    rejectedTable.innerHTML = noDataRow;
+    if (approvedTable) approvedTable.innerHTML = noDataRow;
+    if (needfixTable) needfixTable.innerHTML = noDataRow;
+    if (rejectedTable) rejectedTable.innerHTML = noDataRow;
 }
 
 // Render Approved table with its own filter
 function renderApprovedTable() {
     const tableBody = document.getElementById("approvedTableBody");
+    if (!tableBody) return;
+    
     const filterSelect = document.querySelector('.section-green .filter-row select');
     const selectedType = filterSelect ? filterSelect.value : 'All type';
     
@@ -102,6 +110,7 @@ function renderApprovedTable() {
                 <td>${formattedDate}</td>
                 <td class="actions">
                     <i class="far fa-eye view-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
+                    <i class="fas fa-cloud-upload-alt upload-icon" data-id="${report.id}" data-table="${report.source_table}" title="Upload/Manage PDFs"></i>
                     <i class="fas fa-archive archive-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
                 </td>
             </tr>`;
@@ -116,6 +125,8 @@ function renderApprovedTable() {
 // Render Need Fix table with its own filter
 function renderNeedFixTable() {
     const tableBody = document.getElementById("needfixTableBody");
+    if (!tableBody) return;
+    
     const filterSelect = document.querySelector('.section-Orange .filter-row select');
     const selectedType = filterSelect ? filterSelect.value : 'All type';
     
@@ -159,6 +170,8 @@ function renderNeedFixTable() {
 // Render Rejected table with its own filter
 function renderRejectedTable() {
     const tableBody = document.getElementById("rejectedTableBody");
+    if (!tableBody) return;
+    
     const filterSelect = document.querySelector('.section-red .filter-row select');
     const selectedType = filterSelect ? filterSelect.value : 'All type';
     
@@ -201,6 +214,8 @@ function renderRejectedTable() {
 
 // Attach events to icons within a specific section
 function attachSectionEvents(container) {
+    if (!container) return;
+    
     // Archive icon events
     container.querySelectorAll(".archive-icon").forEach((icon) => {
         icon.addEventListener("click", async (e) => {
@@ -231,6 +246,23 @@ function attachSectionEvents(container) {
         });
     });
 
+    // Upload icon events (only in approved section)
+    container.querySelectorAll(".upload-icon").forEach((icon) => {
+        icon.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const reportId = icon.getAttribute("data-id");
+            const reportTable = icon.getAttribute("data-table");
+            
+            // Set current report info for upload
+            currentUploadReportId = reportId;
+            currentUploadTable = reportTable;
+            currentExistingFiles = []; // Reset existing files array
+            
+            // Show upload modal
+            showUploadModal(reportId, reportTable);
+        });
+    });
+
     // View icon events
     container.querySelectorAll(".view-icon").forEach((icon) => {
         icon.addEventListener("click", (e) => {
@@ -253,29 +285,30 @@ function attachSectionEvents(container) {
 
             const status = (report.status || "").toLowerCase().trim();
 
-            if (status === "rejected") {
+            if (status === "rejected" || status === "reject") {
                 // Show modern banner instead of alert
                 const banner = document.getElementById("rejectedBanner");
-                banner.classList.remove("hidden");
-                banner.classList.add("show");
+                if (banner) {
+                    banner.classList.remove("hidden");
+                    banner.classList.add("show");
 
-                // Hide banner after 3 seconds
-                setTimeout(() => {
-                    banner.classList.remove("show");
-                    banner.classList.add("hidden");
-                }, 3000);
-
+                    // Hide banner after 3 seconds
+                    setTimeout(() => {
+                        banner.classList.remove("show");
+                        banner.classList.add("hidden");
+                    }, 3000);
+                }
                 return; // Stop further execution
             }
 
             let viewMap;
 
-            if (status === "approve") {
+            if (status === "approve" || status === "approved") {
                 // DIFFERENT PATHS for approved
                 viewMap = {
                     "coordinator_cnacr": "./actions/view/cnacrview/cnacrview.php",
-                    "3ydp": "./actions/view/3ydpview/view.php",
-                    "pd_main": "./actions/view/pdview/view.php",
+                    "3ydp": "./actions/view/3ydpview/3ydpview.php",
+                    "pd_main": "./actions/view/pdview/pdview.php",
                     "mar_header": "./actions/view/marview/marview.php",
                     "dpir": "./actions/view/dpirview/view.php"
                 };
@@ -298,6 +331,438 @@ function attachSectionEvents(container) {
             }
         });
     });
+}
+
+// Show upload modal
+function showUploadModal(reportId, reportTable) {
+    const modal = document.getElementById("uploadModal");
+    if (!modal) {
+        console.error("Upload modal not found in the DOM");
+        return;
+    }
+    
+    const reportIdSpan = document.getElementById("modalReportId");
+    const reportTableSpan = document.getElementById("modalReportTable");
+    const reportTitleSpan = document.getElementById("modalReportTitle");
+    const reportTypeSpan = document.getElementById("modalReportType");
+    
+    // Find report details
+    const report = approvedReports.find(r => r.id == reportId && r.source_table === reportTable);
+    
+    // Safely set text content only if elements exist
+    if (reportIdSpan) reportIdSpan.textContent = reportId;
+    if (reportTableSpan) reportTableSpan.textContent = reportTable;
+    if (reportTitleSpan) reportTitleSpan.textContent = report ? (report.title || 'N/A') : 'N/A';
+    if (reportTypeSpan) reportTypeSpan.textContent = report ? (report.displayType || 'N/A') : 'N/A';
+    
+    // Clear file list
+    const fileList = document.getElementById("fileList");
+    if (fileList) {
+        fileList.innerHTML = "";
+    }
+    
+    // Reset file input
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) {
+        fileInput.value = "";
+        fileInput.disabled = false;
+    }
+    
+    // Reset selected files list
+    const selectedFilesList = document.getElementById("selectedFilesList");
+    if (selectedFilesList) {
+        selectedFilesList.innerHTML = "";
+    }
+    
+    // Update file count display
+    updateFileCount();
+    
+    // Show modal
+    modal.style.display = "block";
+    
+    // Load existing files for this report
+    loadReportFiles(reportId, reportTable);
+}
+
+// Close upload modal
+function closeUploadModal() {
+    const modal = document.getElementById("uploadModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+    currentUploadReportId = null;
+    currentUploadTable = null;
+    currentExistingFiles = [];
+    
+    // Clear the file input
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) fileInput.value = "";
+}
+
+// Update file count display
+function updateFileCount() {
+    const fileCount = document.getElementById("fileCount");
+    if (fileCount) {
+        const remaining = MAX_FILES - currentExistingFiles.length;
+        fileCount.textContent = `${currentExistingFiles.length}/${MAX_FILES} files`;
+        fileCount.className = remaining > 0 ? "file-count-ok" : "file-count-full";
+    }
+}
+
+// Handle file selection
+function handleFileSelect(input) {
+    const selectedFilesList = document.getElementById("selectedFilesList");
+    if (!selectedFilesList) return;
+    
+    if (input.files && input.files.length > 0) {
+        // Clear previous file list
+        selectedFilesList.innerHTML = "";
+        
+        // Check total files (existing + new)
+        const totalFiles = currentExistingFiles.length + input.files.length;
+        if (totalFiles > MAX_FILES) {
+            alert(`You can only have up to ${MAX_FILES} files total. You already have ${currentExistingFiles.length} file(s). Please select fewer files.`);
+            input.value = "";
+            return;
+        }
+        
+        // Check each file
+        let validFiles = true;
+        for (let i = 0; i < input.files.length; i++) {
+            const file = input.files[i];
+            
+            // Validate file type
+            if (file.type !== "application/pdf") {
+                alert(`"${file.name}" is not a PDF file. Please select only PDF files.`);
+                input.value = "";
+                validFiles = false;
+                break;
+            }
+            
+            // Validate file size (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert(`"${file.name}" is larger than 10MB. Please select smaller files.`);
+                input.value = "";
+                validFiles = false;
+                break;
+            }
+        }
+        
+        if (!validFiles) {
+            selectedFilesList.innerHTML = "<p class='no-files'>No files selected</p>";
+            document.querySelector(".upload-btn").style.display = "none";
+            return;
+        }
+        
+        // Display all selected files
+        for (let i = 0; i < input.files.length; i++) {
+            const file = input.files[i];
+            
+            const fileItem = document.createElement("div");
+            fileItem.className = "selected-file-item";
+            fileItem.innerHTML = `
+                <i class="fas fa-file-pdf"></i>
+                <span class="file-name">${file.name}</span>
+                <span class="file-size">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                <span class="file-status">Pending</span>
+            `;
+            selectedFilesList.appendChild(fileItem);
+        }
+        
+        // Show upload button
+        document.querySelector(".upload-btn").style.display = "block";
+        
+        // Reset reupload mode if active
+        const uploadBtn = document.querySelector(".upload-btn");
+        uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Selected Files';
+        uploadBtn.onclick = uploadFiles;
+    } else {
+        selectedFilesList.innerHTML = "<p class='no-files'>No files selected</p>";
+        document.querySelector(".upload-btn").style.display = "none";
+    }
+}
+
+// Upload files
+async function uploadFiles() {
+    const fileInput = document.getElementById("fileInput");
+    if (!fileInput) {
+        alert("File input not found");
+        return;
+    }
+    
+    const files = fileInput.files;
+    
+    if (files.length === 0) {
+        alert("Please select files to upload.");
+        return;
+    }
+    
+    if (!currentUploadReportId || !currentUploadTable) {
+        alert("Report information missing.");
+        return;
+    }
+    
+    // Check if we'll exceed the maximum
+    if (currentExistingFiles.length + files.length > MAX_FILES) {
+        alert(`Cannot upload ${files.length} file(s). You can only have ${MAX_FILES} files total. Current: ${currentExistingFiles.length}, Remaining: ${MAX_FILES - currentExistingFiles.length}`);
+        return;
+    }
+    
+    // Disable upload button and show progress
+    const uploadBtn = document.querySelector(".upload-btn");
+    const originalBtnText = uploadBtn.innerHTML;
+    uploadBtn.disabled = true;
+    uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading... 0/' + files.length;
+    
+    let successCount = 0;
+    let failCount = 0;
+    let failedFiles = [];
+    
+    // Upload files one by one
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("report_id", currentUploadReportId);
+        formData.append("report_table", currentUploadTable);
+        
+        try {
+            // Update status
+            uploadBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Uploading... ${i+1}/${files.length}`;
+            
+            const fileItems = document.querySelectorAll(".selected-file-item");
+            if (fileItems[i]) {
+                fileItems[i].querySelector(".file-status").innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+            }
+            
+            const response = await fetch("/coordinator/ReportManagement/php/upload.php", {
+                method: "POST",
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                successCount++;
+                if (fileItems[i]) {
+                    fileItems[i].className = "selected-file-item success";
+                    fileItems[i].querySelector(".file-status").innerHTML = '<i class="fas fa-check-circle"></i> Uploaded';
+                }
+            } else {
+                failCount++;
+                failedFiles.push(file.name);
+                if (fileItems[i]) {
+                    fileItems[i].className = "selected-file-item error";
+                    fileItems[i].querySelector(".file-status").innerHTML = `<i class="fas fa-exclamation-circle"></i> Failed: ${result.error || 'Error'}`;
+                }
+            }
+        } catch (error) {
+            console.error("Upload error:", error);
+            failCount++;
+            failedFiles.push(file.name);
+            const fileItems = document.querySelectorAll(".selected-file-item");
+            if (fileItems[i]) {
+                fileItems[i].className = "selected-file-item error";
+                fileItems[i].querySelector(".file-status").innerHTML = '<i class="fas fa-exclamation-circle"></i> Upload failed';
+            }
+        }
+    }
+    
+    // Show summary
+    if (successCount > 0) {
+        alert(`${successCount} out of ${files.length} file(s) uploaded successfully! ${failCount > 0 ? failCount + ' failed.' : ''}`);
+        // Refresh file list
+        loadReportFiles(currentUploadReportId, currentUploadTable);
+        // Clear file input and selected files list
+        fileInput.value = "";
+        document.getElementById("selectedFilesList").innerHTML = "<p class='no-files'>No files selected</p>";
+    } else {
+        alert("All files failed to upload. Please try again.\nFailed files: " + failedFiles.join(", "));
+    }
+    
+    // Re-enable upload button
+    uploadBtn.disabled = false;
+    uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Selected Files';
+    uploadBtn.style.display = "none";
+}
+
+// Reupload file (replace existing)
+async function reuploadFile(fileId, oldFileName) {
+    const fileInput = document.getElementById("fileInput");
+    if (!fileInput) {
+        alert("File input not found");
+        return;
+    }
+    
+    // Check if a file is selected
+    if (fileInput.files.length === 0) {
+        alert("Please select a file to reupload.");
+        return;
+    }
+    
+    if (fileInput.files.length > 1) {
+        alert("Please select only one file for reupload.");
+        return;
+    }
+    
+    const file = fileInput.files[0];
+    
+    // Validate file type
+    if (file.type !== "application/pdf") {
+        alert("Please select a PDF file.");
+        return;
+    }
+    
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+        alert("File size must be less than 10MB.");
+        return;
+    }
+    
+    if (!confirm(`Replace "${oldFileName}" with "${file.name}"?`)) {
+        return;
+    }
+    
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("report_id", currentUploadReportId);
+    formData.append("report_table", currentUploadTable);
+    formData.append("existing_file_id", fileId);
+    
+    try {
+        const response = await fetch("/coordinator/ReportManagement/php/upload.php", {
+            method: "POST",
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert("File reuploaded successfully!");
+            // Refresh file list
+            loadReportFiles(currentUploadReportId, currentUploadTable);
+            // Clear file input
+            fileInput.value = "";
+            document.getElementById("selectedFilesList").innerHTML = "<p class='no-files'>No files selected</p>";
+        } else {
+            alert("Reupload failed: " + (result.error || "Unknown error"));
+        }
+    } catch (error) {
+        console.error("Reupload error:", error);
+        alert("Error reuploading file.");
+    }
+}
+
+// Load existing files for a report
+async function loadReportFiles(reportId, reportTable) {
+    const fileListDiv = document.getElementById("fileList");
+    if (!fileListDiv) return;
+    
+    fileListDiv.innerHTML = "<p>Loading files...</p>";
+    
+    try {
+        const url = `/coordinator/ReportManagement/php/get_report_files.php?report_id=${reportId}`;
+        console.log("Fetching files from:", url);
+        
+        const response = await fetch(url);
+        const responseText = await response.text();
+        
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (e) {
+            console.error("Failed to parse JSON. Response:", responseText.substring(0, 200));
+            fileListDiv.innerHTML = `<p>Error: Server returned invalid response</p>`;
+            return;
+        }
+        
+        if (result.success) {
+            currentExistingFiles = result.files || [];
+            updateFileCount();
+            
+            if (currentExistingFiles.length > 0) {
+                let html = "<div class='files-grid'>";
+                html += "<h4>Current Files:</h4>";
+                
+                currentExistingFiles.forEach(file => {
+                    // Handle the date properly
+                    let uploadDate = 'Unknown date';
+                    if (file.uploaded_at) {
+                        try {
+                            uploadDate = new Date(file.uploaded_at).toLocaleString();
+                        } catch (e) {
+                            console.warn("Date parsing error:", e);
+                        }
+                    }
+                    
+                    // Fix the file path
+                    const filePath = file.file_path.startsWith('/') ? file.file_path : `/coordinator/ReportManagement/${file.file_path}`;
+                    html += `
+                        <div class="file-item existing" id="file-${file.id}">
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="file-details">
+                                <a href="${filePath}" target="_blank" class="file-name">${file.file_name}</a>
+                                <span class="file-date">Uploaded: ${uploadDate}</span>
+                            </div>
+                            <button onclick="prepareReupload(${file.id}, '${file.file_name}')" class="reupload-btn" title="Replace this file">
+                                <i class="fas fa-sync-alt"></i> Replace
+                            </button>
+                        </div>
+                    `;
+                });
+                html += "</div>";
+                
+                // Show remaining slots
+                const remaining = MAX_FILES - currentExistingFiles.length;
+                if (remaining > 0) {
+                    html += `<p class='remaining-slots'><i class='fas fa-info-circle'></i> You can upload ${remaining} more file(s). Maximum ${MAX_FILES} files total.</p>`;
+                } else {
+                    html += `<p class='max-files-reached'><i class='fas fa-exclamation-triangle'></i> Maximum files (${MAX_FILES}) reached. Replace existing files to update them.</p>`;
+                }
+                
+                fileListDiv.innerHTML = html;
+            } else {
+                fileListDiv.innerHTML = `
+                    <p>No files uploaded yet.</p>
+                    <p class='remaining-slots'><i class='fas fa-info-circle'></i> You can upload up to ${MAX_FILES} PDF files.</p>
+                `;
+            }
+        } else {
+            console.error("Server returned error:", result.error);
+            fileListDiv.innerHTML = `<p>Error: ${result.error || 'Failed to load files'}</p>`;
+        }
+    } catch (error) {
+        console.error("Error loading files:", error);
+        fileListDiv.innerHTML = "<p>Error loading files. Please try again.</p>";
+    }
+}
+
+// Prepare for reupload
+function prepareReupload(fileId, fileName) {
+    // Highlight the file to be replaced
+    const fileElement = document.getElementById(`file-${fileId}`);
+    if (fileElement) {
+        fileElement.style.backgroundColor = "#fff3e0";
+        fileElement.style.borderLeft = "4px solid #ff9800";
+    }
+    
+    // Scroll to file input
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) {
+        fileInput.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    
+    // Change upload button to show reupload mode
+    const uploadBtn = document.querySelector(".upload-btn");
+    uploadBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Replace File';
+    uploadBtn.onclick = function() { reuploadFile(fileId, fileName); };
+    uploadBtn.style.display = "inline-block";
+    
+    // Show message
+    const selectedFilesList = document.getElementById("selectedFilesList");
+    selectedFilesList.innerHTML = `<p class='reupload-mode'><i class='fas fa-info-circle'></i> Reupload mode: Select one file to replace "${fileName}"</p>`;
 }
 
 // Initialize filter event listeners for each section independently
@@ -330,13 +795,16 @@ function initFilterListeners() {
 // Reset filter for a specific section
 function resetSectionFilter(section) {
     if (section === 'approved') {
-        document.querySelector('.section-green .filter-row select').value = 'All type';
+        const filter = document.querySelector('.section-green .filter-row select');
+        if (filter) filter.value = 'All type';
         renderApprovedTable();
     } else if (section === 'needfix') {
-        document.querySelector('.section-Orange .filter-row select').value = 'All type';
+        const filter = document.querySelector('.section-Orange .filter-row select');
+        if (filter) filter.value = 'All type';
         renderNeedFixTable();
     } else if (section === 'rejected') {
-        document.querySelector('.section-red .filter-row select').value = 'All type';
+        const filter = document.querySelector('.section-red .filter-row select');
+        if (filter) filter.value = 'All type';
         renderRejectedTable();
     }
 }
@@ -344,11 +812,19 @@ function resetSectionFilter(section) {
 // Reset all filters
 function resetAllFilters() {
     document.querySelectorAll('.filter-row select').forEach(select => {
-        select.value = 'All type';
+        if (select) select.value = 'All type';
     });
     renderApprovedTable();
     renderNeedFixTable();
     renderRejectedTable();
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById("uploadModal");
+    if (event.target == modal) {
+        closeUploadModal();
+    }
 }
 
 document.addEventListener("DOMContentLoaded", loadReports);

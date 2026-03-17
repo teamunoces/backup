@@ -70,10 +70,11 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
         title="Navigation Sidebar">
     </iframe>
 
+                                   <!-- ACTION BUTTONS -->
                         <div class="buttons">
-                            <button onclick="window.print()">Print this Page</button>
-                            <button id="downloadPDF" class="btn-download" type="button">Download PDF</button>
-                          </div>
+                            <button  onclick="printReport()">Print this Page</button>
+                            <button id="downloadPDF" type="button">Download PDF</button>
+                        </div>
 
 
     <div class="report-container">
@@ -264,10 +265,14 @@ function printReport(){
 
 }
 </script>
-      <script>const reportType = "<?php echo $reportType; ?>";console.log(reportType);</script>
+      <script>const reportType = "<?php echo $reportType; ?>";console.log(reportType);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="./get.js" ></script>
       <script src="/admin/ReportManagement/actions/js/getapproval.js"></script>
       <script src="./darkmode.js"></script>
+      <script src="./print.js"></script>
+      <script src="./download.js"></script>
 
 
 
