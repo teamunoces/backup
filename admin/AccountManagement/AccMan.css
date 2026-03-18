@@ -2,7 +2,7 @@
     --primary-green: #5eb533;
     --dark-green: #4a9128;
     --bg-gray: #e0e0e0;
-    --bg-light: #f8fafc; /* fixed undefined variable */
+    --bg-light: #f8fafc;
     --text-color: #333;
     --red-action: #b22d2d;
 
@@ -16,7 +16,6 @@
     margin: 0;
     padding: 0;
 }
-
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -55,15 +54,13 @@ body {
 }
 
 /* ================= MAIN CONTAINER ================= */
-/* ================= MAIN CONTAINER ================= */
 .container {
-    max-width: 1200px;                /* keeps content from being too wide */
-    margin: 0 auto 30px;              /* centers container horizontally */
-    padding: 15px 20px;               /* added horizontal padding for breathing room */
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    padding: 15px 20px;
     transition: margin-left 0.3s ease; 
     box-sizing: border-box;
 }
-
 
 /* ================= TOP ACTION ================= */
 .top-action {
@@ -97,7 +94,6 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    gap: 15px;
 }
 
 .filter-group {
@@ -108,31 +104,26 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
+    margin-left: auto; /* Pushes filter to the right */
+}
+
+.filter-group label {
+    font-weight: 500;
 }
 
 .filter-group select {
     border: none;
     border-radius: 4px;
-    padding: 4px;
+    padding: 4px 8px;
+    background: white;
+    color: #333;
+    font-size: 0.9rem;
+    cursor: pointer;
 }
 
-.search-bar {
-    position: relative;
-    width: 260px;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 8px 35px 8px 12px;
-    border-radius: 25px;
-    border: 2px solid #ccc;
-}
-
-.search-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+.filter-group select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.5);
 }
 
 /* ================= TABLE ================= */
@@ -167,6 +158,7 @@ body {
     border-radius: 6px;
     font-size: 0.8rem;
     color: #fff;
+    display: inline-block;
 }
 
 .active { background: #2d5a27; }
@@ -179,17 +171,23 @@ body {
     border-radius: 6px;
     color: #fff;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
 .btn-deactivate { background: var(--red-action); }
 .btn-reactivate { background: var(--primary-green); }
 
+.btn-deactivate:hover,
+.btn-reactivate:hover {
+    opacity: 0.9;
+}
+
 /* ================= MODAL ================= */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6); /* Darker backdrop for focus */
-    backdrop-filter: blur(4px);     /* Modern frosted glass effect */
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
     display: none;
     justify-content: center;
     align-items: center;
@@ -200,11 +198,11 @@ body {
 .modal {
     background: #fff;
     width: 90%;
-    max-width: 420px; /* Slightly wider for better proportions */
+    max-width: 420px;
     border-radius: 16px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     position: relative;
-    overflow: hidden; /* Ensures contents don't spill over rounded corners */
+    overflow: hidden;
     animation: slideUp 0.3s ease-out;
 }
 
@@ -272,25 +270,24 @@ body {
     color: #1f2937;
     transition: all 0.2s ease;
     background-color: #fff;
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    box-sizing: border-box;
 }
 
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: #59AF29; /* Primary color */
-    box-shadow: 0 0 0 3px rgba(89, 175, 41, 0.15); /* Green glow ring */
+    border-color: #59AF29;
+    box-shadow: 0 0 0 3px rgba(89, 175, 41, 0.15);
 }
 
 /* Primary Button */
 .btn-create {
     width: 100%;
-    /* Applied requested gradient: #59AF29 to #254911 */
     background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
     color: #ffffff;
     border: none;
     padding: 12px;
-    border-radius: 8px; /* Modern rounded square */
+    border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -300,7 +297,7 @@ body {
 }
 
 .btn-create:hover {
-    transform: translateY(-1px); /* Slight lift */
+    transform: translateY(-1px);
     box-shadow: 0 10px 15px -3px rgba(37, 73, 17, 0.3);
 }
 
@@ -339,8 +336,10 @@ body {
         align-items: stretch;
     }
 
-    .search-bar {
+    .filter-group {
+        margin-left: 0;
         width: 100%;
+        justify-content: center;
     }
 
     .account-table thead {
@@ -394,8 +393,8 @@ body {
     }
 
     .container {
-        margin-left: var(--sidebar-w);   /* keeps space for sidebar */
-        max-width: 1200px;               /* fixed max width instead of calc(100%-sidebar) */
-        padding: 15px 20px;              /* ensure right padding */
+        margin-left: var(--sidebar-w);
+        max-width: 1200px;
+        padding: 15px 20px;
     }
 }

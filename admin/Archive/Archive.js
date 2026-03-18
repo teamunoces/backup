@@ -46,7 +46,6 @@ $(document).ready(function () {
                             <td>${escapeHtml(report.created_at)}</td>
                             <td><span class="badge badge-archived">Archived</span></td>
                             <td>
-                                <i class="far fa-eye view-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
                                 <i class="fas fa-sync-alt restore-btn" data-id="${report.id}" data-table="${report.source_table}" data-type="report"></i>
                             </td>
                         </tr>

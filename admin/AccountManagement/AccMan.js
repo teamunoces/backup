@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const phpUrl = 'Api.php';
     const tableBody = document.querySelector('.account-table tbody');
-    const searchInput = document.getElementById('searchInput');
+    const filterSelect = document.getElementById('filterSelect');
     const createAccountBtn = document.getElementById('createAccountBtn');
     const modalOverlay = document.getElementById('modalOverlay');
     const closeBtn = document.querySelector('.close-btn');
@@ -17,23 +17,38 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!response.ok) throw new Error('Failed to fetch accounts');
 
             const data = await response.json();
-
-            // 🔒 ONLY KEEP ACTIVE ACCOUNTS
-            allAccounts = data.filter(
-                account => account.status.toLowerCase() === 'active'
-            );
-
-            renderTable(allAccounts);
+            
+            // Store ALL accounts (including inactive for filtering)
+            allAccounts = data;
+            
+            // Apply current filter
+            applyFilter();
         } catch (error) {
             console.error(error);
             tableBody.innerHTML = `
                 <tr>
-                    <td colspan="4" style="text-align:center;">
+                    <td colspan="7" style="text-align:center;">
                         Failed to load accounts.
                     </td>
                 </tr>
             `;
         }
+    }
+
+    /* ================= APPLY FILTER ================= */
+    function applyFilter() {
+        const filterValue = filterSelect.value;
+        
+        let filteredAccounts = allAccounts;
+        
+        // Apply status filter if selected
+        if (filterValue) {
+            filteredAccounts = allAccounts.filter(account => 
+                account.status.toLowerCase() === filterValue.toLowerCase()
+            );
+        }
+        
+        renderTable(filteredAccounts);
     }
 
     /* ================= RENDER TABLE ================= */
@@ -43,8 +58,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (accounts.length === 0) {
             tableBody.innerHTML = `
                 <tr>
-                    <td colspan="4" style="text-align:center;">
-                        No active accounts found.
+                    <td colspan="7" style="text-align:center;">
+                        No accounts found.
                     </td>
                 </tr>
             `;
@@ -52,19 +67,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         accounts.forEach(account => {
+            const isActive = account.status.toLowerCase() === 'active';
+            const statusBadge = isActive ? 
+                '<span class="badge active">Active</span>' : 
+                '<span class="badge inactive">Inactive</span>';
+            
+            const actionButton = isActive ?
+                '<button class="btn-deactivate">Deactivate</button>' :
+                '<button class="btn-reactivate">Reactivate</button>';
+
             const row = `
                 <tr data-id="${account.id}">
-                    <td data-label="Username">${account.username}</td>
-                    <td data-label="First Name">${account.name}</td>
-                    <td data-label="Email">${account.email}</td>
-                    <td data-label="Department">${account.department}</td>
-                    <td data-label="Role">${account.role}</td>
-                    <td data-label="Status">
-                        <span class="badge active">Active</span>
-                    </td>
-                    <td data-label="Actions">
-                        <button class="btn-deactivate">Deactivate</button>
-                    </td>
+                    <td data-label="Username">${account.username || ''}</td>
+                    <td data-label="Name">${account.name || ''}</td>
+                    <td data-label="Email">${account.email || ''}</td>
+                    <td data-label="Department">${account.department || ''}</td>
+                    <td data-label="Role">${account.role || ''}</td>
+                    <td data-label="Status">${statusBadge}</td>
+                    <td data-label="Actions">${actionButton}</td>
                 </tr>
             `;
 
@@ -72,19 +92,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    /* ================= SEARCH (ACTIVE ONLY) ================= */
-    searchInput.addEventListener('input', () => {
-        const term = searchInput.value.toLowerCase();
-
-        const filtered = allAccounts.filter(account =>
-            account.username.toLowerCase().includes(term) ||
-            account.email.toLowerCase().includes(term) ||
-            account.department.toLowerCase().includes(term) ||
-            account.role.toLowerCase().includes(term)
-        );
-
-        renderTable(filtered);
-    });
+    /* ================= FILTER EVENT LISTENER ================= */
+    filterSelect.addEventListener('change', applyFilter);
 
     /* ================= MODAL CONTROLS ================= */
     createAccountBtn.addEventListener('click', () => {
@@ -127,19 +136,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    /* ================= DEACTIVATE ================= */
+    /* ================= UPDATE STATUS (DEACTIVATE/REACTIVATE) ================= */
     tableBody.addEventListener('click', async e => {
+        const button = e.target;
+        
+        if (!button.classList.contains('btn-deactivate') && 
+            !button.classList.contains('btn-reactivate')) return;
 
-        if (!e.target.classList.contains('btn-deactivate')) return;
-
-        const row = e.target.closest('tr');
+        const row = button.closest('tr');
         const id = row.dataset.id;
+        const action = button.classList.contains('btn-deactivate') ? 'deactivate' : 'reactivate';
 
         try {
             const response = await fetch(phpUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `action=update_status&id=${id}&status_action=deactivate`
+                body: `action=update_status&id=${id}&status_action=${action}`
             });
 
             const result = await response.json();
@@ -148,11 +160,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (result.success) loadAccounts();
         } catch (error) {
             console.error(error);
-            alert('Failed to deactivate account.');
+            alert(`Failed to ${action} account.`);
         }
     });
 
     /* ================= INIT ================= */
     loadAccounts();
-
 });

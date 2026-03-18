@@ -7,7 +7,53 @@ document.addEventListener('DOMContentLoaded', function() {
     if (resubmitBtn) {
         resubmitBtn.addEventListener('click', handleResubmit);
     }
+    
+    // ===== ADD/DELETE ROW FUNCTIONALITY =====
+    setupTableButtons();
 });
+
+function setupTableButtons() {
+    const addRowBtn = document.querySelector(".add-row-btn");
+    const deleteRowBtn = document.querySelector(".delete-row-btn");
+    const tbody = document.querySelector('.main-table tbody');
+    
+    if (!tbody) {
+        console.error("Table body not found");
+        return;
+    }
+    
+    // Add Row Function
+    if (addRowBtn) {
+        // Remove any existing event listeners by cloning and replacing
+        const newAddBtn = addRowBtn.cloneNode(true);
+        addRowBtn.parentNode.replaceChild(newAddBtn, addRowBtn);
+        
+        newAddBtn.addEventListener("click", function() {
+            addEmptyRow(tbody);
+        });
+    } else {
+        console.error("Add row button not found");
+    }
+    
+    // Delete Row Function
+    if (deleteRowBtn) {
+        // Remove any existing event listeners by cloning and replacing
+        const newDeleteBtn = deleteRowBtn.cloneNode(true);
+        deleteRowBtn.parentNode.replaceChild(newDeleteBtn, deleteRowBtn);
+        
+        newDeleteBtn.addEventListener("click", function() {
+            const rows = tbody.querySelectorAll("tr");
+            
+            if (rows.length > 1) {
+                tbody.removeChild(rows[rows.length - 1]); // remove last row
+            } else {
+                alert("At least one row must remain.");
+            }
+        });
+    } else {
+        console.error("Delete row button not found");
+    }
+}
 
 function loadReportData() {
     // Try URL first

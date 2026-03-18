@@ -258,6 +258,45 @@ table td:first-child textarea {
     font-weight: 600;
 }
 
+/* ===== Add Row Button ===== */
+.add-row-btn {
+    margin-top: 15px;
+    background-color: #f8fafc;
+    color: #3498db;
+    border: 2px dashed #cbd5e1;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-row-btn:hover {
+    background-color: #eff6ff;
+    border-color: #3498db;
+    color: #2980b9;
+}
+/* Delete Row Button */
+.delete-row-btn {
+    margin-top: 10px;
+    background-color: #fef2f2;
+    color: #e74c3c;
+    border: 2px dashed #fecaca;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-row-btn:hover {
+    background-color: #fdecea;
+    border-color: #e74c3c;
+    color: #c0392b;
+}
+
 /* Footer Section */
 footer {
     margin-top: 50px;

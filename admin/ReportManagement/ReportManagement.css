@@ -18,6 +18,7 @@
     --green-header: #72bd44;
     --red-primary: #b53737;
     --orange-archive: #e6a23c;
+    --yellow-warning: #f1c40f;
 }
 
 body.dark-mode {
@@ -42,7 +43,6 @@ body {
     margin: 0;
     /* Top padding = header height + gap | Left padding = sidebar width + gap */
     padding: calc(var(--header-h) + 20px) 20px 20px calc(var(--sidebar-w) + 20px);
-   
 }
 
 #headerFrame, #sidebarFrame {
@@ -65,7 +65,7 @@ body {
    COMPONENTS
 ========================================================= */
 .container {
-    max-width: 1000px; margin: 0 auto;
+    max-width: 1200px; margin: 0 auto;
     display: flex; flex-direction: column; gap: 25px; width: 100%;
 }
 
@@ -74,55 +74,229 @@ body {
     border: 1px solid var(--border-color);
     padding: 20px;
     box-shadow: var(--shadow);
+    border-radius: 8px;
+}
+
+/* Section Colors */
+.section-green {
+    border-top: 4px solid var(--green-primary);
+}
+
+.section-red {
+    border-top: 4px solid var(--red-primary);
 }
 
 /* Search Bar */
-.search-section { display: flex; justify-content: flex-end; }
+.search-section { display: flex; justify-content: flex-end; margin-bottom: 20px; }
 .search-container {
     border: 2px solid var(--green-primary);
-    border-radius: 25px; padding: 5px 15px;
+    border-radius: 25px; padding: 8px 15px;
     display: flex; align-items: center; width: 300px;
     background: var(--bg-card);
 }
 .search-container input {
-    border: none; outline: none; width: 100%; height: 25px;
+    border: none; outline: none; width: 100%; height: 30px;
     background: transparent; color: var(--text-main);
+    font-size: 14px;
 }
 .search-container i { color: var(--green-primary); font-size: 1.2rem; }
 
 /* Filter Row & Table */
-.filter-row { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-.label { color: white; padding: 5px 15px; font-weight: bold; }
+.filter-row { 
+    margin-bottom: 20px; 
+    display: flex; 
+    align-items: center; 
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.label { 
+    color: white; 
+    padding: 8px 20px; 
+    font-weight: bold; 
+    border-radius: 4px;
+    font-size: 14px;
+}
 
 .section-green .label { background-color: var(--green-primary); }
 .section-red .label { background-color: var(--red-primary); }
 
 select {
-    padding: 5px 10px; border-radius: 4px; min-width: 150px;
-    background: var(--bg-card); color: var(--text-main);
+    padding: 8px 15px; 
+    border-radius: 6px; 
+    min-width: 200px;
+    background: var(--bg-card); 
+    color: var(--text-main);
     border: 1px solid var(--border-color);
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+select:focus {
+    border-color: var(--green-primary);
+}
+
+.select-red:focus {
+    border-color: var(--red-primary);
 }
 
 .table-header {
-    padding: 10px 15px; color: white; font-weight: bold;
-    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 20px; 
+    color: white; 
+    font-weight: bold;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-radius: 6px 6px 0 0;
+    margin-bottom: 2px;
 }
+
 .header-green { background-color: var(--green-header); }
 .header-red { background-color: var(--red-primary); }
 
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color); }
+.table-header i { 
+    cursor: pointer; 
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+}
 
+.table-header i:hover {
+    transform: scale(1.1);
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+    border-radius: 0 0 8px 8px;
+}
+
+.admin-table-container {
+    overflow-x: auto;
+    border-radius: 0 0 8px 8px;
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    min-width: 600px;
+}
+
+th { 
+    padding: 15px 12px; 
+    text-align: center; 
+    border-bottom: 2px solid var(--border-color);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td { 
+    padding: 12px; 
+    text-align: center; 
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
+/* Header Colors for each section */
 .section-green th { color: var(--green-header); }
 .section-red th { color: var(--red-primary); }
-tbody tr:nth-child(even) { background-color: var(--table-row-even); }
+
+tbody tr:nth-child(even) { 
+    background-color: var(--table-row-even); 
+}
+
+tbody tr:hover {
+    background-color: rgba(90, 163, 55, 0.1);
+    transition: background-color 0.2s;
+}
 
 /* Actions */
-.actions { display: flex; justify-content: center; gap: 12px; font-size: 1.1rem; }
-.actions i { color: var(--green-primary); cursor: pointer; }
+.actions { 
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+    font-size: 1.1rem;
+}
+
+.actions i { 
+    color: var(--green-primary); 
+    cursor: pointer; 
+    transition: all 0.2s;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.actions i:hover {
+    transform: scale(1.15);
+    background-color: rgba(90, 163, 55, 0.1);
+}
+
+/* Section-specific action colors */
+.section-green .actions i { color: var(--green-primary); }
+.section-red .actions i { color: var(--red-primary); }
 
 .archive-icon {
     background-color: var(--orange-archive);
-    color: white !important; padding: 3px;
-    border-radius: 3px; font-size: 0.8rem;
+    color: white !important; 
+    padding: 5px;
+    border-radius: 4px; 
+    font-size: 0.9rem;
 }
+
+.archive-icon:hover {
+    background-color: #d48c2c !important;
+}
+
+/* Empty state styling */
+tbody tr td[colspan="5"] {
+    padding: 30px;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+/* Status Indicators (optional - if you want to show status visually) */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.status-approved {
+    background-color: rgba(90, 163, 55, 0.2);
+    color: var(--green-primary);
+}
+
+.status-rejected {
+    background-color: rgba(181, 55, 55, 0.2);
+    color: var(--red-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: calc(var(--header-h) + 10px) 10px 10px 10px;
+    }
+    
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+    
+    .filter-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    select {
+        width: 100%;
+    }
+    
+    .actions {
+        gap: 8px;
+    }
+}
+

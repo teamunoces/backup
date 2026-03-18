@@ -1,13 +1,7 @@
 function updateStatus(status) {
-
     const fileIdEl = document.getElementById('currentReportId');
     const feedbackEl = document.getElementById('admincomment');
     const reportTypeEl = document.getElementById('currentReportType');
-    
-    
-
-
-
 
     if (!fileIdEl || !feedbackEl || !reportTypeEl) {
         alert("Required elements not found on page.");
@@ -23,49 +17,64 @@ function updateStatus(status) {
         return;
     }
 
-   fetch('/admin/Dashboard/Pending/review/action/action.php', { 
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ 
-        id: fileId, 
-        type: reportType, 
-        status: status, 
-        feedback: feedback 
-            })
+    fetch('/admin/Dashboard/Pending/review/action/action.php', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            id: fileId, 
+            type: reportType, 
+            status: status, 
+            feedback: feedback 
         })
-        .then(res => {
-            if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-            return res.json();
-        })
-        .then(data => {
-            if (data.success) {
-                alert(`Status updated to "${status}" successfully!`);
-                document.getElementById('admincomment').value = '';
-            } else {
-                alert('Failed to update: ' + data.message);
-            }
-        })
-        .catch(err => console.error(err));
+    })
+    .then(res => {
+        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        return res.json();
+    })
+    .then(data => {
+        if (data.success) {
+            alert(`Status updated to "${status}" successfully!`);
+            // Clear the feedback field
+            document.getElementById('admincomment').value = '';
+            // Redirect to the pending page
+            window.location.href = '/admin/Dashboard/Pending/pending.html'; // Adjust this path as needed
+        } else {
+            alert('Failed to update: ' + data.message);
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert('An error occurred while updating the status.');
+    });
 }
 
 /* -----------------------
    BUTTON EVENTS
 ------------------------*/
 
-document.getElementById('rejectReport')
-.addEventListener('click', (e) => { 
-    e.preventDefault(); 
-    updateStatus('rejected'); 
-});
+document.addEventListener('DOMContentLoaded', function() {
+    const rejectBtn = document.getElementById('rejectReport');
+    const needFixesBtn = document.getElementById('needFixes');
+    const approveBtn = document.getElementById('approveReport');
 
-document.getElementById('needFixes')
-.addEventListener('click', (e) => { 
-    e.preventDefault(); 
-    updateStatus('need fix'); 
-});
+    if (rejectBtn) {
+        rejectBtn.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            updateStatus('rejected'); 
+        });
+    }
 
-document.getElementById('approveReport')
-.addEventListener('click', (e) => { 
-    e.preventDefault(); 
-    updateStatus('approve'); 
+    if (needFixesBtn) {
+        needFixesBtn.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            updateStatus('need fix'); 
+        });
+    }
+
+    if (approveBtn) {
+        approveBtn.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            updateStatus('approve'); 
+        });
+    }
 });

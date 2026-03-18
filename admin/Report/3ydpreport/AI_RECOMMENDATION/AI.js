@@ -44,15 +44,15 @@ document.addEventListener('DOMContentLoaded', function () {
             data.recommendations.forEach((rec, index) => {
                 const li = document.createElement('li');
                 li.innerHTML = `
-                    <div class="rec-title"><strong>${index + 1}. ${rec.project.title_of_project}</strong></div>
+                    <div class="rec-title"><strong>${index + 1}. ${rec.project.title_of_project || 'Untitled Project'}</strong></div>
                     <div class="rec-description">${rec.project.description_of_project || 'No description provided.'}</div>
                 `;
 
                 li.addEventListener('click', () => {
-                    const titleField = document.getElementById('title_of_project');
-                    const textareas = document.querySelectorAll('.form-section textarea');
-                    const beneficiaries = document.querySelector('input[placeholder*="benefit"]');
+                    const tableBody = document.querySelector('tbody');
+                    tableBody.innerHTML = "";
 
+                    // Populate project form fields
                     document.getElementById('title_of_project').value = rec.project.title_of_project || "";
                     document.getElementById('description_of_project').value = rec.project.description_of_project || "";
                     document.getElementById('general_objectives').value = rec.project.general_objectives || "";
@@ -60,9 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('beneficiaries').value = rec.project.beneficiaries || "";
                     document.getElementById('program_plan').value = rec.project.program_plan || "";
 
-                    const tableBody = document.querySelector('tbody');
-                    tableBody.innerHTML = "";
-
+                    // Populate program table
                     if (rec.program && Array.isArray(rec.program)) {
                         rec.program.forEach(p => {
                             const row = document.createElement('tr');
@@ -73,13 +71,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                 p.strategies || "",
                                 p.persons_agencies_involved || "",
                                 p.resources_needed || "",
-                                p.budget || "",
+                                // Ensure budget is safe even if non-numeric
+                                isNaN(parseFloat(p.budget)) ? "" : parseFloat(p.budget),
                                 p.time_frame || ""
                             ];
 
                             rowData.forEach((val, i) => {
                                 const td = document.createElement('td');
-                                const input = (i === 7) ? document.createElement('input') : document.createElement('textarea');
+                                const input = (i === 7 || i === 6) ? document.createElement('input') : document.createElement('textarea');
                                 input.value = val;
                                 td.appendChild(input);
                                 row.appendChild(td);
@@ -125,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         for (let i = 0; i < 8; i++) {
             const td = document.createElement('td');
-            const input = (i === 7) ? document.createElement('input') : document.createElement('textarea');
+            const input = (i === 7 || i === 6) ? document.createElement('input') : document.createElement('textarea');
             input.placeholder = (i === 7) ? "e.g. 2024-2027" : "...";
             td.appendChild(input);
             newRow.appendChild(td);
@@ -134,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tableBody.appendChild(newRow);
     }
 
-    const addRowBtn = document.querySelector('#add-row-btn'); // fixed selector
+    const addRowBtn = document.querySelector('#add-row-btn');
     if (addRowBtn) {
         addRowBtn.addEventListener('click', e => {
             e.preventDefault();

@@ -39,8 +39,8 @@ if (!in_array($status, $allowed)) {
 
 switch($type){
 
-    case "consolidated report":
-        $table = "cnacr";
+    case "community needs assessment consolidated report":
+        $table = "coordinator_cnacr";
         break;
 
     case "3-year development plan":

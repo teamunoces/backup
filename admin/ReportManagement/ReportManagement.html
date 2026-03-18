@@ -28,13 +28,7 @@
     </iframe>
 
     <div class="container">
-        <div class="card search-section">
-            <div class="search-container">
-                <input type="text" placeholder="">
-                <i class="fas fa-search"></i>
-            </div>
-        </div>
-
+     
         <div class="card section-green">
             <div class="filter-row">
                 <span class="label">Type:</span>
@@ -65,6 +59,43 @@
             </div>
         </div>
 
+        <!-- Rows will be dynamically added by JS -->
+
+        <div class="card section-green">
+            <div class="filter-row">
+                <span class="label">Type:</span>
+                <select>
+                     <option>All type</option>
+                    <option value="3 Year Development Plan">3 Year Development Plan</option>
+                    <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
+                    <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
+                    <option value="Program Design">Program Design</option>
+                    <option value="Departmental Planned Initiative Report">Departmental Planned Initiative Report</option>
+                </select>
+            </div>
+            
+            <div class="table-container">
+                <div class="table-header header-green">
+                    <span>COORDINATOR'S APPROVED REPORTS</span>
+                   
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Department</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="coordinatorapprovedTableBody">
+                        <!-- Rows will be dynamically added by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <div class="card section-red">
             <div class="filter-row">
                 <span class="label">Type:</span>
@@ -75,7 +106,7 @@
             
             <div class="table-container">
                 <div class="table-header header-red">
-                    <span>REJECTED REPORT</span>
+                    <span>COORDINATOR'S REJECTED REPORT</span>
                     <i class="fas fa-bars"></i>
                 </div>
                 <table>
@@ -88,7 +119,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="rejectedTableBody">
+                    <tbody id="coordinatorrejectedTableBody">
                         <!-- Rows will be dynamically added by JS -->
                     </tbody>
                 </table>

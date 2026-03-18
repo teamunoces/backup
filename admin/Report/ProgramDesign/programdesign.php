@@ -1,4 +1,6 @@
 <?php
+session_start();
+$userDepartment = $_SESSION['department'] ?? '';
 $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Program Design";
 ?>
 
@@ -9,6 +11,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Program 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Program Design Form - SMCC</title>
     <link rel="stylesheet" href="programdesign.css">
+    <link rel="stylesheet" href="darkmode.css">">
 </head>
 <body>
 
@@ -54,7 +57,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Program 
         <div class="input-fields">
             <div class="field">
                 <label>Department:</label>
-                <input id="department" type="text" placeholder="Enter department">
+                <input id="department" type="text" value="<?php echo htmlspecialchars($userDepartment); ?>" placeholder="Enter department">
             </div>
             <div class="field">
                 <label>Title of Activity:</label>
@@ -102,6 +105,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Program 
                         </tr>
                     </tbody>
                     <button type="button" class="add-row-btn">Add Row</button>
+                    <button type="button" class="delete-row-btn">Delete Row</button>
                 
                 </table>
         </form>
@@ -122,5 +126,6 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Program 
     </div>
     <script>const reportType = "<?php echo $reportType; ?>";console.log(reportType);</script>
     <script src="./post.js" ></script>
+    <script src="./darkmode.js"></script>
 </body>
 </html>

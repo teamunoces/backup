@@ -1,6 +1,7 @@
 <?php
 $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year Development Plan";
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +11,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
   <title>3-Year Development Plan</title>
   <link rel="stylesheet" href="3ydpreport.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
     <!-- Header -->
@@ -19,8 +21,24 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
     <iframe src="../../Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
 
     <div class="container">
-        <!-- Report Header -->
-        <iframe src="../ReportHeader/header.html" id="reportHeaderFrame" frameborder="0" scrolling="no" title="Report Header"></iframe>
+       
+        <header>
+            <div class="header-content">
+                <img src="../images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                <div class="college-info">
+                    <h1>Saint Michael College of Caraga</h1>
+                    <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
+                    <p>District 8, Brgy. Triangulo, Nasipit, Agusan del Norte, Philippines</p>
+                    <p>Tel Nos. +63 085 343-3251 / +63 085 283-3113</p>
+                    <a href="http://www.smccnasipit.edu.ph">www.smccnasipit.edu.ph</a>
+                </div>
+                <div class="logos-right">
+                    <img src="../images/ISOlogo.png" alt="SOCOTEC Logo">
+                </div>
+            </div>
+            <h2 class="office-title">OFFICE OF THE COMMUNITY EXTENSION SERVICES</h2>
+            <div class="double-line"></div>
+        </header>
 
         <header>
             <h1>3-Year Development Plan</h1>
@@ -91,6 +109,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
                         </tbody>
                     </table>
                     <button type="button" class="add-row-btn">Add Row</button>
+                    <button type="button" class="delete-row-btn">Delete Row</button>
                 </div>
             </section>
 
@@ -122,5 +141,6 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
     <script src="./AI_RECOMMENDATION/AI.js" defer></script>
     <script src="./js/post.js" defer></script>
     <script src="paperlines.js"></script>
+    <script src="./darkmode.js"></script>
 </body>
 </html>

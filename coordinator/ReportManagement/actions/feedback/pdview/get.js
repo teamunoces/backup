@@ -1,5 +1,6 @@
 async function loadReport() {
     const params = new URLSearchParams(window.location.search);
+  
     let reportId = params.get("id");
 
     if (!reportId) {
@@ -165,4 +166,52 @@ document.getElementById('resubmitBtn').addEventListener('click', async () => {
     }
 });
 
-document.addEventListener("DOMContentLoaded", loadReport);
+// ===== FIXED ADD/DELETE ROW FUNCTIONS =====
+document.addEventListener("DOMContentLoaded", function() {
+    // Load the report
+    loadReport();
+    
+    // Get buttons
+    const addRowBtn = document.querySelector(".add-row-btn");
+    const deleteRowBtn = document.querySelector(".delete-row-btn");
+    
+    // Add Row Function
+    if (addRowBtn) {
+        addRowBtn.addEventListener("click", function() {
+            const tableBody = document.querySelector('.program-table tbody');
+            if (tableBody) {
+                const newRow = document.createElement("tr");
+                // Create 11 editable cells
+                for (let i = 0; i < 11; i++) {
+                    const td = document.createElement("td");
+                    td.contentEditable = "true";
+                    newRow.appendChild(td);
+                }
+                tableBody.appendChild(newRow);
+            } else {
+                console.error("Table body not found");
+            }
+        });
+    }
+    
+    // Delete Row Function
+    if (deleteRowBtn) {
+        deleteRowBtn.addEventListener("click", function() {
+            const tableBody = document.querySelector('.program-table tbody');
+            if (tableBody) {
+                const rows = tableBody.querySelectorAll("tr");
+                
+                if (rows.length > 1) {
+                    tableBody.removeChild(rows[rows.length - 1]); // remove last row
+                } else {
+                    alert("At least one row must remain.");
+                }
+            } else {
+                console.error("Table body not found");
+            }
+        });
+    }
+});
+
+// Remove the old button declarations and event listeners at the bottom
+// The old code at lines 85-112 should be replaced with the above

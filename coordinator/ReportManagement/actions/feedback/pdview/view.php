@@ -106,7 +106,8 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                         </tr>
                     </tbody>
                    
-                
+                    <button type="button" class="add-row-btn">Add Row</button>
+                    <button type="button" class="delete-row-btn">Delete Row</button>
                 </table>
         </form>
 

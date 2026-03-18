@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.querySelector(".submit-button");
     const addRowBtn = document.querySelector(".add-row-btn");
+    const deleteRowBtn = document.querySelector(".delete-row-btn");
     const tableBody = document.querySelector(".program-table tbody");
 
     // ===== Add Row Function =====
@@ -13,6 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
             newRow.appendChild(td);
         }
         tableBody.appendChild(newRow);
+    });
+           // ===== Delete Row Function =====
+    deleteRowBtn.addEventListener("click", () => {
+        const rows = tableBody.querySelectorAll("tr");
+
+        if (rows.length > 1) {
+            tableBody.removeChild(rows[rows.length - 1]); // remove last row
+        } else {
+            alert("No rows to delete.");
+        }
     });
 
     // ===== Submit Form via AJAX =====

@@ -124,6 +124,8 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
               </tr>
             </tbody>
           </table>
+                    <button type="button" class="add-row-btn"  onclick="addTableRow()">Add Row</button>
+                    <button type="button" class="delete-row-btn"onclick="deleteTableRow()">Delete Row</button>
         </section>
 
                         <div>

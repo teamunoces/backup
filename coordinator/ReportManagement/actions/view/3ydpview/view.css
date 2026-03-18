@@ -24,25 +24,6 @@
     flex-shrink: 0;
 }
 
-.container {
-    max-width: 1100px;
-    margin: 40px auto 40px 180px; /* Adjusted margin to avoid overlap with sidebar */
-    background: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    box-sizing: border-box;
-    width: calc(100vw - 200px);
-}
-/* ===== Report Header ===== */
-#reportHeaderFrame {
-    width: 100%;
-    height: 200px;
-    border: none;
-    background: #fff;
-    margin-bottom: 20px;
-}
-
 /* ===== General Styles ===== */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
@@ -521,7 +502,6 @@ footer {
 }
 
 
-
 /* 4. Ensure lines render in Print Mode */
 @media print {
     .paper-lines {
@@ -535,55 +515,6 @@ footer {
 .paper-lines:focus {
     outline: none;
 }
-/* Tablet and Small Laptops */
-@media (max-width: 1024px) {
-    .container {
-        margin-left: 170px;
-        width: calc(100% - 190px);
-        padding: 20px;
-    }
-}
-
-/* Mobile Devices */
-@media (max-width: 768px) {
-    /* Hide sidebar or move it to top if necessary */
-    #sidebarFrame {
-        display: none; /* Usually hidden on mobile in favor of a hamburger menu */
-    }
-
-    #headerFrame {
-        left: 0;
-        width: 100%;
-    }
-
-    .container {
-        margin: 80px 10px 20px 10px; /* Center container and remove sidebar gap */
-        width: calc(100% - 20px);
-        padding: 15px;
-    }
-
-    /* Stack approval signatures vertically */
-    .signature-group {
-        width: 100%;
-    }
-
-    .buttons {
-        flex-direction: column; /* Stack buttons on top of each other */
-        align-items: center;
-        margin-top: 80px;
-    }
-
-    .buttons button {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    /* Adjust document info table for small screens */
-    .doc-header {
-        width: 100%;
-    }
-}
-
 
 /* ===== PRINT STYLES ===== */
 @media print {

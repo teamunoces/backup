@@ -1,363 +1,235 @@
-/* ===== 1. VARIABLES & CORE SETUP ===== */
-:root {
-    --sidebar-w: 150px;
-    --header-h: 60px;
-    --primary-green: #59af29;
-    --secondary-green: #254911;
-    --light-header: #DDEBF7;
-    --border-dark: #333;
-}
-
+/* General Reset */
 * {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
-    background-color: #f5f5f5;
-    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
 }
 
-/* ===== 2. IFRAMES (UI Navigation) ===== */
+
+/* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: var(--sidebar-w);
+    width: 150px;
     height: 100vh;
     border: none;
     position: fixed;
     top: 0;
     left: 0;
     background: #fff;
-    z-index: 1001;
-    border-right: 1px solid #ddd;
+    z-index: 100;
+    overflow-y: auto;
 }
 
 #headerFrame {
-    height: var(--header-h);
+    height: 60px;
     border: none;
     position: fixed;
     top: 0;
-    left: var(--sidebar-w);
-    width: calc(100% - var(--sidebar-w));
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* --- ------------------------------------REPORT HEADER -------------------------------- */
-
-.report-header {
+/* ===== Header Section ===== */
+.header-content {
     display: flex;
-    align-items: center; 
-    justify-content: space-between; 
-    text-align: center;
-    padding: 5px 0;         /* Reduced padding */
-    margin-bottom: 15px;    /* Half the original margin */
-    border-bottom: 1px solid #000; 
-}
-
-.logo {
-    width: 200px;           /* Scaled down from 200px */
-    height: auto;
-}
-
-.logo.left {
-    margin-right: 15px;
-}
-
-.logo.right {
-    margin-left: 15px;
-}
-
-.header-text {
-    flex: 1;
-}
-
-.header-text h1 {
-    color: #003366; 
-    font-size: 40px;        /* Smaller title */
-    font-weight: bold;
-    margin-bottom: 2px;     /* Tightened gap */
-    font-family: 'Times New Roman', serif; 
-    line-height: 1.1;
-}
-
-.header-text p {
-    margin: 1px 0;          /* Minimal spacing between lines */
-    font-size: 15px;        /* Smaller detail text */
-    color: #0066cc; 
-}
-
-.header-text .website {
-    color: #0066cc;
-    font-weight: 500;
-    margin-bottom: 5px;     /* Reduced gap */
-    font-size: 20px;
-}
-
-.header-text h2 {
-    font-size: 14px;        /* Scaled down subheader */
-    color: #000;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-top: 8px;        /* Reduced gap */
-    letter-spacing: 0.3px;
-}
-
-.header-text h2 + p {
-    font-size: 12px;        /* Smaller secondary text */
-    font-weight: normal;
-    color: #333;
-    margin-top: 2px;
-}
-
-/*Main content______________________________________________________________________*/
-.main-wrapper {
-    margin-left: var(--sidebar-w);
-    margin-top: var(--header-h);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    width: calc(100% - var(--sidebar-w));
-}
-
-
-.act {
-    width: 100%;
-    max-width: 1100px; /* Landscape width */
-    background: linear-gradient(135deg, #3d8317, #59AF29);
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    color: white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: flex-end;
-}
-
-.table-card label {
-    display: block;
-    font-size: 12px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-.table-card select {
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.4);
-    background: rgba(0,0,0,0.2);
-    color: white;
-    font-size: 14px;
-    width: 250px;
-}
-
-
-
-/* ===== 5. THE REPORT CONTAINER (.container) ===== */
-.container {
+    margin-bottom: 15px;
     width: 100%;
-    max-width: 1100px; /* Landscape width */
-    background: white;
-    padding: 50px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
-/* Banners and Labels */
-.section-banner, .green-banner, .banner {
-    background: linear-gradient(to right, var(--secondary-green), var(--primary-green));
-    color: white;
-    padding: 12px 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 13px;
-    margin-top: 30px;
-    border-left: 5px solid #1a330c;
+.logo-left {
+    height: 90px;
+    width: auto;
 }
 
-.main-profile-label, .pill-label {
-    background: var(--primary-green);
-    color: white;
-    text-align: center;
-    padding: 15px 40px;
-    margin: 40px auto 20px auto;
-    width: fit-content;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* ===== 6. TABLE STYLING ===== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    border: 1.5px solid var(--border-dark);
-}
-
-thead th {
-    background-color: var(--light-header);
-    color: #333;
-    border: 1px solid var(--border-dark);
-    padding: 12px 8px;
-    font-size: 12px;
-    text-transform: uppercase;
-    vertical-align: middle;
-}
-
-tbody td {
-    border: 1px solid var(--border-dark);
-    padding: 12px 10px;
-    text-align: center;
-    font-size: 14px;
-}
-
-tbody td:first-child {
-    text-align: left;
-    font-weight: 500;
-}
-
-/* Zebra Striping */
-tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-
-
-/* ===== Main Container Centering ===== */
-.header_content {
-    text-align: center; /* This centers the text and inline-block elements */
-    width: 100%;
+.logos-right {
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Ensures the textarea and header stack in the center */
+    gap: 20px;
+    align-items: center;
 }
 
-/* ===== Header Styling ===== */
-.header_content .intro-header {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    /* Removed fixed color here so the H1/H2 specific colors work */
-    line-height: 1.2; /* Tightened to match the screenshot better */
-    margin-bottom: 20px;
-    width: 100%;
+.logos-right img {
+    height: 80px;
+    width: auto;
 }
 
-.intro-header h1 {
-    font-weight: bold;
-    color: #6482C0; 
-    font-size: 24px;
-    
-    margin: 0 0 2px 0;
-    letter-spacing: 0.5px;
+.college-info {
     text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
 }
 
-.intro-header h2, 
-.intro-header h3 {
-    color: #000000;
-    font-weight: bold;
-    text-transform: uppercase; 
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
     margin: 0;
-    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* Office Title and Double Line */
+.office-title {
     text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-/* Overriding the date and semester to be Title Case as per image */
-#titleH3Semester, #titleH3Date {
-    text-transform: none; 
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+.report-container {
+    margin-top: 60px;
+    background-color: #fff;
+    width: 850px; /* Standard A4 width-ish */
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+/* Header Grid Table */
+.header-grid {
+    display: grid;
+    grid-template-columns: 150px 1fr 150px 1fr;
+    border: 1px solid #000;
+    margin-bottom: 30px;
+}
+
+.label-box {
+    padding: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    border-right: 1px solid #000;
+}
+
+.input-box {
+    padding: 8px;
+}
+
+.bg-gray {
+    background-color: #b3b3b3;
+}
+
+.border-right {
+    border-right: 1px solid #000;
+}
+
+/* Section Styling */
+.section-header {
+    background-color: #b3b3b3;
+    border: 1px solid #000;
+    padding: 8px 15px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 20px;
+    display: flex;
+}
+
+.roman-num {
+    width: 30px;
+}
+
+.section-content {
+    padding: 15px 0 10px 40px;
+}
+
+/* Container for the label and input */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Stacks label above the lines */
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* The textarea styling */
+.paper-lines {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
     font-size: 16px;
+    line-height: 30px; /* This must match the gradient size below */
+    padding: 0;
+    background-attachment: local;
+    
+    /* Creates the horizontal lines */
+    background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
+    background-size: 100% 30px; /* 30px height matches line-height */
+    
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
-/* ===== Textarea Styling ===== */
-.header_content .intro-textarea {
+.paper-lines::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+/* Submit Button */
+.submit-button {
     display: block;
-    width: 100%;          /* Increased slightly for better paragraph width */
-    max-width: 1000px; 
-    margin: 20px auto; 
-    min-height: 150px;   /* Increased height to invite paragraph entry */
-    padding: 15px;
-    
-    /* Typography for Paragraphs */
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;    /* Essential for reading long paragraphs */
-    text-align: justify; /* Optional: gives a clean "block" look to paragraphs */
-    color: #333;
-
-    /* Behavior */
-    white-space: pre-wrap; /* Ensures line breaks and spaces are preserved */
-    overflow-wrap: break-word;
-    
-    /* Aesthetics */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    resize: vertical; 
-    outline: none;
-    transition: all 0.3s ease;
-    background-color: #fafafa; /* Subtle background color change */
-}
-/* Focus state for textarea */
-.header_content .intro-textarea:focus {
-    border-color: #59af29;
-    box-shadow: 0 0 5px rgba(89, 175, 41, 0.4);
+    padding: 6px 30px;
+    border-radius: 50px;
+    border: 1px solid #1a1a1a;
+    background: linear-gradient(to right, #63b32e, #3d7025);
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    margin-left: auto; /* Align right */
+    width: fit-content;
 }
 
-/* Placeholder styling */
-.header_content .intro-textarea::placeholder {
-    color: #888;
-    font-style: italic;
-}
-
-/* Responsive tweaks */
-@media (max-width: 600px) {
-    .header_content .intro-header h1 {
-        font-size: 1.2rem;
-    }
-    .header_content .intro-textarea {
-        width: 95%;
-    }
-}
-
-textarea{
-     display: block;
-    width: 100%;          /* Increased slightly for better paragraph width */
-    max-width: 1000px; 
-    margin: 20px auto; 
-    min-height: 150px;   /* Increased height to invite paragraph entry */
-    padding: 15px;
-    
-    /* Typography for Paragraphs */
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;    /* Essential for reading long paragraphs */
-    text-align: justify; /* Optional: gives a clean "block" look to paragraphs */
-    color: #333;
-
-    /* Behavior */
-    white-space: pre-wrap; /* Ensures line breaks and spaces are preserved */
-    overflow-wrap: break-word;
-    
-    /* Aesthetics */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    resize: vertical; 
-    outline: none;
-    transition: all 0.3s ease;
-    background-color: #fafafa; /* Subtle background color change */
-}
-
-textarea:focus {
-    border-color: #59af29;
-    box-shadow: 0 0 5px rgba(89, 175, 41, 0.4);
-}
-
-textarea::placeholder {
-    color: #888;
-    font-style: italic;
+.submit-button:hover {
+    opacity: 0.9;
 }
 
 /* Footer Section */
@@ -386,120 +258,3 @@ footer {
     width: auto;
 }
 
-/* Submit Button */
-.Submitbtn {
-    display: block;
-    padding: 12px 60px;
-    border-radius: 50px;
-    
-    /* Fixed 'normal' to 'solid' or 'none' - 'normal' isn't a valid border style */
-    border: none; 
-    
-    /* Using your green gradient */
-    background: linear-gradient(to right, #63b32e, #3d7025);
-    color: #ffffff; /* Added white text color */
-    
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 20px; /* Sized down slightly for better balance */
-    text-align: center;
-    
-    /* Smooth interaction */
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-    cursor: pointer;
-    
-    /* Spacing */
-    margin-top: 30px;
-    margin-bottom: 40px;
-    margin-left: auto; 
-    margin-right: auto; /* Change this to 0 if you want it aligned strictly to the right */
-    
-    width: fit-content;
-    box-shadow: 0 4px 15px rgba(61, 112, 37, 0.3); /* Subtle green glow */
-}
-
-.Submitbtn:hover {
-    opacity: 0.95;
-    transform: translateY(-2px); /* Slight lift effect */
-    box-shadow: 0 6px 20px rgba(61, 112, 37, 0.4);
-}
-
-.Submitbtn:active {
-    transform: translateY(0); /* Returns to position when clicked */
-}
-
-
-/* ================= DARK MODE ================= */
-
-body.dark-mode {
-    background-color: #121212;
-    color: #f1f1f1;
-}
-
-/* Main wrapper */
-body.dark-mode .main-wrapper{
-     background-color: #1e1e1e;
-}
-body.dark-mode .container {
-    background-color: #4b4a4a;
-}
-
-/* Cards */
-body.dark-mode .table-card,
-body.dark-mode .table-container,
-body.dark-mode .table-box {
-    background-color: #1f1f1f;
-    color: #ffffff;
-    border-color: #444;
-}
-
-/* Tables */
-body.dark-mode table {
-    background-color: #1e1e1e;
-    color: #ffffff;
-}
-
-body.dark-mode th {
-    background-color: #2c2c2c;
-    color: #ffffff;
-}
-
-body.dark-mode td {
-    border-color: #444;
-}
-
-/* Textareas */
-body.dark-mode textarea, body.dark-mode .intro-textarea {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    border: 1px solid #555;
-}
-
-/* Select dropdown */
-body.dark-mode select {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    border: 1px solid #555;
-}
-
-/* Headers and banners */
-body.dark-mode .report-header,
-body.dark-mode .banner,
-body.dark-mode .green-banner,
-body.dark-mode .section-banner,
-body.dark-mode .main-profile-label,
-body.dark-mode .pill-label {
-    background-color: #2c2c2c;
-    color: #ffffff;
-}
-
-/* Footer */
-body.dark-mode footer {
-    background-color: #1a1a1a;
-}
-
-/* Button */
-body.dark-mode .Submitbtn {
-    background-color: #3a7f1d;
-    color: white;
-}

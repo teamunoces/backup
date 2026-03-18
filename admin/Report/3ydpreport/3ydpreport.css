@@ -27,14 +27,73 @@
     overflow-y: auto;
 }
 
-/* ===== Report Header ===== */
-#reportHeaderFrame {
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
     width: 100%;
-    height: 200px;
-    border: none;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* Office Title and Double Line */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
 }
 
 /* ===== General Styles ===== */
@@ -200,6 +259,25 @@ table td:last-child input {
     background-color: #eff6ff;
     border-color: #3498db;
     color: #2980b9;
+}
+/* Delete Row Button */
+.delete-row-btn {
+    margin-top: 10px;
+    background-color: #fef2f2;
+    color: #e74c3c;
+    border: 2px dashed #fecaca;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-row-btn:hover {
+    background-color: #fdecea;
+    border-color: #e74c3c;
+    color: #c0392b;
 }
 
 /* ===== Form Buttons ===== */

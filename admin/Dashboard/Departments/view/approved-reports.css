@@ -1,0 +1,88 @@
+/* approved-reports.css - Additional styles for approved reports */
+
+/* Ensure content area is properly positioned */
+.content-area {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Main wrapper adjustments */
+.main-wrapper {
+    background: #f5f7fa;
+    padding: 20px;
+}
+
+/* Green banner enhancements */
+.green-banner {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    margin-bottom: 30px;
+}
+
+.banner-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Report card enhancements */
+.report-card {
+    border-left: 4px solid #4CAF50;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.report-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Status badge for approved */
+.status-badge {
+    background: #4CAF50;
+    box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+}
+
+/* Report type badge */
+.report-type {
+    background: #6c757d;
+    font-size: 12px;
+}
+
+/* Attachments section */
+.attachments-section {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+/* PDF action buttons */
+.pdf-action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: white;
+    border: 1px solid #dee2e6;
+}
+
+.pdf-action-btn:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+    .banner-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .coordinator-badge {
+        margin-left: 0;
+    }
+}
+
+/* Loading state for iframe */
+.pdf-iframe.loading {
+    background: #f8f9fa url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50"><path fill="%23ddd" d="M25,5A20,20,0,0,1,45,25H40A15,15,0,0,0,25,10Z"><animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/></path></svg>') center no-repeat;
+}

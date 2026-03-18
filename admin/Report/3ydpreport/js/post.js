@@ -3,19 +3,34 @@
 
     const table = document.getElementById("programPlanTable");
     const addRowBtn = document.querySelector(".add-row-btn");
+    const deleteRowBtn = document.querySelector(".delete-row-btn");
     const submitBtn = document.querySelector(".btn-submit");
 
     if(reportType === "3-year Development Plan"){
     console.log("This is the 3YDP report");
     }
-    // --- Add new row dynamically ---
-    addRowBtn.addEventListener("click", () => {
-        const newRow = table.tBodies[0].rows[0].cloneNode(true);
-        // Clear all input/textarea values
-        newRow.querySelectorAll("textarea, input").forEach(cell => cell.value = "");
-        table.tBodies[0].appendChild(newRow);
-    });
+   
+            // --- Add new row dynamically ---
+            addRowBtn.addEventListener("click", () => {
+                const newRow = table.tBodies[0].rows[0].cloneNode(true);
 
+                // Clear all input/textarea values
+                newRow.querySelectorAll("textarea, input").forEach(cell => cell.value = "");
+
+                table.tBodies[0].appendChild(newRow);
+            });
+
+            // --- Delete last row ---
+            deleteRowBtn.addEventListener("click", () => {
+                const tbody = table.tBodies[0];
+
+                // Prevent deleting the last remaining row
+                if (tbody.rows.length > 1) {
+                    tbody.deleteRow(tbody.rows.length - 1);
+                } else {
+                    alert("At least one row must remain.");
+                }
+            });
     // --- Submit form ---
     submitBtn.addEventListener("click", function(e) {
         e.preventDefault();
@@ -79,12 +94,33 @@ document.addEventListener("DOMContentLoaded", function() {
     const clearBtn = document.querySelector(".btn-clear");
 
     clearBtn.addEventListener("click", function() {
-        // Clear all main textareas in the form
+
+        // Clear all textareas
         document.querySelectorAll("form textarea").forEach(textarea => {
             textarea.value = "";
         });
 
-        // Optional: reset table rows to a single empty row
+        // Clear all input fields (text, date, etc.)
+        document.querySelectorAll("form input").forEach(input => {
+            input.value = "";
+        });
+
+        // Clear specific fields (extra safety)
+        const idsToClear = [
+            "title_of_project",
+            "description_of_project",
+            "general_objectives",
+            "program_justification",
+            "beneficiaries",
+            "program_plan"
+        ];
+
+        idsToClear.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = "";
+        });
+
+        // Reset table rows
         const tableBody = document.querySelector("#programPlanTable tbody");
         tableBody.innerHTML = `
             <tr>

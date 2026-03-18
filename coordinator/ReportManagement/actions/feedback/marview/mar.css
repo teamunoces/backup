@@ -235,6 +235,56 @@ th, td {
     padding: 6px;
 }
 
+/* Base style for both buttons */
+.add-row-btn, 
+.delete-row-btn {
+    padding: 8px 16px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid;
+    outline: none;
+}
+
+/* Add Row Button - Subtle Green */
+.add-row-btn {
+    background-color: #ffffff;
+    color: #2e7d32;
+    border-color: #2e7d32;
+}
+
+.add-row-btn:hover {
+    background-color: #2e7d32;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(46, 125, 50, 0.2);
+}
+
+/* Delete Row Button - Subtle Red */
+.delete-row-btn {
+    background-color: #ffffff;
+    color: #d32f2f;
+    border-color: #d32f2f;
+}
+
+.delete-row-btn:hover {
+    background-color: #d32f2f;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(211, 47, 47, 0.2);
+}
+
+/* Click Animation */
+.add-row-btn:active, 
+.delete-row-btn:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+
 /* Footer Section */
 footer {
     margin-top: 50px;

@@ -127,8 +127,8 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
             </div>
 
 
-             <input type="hidden" id="currentReportId" value="<?php echo htmlspecialchars($_GET['id'] ?? ''); ?>">
-            <input type="hidden" id="currentReportType" value="<?php echo htmlspecialchars($reportType); ?>">
+                 <input type="hidden" id="currentReportId" value="<?php echo htmlspecialchars($_GET['id'] ?? ''); ?>">
+                 <input type="hidden" id="currentReportType" value="<?php echo htmlspecialchars($reportType); ?>">
     </div>
                 
 

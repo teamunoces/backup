@@ -1,7 +1,7 @@
 let reportData = { 'pending': {}, 'need fix': {} };
 
 const reviewPages = {
-    "community needs assessment consolidated report": "./review/cnacr/coordinator/cnacr_coordinator.php",
+    "community needs assessment consolidated report": "./review/coordinator/cnacr_coordinator.php",
     "3-year development plan": "./review/3ydp/3ydpreview.php",
     "program design": "./review/programdesign/pdview.php",
     "departmental planned initiative report": "./review/dpir/dpirreview.php",

@@ -1,0 +1,358 @@
+/* ===== VARIABLES ===== */
+:root {
+  --sidebar-w: 150px;
+  --header-h: 60px;
+  --primary-color: #55a630;
+  --secondary-color: #38761d;
+  --text-light: #fff;
+  --text-dark: #000;
+  --pending-color: #d00000;
+}
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+  background: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== PAGE WRAPPER ===== */
+.page-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ===== HEADER ===== */
+#headerFrame {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);
+  height: var(--header-h);
+  width: calc(100% - var(--sidebar-w));
+  z-index: 1000;
+  background: #fff;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== SIDEBAR ===== */
+#sidebarFrame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: #fff;
+  z-index: 1001;
+  border: none;
+  overflow-y: auto;
+}
+
+/* ===== CONTENT AREA ===== */
+.content-area {
+  margin-left: var(--sidebar-w);
+  margin-top: var(--header-h);
+  min-height: calc(100vh - var(--header-h));
+  background: #fff;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-wrapper {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===== BANNER ===== */
+.green-banner {
+  background: var(--primary-color);
+  color: var(--text-light);
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+
+/* ===== DEPARTMENT GRID ===== */
+.department-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* ===== DEPARTMENT CARD - Enhanced Design ===== */
+.dept-card {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  min-height: 140px;
+}
+
+/* Different gradient backgrounds for each department */
+.dept-card:nth-child(1) { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); } /* CCIS */
+.dept-card:nth-child(2) { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); } /* CTHM */
+.dept-card:nth-child(3) { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); } /* CAS */
+.dept-card:nth-child(4) { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); } /* CBM */
+.dept-card:nth-child(5) { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); } /* JHS */
+.dept-card:nth-child(6) { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); } /* SHS */
+.dept-card:nth-child(7) { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); } /* CTE */
+.dept-card:nth-child(8) { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); } /* CCJE */
+.dept-card:nth-child(9) { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); } /* CCF */
+
+.dept-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dept-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dept-card:hover::before {
+  opacity: 1;
+}
+
+.dept-card:active {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.18);
+}
+
+.dept-name {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  padding: 25px 20px;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.dept-card:hover .dept-name {
+  transform: translateX(5px);
+}
+
+/* Add decorative elements */
+.dept-card::after {
+  content: '→';
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 1;
+}
+
+.dept-card:hover::after {
+  transform: translateX(8px);
+  color: white;
+}
+
+/* Add subtle pattern overlay */
+.dept-card {
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Add shine effect */
+.dept-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.dept-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(30deg);
+  transition: transform 0.6s ease;
+  opacity: 0;
+}
+
+.dept-card:hover::before {
+  opacity: 1;
+  transform: rotate(30deg) translate(10%, 10%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dept-card {
+    min-height: 120px;
+  }
+  
+  .dept-name {
+    font-size: 20px;
+    padding: 20px 15px;
+  }
+  
+  .dept-card::after {
+    font-size: 20px;
+    bottom: 12px;
+    right: 15px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .dept-card {
+    min-height: 130px;
+  }
+  
+  .dept-name {
+    font-size: 22px;
+    padding: 22px 18px;
+  }
+}
+
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-w: 0px;
+  }
+  
+  #headerFrame {
+    left: 0;
+    width: 100%;
+  }
+  
+  #sidebarFrame {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .content-area {
+    margin-left: 0;
+  }
+  
+  .main-wrapper {
+    padding: 15px;
+  }
+  
+  .green-banner {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+  
+
+  
+  .department-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .dept-card {
+    padding: 15px;
+  }
+  
+  .dept-name {
+    font-size: 16px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-wrapper {
+    padding: 18px;
+  }
+  
+  .department-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .dept-card {
+    padding: 16px 12px;
+  }
+  
+
+  .dept-name {
+    font-size: 16px;
+  }
+}
+
+/* Small Desktop */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .department-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .main-wrapper {
+    max-width: 1200px;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1367px) {
+  .main-wrapper {
+    max-width: 1600px;
+    padding: 25px;
+  }
+  
+  .department-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .dept-name {
+    font-size: 18px;
+  }
+  
+  .dept-date {
+    font-size: 12px;
+  }
+  
+  .green-banner {
+    font-size: 16px;
+    padding: 15px 25px;
+  }
+}
+
+/* Fix for iframe borders */
+iframe {
+  border: none;
+}
+
+/* Ensure content doesn't overflow */
+img, svg, iframe {
+  max-width: 100%;
+}

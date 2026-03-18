@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'AccountManagement.html': { title: 'ACCOUNT MANAGEMENT', icon: 'fa-users' },
         'Approval.html': { title: 'APPROVAL', icon: 'fa-check-circle' },
         'Archive.html': { title: 'ARCHIVE', icon: 'fa-archive' },
-        'Pending.html': { title: 'PENDING', icon: 'fa-hourglass-half' },
+        'Pending.html': { title: 'PENDING AND NEED FIXES', icon: 'fa-hourglass-half' },
         'SubmittedMonthly.html': { title: 'SUBMITTED MONTHLY', icon: 'fa-calendar-alt' },
-        'cnacr.php': { title: 'Community Needs Assessment Consolidated Report', icon: 'fa-file-contract' },
+        'cnacr.php': { title: 'Community Needs Assessment Consolidated Result Report', icon: 'fa-file-contract' },
         'cnacr.html': { title: 'Community Needs Assessment Consolidated Result', icon: 'fa-file-contract' },
         'cnacrreview.php': { title: 'Community Needs Assessment Consolidated Report Review', icon: 'fa-file-contract' },
         'needfix.html': { title: 'Needs Fix', icon: 'fa-tools' },
@@ -90,10 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
         '3ydpview.php': { title: '3 Year Development Plan View', icon: 'fa-file-alt' },
         'programdesign.php': { title: 'Program Design', icon: 'fa-file-alt' },
         'pdview.php': { title: 'Program Design View', icon: 'fa-file-alt' },
-        'dpir.php': { title: 'Departmental Planned Initiative Report', icon: 'fa-file-alt' }
-
-
-
+        'dpir.php': { title: 'Departmental Planned Initiative Report', icon: 'fa-file-alt' },
+        'Departments.html': { title: 'Departments', icon: 'fa-building' },
+        'ApprovedReports.php' : { title: 'Approved Reports', icon: 'fa-check-circle' },
 
 
     };

@@ -35,7 +35,7 @@ switch ($action) {
             exit;
         }
 
-        $barangayTables = ["aclan","barangay1","barangay7","cubicubi","culit","punta","santaana","camagong"];
+        $barangayTables = ["aclan","amontay","ataatahon","barangay1","barangay2","barangay3","barangay4","barangay5","barangay6","barangay7","camagong","cubicubi","culit","jaguimitan","kinajabangan","punta","santaana","talisay","triangulo"];
         $data = [];
         foreach ($barangayTables as $table) {
             $result = $conn->query("SELECT COUNT(*) AS respondents FROM `$table`");
@@ -56,9 +56,7 @@ switch ($action) {
             exit;
         }
 
-        $barangayTables = ["aclan","amotay","ataatahon","barangay1","barangay2","barangay3",
-                           "barangay4","barangay5","barangay6","barangay7","cubicubi","culit",
-                           "jaguimitan","kinabjangan","punta","santaana","talisay","triangulo","camagong"];
+        $barangayTables = ["aclan","amontay","ataatahon","barangay1","barangay2","barangay3","barangay4","barangay5","barangay6","barangay7","camagong","cubicubi","culit","jaguimitan","kinajabangan","punta","santaana","talisay","triangulo"];
         $data = [];
         foreach ($barangayTables as $table) {
             $result = $conn->query("SELECT SUM(population) AS total_population, SUM(households) AS total_households FROM `$table`");

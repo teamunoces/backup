@@ -1,0 +1,630 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    padding-top: 80px; /* Space for your fixed header */
+    padding-left: 170px; /* Space for your fixed sidebar */
+    display: flex;
+    justify-content: center;
+    background-color: #f0f0f0;
+}
+
+
+
+/* ===== Frames (Layout Shell) ===== */
+#sidebarFrame {
+    width: 150px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    right: 0;
+    width: calc(100% - 150px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+
+/*----------------------- Document Header-------------------------------------*/
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* Office Title and Double Line */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+/* ===== Main Form Container ===== */
+
+.report-container {
+    background-color: white;
+    width: 800px;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+
+    /* KEY CHANGES */
+    height: auto;        /* Allows it to grow with content */
+    min-height: 1000px;  /* Optional: keeps it looking like a full page even when empty */
+    overflow: visible;   /* Ensures content doesn't get clipped */
+    margin-bottom: 50px; /* Adds space at the very bottom so it doesn't touch the screen edge */
+}
+h1 {
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Header Table Styling */
+.header-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+.header-table td {
+    border: 1px solid black;
+    height: 30px;
+    padding: 5px 10px;
+}
+
+.label-cell {
+    background-color: #b3b3b3;
+    font-weight: bold;
+    width: 15%;
+    font-size: 14px;
+}
+
+/* Styling for the actual input boxes */
+.input-cell input[type="text"] {
+  margin-left: 5px;
+    width: 250px;           /* Adjust this to match your desired width */
+    height: 22px;           /* Matches the height in your screenshot */
+    border:none; /* Thin, grey border */
+    border-radius: 3px;     /* Slight rounding on the corners */
+    padding: 0 5px;         /* Keeps text from touching the edges */
+    font-family: Arial, sans-serif;
+    outline: none;          /* Removes the highlight when clicked */
+}
+
+/* Optional: Ensure the cell centers the input */
+.input-cell {
+    width: 35%;
+    vertical-align: middle;
+    text-align: left; /* Or 'center' if you want it in the middle of the cell */
+}
+
+
+/* Section Header Styling */
+.section-header {
+    background-color: #b3b3b3;
+    border: 1px solid black;
+    padding: 8px 20px;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+/* Content and Lines */
+.section-content {
+    height: auto;
+    overflow: visible;
+    width: 100%;
+    padding: 10px 5px;
+}
+
+.section-content p {
+    margin: 15px 0 5px 0;
+    font-size: 14px;
+}
+
+.line {
+    display: inline-block;
+    border-bottom: 1.5px solid black;
+    min-width: 200px;
+    margin-left: 5px;
+    vertical-align: bottom;
+}
+
+.line.full {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+    height: 1px;
+}
+
+.line-group {
+    margin-top: 10px;
+}
+
+.line-textarea, .auto-expand {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    width: 50%;
+    padding: 1px;
+    font-family: inherit;
+    font-size: inherit;
+    resize: none;  /* Prevents manual resizing */
+    overflow: hidden;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+.line-textarea:focus, .auto-expand:focus {
+    border-bottom: 2px solid #007bff;
+}
+
+/* Make the container layout better */
+.section-content p {
+    display: flex;
+    align-items: flex-start;
+    margin: 15px 0;
+}
+
+/*----------------------second section----------------------------*/
+
+#prevailing_needs {
+    padding: 5px 0;
+}
+
+.paper-lines {
+    pointer-events: none;
+    width: 100%;
+    min-height: 93px; /* Starts with 3 lines */
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    
+    /* Notebook background lines */
+    line-height: 31px;
+    background-image: linear-gradient(transparent 30px, #000 31px);
+    background-size: 100% 31px;
+    background-attachment: local;
+    
+    display: block;
+    padding: 5PX;
+    margin: 0;
+    
+    /* This ensures the height calculation is accurate */
+    box-sizing: border-box;
+}
+
+/* Optional: Removes the border when clicking the box */
+.paper-lines:focus {
+    outline: none;
+}
+
+
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+
+
+.buttons {
+    position: fixed;
+    top: 80px; /* adjust depending on header height */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+
+    display: flex;
+    gap: 12px; /* space between buttons */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Base button style */
+.buttons button {
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Primary button (onclick button) */
+.buttons button[onclick] {
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(37, 73, 17, 0.2);
+}
+
+.buttons button[onclick]:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 73, 17, 0.3);
+}
+
+/* Link button */
+.buttons a {
+    text-decoration: none;
+}
+
+.buttons a button {
+    background-color: transparent;
+    color: #254911;
+    border: 2px solid #59AF29;
+    box-shadow: none;
+}
+
+.buttons a button:hover {
+    background-color: #f0fdf4;
+    border-color: #254911;
+    transform: translateY(-2px);
+}
+
+/* Click effect */
+.buttons button:active {
+    transform: translateY(0) scale(0.96);
+}
+
+
+/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+.approvals-container {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #000;
+}
+
+.approval-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.signature-group {
+  width: 35%; /* Adjust width to match the line lengths in your image */
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 35px; /* Creates space for the signature signature */
+}
+
+.signature-line {
+  border-bottom: 1.5px solid black;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-size: 14px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.left-align {
+  text-align: left;
+  width: 100%;
+}
+
+/* Centered Layout for VP and President */
+.approval-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-block {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.name-underlined {
+  font-weight: bold;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-size: 16px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+/* ===== 4. Document Info Table (The Navy Blue Style) ===== */
+.doc-header {
+    width: auto; /* Shrinks the table to fit the content */
+    margin-right: auto; /* Keeps it pushed to the left */
+}
+
+.doc-header td {
+    border: 1px solid #000;
+    padding: 5px 10px;
+}
+
+.doc-header .label {
+    background-color: #002060;
+    color: #fff;
+    width: 25%;
+    font-size: 11px;
+}
+
+.doc-header .value {
+    /* Reduced from 75% to 50% or 30% depending on how narrow you want it */
+    width: 70%; 
+    font-size: 11px;
+    /* This ensures the text stays aligned left within that narrower space */
+    text-align: left; 
+}
+/*------------------------------------------ Container positioning */
+.document-info {
+    margin-top: 50px; /* Adjust based on space needed after approvals */
+    width: 30%;
+}
+
+/* Table Styling */
+.doc-header {
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 11px; /* Matches the compact look of the screenshot */
+    border: 1px solid #d1d1d1;
+}
+
+/* The first column (Dark Blue Background) */
+.doc-header td.label {
+    background-color: #002060; /* Dark Navy Blue */
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    border: 1px solid #d1d1d1;
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
+}
+
+/* The middle colon column */
+.doc-header td:nth-child(2) {
+    width: 2%;
+    padding: 0 1px;
+    font-weight: bold;
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+/* The value column */
+.doc-header td.value {
+    padding: 4px 10px;
+    border: 1px solid #d1d1d1;
+    min-width: 120px;
+}
+
+/* Styling the inputs/text inside the value cell */
+.doc-header td.value input, 
+.doc-header td.value p {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Remove default focus outline for disabled inputs */
+.doc-header td.value input:disabled {
+    color: black;
+    cursor: default;
+}
+
+@media print {
+
+    /* Hide elements you don't want */
+    #sidebarFrame,
+    #headerFrame,
+    .buttons {
+        display: none !important;
+    }
+
+    /* Remove the spacing reserved for fixed layout */
+    body {
+        background-color: white;
+        padding: 0;
+        margin: 0;
+        position: relative;
+    }
+
+    /* Force exact color and design printing */
+    .report-container {
+        box-shadow: none;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        margin: 0;
+        padding-bottom: 20px; /* Create space for footer + document-info */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .section-header, .header-table, .first_content {
+        margin-top: 15px !important;    /* Space above the grey bar */
+        margin-bottom: 0px !important; /* NO space below the grey bar */
+        
+    }
+
+    .section-content, .section_content {
+        break-inside: avoid !important; 
+        margin-top: 0px !important;    /* Pulls content up to touch the header */
+        padding-top: 5px !important;
+    }
+
+    /* 2. Remove default margins from <p> tags inside sections */
+    .section-content p, .section_content p {
+        margin-top: 2px !important;
+        margin-bottom: 2px !important;
+    }
+
+  
+
+    /* 4. Fix for Section II vs Section III naming inconsistency */
+    .section-header + div {
+        margin-top: 0 !important;
+    }
+    .program-table th,
+    .program-table td {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .doc-header td.label {
+        background-color: #002060 !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Ensures the signature lines (borders) are visible */
+    .signature-block .name {
+        border-bottom: 1px solid #000 !important;
+    }
+
+    /* Prevents the approval section from being split across two pages */
+    .approvals {
+        font-size: 12px;
+        page-break-inside: avoid;
+    }
+
+    /* ===== Document Info at bottom-left of last page ===== */
+    .document-info {
+        margin-top: 100%;
+        bottom: 50px; /* Position above the footer */
+        left: 20px;
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        z-index: 999;
+        background-color: white; /* Ensure readability */
+        display: block;
+    }
+
+    /* ===== Footer at bottom of last page ===== */
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-color: white;
+        border-top: 1px solid #ccc; /* Optional: adds a separator line */
+        z-index: 1000;
+        display: block !important; /* Force footer to display */
+        visibility: visible !important; /* Ensure visibility */
+    }
+
+    /* Make sure footer content is visible */
+    footer * {
+        visibility: visible !important;
+        display: block !important;
+    }
+
+
+}

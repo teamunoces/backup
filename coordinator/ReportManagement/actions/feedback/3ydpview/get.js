@@ -127,6 +127,32 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+// ===== ADD/DELETE ROW FUNCTIONS =====
+function addTableRow() {
+    const tableBody = document.querySelector("#programPlanTable tbody");
+    if (tableBody) {
+        addEmptyProgramRow(tableBody);
+    } else {
+        console.error("Table body not found");
+    }
+}
+
+function deleteTableRow() {
+    const tableBody = document.querySelector("#programPlanTable tbody");
+    if (!tableBody) {
+        console.error("Table body not found");
+        return;
+    }
+    
+    const rows = tableBody.querySelectorAll("tr");
+    
+    if (rows.length > 1) {
+        tableBody.removeChild(rows[rows.length - 1]); // remove last row
+    } else {
+        alert("At least one row must remain.");
+    }
+}
+
 // Collect all form data for update (EXCLUDING admincomment)
 function collectFormData() {
     const params = new URLSearchParams(window.location.search);

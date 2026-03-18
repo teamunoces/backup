@@ -157,12 +157,14 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                                         <td contenteditable="true"></td>
                                     </tr>
                                 </tbody>
-                            
+                            <button type="button" class="add-row-btn">Add Row</button>
+                            <button type="button" class="delete-row-btn">Delete Row</button>
                             </table>
+                            
                     </form>
 
                
-                          <!-- submit button-->>
+                          <!-- submit button-->
 
                         <div>
                            <button type="button" class="submit-button" id="resubmitBtn">Re-submit</button>

@@ -1,0 +1,157 @@
+/* ================= DARK MODE DEFAULTS ================= */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --card-bg: #f8f9fa;
+    --border-color: #dee2e6;
+    --accent-color: #007bff;
+}
+
+/* ================= DARK MODE OVERRIDES ================= */
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --border-color: #333333;
+    --accent-color: #3700b3;
+    
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Apply variables to common elements */
+body.dark-mode table {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+body.dark-mode th, 
+body.dark-mode td {
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode .card, 
+body.dark-mode .modal-content {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+/* Form Inputs */
+body.dark-mode input, 
+body.dark-mode select, 
+body.dark-mode textarea {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid var(--border-color);
+}
+
+/* Scrollbar styling for a polished look */
+body.dark-mode::-webkit-scrollbar {
+    width: 12px;
+}
+body.dark-mode::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+body.dark-mode::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 10px;
+    border: 3px solid #1e1e1e;
+}
+
+/* 3. Approvals Section Dark Mode */
+body.dark-mode .approvals-container {
+    color: #e0e0e0; /* Changes "Professional Look" text from black to light gray */
+}
+
+body.dark-mode .signature-line {
+    border-bottom-color: #555; /* Softens the stark black line */
+}
+
+body.dark-mode .name-underlined {
+    color: #ffffff;
+}
+
+/* 4. Document Info Table Dark Mode */
+body.dark-mode .doc-header {
+    border-color: #444;
+}
+
+body.dark-mode .doc-header td {
+    border-color: #444;
+}
+
+/* Adjusting the Navy Blue header for readability in dark mode */
+body.dark-mode .doc-header .label, 
+body.dark-mode .doc-header td.label {
+    background-color: #1a2a4a; /* Desaturated navy for better contrast */
+    color: #cbd5e0;
+    border-color: #444;
+}
+
+body.dark-mode .doc-header td.value {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+/* Styling inputs inside the table for dark mode */
+body.dark-mode .doc-header td.value input, 
+body.dark-mode .doc-header td.value p {
+    color: #e0e0e0;
+}
+
+body.dark-mode .doc-header td.value input:disabled {
+    color: #b0b0b0;
+}
+
+/* Middle colon column adjustment */
+body.dark-mode .doc-header td:nth-child(2) {
+    color: #e0e0e0;
+    border-top-color: #444;
+    border-bottom-color: #444;
+    background-color: #1e1e1e;
+}
+/* Ensure the main content containers switch colors */
+body.dark-mode .approvals-container,
+body.dark-mode .container, 
+body.dark-mode .wrapper,
+body.dark-mode main {
+    background-color: #121212; /* Match the body background */
+    color: #e0e0e0;            /* Light text for readability */
+}
+
+/* If your container has a white "card" style, change it to dark gray */
+body.dark-mode .content-box,
+body.dark-mode .report-container {
+    background-color: #1e1e1e; 
+    border: 1px solid #333;
+    box-shadow: none; /* Remove light-mode shadows which look glowy in dark mode */
+}
+/* ================= FORM GROUP & LABEL DARK MODE ================= */
+
+/* Fixes the "3. Kabayani ng Buhay" label */
+body.dark-mode label,
+body.dark-mode .form-group label {
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+/* Fixes the textarea styling */
+body.dark-mode textarea.paper-lines {
+    background-color: transparent; /* Keeps the 'paper' feel */
+    color: #e0e0e0 !important;
+    border-bottom: 1px solid #444 !important; /* The 'line' in line-input */
+}
+
+/* Placeholder color adjustment for dark mode */
+body.dark-mode textarea::placeholder {
+    color: #777 !important;
+}
+
+/* Container fix to ensure no white background leaks through */
+body.dark-mode .form-group {
+    background-color: transparent;
+    color: #e0e0e0;
+}
