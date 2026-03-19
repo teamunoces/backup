@@ -398,102 +398,137 @@ footer {
 }
 
 
-/* --- APPROVALS LAYOUT --- */
+/* ===== 3. Approvals Section (The "Professional" Look) ===== */
 .approvals {
     display: flex;
-    flex-direction: column; /* Stacks sections vertically */
-    gap: 40px;
-    max-width: 800px;
-    margin: 20px auto;
-}
-
-.section {
-    display: flex;
     flex-direction: column;
-}
-
-/* "Prepared by:", etc. */
-.approvals .label {
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: left;
-}
-
-/* Center the signature names and titles */
-.ces-head-block, .signature-block {
-    text-align: center;
-    align-self: center; /* Centers the block itself */
+    gap: 35px;
+    margin-top: 50px;
     width: 100%;
 }
 
-.name {
-    display: block;
+.approval-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.signature-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center names/titles */
+    text-align: center;
+}
+
+.signature-block .label {
+    align-self: flex-start; /* "Noted by" stays left */
     font-weight: bold;
-    text-decoration: underline;
+    margin-bottom: 25px;
+}
+
+.signature-block .name {
+    width: 80%;
+    border-bottom: 1px solid #000; /* Signature Line */
+    font-weight: bold;
     text-transform: uppercase;
-    font-size: 1.1rem;
-}
-
-.title, .ces-head {
-    display: block;
-    font-weight: bold;
-    font-size: 0.95rem;
-    margin-top: 2px;
-}
-
-/* Specific spacing for the CES Head line as seen in image */
-#ces_head {
-    border-bottom: 2px solid black;
-    width: 250px;
-    margin: 0 auto;
+    margin-bottom: 5px;
     min-height: 20px;
 }
 
-/* --- DOCUMENT INFORMATION TABLE --- */
-.form-section {
-    margin-top: 50px;
+.signature-block .title {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.name{
+    border-bottom: 1px solid #000;
+    width: 200px; /* adjust size */
 }
 
-.section-title {
-    display: none; /* Hidden based on the reference image */
+/* ===== 4. Document Info Table (The Navy Blue Style) ===== */
+.doc-header {
+    width: auto; /* Shrinks the table to fit the content */
+    margin-right: auto; /* Keeps it pushed to the left */
 }
 
+.doc-header td {
+    border: 1px solid #000;
+    padding: 5px 10px;
+}
+
+.doc-header .label {
+    background-color: #002060;
+    color: #fff;
+    width: 25%;
+    font-size: 11px;
+}
+
+.doc-header .value {
+    /* Reduced from 75% to 50% or 30% depending on how narrow you want it */
+    width: 70%; 
+    font-size: 11px;
+    /* This ensures the text stays aligned left within that narrower space */
+    text-align: left; 
+}
+/*------------------------------------------ Container positioning */
+.document-info {
+    margin-top: 50px; /* Adjust based on space needed after approvals */
+    width: 30%;
+}
+
+/* Table Styling */
 .doc-header {
     border-collapse: collapse;
-    font-size: 12px;
-    border: 1px solid #000;
+    font-family: Arial, sans-serif;
+    font-size: 11px; /* Matches the compact look of the screenshot */
+    border: 1px solid #d1d1d1;
 }
 
-.doc-header tr td {
-    border: 1px solid #ccc;
+/* The first column (Dark Blue Background) */
+.doc-header td.label {
+    background-color: #002060; /* Dark Navy Blue */
+    color: white;
+    font-weight: bold;
     padding: 4px 8px;
+    border: 1px solid #d1d1d1;
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
 }
 
-/* The dark blue labels on the left */
-.doc-header .label {
-    background-color: #002060; /* Dark Navy */
-    color: #ffffff;
-    font-weight: normal;
-    width: 120px;
+/* The middle colon column */
+.doc-header td:nth-child(2) {
+    width: 2%;
+    padding: 0 1px;
+    font-weight: bold;
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
 }
 
-.doc-header .separator {
-    width: 10px;
-    text-align: center;
-    background-color: #fff;
+/* The value column */
+.doc-header td.value {
+    padding: 4px 10px;
+    border: 1px solid #d1d1d1;
+    min-width: 120px;
 }
 
-.doc-header .value .document_type {
-    background-color: #fff;
-    min-width: 150px;
-}
-
-.doc-header input:disabled {
+/* Styling the inputs/text inside the value cell */
+.doc-header td.value input, 
+.doc-header td.value p {
     border: none;
     background: transparent;
-    color: #000;
-    width: 100%;
     font-family: inherit;
+    font-size: inherit;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Remove default focus outline for disabled inputs */
+.doc-header td.value input:disabled {
+    color: black;
+    cursor: default;
 }
 
 /* ===== 12. PRINT STYLES ===== */

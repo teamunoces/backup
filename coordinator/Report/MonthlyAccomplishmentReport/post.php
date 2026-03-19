@@ -23,11 +23,14 @@ try {
     $createdBy = $_SESSION['name'] ?? 'Unknown User';
     $role = $_SESSION['role'] ?? 'N/A';
     $user_id = $_SESSION['user_id'] ?? '0'; // Ensure it matches your login session key
+    $dean = $_SESSION['dean'] ?? 'N/A';
+    
+
 
     // 1. Insert into main_header with role and user_id
     $sqlMain = "INSERT INTO mar_header 
-    (type, department, month, title_act, location, benefeciaries, created_by_name, feedback, status, role, user_id) 
-    VALUES (:type, :department, :month, :title_act, :location, :benefeciaries, :created_by_name, :feedback, :status, :role, :user_id)";
+    (type, department, month, title_act, location, benefeciaries, created_by_name, feedback, status, role, user_id, dean) 
+    VALUES (:type, :department, :month, :title_act, :location, :benefeciaries, :created_by_name, :feedback, :status, :role, :user_id, :dean)";
     
     $stmtMain = $pdo->prepare($sqlMain);
     $stmtMain->execute([
@@ -41,7 +44,8 @@ try {
         ':feedback'          => $_POST['feedback'] ?? '',
         ':status'            => $_POST['status'] ?? 'pending',
         ':role'              => $role,
-        ':user_id'           => $user_id
+        ':user_id'           => $user_id,
+        ':dean'              => $_SESSION['dean'] ?? 'N/A'
     ]);
 
     $reportId = $pdo->lastInsertId();

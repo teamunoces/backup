@@ -24,25 +24,6 @@
     flex-shrink: 0;
 }
 
-.container {
-    max-width: 1100px;
-    margin: 40px auto 40px 180px; /* Adjusted margin to avoid overlap with sidebar */
-    background: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    box-sizing: border-box;
-    width: calc(100vw - 200px);
-}
-/* ===== Report Header ===== */
-#reportHeaderFrame {
-    width: 100%;
-    height: 200px;
-    border: none;
-    background: #fff;
-    margin-bottom: 20px;
-}
-
 /* ===== General Styles ===== */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
@@ -56,6 +37,8 @@ body {
 }
 
 .container {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
     max-width: 1100px;
     margin: 50px auto 0 400px;
     background: #fff;
@@ -66,6 +49,78 @@ body {
     width: calc(100vw - 250px);
 }
 
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    padding-right: 10px;
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* Office Title and Double Line */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+/* ===== Form Title ===== */
 header h1 {
     text-align: center;
     text-transform: uppercase;
@@ -132,9 +187,10 @@ table {
 }
 
 table thead th {
+    font-weight: bold;
     background-color: #f8fafc;
     color: #475569;
-    font-size: 0.7rem; /* Smaller font to help 9 columns fit better */
+    font-size: 0.9rem; /* Smaller font to help 9 columns fit better */
     padding: 8px 4px;
     border: 1px solid #cbd5e1;
     text-transform: uppercase;
@@ -149,13 +205,14 @@ table td {
 }
 
 table td textarea {
-    field-sizing: content; /* Grows height automatically */
-    width: 100%;
+    field-sizing: content; 
+    width: 100% !important;
     min-height: 60px; 
-    border: none;
-    padding: 10px 5px; /* Reduced side padding to maximize text space */
-    background: transparent;
-    font-size: 0.85rem; /* Slightly smaller for dense data view */
+    border: none !important;
+    padding: 10px 5px !important;
+    background: transparent !important; /* Ensure no gradient background */
+    background-image: none !important;  /* Explicitly remove any inherited lines */
+    font-size: 0.85rem;
     color: #1e293b;
     line-height: 1.4;
     display: block;
@@ -163,7 +220,8 @@ table td textarea {
     outline: none;
     overflow: hidden; 
     resize: none;
-    white-space: pre-wrap; /* Ensures line breaks in data are preserved */
+    white-space: pre-wrap;
+    pointer-events: none;
 }
 
 /* Fixes the "Overlapping" on Focus */
@@ -252,12 +310,14 @@ footer {
     font-size: 0.9rem;
     font-weight: bold;
 }
-
+.name{
+    border-bottom: 1px solid #000;
+    width: 200px; /* adjust size */
+}
 /* ===== 4. Document Info Table (The Navy Blue Style) ===== */
 .doc-header {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    width: auto; /* Shrinks the table to fit the content */
+    margin-right: auto; /* Keeps it pushed to the left */
 }
 
 .doc-header td {
@@ -273,58 +333,71 @@ footer {
 }
 
 .doc-header .value {
-    width: 75%;
+    /* Reduced from 75% to 50% or 30% depending on how narrow you want it */
+    width: 70%; 
     font-size: 11px;
+    /* This ensures the text stays aligned left within that narrower space */
+    text-align: left; 
+}
+/*------------------------------------------ Container positioning */
+.document-info {
+    margin-top: 50px; /* Adjust based on space needed after approvals */
+    width: 30%;
 }
 
-/* --- DOCUMENT INFORMATION TABLE (Compact) --- */
-.form-section {
-    margin-top: 20px; /* smaller top spacing */
-}
-
-.section-title {
-    display: none; /* keep hidden */
-}
-
+/* Table Styling */
 .doc-header {
     border-collapse: collapse;
-    font-size: 10px; /* smaller font */
-    border: 1px solid #000;
+    font-family: Arial, sans-serif;
+    font-size: 11px; /* Matches the compact look of the screenshot */
+    border: 1px solid #d1d1d1;
 }
 
-.doc-header tr td {
-    border: 1px solid #ccc;
-    padding: 2px 6px; /* reduce padding */
+/* The first column (Dark Blue Background) */
+.doc-header td.label {
+    background-color: #002060; /* Dark Navy Blue */
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    border: 1px solid #d1d1d1;
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
 }
 
-.doc-header .label {
-    background-color: #002060; /* Dark Navy */
-    color: #ffffff;
-    font-weight: normal;
-    width: 100px; /* smaller width */
-    font-size: 10px;
+/* The middle colon column */
+.doc-header td:nth-child(2) {
+    width: 2%;
+    padding: 0 1px;
+    font-weight: bold;
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
 }
 
-.doc-header .separator {
-    width: 8px; /* narrower */
-    text-align: center;
-    background-color: #fff;
+/* The value column */
+.doc-header td.value {
+    padding: 4px 10px;
+    border: 1px solid #d1d1d1;
+    min-width: 120px;
 }
 
-.doc-header .value .document_type {
-    background-color: #fff;
-    min-width: 120px; /* smaller */
-    font-size: 10px;
-}
-
-.doc-header input:disabled {
+/* Styling the inputs/text inside the value cell */
+.doc-header td.value input, 
+.doc-header td.value p {
     border: none;
     background: transparent;
-    color: #000;
-    width: 100%;
     font-family: inherit;
-    font-size: 10px; /* smaller text inside inputs */
-    padding: 2px 4px;
+    font-size: inherit;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Remove default focus outline for disabled inputs */
+.doc-header td.value input:disabled {
+    color: black;
+    cursor: default;
 }
 
 /* ===== 10. BUTTONS (Center Top of Container) ===== */
@@ -384,102 +457,117 @@ footer {
 .buttons button:active {
     transform: scale(0.96);
 }
-/* ===== Responsive ===== */
-@media (max-width: 1200px) {
-    #sidebarFrame { width: 200px; }
-    #headerFrame { left: 200px; width: calc(100% - 200px); }
-    .container { margin-left: 200px; width: calc(100vw - 200px); }
+/* ===== Optimized Paper Lines Fix ===== */
+.paper-lines {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 31px;
+    /* Notebook lines - Only applied to elements with this specific class */
+    background-image: linear-gradient(transparent 30px, #000 31px);
+    background-size: 100% 31px;
+    background-attachment: local;
+    display: block;
+    padding: 5px;
+    box-sizing: border-box;
+    pointer-events: none;
 }
 
-@media (max-width: 900px) {
-    #sidebarFrame { width: 150px; }
-    #headerFrame { left: 150px; width: calc(100% - 150px); }
-    .container { margin-left: 150px; width: calc(100vw - 150px); }
-    table { min-width: 700px; }
-}
 
-@media (max-width: 768px) {
-    #sidebarFrame { transform: translateX(-100%); }
-    #headerFrame { left: 0; width: 100%; }
-    .container { margin-left: 0; margin-top: 80px; width: 100vw; padding: 20px; }
-    .form-actions { flex-direction: column; align-items: center; }
-    .btn { width: 100%; min-width: unset; }
-    table { min-width: 600px; }
-}
-
-@media (max-width: 600px) {
-    .form-actions { flex-direction: column; align-items: center; }
-    .btn { width: 100%; }
-    table { min-width: 500px; }
-}
-
+/* 4. Ensure lines render in Print Mode */
 @media print {
-    /* Hide navigation and buttons */
+    .paper-lines {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        background-image: linear-gradient(transparent 29px, #ccc 30px) !important; /* Lighter lines for ink saving */
+    }
+}
+
+/* Optional: Removes the border when clicking the box */
+.paper-lines:focus {
+    outline: none;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    /* 1. Hide Web UI Elements */
+    .buttons,
     #sidebarFrame,
-    #headerFrame,
-    .buttons {
+    #headerFrame {
         display: none !important;
     }
 
-    /* --- GENERAL CONTAINER SETUP --- */
+    /* 2. Reset Container for Paper */
+    body {
+        background-color: #fff !important;
+        margin: 0;
+        padding: 0;
+    }
+
     .container {
-        position: relative !important;
         margin: 0 !important;
-        padding: 0 0 120px 0 !important; /* space for footer */
+        padding: 0 !important;
         width: 100% !important;
-        min-height: 100%;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    /* 3. Force Color and Background Rendering */
+    * {
+        -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+        print-color-adjust: exact !important;         /* Firefox */
+    }
+
+    /* 4. Maintain Header and Typography Colors */
+    .college-info h1 {
+        color: #4f81bd !important;
+    }
+
+    .double-line {
+        border-top: 4px double #4f81bd !important;
+    }
+
+    .doc-header td.label {
+        background-color: #002060 !important;
+        color: #fff !important;
+    }
+
+    /* 5. Handle Textareas and Notebook Lines */
+   table td textarea {
+        background: none !important;
+        -webkit-print-color-adjust: economy;
+    }
+
+    /* 6. Table Layout */
+    table {
+        table-layout: fixed !important;
+        width: 100% !important;
+        table-layout: fixed !important;
+        border-collapse: collapse !important;
+    }
+
+   table, th, td {
+        border: 1px solid #000 !important;
+    }
+
+    /* 7. Page Breaks */
+    h1, h2, .form-section {
+        page-break-after: avoid;
+    }
+    
+    .table-section, .approvals-container {
+        page-break-inside: avoid;
+    }
+    .paper-lines {
+        -webkit-print-color-adjust: exact !important;
+    }
+    /* Prevent the first section from jumping to page 2 */
+    .report-form {
         display: block !important;
     }
-
-    body {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
-    }
-
-    #header h1 {
-    font-size: 15px; /* Change this value */
-    font-weight: bold; /* Optional */
 }
-
-    .input-group{
-      font-size: 12px;
-    }
-
-    /* --- HEADER --- */
-    .report-header {
-        height: auto !important;
-        margin-bottom: 0 !important;
-    }
-
-    .report-header iframe {
-        width: 100%;
-        height: 50% !important;
-        border: none;
-    }
-    .approvals{
-      font-size: 12px;
-    }
-
-    textarea {
-    font-size: 12px !important;
-    border: none !important;
-    height: auto !important;
-    overflow: visible !important;
-    resize: none;
-    }
-
-    table, tr, td { page-break-inside: avoid !important; }
-
-    /* --- PORTRAIT ORIENTATION --- */
-    @page :portrait {
-        size: A4 portrait; /* or letter portrait */
-        margin: 0.5in !important;
-    }
-
-    /* --- LANDSCAPE ORIENTATION --- */
-    @page :landscape {
-        size: A4 landscape; /* or letter landscape */
-        margin: 0.5in !important;
-    }
-}
-

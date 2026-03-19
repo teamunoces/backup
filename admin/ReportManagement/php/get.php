@@ -2,12 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "ces_reports_db";
-
-$conn = new mysqli($host, $user, $pass, $dbname);
+$conn = new mysqli("localhost", "root", "", "ces_reports_db");
 
 if ($conn->connect_error) {
     echo json_encode(["error" => $conn->connect_error]);
@@ -16,60 +11,70 @@ if ($conn->connect_error) {
 
 $reports = [];
 
-$tablesResult = $conn->query("SHOW TABLES");
+// ✅ ONLY THESE TABLES WILL BE USED
+$allowedTables = [
+    "3ydp",
+    "cnacr",
+    "coordinator_cnacr",
+    "mar_header",
+    "pd_main"
+];
 
-while ($tableRow = $tablesResult->fetch_array()) {
-    $tableName = $tableRow[0];
+foreach ($allowedTables as $tableName) {
 
-    // Check if table has status column
-    $checkColumn = $conn->query("SHOW COLUMNS FROM `$tableName` LIKE 'status'");
+    // ✅ CHECK IF TABLE EXISTS (SAFE)
+    $checkTable = $conn->query("SHOW TABLES LIKE '$tableName'");
+    if ($checkTable->num_rows == 0) continue;
 
-    if ($checkColumn && $checkColumn->num_rows > 0) {
-        // Also check for role column
-        $roleColumn = $conn->query("SHOW COLUMNS FROM `$tableName` LIKE 'role'");
-        $hasRole = $roleColumn && $roleColumn->num_rows > 0;
+    // ✅ CHECK COLUMNS
+    $hasStatus   = $conn->query("SHOW COLUMNS FROM `$tableName` LIKE 'status'")->num_rows > 0;
+    $hasRole     = $conn->query("SHOW COLUMNS FROM `$tableName` LIKE 'role'")->num_rows > 0;
+    $hasArchived = $conn->query("SHOW COLUMNS FROM `$tableName` LIKE 'archived'")->num_rows > 0;
 
-        $result = $conn->query("
-            SELECT * FROM `$tableName`
-            WHERE archived = 'not archived'
-        ");
+    // ✅ BUILD QUERY
+    $query = "SELECT * FROM `$tableName`";
+    if ($hasArchived) {
+        $query .= " WHERE archived = 'not archived'";
+    }
 
-        if ($result) {
-            while ($row = $result->fetch_assoc()) {
-                // Detect title column
-                $title = $row['title'] ??
-                        $row['title_act'] ??
-                        $row['title_of_project'] ??
-                        $row['title_of_activity'] ??
-                        $row['title_of_program'] ??
-                        "N/A";
+    $result = $conn->query($query);
 
-                // Detect department column
-                $department = $row['department'] ??
-                             $row['office'] ??
-                             "N/A";
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
 
-                // Detect date column
-                $created_at = $row['created_at'] ??
-                             $row['date_created'] ??
-                             null;
+            // ✅ TITLE DETECTION
+            $title = $row['title'] ??
+                     $row['title_act'] ??
+                     $row['title_of_project'] ??
+                     $row['title_of_activity'] ??
+                     $row['title_of_program'] ??
+                     "N/A";
 
-                // Get role if exists
-                $role = $hasRole ? ($row['role'] ?? 'admin') : 'admin';
+            // ✅ DEPARTMENT DETECTION
+            $department = $row['department'] ??
+                          $row['office'] ??
+                          "N/A";
 
-                // Get status
-                $status = $row['status'] ?? 'pending';
+            // ✅ DATE DETECTION
+            $created_at = $row['created_at'] ??
+                          $row['date_created'] ??
+                          null;
 
-                $reports[] = [
-                    "id" => $row['id'] ?? null,
-                    "title" => $title,
-                    "department" => $department,
-                    "created_at" => $created_at,
-                    "status" => $status,
-                    "role" => $role,
-                    "source_table" => $tableName
-                ];
-            }
+            // ✅ ROLE FIX
+            $role = $hasRole ? strtolower($row['role']) : 'admin';
+
+            // ✅ STATUS FIX
+            $status = $hasStatus ? strtolower($row['status']) : 'pending';
+
+            $reports[] = [
+                "id" => $row['id'] ?? null,
+                "title" => $title,
+                "department" => $department,
+                "created_at" => $created_at,
+                "status" => $status,
+                "role" => $role,
+                "source_table" => $tableName
+            ];
         }
     }
 }

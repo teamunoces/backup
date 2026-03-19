@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+$userName = $_SESSION['name'] ?? '';
+$userDean = $_SESSION['dean'] ?? '';
 $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year Development Plan";
 ?>
 <!DOCTYPE html>
@@ -9,28 +13,42 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
   <title><?php echo $reportType; ?></title>
   <link rel="stylesheet" href="view.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
 
   <!-- HEADER -->
-  <iframe src="/admin/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
+  <iframe src="/coordinator/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
 
   <!-- SIDEBAR -->
-  <iframe src="/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+  <iframe src="/coordinator/Sidebar/sidebar.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
 
   <!-- ACTION BUTTONS -->
   <div class="buttons">
-    <button onclick="window.print()">Print this Page</button>
+    <button  onclick="printReport()">Print this Page</button>
     <button id="downloadPDF" type="button">Download PDF</button>
   </div>
 
   <!-- MAIN PRINT CONTAINER -->
   <div class="container">
-
-    <!-- REPORT HEADER -->
-    <section class="report-header">
-      <iframe src="../../ReportHeader/header.html" id="reportHeaderFrame" frameborder="0" scrolling="no"></iframe>
-    </section>
+    
+                   <header>
+                      <div class="header-content">
+                          <img src="/admin/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                          <div class="college-info">
+                              <h1>Saint Michael College of Caraga</h1>
+                              <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
+                              <p>District 8, Brgy. Triangulo, Nasipit, Agusan del Norte, Philippines</p>
+                              <p>Tel Nos. +63 085 343-3251 / +63 085 283-3113</p>
+                              <a href="http://www.smccnasipit.edu.ph">www.smccnasipit.edu.ph</a>
+                          </div>
+                          <div class="logos-right">
+                              <img src="/admin/ReportManagement/actions/images/ISOlogo.png" alt="SOCOTEC Logo">
+                          </div>
+                      </div>
+                      <h2 class="office-title">OFFICE OF THE COMMUNITY EXTENSION SERVICES</h2>
+                      <div class="double-line"></div>
+                  </header>
 
     <!-- CONTENT BODY -->
     <section class="content-body">
@@ -40,35 +58,40 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 
       <!-- FORM DETAILS -->
       <form class="report-form">
+
+
+
+
+
         <div class="form-section">
           <div class="input-group">
             <label>I. Title of the Project/Program:</label>
-            <textarea id="title_of_project" rows="2" placeholder="Enter project title..."></textarea>
+            <textarea id="title_of_project" rows="2" class="paper-lines"  placeholder="Enter project title..."></textarea>
           </div>
 
           <div class="input-group">
             <label>II. Description of the Project/Program:</label>
-            <textarea id="description_of_project" rows="3" placeholder="Briefly describe the project..."></textarea>
+            <textarea id="description_of_project" rows="3" class="paper-lines" placeholder="Briefly describe the project..."></textarea>
           </div>
 
           <div class="input-group">
             <label>III. General Objectives:</label>
-            <textarea id="general_objectives" rows="3" placeholder="What are the goals?"></textarea>
+            <textarea id="general_objectives" rows="3" class="paper-lines" placeholder="What are the goals?"></textarea>
           </div>
 
           <div class="input-group">
             <label>IV. Program Justification:</label>
-            <textarea id="program_justification" rows="3" placeholder="Why is this project necessary?"></textarea>
+            <textarea id="program_justification" rows="3" class="paper-lines" placeholder="Why is this project necessary?"></textarea>
           </div>
 
           <div class="input-group">
             <label>V. Beneficiaries:</label>
-            <textarea id="beneficiaries" rows="2" placeholder="Who will benefit from this?"></textarea>
+            <textarea id="beneficiaries" rows="2" class="paper-lines" placeholder="Who will benefit from this?"></textarea>
           </div>
 
           <div class="input-group">
             <label>VI. Program Plan:</label>
-            <textarea id="program_plan_text" rows="3" placeholder="What is the plan?"></textarea>
+            <textarea id="program_plan_text" rows="3" class="paper-lines" placeholder="What is the plan?"></textarea>
           </div>
         </div>
 
@@ -102,7 +125,8 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
           </table>
         </section>
 
-        <!-- APPROVAL SECTIONS -->
+    
+                     <!-- APPROVAL SECTIONS -->
         <section class="approvals">
           <div class="approval-section">
             <div class="label">Prepared by:</div>
@@ -133,13 +157,14 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
           </div>
         </section>
 
+
         <!-- DOCUMENT INFORMATION -->
+    
         <section class="document-info">
-          <h2>Document Information</h2>
           <table class="doc-header">
             <tr>
-              <td class="label">Document Type</td><td>:</td>
-              <td class="value"><p class="document_type">FM-DPM-SMCC-CES-02</p></td>
+              <td class="label">Form Code No.</td><td>:</td>
+              <td class="value"><p class="document_type">FM-DPM-SMCC-CES-04</p></td>
             </tr>
             <tr>
               <td class="label">Issue Status</td><td>:</td>
@@ -169,6 +194,9 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
       </div>
     </footer>
 
+
+    
+
     <!-- HIDDEN INPUTS -->
     <input type="hidden" id="currentReportId" value="<?php echo htmlspecialchars($_GET['id'] ?? ''); ?>">
     <input type="hidden" id="currentReportType" value="<?php echo htmlspecialchars($reportType); ?>">
@@ -178,6 +206,26 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
   <script src="get.js"></script>
   <script src="/admin/ReportManagement/actions/js/getapproval.js"></script>
   <script src="download.js"></script>
+  <script src="./darkmode.js"></script>
+
+  <script>
+          function printReport() {
+              // Select elements you want to hide
+              const buttons = document.querySelectorAll('.buttons');
+              const iframes = document.querySelectorAll('iframe');
+
+              // Hide them before printing
+              buttons.forEach(btn => btn.style.display = 'none');
+              iframes.forEach(frame => frame.style.display = 'none');
+
+              // Trigger print
+              window.print();
+
+              // Restore visibility after print
+              buttons.forEach(btn => btn.style.display = '');
+              iframes.forEach(frame => frame.style.display = '');
+          }
+</script>
 
 </body>
 </html>

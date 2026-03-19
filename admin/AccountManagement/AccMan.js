@@ -10,30 +10,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let allAccounts = [];
 
-    /* ================= LOAD ACCOUNTS ================= */
-    async function loadAccounts() {
-        try {
-            const response = await fetch(`${phpUrl}?action=get_accounts`);
-            if (!response.ok) throw new Error('Failed to fetch accounts');
+   /* ================= LOAD ACCOUNTS ================= */
+async function loadAccounts() {
+    try {
+        const response = await fetch(`${phpUrl}?action=get_accounts`);
+        if (!response.ok) throw new Error('Failed to fetch accounts');
 
-            const data = await response.json();
-            
-            // Store ALL accounts (including inactive for filtering)
-            allAccounts = data;
-            
-            // Apply current filter
-            applyFilter();
-        } catch (error) {
-            console.error(error);
-            tableBody.innerHTML = `
-                <tr>
-                    <td colspan="7" style="text-align:center;">
-                        Failed to load accounts.
-                    </td>
-                </tr>
-            `;
-        }
+        const data = await response.json();
+        
+        // Store ONLY active accounts by default
+        // Filter out accounts that are not active (status !== 'active')
+        allAccounts = data.filter(account => account.status.toLowerCase() === 'active');
+        
+        // Apply current filter (this will now only work with the active accounts)
+        applyFilter();
+    } catch (error) {
+        console.error(error);
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align:center;">
+                    Failed to load accounts.
+                </td>
+            </tr>
+        `;
     }
+}
 
     /* ================= APPLY FILTER ================= */
     function applyFilter() {

@@ -1,9 +1,11 @@
 $(document).ready(function () {
     const typeMap = {
         "cnacr": "CNACR",
+        "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
         "3ydp": "3 Year Development Plan",
         "pd_main": "Program Design",
-        "dpir": "Departmental Planned Initiative Report"
+        "dpir": "Departmental Planned Initiative Report",
+        "mar_header": "Monthly Accomplishment Report"
     };
 
     function loadArchiveData() {

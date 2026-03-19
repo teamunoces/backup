@@ -82,7 +82,7 @@ function viewReport(id, type, status) {
             return;
         } 
         if (typeLower === 'community needs assessment consolidated report') {
-            window.location.href = `./review/needfix/cnacrneedfix/needfix.html?id=${id}`;
+            window.location.href = `./review/needfix/cnacrneedfix/cnacrview.php?id=${id}`;
             return;
         }
         if (typeLower === 'program design') {
@@ -95,7 +95,7 @@ function viewReport(id, type, status) {
         }
         
         if (typeLower === "monthly accomplishment report") {
-            window.location.href = `./review/needfix/monthlyaccomplishmentneedfix/needfix.html?id=${id}`;
+            window.location.href = `./review/needfix/marneedfix/marview.php?id=${id}`;
             return;
         }
     }

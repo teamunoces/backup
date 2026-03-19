@@ -15,6 +15,8 @@ try {
     $department = $_SESSION['department'];
     $role = $_SESSION['role'];
     $user_id = $_SESSION['user_id'];
+    $dean = $_SESSION['dean'] ?? 'N/A';
+
 
     $input = file_get_contents("php://input");
     $data = json_decode($input, true);
@@ -31,10 +33,10 @@ try {
 
     // --- Insert main report including role and user_id ---
     $stmt = $conn->prepare("INSERT INTO `3ydp`
-        (type, title_of_project, description_of_project, general_objectives, program_justification, beneficiaries, program_plan_text, created_by_name, department, role, user_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        (type, title_of_project, description_of_project, general_objectives, program_justification, beneficiaries, program_plan_text, created_by_name, department, role, user_id, dean)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param(
-        "ssssssssssi",
+        "ssssssssssis",
         $type,
         $title,
         $description,
@@ -45,7 +47,8 @@ try {
         $created_by_name,
         $department,
         $role,
-        $user_id
+        $user_id,
+        $dean
     );
     $stmt->execute();
     $report_id = $conn->insert_id; // <-- all program rows use this ID

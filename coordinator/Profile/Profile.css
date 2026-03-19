@@ -95,3 +95,40 @@ body {
     pointer-events: auto;
 }
 
+/* Notification Bell Styles */
+.notification-icon {
+    position: relative;
+    cursor: pointer;
+    margin-right: 15px;
+    font-size: 20px;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.notification-icon:hover {
+    color: #55a630;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff4444;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Dark mode support */
+body.dark-mode .notification-icon {
+    color: #fff;
+}
+
+body.dark-mode .notification-badge {
+    background-color: #ff6b6b;
+}

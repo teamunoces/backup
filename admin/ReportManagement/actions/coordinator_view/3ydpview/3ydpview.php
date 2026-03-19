@@ -1,8 +1,5 @@
 <?php
 session_start();
-
-$userName = $_SESSION['name'] ?? '';
-$userDean = $_SESSION['dean'] ?? '';
 $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year Development Plan";
 ?>
 <!DOCTYPE html>
@@ -130,7 +127,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
           <div class="approval-row">
             <div class="signature-group">
               <div class="label">Prepared by:</div>
-               <div class="signature-line"><?php echo htmlspecialchars($userName); ?></div>
+               <div class="signature-line" id="coordinator_name"></div>
               <div class="title bold">CES Coordinator</div>
             </div>
           </div>
@@ -138,7 +135,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
           <div class="label" style="margin-top: 20px;">Noted by:</div>
           <div class="approval-row">
             <div class="signature-group">
-              <div class="signature-line"><?php echo htmlspecialchars($userDean); ?></div>
+              <div class="signature-line" id="coordinator_dean"></div>
               <div class="title bold">Dean</div>
             </div>
             <div class="signature-group">

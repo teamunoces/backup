@@ -1,17 +1,26 @@
 :root {
   --bg: #ffffff;
   --text: #222;
+  --primary: #55a630;
+  --primary-dark: #3f8a1f;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #17a2b8;
+  --border: #e0e0e0;
 }
 
 body.dark {
   --bg: #121212;
   --text: #f5f5f5;
+  --border: #333;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
 }
+
 /* ===== Header Container ===== */
 .main-header {
     display: flex;
@@ -68,6 +77,35 @@ body {
     cursor: pointer;
 }
 
+/* ===== Notification Icon ===== */
+.notification-icon {
+    position: relative;
+    cursor: pointer;
+    color: #55a630;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.notification-icon:hover {
+    background-color: rgba(85, 166, 48, 0.1);
+}
+
+.notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #dc3545;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 10px;
+    min-width: 15px;
+    text-align: center;
+}
+
 /* ===== Dropdown Card (Refined) ===== */
 .menu-card {
     position: fixed;
@@ -95,3 +133,359 @@ body {
     pointer-events: auto;
 }
 
+/* ===== Notification Modal Styles ===== */
+#notificationOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-modal {
+    background-color: var(--bg);
+    border-radius: 12px;
+    width: 500px;
+    max-width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.notification-header h2 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.notification-header h2 i {
+    margin-right: 10px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Tabs */
+.notification-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.tab-btn.active {
+    opacity: 1;
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+}
+
+.tab-btn:hover {
+    opacity: 1;
+}
+
+.tab-badge {
+    background-color: var(--primary);
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-group label i {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Modal Actions */
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-send, .btn-cancel {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.btn-send {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-send:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background-color: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-cancel:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Inbox Styles */
+.inbox-filters {
+    margin-bottom: 15px;
+}
+
+.inbox-filters select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.messages-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.message-item {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.message-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message-item.unread {
+    background-color: rgba(85, 166, 48, 0.05);
+    border-left: 3px solid var(--primary);
+}
+
+.message-item.urgent {
+    border-left: 3px solid var(--danger);
+}
+
+.message-item.important {
+    border-left: 3px solid var(--warning);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.message-subject {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.message-time {
+    font-size: 11px;
+    color: #999;
+}
+
+.message-preview {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.message-priority {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.priority-urgent {
+    background-color: var(--danger);
+    color: white;
+}
+
+.priority-important {
+    background-color: var(--warning);
+    color: #333;
+}
+
+.priority-normal {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    text-align: center;
+    padding: 20px;
+    color: var(--primary);
+}
+
+.loading-spinner i {
+    font-size: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* No messages */
+.no-messages {
+    text-align: center;
+    padding: 30px;
+    color: #999;
+}
+
+.no-messages i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+
+/* Multi-select dropdown styles */
+select[multiple] {
+    height: auto;
+    min-height: 150px;
+    padding: 8px;
+}
+
+select[multiple] option {
+    padding: 8px 12px;
+    margin: 2px 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+select[multiple] option:hover {
+    background-color: rgba(85, 166, 48, 0.1);
+}
+
+select[multiple] option:checked {
+    background-color: var(--primary);
+    color: white;
+}
+
+.form-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    display: block;
+}
+
+body.dark .form-text {
+    color: #999;
+}
+
+body.dark select[multiple] option:hover {
+    background-color: rgba(85, 166, 48, 0.3);
+}

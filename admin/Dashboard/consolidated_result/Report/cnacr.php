@@ -42,7 +42,7 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
                                                         <option value="Select" selected>Select</option>
                                                         <option value="camagong">BRGY. CAMAGONG</option>
                                                         <option value="aclan">BRGY. ACLAN</option>
-                                                        <option value="amotay">BRGY. AMOTAY</option>
+                                                        <option value="amontay">BRGY. AMONTAY</option>
                                                         <option value="ataatahon">BRGY. ATAATAHON</option>
                                                         <option value="barangay1">BRGY. 1</option>
                                                         <option value="barangay2">BRGY. 2</option>
@@ -125,7 +125,7 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
             </thead>
             <tbody id="barangayProfileTable">
                 <tr>
-                    <td>BRGY. CAMAGONG<br>DISTRICT 1 TO DISTRICT 10</td>
+                    <td id="barangayName"></td>
                     <td id="totalPopulation">Loading...</td>
                     <td id="totalHousehold">Loading...</td>
                     <td id="totalRespondents">Loading...</td>
@@ -555,7 +555,20 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
                 </div>
    
 </div>    
+            <script>
+            // Get references to the select and the td
+            const barangaySelect = document.getElementById('barangaySelect');
+            const barangayNameTd = document.getElementById('barangayName');
 
+            // Listen for changes on the select
+            barangaySelect.addEventListener('change', function() {
+                // Get the selected option's text (not value)
+                const selectedText = barangaySelect.options[barangaySelect.selectedIndex].text;
+                
+                // Update the td
+                barangayNameTd.textContent = selectedText;
+            });
+            </script>
        
 
 

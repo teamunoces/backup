@@ -33,6 +33,7 @@ if(!$data) {
 $data['created_by_name'] = $_SESSION['name'];
 $data['role'] = $_SESSION['role'];
 $data['user_id'] = $_SESSION['user_id'];
+$data['dean'] = $_SESSION['dean'] ?? 'N/A';
 
 // Set defaults for required fields if not present
 $defaults = [

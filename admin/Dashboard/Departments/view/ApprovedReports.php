@@ -576,18 +576,23 @@ $debug_mode = false; // Set to true to see debug info
                         $report_type = getReportType($report['source_table']);
                         $attachments = getAttachments($conn, $report['id']);
                     ?>
-                        <div class="report-card">
-                            <div class="report-header">
-                                <h2 class="report-title">
-                                    <?php echo htmlspecialchars($report['title'] ?? 'Untitled'); ?>
-                                    <span class="report-type"><?php echo $report_type; ?></span>
-                                    <span class="status-badge">APPROVED</span>
-                                    <span class="coordinator-tag">Coordinator</span>
-                                </h2>
-                                <span class="report-date">
-                                    <?php echo isset($report['created_at']) ? date('F j, Y, g:i a', strtotime($report['created_at'])) : 'Date unknown'; ?>
-                                </span>
-                            </div>
+                        <div class="report-card"
+                                data-report-date="<?php echo isset($report['created_at']) ? date('Y-m-d', strtotime($report['created_at'])) : ''; ?>"
+                                data-report-type="<?php echo strtolower($report_type); ?>">
+
+                                <div class="report-header">
+                                    <h2 class="report-title">
+                                        <?php echo htmlspecialchars($report['title'] ?? 'Untitled'); ?>
+                                        <span class="report-type"><?php echo $report_type; ?></span>
+                                        <span class="status-badge">APPROVED</span>
+                                        <span class="coordinator-tag">Coordinator</span>
+                                    </h2>
+
+                                    <span class="report-date">
+                                        <?php echo isset($report['created_at']) ? date('F j, Y, g:i a', strtotime($report['created_at'])) : 'Date unknown'; ?>
+                                    </span>
+                                </div>
+
                             
                             <div class="report-meta">
                                 <span class="submitted-by">

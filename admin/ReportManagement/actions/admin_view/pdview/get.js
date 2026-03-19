@@ -26,6 +26,7 @@ async function loadReport() {
             document.getElementById('title_of_activity').value = data.main.title_of_activity || '';
             document.getElementById('participants').value = data.main.participants || '';
             document.getElementById('location').value = data.main.location || '';
+            
 
 
             // Populate table

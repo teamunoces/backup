@@ -16,9 +16,17 @@
             <h1 class="header-title"></h1>
         </div>
 
+         <!-- Add notification bell with badge -->
+            <div class="notification-icon" id="notificationBell">
+                <i class="fa-solid fa-bell"></i>
+                <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+            </div>
+
         <div class="header-right">
             <img src="../../login/images/ces.png" alt="School Logo" class="admin-logo">
             <span class="admin-text" id="admin-toggle">Coordinator</span>
+
+            
 
             <!-- Moved inside .header-right for proper dropdown positioning -->
             <div class="menu-card" id="menu-card">
@@ -79,6 +87,50 @@
             <button onclick="closeProfile()">Cancel</button>
     </div>
 
+                       <!-- Notification Modal HTML - make sure it's visible but hidden initially -->
+                    <div id="notificationModalContainer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000;">
+                        <div id="notificationModal" class="notification-modal">
+                            <div class="notification-header">
+                                <h2><i class="fa-solid fa-bell notification-bell"></i></i> Send Notification</h2>
+                                <button class="close-btn" id="closeNotificationBtn"><i class="fa-solid fa-times"></i></button>
+                            </div>
+                            
+                            <!-- Send Message Tab -->
+                            <div id="sendTab" class="tab-content active">
+                                <div class="form-group">
+                                    <label><i class="fa-solid fa-user-tie"></i> Send to Departments/Coordinators:</label>
+                                    <select id="departmentSelect" class="form-control" multiple size="8">
+                                        <option value="" disabled>Loading departments...</option>
+                                    </select>
+                                    <small class="form-text"><i class="fa-solid fa-info-circle"></i> Click to select multiple (hold Ctrl/Cmd for multiple)</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fa-solid fa-message"></i> Message:</label>
+                                    <textarea id="messageContent" class="form-control" rows="4" placeholder="Type your message here..."></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fa-solid fa-flag"></i> Priority:</label>
+                                    <select id="messagePriority" class="form-control">
+                                        <option value="normal">Normal</option>
+                                        <option value="important">Important</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="modal-actions">
+                                    <button class="btn-send" id="sendNotificationBtn">
+                                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                                    </button>
+                                    <button class="btn-cancel" id="cancelNotificationBtn">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+   <script src="notifications.js"></script>
     <script src="menu.js"></script>
     <script src="edit/edit.js"></script>
 

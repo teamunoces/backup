@@ -23,11 +23,13 @@ try {
     $createdBy = $_SESSION['name'] ?? 'Unknown User';
     $role = $_SESSION['role'] ?? 'N/A';
     $user_id = $_SESSION['user_id'] ?? '0'; // Ensure it matches your login session key
+    $dean = $_SESSION['dean'] ?? 'N/A';
+    
 
     // 1. Insert into pd_main with role and user_id
     $sqlMain = "INSERT INTO pd_main 
-    (type, department, title_of_activity, participants, location, created_by_name, feedback, status, role, user_id) 
-    VALUES (:type, :department, :title_of_activity, :participants, :location, :created_by_name, :feedback, :status, :role, :user_id)";
+    (type, department, title_of_activity, participants, location, created_by_name, feedback, status, role, user_id, dean) 
+    VALUES (:type, :department, :title_of_activity, :participants, :location, :created_by_name, :feedback, :status, :role, :user_id, :dean)";
     
     $stmtMain = $pdo->prepare($sqlMain);
     $stmtMain->execute([
@@ -40,7 +42,8 @@ try {
         ':feedback'          => $_POST['feedback'] ?? '',
         ':status'            => $_POST['status'] ?? 'pending',
         ':role'              => $role,
-        ':user_id'           => $user_id
+        ':user_id'           => $user_id,
+        ':dean'              => $dean
     ]);
 
     $reportId = $pdo->lastInsertId();

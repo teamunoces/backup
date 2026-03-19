@@ -56,6 +56,7 @@ function fetchArchiveData() {
                     while ($row = $reportRes->fetch_assoc()) {
                         // Handle different column names across tables
                         $title = $row['title'] ?? 
+                                $row['title_act'] ?? 
                                 $row['title_of_project'] ?? 
                                 $row['title_of_activity'] ?? 
                                 $row['title_of_program'] ?? 
