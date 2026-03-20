@@ -181,29 +181,60 @@ function attachActionEvents(data) {
         });
     });
 
-    // View icon events
-    document.querySelectorAll(".view-icon").forEach((icon) => {
-        icon.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+// View icon events
+document.querySelectorAll(".view-icon").forEach((icon) => {
+    icon.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const reportId = icon.getAttribute("data-id");
+        const sourceTable = icon.getAttribute("data-source-table");
+        const row = icon.closest("tr");
+        
+        // Find the report that matches BOTH id and source_table
+        const report = data.find(r => r.id == reportId && r.source_table === sourceTable);
+
+        if (!report) {
+            console.error("Report not found in data array");
+            showNotification("Report not found", "error");
+            return;
+        }
+
+        // Check if this is in the rejected table
+        const parentTbody = row.closest('tbody');
+        if (parentTbody && parentTbody.id === 'coordinatorrejectedTableBody') {
+            // For rejected reports, show feedback modal instead of navigating
+            console.log("Rejected report view clicked - showing feedback");
             
-            const reportId = icon.getAttribute("data-id");
-            const sourceTable = icon.getAttribute("data-source-table");
-            const row = icon.closest("tr");
-
-            // Find the report that matches BOTH id and source_table
-            const report = data.find(r => r.id == reportId && r.source_table === sourceTable);
-
-            if (!report) {
-                console.error("Report not found in data array");
-                showNotification("Report not found", "error");
-                return;
+            // Type mapping for display
+            const typeMap = {
+                "cnacr": "CNACR",
+                "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
+                "3ydp": "3 Year Development Plan",
+                "pd_main": "Program Design",
+                "mar_header": "Monthly Accomplishment Report"
+            };
+            
+            // Prepare report object with display info
+            const reportWithDisplay = {
+                ...report,
+                displayType: typeMap[report.source_table] || report.source_table
+            };
+            
+            // Show feedback modal
+            if (typeof window.showFeedbackModal === 'function') {
+                window.showFeedbackModal(reportId, sourceTable, reportWithDisplay);
+            } else {
+                console.error("showFeedbackModal function not found");
+                showNotification("Feedback feature not available", "error");
             }
-
+        } else {
+            // For other tables, navigate to view page as before
             const viewPath = getViewPath(report, row);
             window.location.href = `${viewPath}?id=${reportId}`;
-        });
+        }
     });
+});
 }
 
 function getViewPath(report, row) {
@@ -226,11 +257,9 @@ function getViewPath(report, row) {
             "default": "actions/coordinator_view/defaultview/view.php"
         },
         coordinatorRejected: {
-            "coordinator_cnacr": "actions/coordinator_view/cnacrview/cnacrview.php",
-            "3ydp": "actions/coordinator_view/3ydpview/view.php",
-            "pd_main": "actions/coordinator_view/pdview/pdview.php",
-            "mar_header": "actions/coordinator_view/marview/marview.php",
-            "default": "actions/coordinator_view/defaultview/view.php"
+            // Return empty or null for rejected reports since we don't navigate
+            // These will be handled by the view icon click handler separately
+            "default": null
         }
     };
 
@@ -247,6 +276,12 @@ function getViewPath(report, row) {
     }
 
     const mapping = viewMappings[tableKey];
+    
+    // For rejected reports, return null (will be handled separately)
+    if (tableKey === 'coordinatorRejected') {
+        return null;
+    }
+    
     return mapping[type] || mapping.default;
 }
 

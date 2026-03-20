@@ -14,6 +14,8 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monthly Accomplishment Report</title>
     <link rel="stylesheet" href="mar.css">
+    <link rel="stylesheet" href="darkmode.css">
+">
     <style>
 /* Hide elements when printing */
 @media print {
@@ -107,7 +109,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                 <table class="header-table">
                         <tr>
                             <td class="label">Department</td>
-                            <td class="input_cell"><input type="text" name="department" id="department" placeholder="Type here..." ></td>
+                            <td class="input_cell"><input type="text" name="department" id="department" placeholder="Type here..."></td>
                         </tr>
                         <tr>
                             <td class="label">Report for the Month of</td>
@@ -146,15 +148,15 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td contenteditable="true"></td>
-                                        <td contenteditable="true"></td>
-                                        <td contenteditable="true"></td>
-                                        <td contenteditable="true"></td>
-                                        <td contenteditable="true"></td>
-                                        <td contenteditable="true"></td>
-                                        <td contenteditable="true"></td>
-                                        <td contenteditable="true"></td>
+                                   <tr>
+                                        <td contenteditable="false" class="read-only-cell"></td>
+                                        <td contenteditable="false" class="read-only-cell"></td>
+                                        <td contenteditable="false" class="read-only-cell"></td>
+                                        <td contenteditable="false" class="read-only-cell"></td>
+                                        <td contenteditable="false" class="read-only-cell"></td>
+                                        <td contenteditable="false" class="read-only-cell"></td>
+                                        <td contenteditable="false" class="read-only-cell"></td>
+                                        <td contenteditable="false" class="read-only-cell"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -195,6 +197,8 @@ function printReport(){
       <script>const reportType = "<?php echo $reportType; ?>";console.log(reportType);</script>
       <script src="./get.js" ></script>
 </script>
+
+<script src="./darkmode.js"></script>
 
 
 </body>

@@ -1,0 +1,225 @@
+/* ================= DARK MODE STYLES ================= */
+
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+/* Main Container */
+body.dark-mode .form-container,
+body.dark-mode .report-container,
+body.dark-mode .container {
+    background-color: #2d2d2d;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Admin Feedback Section */
+body.dark-mode .admin-comment {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+}
+
+body.dark-mode .admin-comment-label {
+    color: #ffffff !important;
+}
+
+body.dark-mode #admincomment {
+    background-color: #3d3d3d;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode #admincomment:focus {
+    border-color: #777;
+    background-color: #4a4a4a;
+}
+
+/* Header Section */
+body.dark-mode .header-content {
+    border-bottom-color: #404040;
+}
+
+body.dark-mode .college-info h1 {
+    color: #fff;
+}
+
+body.dark-mode .college-info p,
+body.dark-mode .college-info a {
+    color: #b0b0b0;
+}
+
+body.dark-mode .office-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .double-line {
+    border-top-color: #404040;
+}
+
+/* Form Title */
+body.dark-mode .form-type {
+    color: #fff;
+}
+
+/* Input Fields */
+body.dark-mode .field label {
+    color: #b0b0b0;
+}
+
+body.dark-mode .field input,
+body.dark-mode .field textarea {
+    background-color: #3d3d3d;
+    border-bottom-color: #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode .field input:focus,
+body.dark-mode .field textarea:focus {
+    border-bottom-color: #777;
+}
+
+body.dark-mode .field input::placeholder,
+body.dark-mode .field textarea::placeholder {
+    color: #888;
+}
+
+/* Tables */
+body.dark-mode .program-table {
+    border-color: #404040;
+}
+
+body.dark-mode .program-table th {
+    background-color: #3d3d3d;
+    color: #fff;
+    border-color: #555;
+}
+
+body.dark-mode .program-table td {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #404040;
+}
+
+body.dark-mode .program-table td[contenteditable="true"] {
+    background-color: #3d3d3d;
+    color: #e0e0e0;
+}
+
+body.dark-mode .program-table td[contenteditable="true"]:focus {
+    background-color: #4a4a4a;
+    box-shadow: inset 0 0 0 2px #777;
+}
+
+/* Buttons */
+body.dark-mode .rejectbtn,
+body.dark-mode .needFixes,
+body.dark-mode .approvebtn {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .rejectbtn:hover,
+body.dark-mode .needFixes:hover,
+body.dark-mode .approvebtn:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+/* Footer */
+body.dark-mode footer {
+    border-top-color: #404040;
+}
+
+body.dark-mode .footer-logos img {
+    filter: brightness(0.8);
+}
+
+/* Iframes */
+body.dark-mode iframe {
+    background-color: #2d2d2d;
+}
+
+/* Scrollbar */
+body.dark-mode::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 6px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* Print Styles */
+@media print {
+    body.dark-mode {
+        background-color: #fff;
+        color: #000;
+    }
+    
+    body.dark-mode .form-container,
+    body.dark-mode .report-container,
+    body.dark-mode .container {
+        background-color: #fff;
+        box-shadow: none;
+    }
+    
+    body.dark-mode .admin-comment {
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+    
+    body.dark-mode #admincomment {
+        background-color: #fff;
+        border: 1px solid #000;
+        color: #000;
+    }
+    
+    body.dark-mode .field input,
+    body.dark-mode .field textarea {
+        border: none;
+        background-color: transparent;
+        color: #000;
+    }
+    
+    body.dark-mode .program-table td {
+        background-color: #fff;
+        color: #000;
+    }
+    
+    body.dark-mode .program-table th {
+        background-color: #d9d9d9;
+        color: #000;
+    }
+    
+    .button-container,
+    #sidebarFrame,
+    #headerFrame {
+        display: none !important;
+    }
+}
+
+/* Transitions */
+body, 
+body *,
+.form-container,
+.admin-comment,
+#admincomment,
+input,
+textarea,
+button,
+table,
+td,
+th {
+    transition: background-color 0.3s ease, 
+                color 0.2s ease, 
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}

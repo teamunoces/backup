@@ -99,24 +99,23 @@
 /* ===== General Styles ===== */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    letter-spacing: -0.011em; /* Tightens the document look */
+    letter-spacing: -0.011em;
     line-height: 1.6;
-    color: #1a202c; /* Deep document-ink gray */
+    color: #1a202c;
     background-color: #f4f7f9;
-    color: #333;
     margin: 0;
     padding: 0;
+    margin-left: 150px; /* Add margin to account for sidebar */
 }
 
 .container {
     max-width: 1100px;
-    margin: 100px auto 0 400px;
+    margin: 80px auto 40px auto; /* Centered with auto margins */
     background: #fff;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     box-sizing: border-box;
-    width: calc(100vw - 250px);
 }
 
 header h1 {
@@ -173,14 +172,14 @@ input[type="text"]:focus, textarea:focus {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     border: 1px solid #e2e8f0;
-    position: relative; /* Contain the sticky elements */
+    position: relative;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse; /* Collapse usually handles borders better than separate */
+    border-collapse: collapse;
     min-width: 1200px;
-    table-layout: fixed; /* Prevents columns from jumping when typing */
+    table-layout: fixed;
 }
 
 table thead th {
@@ -194,7 +193,7 @@ table thead th {
     border-right: 1px solid #e2e8f0;
     position: sticky;
     top: 0;
-    z-index: 20; /* High z-index to stay above focused inputs */
+    z-index: 20;
 }
 
 table td {
@@ -202,15 +201,14 @@ table td {
     border-right: 1px solid #f1f5f9;
     padding: 0;
     vertical-align: top;
-    height: 1px; /* Important: Allows the textarea to fill the 100% height */
+    height: 1px;
 }
 
 table td textarea,
 table td input {
-    field-sizing: content; /* The "Magic" property */
+    field-sizing: content;
     min-height: 50px;
     width: 100%;
-    min-height: 50px; 
     border: none;
     padding: 15px;
     background: transparent;
@@ -220,27 +218,25 @@ table td input {
     display: block;
     box-sizing: border-box;
     outline: none;
-    overflow: hidden; /* Hide scrollbars as it grows */
-    resize: none;      /* Disable manual resize to keep it clean */
+    overflow: hidden;
+    resize: none;
     transition: background 0.2s;
 }
 
-/* Fixes the "Overlapping" on Focus */
 table td textarea:focus,
 table td input:focus {
     background-color: #ffffff;
-    /* Use a solid inset shadow to avoid clipping against cell borders */
-    box-shadow: inset 0 0 0 2px #3498db; 
+    box-shadow: inset 0 0 0 2px #3498db;
     z-index: 10;
-    position: relative; 
+    position: relative;
 }
 
-/* Specific Column Alignment */
 table td:first-child textarea,
 table td:last-child input {
     text-align: center;
     font-weight: 600;
 }
+
 /* ===== Add Row Button ===== */
 .add-row-btn {
     margin-top: 15px;
@@ -260,6 +256,7 @@ table td:last-child input {
     border-color: #3498db;
     color: #2980b9;
 }
+
 /* Delete Row Button */
 .delete-row-btn {
     margin-top: 10px;
@@ -318,15 +315,14 @@ table td:last-child input {
 .btn:active {
     transform: translateY(0);
 }
+
 .btn-clear {
-    /* Inherits .btn properties (padding, radius, etc.) */
     background: linear-gradient(to right, #e0e0e0, #bdbdbd);
-    color: #444; /* Darker text for contrast against light gray */
+    color: #444;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    border: 1px solid rgba(0,0,0,0.05); /* Optional: adds a tiny bit of definition */
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
-/* If you want a "Ghost" style instead (Hollow) */
 .btn-clear-outline {
     background: transparent;
     color: #666;
@@ -348,26 +344,24 @@ table td:last-child input {
 
 #ai-input {
     width: 100%;
-    max-width: 600px; /* Limits width for better readability */
+    max-width: 600px;
     padding: 14px 25px;
     font-size: 1rem;
-    border-radius: 50px; /* Matches your .btn pill shape */
+    border-radius: 50px;
     border: 2px solid #e0e0e0;
     background: #ffffff;
     outline: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     color: #333;
 }
 
-/* AI Focus State: Matches your blue button colors */
 #ai-input:focus {
-    border-color: #00b4db; 
+    border-color: #00b4db;
     box-shadow: 0 0 12px rgba(0, 180, 219, 0.3);
     transform: translateY(-1px);
 }
 
-/* Custom Placeholder styling */
 #ai-input::placeholder {
     color: #aaa;
     font-style: italic;
@@ -417,7 +411,6 @@ table td:last-child input {
     line-height: 1.5;
 }
 
-/* Recommendation List */
 #recommendation-list {
     list-style: none;
     padding: 0;
@@ -480,58 +473,94 @@ table td:last-child input {
 
 .paper-lines {
     width: 100%;
-    min-height: 50x; /* Starts with 3 lines */
+    min-height: 50px;
     border: none;
     outline: none;
     resize: none;
     overflow: hidden;
     font-family: Arial, sans-serif;
     font-size: 16px;
-    
-    /* Notebook background lines */
     line-height: 31px;
     background-image: linear-gradient(transparent 30px, #000 31px);
     background-size: 100% 31px;
     background-attachment: local;
-    
     display: block;
     padding: 0;
     margin: 0;
-    
-    /* This ensures the height calculation is accurate */
     box-sizing: border-box;
 }
 
-/* Optional: Removes the border when clicking the box */
 .paper-lines:focus {
     outline: none;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 1200px) {
-    #sidebarFrame { width: 200px; }
-    #headerFrame { left: 200px; width: calc(100% - 200px); }
-    .container { margin-left: 200px; width: calc(100vw - 200px); }
+    body {
+        margin-left: 150px;
+    }
+    .container {
+        max-width: 1000px;
+    }
 }
 
 @media (max-width: 900px) {
-    #sidebarFrame { width: 150px; }
-    #headerFrame { left: 150px; width: calc(100% - 150px); }
-    .container { margin-left: 150px; width: calc(100vw - 150px); }
-    table { min-width: 700px; }
+    body {
+        margin-left: 150px;
+    }
+    .container {
+        max-width: 90%;
+        padding: 30px;
+    }
+    table {
+        min-width: 700px;
+    }
 }
 
 @media (max-width: 768px) {
-    #sidebarFrame { transform: translateX(-100%); }
-    #headerFrame { left: 0; width: 100%; }
-    .container { margin-left: 0; margin-top: 80px; width: 100vw; padding: 20px; }
-    .form-actions { flex-direction: column; align-items: center; }
-    .btn { width: 100%; min-width: unset; }
-    table { min-width: 600px; }
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+    body {
+        margin-left: 0; /* Remove margin when sidebar is hidden */
+    }
+    .container {
+        margin-top: 80px;
+        width: 90%;
+        padding: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn {
+        width: 100%;
+        min-width: unset;
+    }
+    table {
+        min-width: 600px;
+    }
 }
 
 @media (max-width: 600px) {
-    .form-actions { flex-direction: column; align-items: center; }
-    .btn { width: 100%; }
-    table { min-width: 500px; }
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn {
+        width: 100%;
+    }
+    table {
+        min-width: 500px;
+    }
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
 }

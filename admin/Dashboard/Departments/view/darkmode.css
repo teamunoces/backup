@@ -1,0 +1,399 @@
+/* ================= DARK MODE STYLES ================= */
+/* Force dark mode on all elements */
+body.dark-mode,
+body.dark-mode * {
+    transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease;
+}
+
+/* Apply to main content and iframes */
+body.dark-mode,
+body.dark-mode .content-area,
+body.dark-mode .main-wrapper,
+body.dark-mode .reports-container {
+    background: #1a1a1a;
+    color: #e0e0e0 !important;
+}
+
+/* ===== FILTER SECTION - STRONG OVERRIDES ===== */
+body.dark-mode .filters-container,
+body.dark-mode .filters-wrapper,
+body.dark-mode .filter-row,
+body.dark-mode [class*="filter"] {
+    background-color: #0f172a !important;
+}
+
+body.dark-mode .filters-wrapper {
+    background-color: #0f172a !important;
+    border: 1px solid #2a2a4a !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+}
+
+body.dark-mode .filter-row {
+    background-color: transparent !important;
+    margin-bottom: 15px !important;
+}
+
+body.dark-mode .filter-row .label {
+    color: #e0e0e0 !important;
+    font-weight: 500 !important;
+}
+
+/* Select dropdowns - force dark background */
+body.dark-mode .select-red,
+body.dark-mode select.select-red,
+body.dark-mode .date-input-red,
+body.dark-mode input.date-input-red {
+    background-color: #1e293b !important;
+    border: 1px solid #3b3b5c !important;
+    color: #e0e0e0 !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+}
+
+body.dark-mode .select-red:hover,
+body.dark-mode select.select-red:hover,
+body.dark-mode .date-input-red:hover,
+body.dark-mode input.date-input-red:hover {
+    border-color: #60a5fa !important;
+    background-color: #1e293b !important;
+}
+
+body.dark-mode .select-red:focus,
+body.dark-mode select.select-red:focus,
+body.dark-mode .date-input-red:focus,
+body.dark-mode input.date-input-red:focus {
+    border-color: #3b82f6 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
+    background-color: #1e293b !important;
+}
+
+/* Select dropdown options */
+body.dark-mode .select-red option,
+body.dark-mode select.select-red option {
+    background-color: #1e293b !important;
+    color: #e0e0e0 !important;
+}
+
+/* Date input specific */
+body.dark-mode input[type="date"] {
+    background-color: #1e293b !important;
+    color-scheme: dark !important;
+}
+
+body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) !important;
+    cursor: pointer !important;
+}
+
+/* Filter buttons */
+body.dark-mode .apply-filter-btn,
+body.dark-mode .clear-filters-btn {
+    background-color: #2a2a4a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #3a3a6a !important;
+    padding: 8px 16px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: 500 !important;
+}
+
+body.dark-mode .apply-filter-btn:hover,
+body.dark-mode .clear-filters-btn:hover {
+    background-color: #3a3a6a !important;
+    color: #ffffff !important;
+    border-color: #60a5fa !important;
+}
+
+body.dark-mode .results-count {
+    color: #9ca3af !important;
+    margin-left: 15px !important;
+}
+
+/* Custom date range row */
+body.dark-mode .custom-date-row {
+    background-color: transparent !important;
+}
+
+body.dark-mode .custom-date-row .label {
+    color: #e0e0e0 !important;
+}
+
+/* ===== REPORT CARDS ===== */
+body.dark-mode .report-card {
+    background-color: #16213e !important;
+    border: 1px solid #2a2a4a !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    margin-bottom: 20px !important;
+}
+
+body.dark-mode .report-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    border-color: #3a3a6a !important;
+}
+
+/* Report header */
+body.dark-mode .report-header {
+    border-bottom: 1px solid #2a2a4a !important;
+    padding: 16px 20px !important;
+}
+
+body.dark-mode .report-title {
+    color: #ffffff !important;
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+}
+
+body.dark-mode .report-type {
+    background-color: #2a2a4a !important;
+    color: #a78bfa !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    font-size: 0.75rem !important;
+    margin-left: 10px !important;
+}
+
+body.dark-mode .status-badge {
+    background-color: #2e7d32 !important;
+    color: #ffffff !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    font-size: 0.75rem !important;
+    margin-left: 8px !important;
+}
+
+body.dark-mode .coordinator-tag {
+    background-color: #9c27b0 !important;
+    color: #ffffff !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    font-size: 0.75rem !important;
+    margin-left: 8px !important;
+}
+
+body.dark-mode .report-date {
+    color: #9ca3af !important;
+    font-size: 0.875rem !important;
+}
+
+/* Report meta section */
+body.dark-mode .report-meta {
+    background-color: #0f172a !important;
+    padding: 12px 20px !important;
+    border-bottom: 1px solid #2a2a4a !important;
+}
+
+body.dark-mode .report-meta span {
+    color: #d1d5db !important;
+    margin-right: 20px !important;
+    font-size: 0.875rem !important;
+}
+
+body.dark-mode .submitted-by {
+    color: #a78bfa !important;
+    font-weight: 500 !important;
+}
+
+/* Report content */
+body.dark-mode .report-content {
+    color: #e5e7eb !important;
+    padding: 20px !important;
+    line-height: 1.6 !important;
+    background-color: #0f172a !important;
+    margin: 0 !important;
+}
+
+/* ===== ATTACHMENTS SECTION ===== */
+body.dark-mode .attachments-section {
+    background-color: #0f172a !important;
+    border-top: 1px solid #2a2a4a !important;
+    padding: 16px 20px !important;
+}
+
+body.dark-mode .attachments-title {
+    color: #ffffff !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 12px !important;
+}
+
+body.dark-mode .attachment-item {
+    background-color: #16213e !important;
+    border: 1px solid #2a2a4a !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    margin-bottom: 8px !important;
+}
+
+body.dark-mode .attachment-item:hover {
+    background-color: #1e2a4a !important;
+    border-color: #3b82f6 !important;
+}
+
+body.dark-mode .attachment-icon {
+    color: #60a5fa !important;
+}
+
+body.dark-mode .attachment-name {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .attachment-size {
+    color: #9ca3af !important;
+    font-size: 0.75rem !important;
+}
+
+body.dark-mode .attachment-view-btn,
+body.dark-mode .attachment-download-btn {
+    background-color: #2a2a4a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #3a3a6a !important;
+    padding: 4px 12px !important;
+    border-radius: 6px !important;
+    font-size: 0.75rem !important;
+    cursor: pointer !important;
+}
+
+body.dark-mode .attachment-view-btn:hover,
+body.dark-mode .attachment-download-btn:hover {
+    background-color: #3a3a6a !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .attachment-view-btn {
+    background-color: #3b82f6 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .attachment-view-btn:hover {
+    background-color: #2563eb !important;
+}
+
+/* ===== PDF MODAL ===== */
+body.dark-mode .modal-content {
+    background-color: #16213e !important;
+    border: 1px solid #2a2a4a !important;
+    border-radius: 12px !important;
+}
+
+body.dark-mode .modal-header {
+    background-color: #0f172a !important;
+    border-bottom: 1px solid #2a2a4a !important;
+    padding: 16px 20px !important;
+}
+
+body.dark-mode .modal-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .modal-header .close {
+    color: #9ca3af !important;
+    font-size: 1.5rem !important;
+}
+
+body.dark-mode .modal-header .close:hover {
+    color: #ffffff !important;
+}
+
+body.dark-mode .pdf-controls {
+    background-color: #0f172a !important;
+    border-top: 1px solid #2a2a4a !important;
+    padding: 12px !important;
+}
+
+body.dark-mode .pdf-controls button {
+    background-color: #2a2a4a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #3a3a6a !important;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    margin: 0 4px !important;
+}
+
+body.dark-mode .pdf-controls button:hover {
+    background-color: #3a3a6a !important;
+}
+
+/* ===== NO REPORTS SECTION ===== */
+body.dark-mode .no-reports {
+    background-color: #16213e !important;
+    border: 1px solid #2a2a4a !important;
+    border-radius: 12px !important;
+    padding: 40px !important;
+    text-align: center !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .debug-text {
+    color: #9ca3af !important;
+    font-size: 0.75rem !important;
+}
+
+/* ===== REPORTS SUMMARY ===== */
+body.dark-mode .reports-summary {
+    background-color: #0f172a !important;
+    border: 1px solid #2a2a4a !important;
+    border-radius: 8px !important;
+    padding: 12px 20px !important;
+    margin-top: 20px !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .reports-summary strong {
+    color: #60a5fa !important;
+}
+
+/* ===== SCROLLBAR ===== */
+body.dark-mode ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #0f172a !important;
+    border-radius: 5px !important;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #2a2a4a !important;
+    border-radius: 5px !important;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a6a !important;
+}
+
+/* ===== ADDITIONAL OVERRIDES ===== */
+/* Force any white backgrounds to dark */
+body.dark-mode [style*="background: white"],
+body.dark-mode [style*="background:#fff"],
+body.dark-mode [style*="background-color: white"],
+body.dark-mode [style*="background-color:#fff"],
+body.dark-mode [style*="background-color: #fff"],
+body.dark-mode [style*="background-color: #ffffff"] {
+    background-color: #16213e !important;
+}
+
+/* Ensure proper text contrast in buttons */
+body.dark-mode button,
+body.dark-mode .btn,
+body.dark-mode input[type="button"],
+body.dark-mode input[type="submit"] {
+    color: #e0e0e0 !important;
+}
+
+/* Container backgrounds */
+body.dark-mode div[class*="container"],
+body.dark-mode section[class*="container"] {
+    background-color: transparent !important;
+}
+
+/* Fix any white cards */
+body.dark-mode .card,
+body.dark-mode [class*="card"] {
+    background-color: #16213e !important;
+    border-color: #2a2a4a !important;
+}

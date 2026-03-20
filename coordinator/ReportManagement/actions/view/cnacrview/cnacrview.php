@@ -26,17 +26,17 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
   <!-- SIDEBAR -->
   <iframe src="/coordinator/Sidebar/sidebar.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
-
-
-                 
-    <div class="report-container">
-
-                                   <!-- ACTION BUTTONS -->
+             <!-- ACTION BUTTONS -->
                         <div class="buttons">
                             <button  onclick="printReport()">Print this Page</button>
                             <button id="downloadPDF" type="button">Download PDF</button>
                         </div>
 
+
+                 
+    <div class="report-container">
+
+                      
         <header>
             <div class="header-content">
                 <img src="/coordinator/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">

@@ -123,6 +123,7 @@ h1 {
 
 /* ===== Tables ===== */
 table {
+    pointer-events: none;
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 30px;
@@ -156,6 +157,7 @@ th, td {
     word-wrap: break-word;
 }
 .main-table tbody td {
+
     height: 200px;
 }
 
@@ -182,6 +184,7 @@ th, td {
 
 /* Styling for the actual input boxes */
 .input_cell input[type="text"] {
+    
     width: 500px;           /* Adjust this to match your desired width */
     height: 30px;           /* Matches the height in your screenshot */
     border:none; /* Thin, grey border */
@@ -198,7 +201,7 @@ th, td {
     text-align: left; /* Or 'center' if you want it in the middle of the cell */
 }
 
-/* Table Styling */
+/* Table Layout & Reset */
 .main-table {
     width: 100%;
     border-collapse: collapse;
@@ -207,34 +210,51 @@ th, td {
     table-layout: fixed;
 }
 
+/* Base Cell Styling */
 .main-table th, 
 .main-table td {
     border: 1px solid #a6a6a6;
     padding: 8px;
     text-align: center;
     vertical-align: top;
+    word-wrap: break-word; /* Ensures text doesn't overflow fixed columns */
 }
 
-/* Row height control */
-.main-table tbody td {
-    height: 120px; /* adjust this value */
-}
-
-/* Header styling */
+/* Header Styling - Rejection Red Tint */
 .main-table th {
-    background-color: #d9d9d9;
-    color: #333;
-    font-weight: normal;
+    background-color: #fceaea; /* Subtle red for rejection */
+    color: #b91c1c;            /* Dark red text */
+    font-weight: bold;
     padding: 10px 4px;
 }
 
-/* Editable table cells */
-.main-table td[contenteditable="true"] {
-    background-color: #ffffff;
-    outline: none;
-    padding: 6px;
+/* Locked/Read-Only Styling */
+.read-only-cell {
+    background-color: #f9f9f9; 
+    color: #555;               
+    cursor: not-allowed;       
+    pointer-events: none;      /* Disables all clicking/interaction */
+    user-select: none;         /* Prevents copying text if desired */
 }
 
+/* Ensure even if contenteditable="true" was left in HTML, it looks locked */
+.main-table td[contenteditable="false"],
+.main-table td:not([contenteditable="true"]) {
+    background-color: #fdfdfd;
+    height: 120px; 
+}
+
+/* Row height control for the body */
+.main-table tbody td {
+    height: 120px; 
+}
+
+/* Remove any previous 'editable' styles that might conflict */
+.main-table td[contenteditable="true"] {
+    background-color: #f9f9f9;
+    outline: none;
+    pointer-events: none;
+}
 
 
 

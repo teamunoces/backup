@@ -3,7 +3,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f5f5f5;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    margin-left: 150px; /* Account for fixed sidebar */
     display: flex;
     justify-content: center;
     min-height: 100vh;
@@ -22,8 +23,7 @@ body {
     overflow-y: auto;
 }
 
-#headerFrame {
-    height: 60px;
+#headerFrame {    height: 60px;
     border: none;
     position: fixed;
     top: 0;
@@ -42,11 +42,12 @@ body {
     max-width: 1100px;
     padding: 40px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    margin-top: 160px; /* Prevents overlap with fixed header */
-    margin-bottom: 40px;
+    margin: 100px auto 40px auto; /* Centered with auto margins, top margin accounts for header */
     display: flex;
     flex-direction: column;
+    border-radius: 8px;
 }
+
 /* Ensure the table doesn't get squashed */
 .form-container table {
     width: 95%;
@@ -240,17 +241,15 @@ footer {
 
 
 
-/* ===== 10. BUTTONS (Centered Above Container) ===== */
+/* ===== BUTTONS - Positioned Above Container ===== */
 .buttons {
+    position: fixed;
+    top: 70px;
+    right: 20px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
     gap: 15px;
-    width: calc(100% - 150px); /* Subtracts sidebar width */
-    position: absolute; 
-    top: 90px;         /* Sits between Header (60px) and Form (160px) */
-    left: 150px;       /* Starts after the sidebar */
-    z-index: 101;
+    z-index: 1001;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -259,7 +258,7 @@ footer {
     font-size: 14px;
     font-weight: 600;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
     display: inline-flex;
@@ -267,17 +266,10 @@ footer {
     justify-content: center;
 }
 
-/* Print Guard: Hides buttons when printing or saving as PDF */
-@media print {
-    .buttons {
-        display: none !important;
-    }
-}
-
-/* Keep your existing button colors below... */
 .buttons button[onclick] {
     background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
     color: white;
+    box-shadow: 0 4px 6px rgba(37, 73, 17, 0.2);
 }
 
 .buttons button[onclick]:hover {

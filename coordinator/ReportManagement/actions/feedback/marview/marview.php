@@ -14,6 +14,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monthly Accomplishment Report</title>
     <link rel="stylesheet" href="mar.css">
+    <link rel="stylesheet" href="darkmode.css">
     <style>
 /* Hide elements when printing */
 @media print {
@@ -200,6 +201,7 @@ function printReport(){
       <script>const reportType = "<?php echo $reportType; ?>";console.log(reportType);</script>
       <script src="./get.js" ></script>
 </script>
+        <script src="./darkmode.js"></script>
 
 
 </body>

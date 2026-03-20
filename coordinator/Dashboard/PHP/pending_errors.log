@@ -13920,3 +13920,1425 @@
 
 [19-Mar-2026 14:48:38 UTC] Found 1 records in coordinator_cnacr
 [19-Mar-2026 14:48:38 UTC] Sending response with 5 tables
+[20-Mar-2026 05:29:18 UTC] Current User ID: 7
+[20-Mar-2026 05:29:18 UTC] Database connected successfully
+[20-Mar-2026 05:29:18 UTC] Status filter: pending
+[20-Mar-2026 05:29:18 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 05:29:18 UTC] Processing table: 3ydp
+[20-Mar-2026 05:29:18 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:29:18 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:29:18 UTC] Found 0 records in 3ydp
+[20-Mar-2026 05:29:18 UTC] Processing table: pd_main
+[20-Mar-2026 05:29:18 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:29:18 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:29:18 UTC] Found 0 records in pd_main
+[20-Mar-2026 05:29:18 UTC] Processing table: dpir
+[20-Mar-2026 05:29:18 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:29:18 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:29:18 UTC] Found 0 records in dpir
+[20-Mar-2026 05:29:18 UTC] Processing table: mar_header
+[20-Mar-2026 05:29:18 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:29:18 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:29:18 UTC] Found 0 records in mar_header
+[20-Mar-2026 05:29:18 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 05:29:18 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:29:18 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:29:18 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 05:29:18 UTC] Sending response with 5 tables
+[20-Mar-2026 05:51:28 UTC] Current User ID: 7
+[20-Mar-2026 05:51:28 UTC] Database connected successfully
+[20-Mar-2026 05:51:28 UTC] Status filter: pending
+[20-Mar-2026 05:51:28 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 05:51:28 UTC] Processing table: 3ydp
+[20-Mar-2026 05:51:28 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:51:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:51:28 UTC] Found 0 records in 3ydp
+[20-Mar-2026 05:51:28 UTC] Processing table: pd_main
+[20-Mar-2026 05:51:28 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:51:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:51:28 UTC] Found 0 records in pd_main
+[20-Mar-2026 05:51:28 UTC] Processing table: dpir
+[20-Mar-2026 05:51:28 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:51:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:51:28 UTC] Found 0 records in dpir
+[20-Mar-2026 05:51:28 UTC] Processing table: mar_header
+[20-Mar-2026 05:51:28 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:51:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:51:28 UTC] Found 0 records in mar_header
+[20-Mar-2026 05:51:28 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 05:51:28 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:51:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:51:28 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 05:51:28 UTC] Sending response with 5 tables
+[20-Mar-2026 05:55:55 UTC] Current User ID: 9
+[20-Mar-2026 05:55:55 UTC] Database connected successfully
+[20-Mar-2026 05:55:55 UTC] Status filter: pending
+[20-Mar-2026 05:55:55 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 05:55:55 UTC] Processing table: 3ydp
+[20-Mar-2026 05:55:55 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:55:55 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:55:55 UTC] Found 0 records in 3ydp
+[20-Mar-2026 05:55:55 UTC] Processing table: pd_main
+[20-Mar-2026 05:55:55 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:55:55 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:55:55 UTC] Found 0 records in pd_main
+[20-Mar-2026 05:55:55 UTC] Processing table: dpir
+[20-Mar-2026 05:55:55 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:55:55 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:55:55 UTC] Found 0 records in dpir
+[20-Mar-2026 05:55:55 UTC] Processing table: mar_header
+[20-Mar-2026 05:55:55 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:55:55 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:55:55 UTC] Found 0 records in mar_header
+[20-Mar-2026 05:55:55 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 05:55:55 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:55:55 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:55:55 UTC] Found 0 records in coordinator_cnacr
+[20-Mar-2026 05:55:55 UTC] Sending response with 5 tables
+[20-Mar-2026 05:56:10 UTC] Current User ID: 9
+[20-Mar-2026 05:56:10 UTC] Database connected successfully
+[20-Mar-2026 05:56:10 UTC] Status filter: pending
+[20-Mar-2026 05:56:10 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 05:56:10 UTC] Processing table: 3ydp
+[20-Mar-2026 05:56:10 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:10 UTC] Found 0 records in 3ydp
+[20-Mar-2026 05:56:10 UTC] Processing table: pd_main
+[20-Mar-2026 05:56:10 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:10 UTC] Found 0 records in pd_main
+[20-Mar-2026 05:56:10 UTC] Processing table: dpir
+[20-Mar-2026 05:56:10 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:10 UTC] Found 0 records in dpir
+[20-Mar-2026 05:56:10 UTC] Processing table: mar_header
+[20-Mar-2026 05:56:10 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:10 UTC] Found 0 records in mar_header
+[20-Mar-2026 05:56:10 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 05:56:10 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:10 UTC] Found 0 records in coordinator_cnacr
+[20-Mar-2026 05:56:10 UTC] Sending response with 5 tables
+[20-Mar-2026 05:56:35 UTC] Current User ID: 9
+[20-Mar-2026 05:56:36 UTC] Database connected successfully
+[20-Mar-2026 05:56:36 UTC] Status filter: pending
+[20-Mar-2026 05:56:36 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 05:56:36 UTC] Processing table: 3ydp
+[20-Mar-2026 05:56:36 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:36 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:36 UTC] Found 0 records in 3ydp
+[20-Mar-2026 05:56:36 UTC] Processing table: pd_main
+[20-Mar-2026 05:56:36 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:36 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:36 UTC] Found 0 records in pd_main
+[20-Mar-2026 05:56:36 UTC] Processing table: dpir
+[20-Mar-2026 05:56:36 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:36 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:36 UTC] Found 0 records in dpir
+[20-Mar-2026 05:56:36 UTC] Processing table: mar_header
+[20-Mar-2026 05:56:36 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:36 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:36 UTC] Found 0 records in mar_header
+[20-Mar-2026 05:56:36 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 05:56:36 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:56:36 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:56:36 UTC] Found 0 records in coordinator_cnacr
+[20-Mar-2026 05:56:36 UTC] Sending response with 5 tables
+[20-Mar-2026 05:58:10 UTC] Current User ID: 9
+[20-Mar-2026 05:58:10 UTC] Database connected successfully
+[20-Mar-2026 05:58:10 UTC] Status filter: pending
+[20-Mar-2026 05:58:10 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 05:58:10 UTC] Processing table: 3ydp
+[20-Mar-2026 05:58:10 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:58:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:58:10 UTC] Found 0 records in 3ydp
+[20-Mar-2026 05:58:10 UTC] Processing table: pd_main
+[20-Mar-2026 05:58:10 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:58:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:58:10 UTC] Found 0 records in pd_main
+[20-Mar-2026 05:58:10 UTC] Processing table: dpir
+[20-Mar-2026 05:58:10 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:58:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:58:10 UTC] Found 0 records in dpir
+[20-Mar-2026 05:58:10 UTC] Processing table: mar_header
+[20-Mar-2026 05:58:10 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:58:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:58:10 UTC] Found 0 records in mar_header
+[20-Mar-2026 05:58:10 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 05:58:10 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:58:10 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:58:10 UTC] Found 0 records in coordinator_cnacr
+[20-Mar-2026 05:58:10 UTC] Sending response with 5 tables
+[20-Mar-2026 05:59:01 UTC] Current User ID: 9
+[20-Mar-2026 05:59:01 UTC] Database connected successfully
+[20-Mar-2026 05:59:01 UTC] Status filter: pending
+[20-Mar-2026 05:59:01 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 05:59:01 UTC] Processing table: 3ydp
+[20-Mar-2026 05:59:01 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:01 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:02 UTC] Found 0 records in 3ydp
+[20-Mar-2026 05:59:02 UTC] Processing table: pd_main
+[20-Mar-2026 05:59:02 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:02 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:02 UTC] Found 0 records in pd_main
+[20-Mar-2026 05:59:02 UTC] Processing table: dpir
+[20-Mar-2026 05:59:02 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:02 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:02 UTC] Found 0 records in dpir
+[20-Mar-2026 05:59:02 UTC] Processing table: mar_header
+[20-Mar-2026 05:59:02 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:02 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:02 UTC] Found 0 records in mar_header
+[20-Mar-2026 05:59:02 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 05:59:02 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:02 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:02 UTC] Found 0 records in coordinator_cnacr
+[20-Mar-2026 05:59:02 UTC] Sending response with 5 tables
+[20-Mar-2026 05:59:14 UTC] Current User ID: 9
+[20-Mar-2026 05:59:14 UTC] Database connected successfully
+[20-Mar-2026 05:59:14 UTC] Status filter: pending
+[20-Mar-2026 05:59:14 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 05:59:14 UTC] Processing table: 3ydp
+[20-Mar-2026 05:59:14 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:14 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:14 UTC] Found 0 records in 3ydp
+[20-Mar-2026 05:59:14 UTC] Processing table: pd_main
+[20-Mar-2026 05:59:14 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:14 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:14 UTC] Found 0 records in pd_main
+[20-Mar-2026 05:59:14 UTC] Processing table: dpir
+[20-Mar-2026 05:59:14 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:14 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:14 UTC] Found 0 records in dpir
+[20-Mar-2026 05:59:14 UTC] Processing table: mar_header
+[20-Mar-2026 05:59:14 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:14 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:14 UTC] Found 0 records in mar_header
+[20-Mar-2026 05:59:14 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 05:59:14 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:14 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 9
+)
+
+[20-Mar-2026 05:59:14 UTC] Found 0 records in coordinator_cnacr
+[20-Mar-2026 05:59:14 UTC] Sending response with 5 tables
+[20-Mar-2026 05:59:24 UTC] Current User ID: 7
+[20-Mar-2026 05:59:24 UTC] Database connected successfully
+[20-Mar-2026 05:59:24 UTC] Status filter: pending
+[20-Mar-2026 05:59:24 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 05:59:24 UTC] Processing table: 3ydp
+[20-Mar-2026 05:59:24 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:24 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:59:24 UTC] Found 0 records in 3ydp
+[20-Mar-2026 05:59:24 UTC] Processing table: pd_main
+[20-Mar-2026 05:59:24 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:24 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:59:24 UTC] Found 0 records in pd_main
+[20-Mar-2026 05:59:24 UTC] Processing table: dpir
+[20-Mar-2026 05:59:24 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:24 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:59:24 UTC] Found 0 records in dpir
+[20-Mar-2026 05:59:24 UTC] Processing table: mar_header
+[20-Mar-2026 05:59:24 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:24 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:59:24 UTC] Found 0 records in mar_header
+[20-Mar-2026 05:59:24 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 05:59:24 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 05:59:24 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 05:59:24 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 05:59:24 UTC] Sending response with 5 tables
+[20-Mar-2026 06:26:50 UTC] Current User ID: 7
+[20-Mar-2026 06:26:50 UTC] Database connected successfully
+[20-Mar-2026 06:26:50 UTC] Status filter: pending
+[20-Mar-2026 06:26:50 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 06:26:50 UTC] Processing table: 3ydp
+[20-Mar-2026 06:26:50 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 06:26:50 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 06:26:50 UTC] Found 0 records in 3ydp
+[20-Mar-2026 06:26:50 UTC] Processing table: pd_main
+[20-Mar-2026 06:26:50 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 06:26:50 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 06:26:50 UTC] Found 0 records in pd_main
+[20-Mar-2026 06:26:50 UTC] Processing table: dpir
+[20-Mar-2026 06:26:50 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 06:26:50 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 06:26:50 UTC] Found 0 records in dpir
+[20-Mar-2026 06:26:50 UTC] Processing table: mar_header
+[20-Mar-2026 06:26:50 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 06:26:50 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 06:26:50 UTC] Found 0 records in mar_header
+[20-Mar-2026 06:26:50 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 06:26:50 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 06:26:50 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 06:26:50 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 06:26:50 UTC] Sending response with 5 tables
+[20-Mar-2026 08:16:53 UTC] Current User ID: 7
+[20-Mar-2026 08:16:53 UTC] Database connected successfully
+[20-Mar-2026 08:16:53 UTC] Status filter: pending
+[20-Mar-2026 08:16:53 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 08:16:53 UTC] Processing table: 3ydp
+[20-Mar-2026 08:16:53 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:16:53 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:16:53 UTC] Found 0 records in 3ydp
+[20-Mar-2026 08:16:53 UTC] Processing table: pd_main
+[20-Mar-2026 08:16:53 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:16:53 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:16:53 UTC] Found 0 records in pd_main
+[20-Mar-2026 08:16:53 UTC] Processing table: dpir
+[20-Mar-2026 08:16:53 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:16:53 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:16:53 UTC] Found 0 records in dpir
+[20-Mar-2026 08:16:53 UTC] Processing table: mar_header
+[20-Mar-2026 08:16:53 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:16:53 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:16:53 UTC] Found 0 records in mar_header
+[20-Mar-2026 08:16:53 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 08:16:53 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:16:53 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:16:53 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 08:16:53 UTC] Sending response with 5 tables
+[20-Mar-2026 08:19:42 UTC] Current User ID: 7
+[20-Mar-2026 08:19:42 UTC] Database connected successfully
+[20-Mar-2026 08:19:42 UTC] Status filter: pending
+[20-Mar-2026 08:19:42 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 08:19:42 UTC] Processing table: 3ydp
+[20-Mar-2026 08:19:42 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:19:42 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:19:42 UTC] Found 0 records in 3ydp
+[20-Mar-2026 08:19:42 UTC] Processing table: pd_main
+[20-Mar-2026 08:19:42 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:19:42 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:19:42 UTC] Found 0 records in pd_main
+[20-Mar-2026 08:19:42 UTC] Processing table: dpir
+[20-Mar-2026 08:19:42 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:19:42 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:19:42 UTC] Found 0 records in dpir
+[20-Mar-2026 08:19:42 UTC] Processing table: mar_header
+[20-Mar-2026 08:19:42 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:19:42 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:19:42 UTC] Found 0 records in mar_header
+[20-Mar-2026 08:19:42 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 08:19:42 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 08:19:42 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 08:19:42 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 08:19:42 UTC] Sending response with 5 tables
+[20-Mar-2026 09:02:19 UTC] Current User ID: 7
+[20-Mar-2026 09:02:19 UTC] Database connected successfully
+[20-Mar-2026 09:02:19 UTC] Status filter: pending
+[20-Mar-2026 09:02:19 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 09:02:19 UTC] Processing table: 3ydp
+[20-Mar-2026 09:02:19 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:02:19 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:02:19 UTC] Found 0 records in 3ydp
+[20-Mar-2026 09:02:19 UTC] Processing table: pd_main
+[20-Mar-2026 09:02:19 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:02:19 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:02:19 UTC] Found 0 records in pd_main
+[20-Mar-2026 09:02:19 UTC] Processing table: dpir
+[20-Mar-2026 09:02:19 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:02:19 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:02:19 UTC] Found 0 records in dpir
+[20-Mar-2026 09:02:19 UTC] Processing table: mar_header
+[20-Mar-2026 09:02:19 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:02:19 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:02:19 UTC] Found 0 records in mar_header
+[20-Mar-2026 09:02:19 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 09:02:19 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:02:19 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:02:19 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 09:02:19 UTC] Sending response with 5 tables
+[20-Mar-2026 09:03:20 UTC] Current User ID: 7
+[20-Mar-2026 09:03:20 UTC] Database connected successfully
+[20-Mar-2026 09:03:20 UTC] Status filter: pending
+[20-Mar-2026 09:03:20 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 09:03:20 UTC] Processing table: 3ydp
+[20-Mar-2026 09:03:20 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:20 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:20 UTC] Found 0 records in 3ydp
+[20-Mar-2026 09:03:20 UTC] Processing table: pd_main
+[20-Mar-2026 09:03:20 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:20 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:20 UTC] Found 0 records in pd_main
+[20-Mar-2026 09:03:20 UTC] Processing table: dpir
+[20-Mar-2026 09:03:20 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:20 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:20 UTC] Found 0 records in dpir
+[20-Mar-2026 09:03:20 UTC] Processing table: mar_header
+[20-Mar-2026 09:03:20 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:20 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:20 UTC] Found 0 records in mar_header
+[20-Mar-2026 09:03:20 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 09:03:20 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:20 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:20 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 09:03:20 UTC] Sending response with 5 tables
+[20-Mar-2026 09:03:31 UTC] Current User ID: 7
+[20-Mar-2026 09:03:31 UTC] Database connected successfully
+[20-Mar-2026 09:03:31 UTC] Status filter: pending
+[20-Mar-2026 09:03:31 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 09:03:31 UTC] Processing table: 3ydp
+[20-Mar-2026 09:03:31 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:31 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:31 UTC] Found 0 records in 3ydp
+[20-Mar-2026 09:03:31 UTC] Processing table: pd_main
+[20-Mar-2026 09:03:31 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:31 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:31 UTC] Found 0 records in pd_main
+[20-Mar-2026 09:03:31 UTC] Processing table: dpir
+[20-Mar-2026 09:03:31 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:31 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:31 UTC] Found 0 records in dpir
+[20-Mar-2026 09:03:31 UTC] Processing table: mar_header
+[20-Mar-2026 09:03:31 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:31 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:31 UTC] Found 0 records in mar_header
+[20-Mar-2026 09:03:31 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 09:03:31 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:03:31 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:03:31 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 09:03:31 UTC] Sending response with 5 tables
+[20-Mar-2026 09:04:00 UTC] Current User ID: 7
+[20-Mar-2026 09:04:00 UTC] Database connected successfully
+[20-Mar-2026 09:04:00 UTC] Status filter: pending
+[20-Mar-2026 09:04:00 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 09:04:00 UTC] Processing table: 3ydp
+[20-Mar-2026 09:04:00 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:04:00 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:04:00 UTC] Found 0 records in 3ydp
+[20-Mar-2026 09:04:00 UTC] Processing table: pd_main
+[20-Mar-2026 09:04:00 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:04:00 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:04:00 UTC] Found 0 records in pd_main
+[20-Mar-2026 09:04:00 UTC] Processing table: dpir
+[20-Mar-2026 09:04:00 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:04:00 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:04:00 UTC] Found 0 records in dpir
+[20-Mar-2026 09:04:00 UTC] Processing table: mar_header
+[20-Mar-2026 09:04:00 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:04:00 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:04:00 UTC] Found 0 records in mar_header
+[20-Mar-2026 09:04:00 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 09:04:00 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:04:00 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:04:00 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 09:04:00 UTC] Sending response with 5 tables
+[20-Mar-2026 09:12:43 UTC] Current User ID: 7
+[20-Mar-2026 09:12:43 UTC] Database connected successfully
+[20-Mar-2026 09:12:43 UTC] Status filter: pending
+[20-Mar-2026 09:12:43 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 09:12:43 UTC] Processing table: 3ydp
+[20-Mar-2026 09:12:43 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:12:43 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:12:43 UTC] Found 0 records in 3ydp
+[20-Mar-2026 09:12:43 UTC] Processing table: pd_main
+[20-Mar-2026 09:12:43 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:12:43 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:12:43 UTC] Found 0 records in pd_main
+[20-Mar-2026 09:12:43 UTC] Processing table: dpir
+[20-Mar-2026 09:12:43 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:12:43 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:12:43 UTC] Found 0 records in dpir
+[20-Mar-2026 09:12:43 UTC] Processing table: mar_header
+[20-Mar-2026 09:12:43 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:12:43 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:12:43 UTC] Found 0 records in mar_header
+[20-Mar-2026 09:12:43 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 09:12:43 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:12:43 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:12:43 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 09:12:43 UTC] Sending response with 5 tables
+[20-Mar-2026 09:13:28 UTC] Current User ID: 7
+[20-Mar-2026 09:13:28 UTC] Database connected successfully
+[20-Mar-2026 09:13:28 UTC] Status filter: pending
+[20-Mar-2026 09:13:28 UTC] Status array: Array
+(
+    [0] => pending
+)
+
+[20-Mar-2026 09:13:28 UTC] Processing table: 3ydp
+[20-Mar-2026 09:13:28 UTC] Query for 3ydp: 
+        SELECT id, type, title_of_project AS title, created_by_name AS name, department, created_at AS date, status
+        FROM 3ydp
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:13:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:13:28 UTC] Found 1 records in 3ydp
+[20-Mar-2026 09:13:28 UTC] Processing table: pd_main
+[20-Mar-2026 09:13:28 UTC] Query for pd_main: 
+        SELECT id, type, title_of_activity AS title, created_by_name AS name, department, created_at AS date, status
+        FROM pd_main
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:13:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:13:28 UTC] Found 0 records in pd_main
+[20-Mar-2026 09:13:28 UTC] Processing table: dpir
+[20-Mar-2026 09:13:28 UTC] Query for dpir: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM dpir
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:13:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:13:28 UTC] Found 0 records in dpir
+[20-Mar-2026 09:13:28 UTC] Processing table: mar_header
+[20-Mar-2026 09:13:28 UTC] Query for mar_header: 
+        SELECT id, type, title_act AS title, created_by_name AS name, department, created_at AS date, status
+        FROM mar_header
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:13:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:13:28 UTC] Found 0 records in mar_header
+[20-Mar-2026 09:13:28 UTC] Processing table: coordinator_cnacr
+[20-Mar-2026 09:13:28 UTC] Query for coordinator_cnacr: 
+        SELECT id, type, title_of_program AS title, created_by_name AS name, department, created_at AS date, status
+        FROM coordinator_cnacr
+        WHERE status IN (?)
+        AND user_id = ?
+        
+[20-Mar-2026 09:13:28 UTC] Binding parameters - types: ss, params: Array
+(
+    [0] => pending
+    [1] => 7
+)
+
+[20-Mar-2026 09:13:28 UTC] Found 1 records in coordinator_cnacr
+[20-Mar-2026 09:13:28 UTC] Sending response with 5 tables

@@ -286,21 +286,12 @@ function attachSectionEvents(container) {
             const status = (report.status || "").toLowerCase().trim();
 
             if (status === "rejected" || status === "reject") {
-                // Show modern banner instead of alert
-                const banner = document.getElementById("rejectedBanner");
-                if (banner) {
-                    banner.classList.remove("hidden");
-                    banner.classList.add("show");
-
-                    // Hide banner after 3 seconds
-                    setTimeout(() => {
-                        banner.classList.remove("show");
-                        banner.classList.add("hidden");
-                    }, 3000);
-                }
-                return; // Stop further execution
+                // Show feedback modal for rejected reports
+                showFeedbackModal(reportId, reportTable, report);
+                return;
             }
 
+            // Existing view logic for approved and need fix
             let viewMap;
 
             if (status === "approve" || status === "approved") {
@@ -333,6 +324,209 @@ function attachSectionEvents(container) {
     });
 }
 
+// Show feedback modal for rejected reports
+function showFeedbackModal(reportId, reportTable, report) {
+    // Create modal if it doesn't exist
+    let feedbackModal = document.getElementById("feedbackModal");
+    
+    if (!feedbackModal) {
+        feedbackModal = document.createElement("div");
+        feedbackModal.id = "feedbackModal";
+        feedbackModal.className = "modal";
+        feedbackModal.innerHTML = `
+            <div class="modal-content feedback-modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-comment"></i> Feedback for Rejected Report</h2>
+                    <span class="close" onclick="closeFeedbackModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="report-info-feedback">
+                        <p><strong>Report Type:</strong> <span id="feedbackReportType"></span></p>
+                        <p><strong>Title:</strong> <span id="feedbackReportTitle"></span></p>
+                        <p><strong>Department:</strong> <span id="feedbackReportDepartment"></span></p>
+                    </div>
+                    <div class="feedback-section">
+                        <h3><i class="fas fa-file-alt"></i> Feedback Details</h3>
+                        <div id="feedbackContent" class="feedback-content">
+                            <p class="loading-feedback"><i class="fas fa-spinner fa-spin"></i> Loading feedback...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(feedbackModal);
+        
+        // Add CSS for feedback modal
+        const style = document.createElement("style");
+        style.textContent = `
+            .feedback-modal-content {
+                max-width: 600px;
+            }
+            
+            .report-info-feedback {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+            }
+            
+            .report-info-feedback p {
+                margin: 8px 0;
+                font-size: 14px;
+            }
+            
+            .report-info-feedback strong {
+                color: #495057;
+                width: 120px;
+                display: inline-block;
+            }
+            
+            .feedback-section {
+                background: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                padding: 20px;
+            }
+            
+            .feedback-section h3 {
+                color: #dc3545;
+                margin-top: 0;
+                margin-bottom: 15px;
+                font-size: 16px;
+                border-bottom: 1px solid #ffcdd2;
+                padding-bottom: 10px;
+            }
+            
+            .feedback-content {
+                max-height: 300px;
+                overflow-y: auto;
+                padding: 15px;
+                background: #fff5f5;
+                border-radius: 6px;
+                border-left: 4px solid #dc3545;
+            }
+            
+            .feedback-content p {
+                margin: 10px 0;
+                line-height: 1.6;
+                color: #333;
+            }
+            
+            .feedback-content .feedback-label {
+                color: #dc3545;
+                font-weight: bold;
+                margin-right: 10px;
+            }
+            
+            .feedback-content .loading-feedback {
+                color: #666;
+                font-style: italic;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .feedback-content .no-feedback {
+                color: #666;
+                font-style: italic;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .feedback-content .feedback-item {
+                border-bottom: 1px solid #ffcdd2;
+                padding: 10px 0;
+            }
+            
+            .feedback-content .feedback-item:last-child {
+                border-bottom: none;
+            }
+            
+            .feedback-timestamp {
+                color: #888;
+                font-size: 12px;
+                display: block;
+                margin-top: 5px;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Set report info
+    document.getElementById("feedbackReportType").textContent = report.displayType || 'N/A';
+    document.getElementById("feedbackReportTitle").textContent = report.title || 'N/A';
+    document.getElementById("feedbackReportDepartment").textContent = report.department || 'N/A';
+    
+    // Show modal
+    feedbackModal.style.display = "block";
+    
+    // Load feedback with correct path
+    loadFeedback(reportId, reportTable);
+}
+
+// Function to close feedback modal
+function closeFeedbackModal() {
+    const modal = document.getElementById("feedbackModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Function to load feedback - UPDATED WITH CORRECT PATH
+async function loadFeedback(reportId, reportTable) {
+    const feedbackContent = document.getElementById("feedbackContent");
+    if (!feedbackContent) return;
+    
+    feedbackContent.innerHTML = '<p class="loading-feedback"><i class="fas fa-spinner fa-spin"></i> Loading feedback...</p>';
+    
+    try {
+        // Use the correct path based on your structure
+        const url = `/coordinator/ReportManagement/php/get_feedback.php?report_id=${reportId}&table=${encodeURIComponent(reportTable)}`;
+        console.log("Fetching feedback from:", url);
+        
+        const response = await fetch(url);
+        
+        // Check if response is OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Get the response text first for debugging
+        const responseText = await response.text();
+        console.log("Raw response:", responseText.substring(0, 200)); // Log first 200 chars
+        
+        // Try to parse as JSON
+        let data;
+        try {
+            data = JSON.parse(responseText);
+        } catch (e) {
+            console.error("Failed to parse JSON. Full response:", responseText);
+            feedbackContent.innerHTML = '<p class="no-feedback">Error: Server returned invalid response. Please check console for details.</p>';
+            return;
+        }
+        
+        if (data.success && data.feedback && data.feedback.length > 0) {
+            let html = '';
+            data.feedback.forEach(feedback => {
+                const feedbackText = feedback.feedback_text || feedback.feedback || 'No feedback text provided';
+                const timestamp = feedback.created_at || feedback.updated_at || null;
+                
+                html += `
+                    <div class="feedback-item">
+                        <p><span class="feedback-label">Feedback:</span> ${feedbackText}</p>
+                        ${timestamp ? `<span class="feedback-timestamp">${new Date(timestamp).toLocaleString()}</span>` : ''}
+                    </div>
+                `;
+            });
+            feedbackContent.innerHTML = html;
+        } else {
+            feedbackContent.innerHTML = '<p class="no-feedback">No feedback available for this report.</p>';
+        }
+    } catch (error) {
+        console.error("Error loading feedback:", error);
+        feedbackContent.innerHTML = '<p class="no-feedback">Error loading feedback. Please try again.</p>';
+    }
+}
+
 // Show upload modal
 function showUploadModal(reportId, reportTable) {
     const modal = document.getElementById("uploadModal");
@@ -341,19 +535,13 @@ function showUploadModal(reportId, reportTable) {
         return;
     }
     
-    const reportIdSpan = document.getElementById("modalReportId");
-    const reportTableSpan = document.getElementById("modalReportTable");
     const reportTitleSpan = document.getElementById("modalReportTitle");
-    const reportTypeSpan = document.getElementById("modalReportType");
     
     // Find report details
     const report = approvedReports.find(r => r.id == reportId && r.source_table === reportTable);
     
     // Safely set text content only if elements exist
-    if (reportIdSpan) reportIdSpan.textContent = reportId;
-    if (reportTableSpan) reportTableSpan.textContent = reportTable;
     if (reportTitleSpan) reportTitleSpan.textContent = report ? (report.title || 'N/A') : 'N/A';
-    if (reportTypeSpan) reportTypeSpan.textContent = report ? (report.displayType || 'N/A') : 'N/A';
     
     // Clear file list
     const fileList = document.getElementById("fileList");
@@ -450,7 +638,8 @@ function handleFileSelect(input) {
         
         if (!validFiles) {
             selectedFilesList.innerHTML = "<p class='no-files'>No files selected</p>";
-            document.querySelector(".upload-btn").style.display = "none";
+            const uploadBtn = document.querySelector(".upload-btn");
+            if (uploadBtn) uploadBtn.style.display = "none";
             return;
         }
         
@@ -470,15 +659,16 @@ function handleFileSelect(input) {
         }
         
         // Show upload button
-        document.querySelector(".upload-btn").style.display = "block";
-        
-        // Reset reupload mode if active
         const uploadBtn = document.querySelector(".upload-btn");
-        uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Selected Files';
-        uploadBtn.onclick = uploadFiles;
+        if (uploadBtn) {
+            uploadBtn.style.display = "block";
+            uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Selected Files';
+            uploadBtn.onclick = uploadFiles;
+        }
     } else {
         selectedFilesList.innerHTML = "<p class='no-files'>No files selected</p>";
-        document.querySelector(".upload-btn").style.display = "none";
+        const uploadBtn = document.querySelector(".upload-btn");
+        if (uploadBtn) uploadBtn.style.display = "none";
     }
 }
 
@@ -821,9 +1011,15 @@ function resetAllFilters() {
 
 // Close modal when clicking outside
 window.onclick = function(event) {
-    const modal = document.getElementById("uploadModal");
-    if (event.target == modal) {
+    const uploadModal = document.getElementById("uploadModal");
+    const feedbackModal = document.getElementById("feedbackModal");
+    
+    if (event.target == uploadModal) {
         closeUploadModal();
+    }
+    
+    if (event.target == feedbackModal) {
+        closeFeedbackModal();
     }
 }
 

@@ -104,6 +104,7 @@ body.dark-mode table {
 }
 
 body.dark-mode th {
+    background-color: #1e1e1e;
     color: var(--green-primary);
     border-bottom: 2px solid #555;
 }
@@ -133,4 +134,23 @@ body.dark-mode .action-icon {
 
 body.dark-mode .action-icon:hover {
     color: var(--green-primary);
+}
+/* =====================================================
+   FIX: TABLE ROW ALTERNATING COLORS IN DARK MODE
+===================================================== */
+body.dark-mode table tr {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode table tr:nth-child(even) {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode table tr:nth-child(odd) {
+    background-color: #1e1e1e;
+}
+
+/* Optional: Add hover effect for better UX */
+body.dark-mode table tr:hover {
+    background-color: #333;
 }

@@ -13,6 +13,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
   <title><?php echo $reportType; ?></title>
   <link rel="stylesheet" href="view.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
 
@@ -150,6 +151,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
   </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="get.js"></script>
+  <script src="./darkmode.js"></script>
 
 
 

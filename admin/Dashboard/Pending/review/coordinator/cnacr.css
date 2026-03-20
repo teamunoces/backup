@@ -8,9 +8,12 @@
 
 body {
     background-color: #f4f4f4;
-    padding: 40px;
+    margin: 0;
+    padding: 0;
+    margin-left: 150px; /* Account for fixed sidebar */
     display: flex;
     justify-content: center;
+    min-height: 100vh;
 }
 
 
@@ -109,12 +112,17 @@ body {
     margin-bottom: 25px;
 }
 
+/* Main Container - Centered */
 .report-container {
-    margin-top: 60px;
+    margin-top: 80px;
     background-color: #fff;
-    width: 850px; /* Standard A4 width-ish */
+    max-width: 1100px;
+    width: 100%;
     padding: 40px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
 }
 
 h1 {
@@ -174,7 +182,7 @@ h1 {
 .form-group {
     margin-bottom: 20px;
     display: flex;
-    flex-direction: column; /* Stacks label above the lines */
+    flex-direction: column;
 }
 
 .form-group label {
@@ -191,14 +199,11 @@ h1 {
     outline: none;
     resize: none;
     font-size: 16px;
-    line-height: 30px; /* This must match the gradient size below */
+    line-height: 30px;
     padding: 0;
     background-attachment: local;
-    
-    /* Creates the horizontal lines */
     background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
-    background-size: 100% 30px; /* 30px height matches line-height */
-    
+    background-size: 100% 30px;
     background-color: transparent;
     font-family: Arial, sans-serif;
     overflow: hidden;
@@ -208,7 +213,6 @@ h1 {
     color: #ccc;
     font-style: italic;
 }
-
 
 /* Footer Section */
 footer {
@@ -235,16 +239,62 @@ footer {
     height: 40px;
     width: auto;
 }
-/*__________________________________________________BUTTON___________________________________________*/
-.button-container {
-    display: flex;
-    justify-content: space-between; /* Pushes buttons to opposite sides */
-    gap: 150px; /* Optional spacing between buttons */
-    margin-top: 30px; /* spacing from top */
+
+/* Admin Comment Section */
+.admin-comment {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
 }
 
-/* Keep individual button styling */
-.rejectbtn, .approvebtn, .needFixes{
+.admin-comment-label {
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#admincomment {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    min-height: 150px;
+    padding: 15px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: justify;
+    color: #333;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fafafa;
+    pointer-events: none;
+}
+
+#admincomment:focus {
+    border-color: #4f81bd;
+    box-shadow: 0 0 5px rgba(79, 129, 189, 0.3);
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 150px;
+    margin-top: 30px;
+}
+
+.rejectbtn, .approvebtn, .needFixes {
     padding: 12px 30px;
     border-radius: 50px;
     border: none;
@@ -259,54 +309,101 @@ footer {
     width: fit-content;
 }
 
-/* Optional: different colors for reject/approve */
-
 .rejectbtn {
-    background: linear-gradient(to right, #d9534f, #c12d2d); /* red gradient */
-}
-.needFixes {
-    background: linear-gradient(to right, #f0ad4e, #d58512); /* orange gradient */
-}
-.approvebtn {
-    background: linear-gradient(to right, #63b32e, #3d7025); /* green gradient */
+    background: linear-gradient(to right, #d9534f, #c12d2d);
 }
 
-/* Hover effect */
+.needFixes {
+    background: linear-gradient(to right, #f0ad4e, #d58512);
+}
+
+.approvebtn {
+    background: linear-gradient(to right, #63b32e, #3d7025);
+}
+
 .button-container button:hover {
     transform: translateY(-2px);
     opacity: 0.95;
     box-shadow: 0 6px 20px rgba(61, 112, 37, 0.4);
 }
-.admin-comment-label{
-  font-weight: bold;
-  font-size: 35px;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  
-}
-#admincomment{
-    display: block; 
-    width: 100%;          /* Increased slightly for better paragraph width */
-    max-width: 1000px; 
-    margin: 20px auto; 
-    min-height: 150px;   /* Increased height to invite paragraph entry */
-    padding: 15px;
-    
-    /* Typography for Paragraphs */
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;    /* Essential for reading long paragraphs */
-    text-align: justify; /* Optional: gives a clean "block" look to paragraphs */
-    color: #333;
 
-    /* Behavior */
-    white-space: pre-wrap; /* Ensures line breaks and spaces are preserved */
-    overflow-wrap: break-word;
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 1200px) {
+    .report-container {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 900px) {
+    .report-container {
+        max-width: 90%;
+        padding: 30px;
+    }
     
-    /* Aesthetics */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    resize: vertical; 
-    outline: none;
-    transition: all 0.3s ease;
-    background-color: #fafafa; /* Subtle background color change */
+    .button-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .rejectbtn, .approvebtn, .needFixes {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+    
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+    
+    body {
+        margin-left: 0;
+    }
+    
+    .report-container {
+        margin-top: 80px;
+        width: 90%;
+        padding: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .header-grid {
+        grid-template-columns: 120px 1fr 120px 1fr;
+    }
+    
+    .section-content {
+        padding: 15px 0 10px 20px;
+    }
+    
+    .admin-comment-label {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .report-container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .header-grid {
+        grid-template-columns: 100px 1fr 100px 1fr;
+    }
+    
+    .label-box {
+        font-size: 12px;
+        padding: 6px;
+    }
+    
+    .rejectbtn, .approvebtn, .needFixes {
+        font-size: 16px;
+        padding: 8px 20px;
+    }
 }

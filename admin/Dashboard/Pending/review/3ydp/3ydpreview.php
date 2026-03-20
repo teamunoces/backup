@@ -3,12 +3,13 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<l>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3-Year Development Plan</title>
   <link rel="stylesheet" href="3ydpreview.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
       <iframe 
@@ -29,9 +30,20 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
         </iframe>
 
     <div class="container">
-        <!-- Report Header -->
-        <iframe src="../ReportHeader/header.html" id="reportHeaderFrame" frameborder="0" scrolling="no" title="Report Header"></iframe>
 
+                                <header class="report-header">
+                                    <img src="../images/smcclogo.png" alt="SMCC Logo" class="logo left">
+                                    <div class="header-text">
+                                        <h1>Saint Michael College of Caraga</h1>
+                                        <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
+                                        <p>Tel. Nos. +63 085 343-3251 / Fax No. +63 085 808-0892</p>
+                                        <p class="website">www.smccnasipit.edu.ph</p>
+                                        <h2>OFFICE OF THE COMMUNITY EXTENSION SERVICE</h2>
+                                        <p id="psemester">First Semester, A.Y. 2025-2026</p>
+                                    </div>
+                                    <img src="../images/ISOlogo.png" alt="Extension Logo" class="logo right">
+                                </header>
+        
         <header>
             <h1>3-Year Development Plan</h1>
         </header>
@@ -134,6 +146,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 
     <script src="./js/get.js"></script>
     <script src="../action/action.js"></script>
+    <script src="./darkmode.js"></script>
     
   </body>  
 </html>

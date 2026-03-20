@@ -24,48 +24,30 @@
     flex-shrink: 0;
 }
 
-.container {
-    max-width: 1100px;
-    margin: 40px auto 40px 180px; /* Adjusted margin to avoid overlap with sidebar */
-    background: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    box-sizing: border-box;
-    width: calc(100vw - 200px);
-}
-/* ===== Report Header ===== */
-#reportHeaderFrame {
-    width: 100%;
-    height: 200px;
-    border: none;
-    background: #fff;
-    margin-bottom: 20px;
-}
+
 
 /* ===== General Styles ===== */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    letter-spacing: -0.011em; /* Tightens the document look */
+    letter-spacing: -0.011em;
     line-height: 1.6;
-    color: #1a202c; /* Deep document-ink gray */
+    color: #1a202c;
     background-color: #f4f7f9;
-    color: #333;
     margin: 0;
     padding: 0;
+    margin-left: 150px; /* Account for fixed sidebar */
 }
 
 .container {
     max-width: 1100px;
-    margin: 50px auto 0 400px;
+    margin: 80px auto 40px auto; /* Centered with auto margins */
     background: #fff;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     box-sizing: border-box;
-    width: calc(100vw - 250px);
+    width: calc(100% - 40px);
 }
-
 
 /* ===== Header Section ===== */
 .header-content {
@@ -136,6 +118,23 @@ body {
     margin-bottom: 25px;
 }
 
+/* Admin Feedback Section */
+.admin-comment {
+    margin-bottom: 25px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.admin-comment-label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
 /* ===== Form Title ===== */
 header h1 {
     text-align: center;
@@ -187,7 +186,7 @@ input[type="text"]:focus, textarea:focus {
 
 /* ===== Table Section Fixes ===== */
 .table-wrapper {
-    overflow-x: visible; /* Remove horizontal scroll */
+    overflow-x: visible;
     background: #fff;
     border: 1px solid #e2e8f0;
     margin-bottom: 30px;
@@ -197,16 +196,15 @@ input[type="text"]:focus, textarea:focus {
 table {
     width: 100%;
     border-collapse: collapse;
-    /* Removed min-width: 1200px to prevent sliding */
-    table-layout: fixed; /* Keeps columns equal width so they don't "jump" */
-    word-wrap: break-word; /* Ensures long text breaks to new lines */
+    table-layout: fixed;
+    word-wrap: break-word;
 }
 
 table thead th {
     font-weight: bold;
     background-color: #f8fafc;
     color: #475569;
-    font-size: 0.9rem; /* Smaller font to help 9 columns fit better */
+    font-size: 0.9rem;
     padding: 8px 4px;
     border: 1px solid #cbd5e1;
     text-transform: uppercase;
@@ -221,13 +219,13 @@ table td {
 }
 
 table td textarea {
-    field-sizing: content; /* Grows height automatically */
+    field-sizing: content;
     width: 100%;
     min-height: 60px; 
     border: none;
-    padding: 10px 5px; /* Reduced side padding to maximize text space */
+    padding: 10px 5px;
     background: transparent;
-    font-size: 0.85rem; /* Slightly smaller for dense data view */
+    font-size: 0.85rem;
     color: #1e293b;
     line-height: 1.4;
     display: block;
@@ -235,11 +233,9 @@ table td textarea {
     outline: none;
     overflow: hidden; 
     resize: none;
-    white-space: pre-wrap; /* Ensures line breaks in data are preserved */
-   
+    white-space: pre-wrap;
 }
 
-/* Fixes the "Overlapping" on Focus */
 table td textarea:focus {
     background-color: #f0f7ff;
     box-shadow: inset 0 0 0 2px #3498db; 
@@ -247,12 +243,10 @@ table td textarea:focus {
     position: relative; 
 }
 
-/* Column-specific widths if you want to prioritize certain data */
-/* Example: Making the "Program" or "Objectives" column slightly wider */
-table th:nth-child(1), table td:nth-child(1) { width: 12%; } /* Program */
-table th:nth-child(3), table td:nth-child(3) { width: 15%; } /* Objectives */
+/* Column-specific widths */
+table th:nth-child(1), table td:nth-child(1) { width: 12%; }
+table th:nth-child(3), table td:nth-child(3) { width: 15%; }
 
-/* Specific Column Alignment */
 table td:first-child textarea {
     text-align: center;
     font-weight: 600;
@@ -277,6 +271,7 @@ table td:first-child textarea {
     border-color: #3498db;
     color: #2980b9;
 }
+
 /* Delete Row Button */
 .delete-row-btn {
     margin-top: 10px;
@@ -323,84 +318,27 @@ footer {
     width: auto;
 }
 
-
-
-
 .paper-lines {
     width: 100%;
-    min-height: 50px; /* Starts with 3 lines */
+    min-height: 50px;
     border: none;
     outline: none;
     resize: none;
     overflow: hidden;
     font-family: Arial, sans-serif;
     font-size: 16px;
-    
-    /* Notebook background lines */
     line-height: 31px;
     background-image: linear-gradient(transparent 30px, #000 31px);
     background-size: 100% 31px;
     background-attachment: local;
-    
     display: block;
-    padding: 5PX;
+    padding: 5px;
     margin: 0;
-    
-    /* This ensures the height calculation is accurate */
     box-sizing: border-box;
 }
 
-/* Optional: Removes the border when clicking the box */
 .paper-lines:focus {
     outline: none;
-}
-/* Tablet and Small Laptops */
-@media (max-width: 1024px) {
-    .container {
-        margin-left: 170px;
-        width: calc(100% - 190px);
-        padding: 20px;
-    }
-}
-
-/* Mobile Devices */
-@media (max-width: 768px) {
-    /* Hide sidebar or move it to top if necessary */
-    #sidebarFrame {
-        display: none; /* Usually hidden on mobile in favor of a hamburger menu */
-    }
-
-    #headerFrame {
-        left: 0;
-        width: 100%;
-    }
-
-    .container {
-        margin: 80px 10px 20px 10px; /* Center container and remove sidebar gap */
-        width: calc(100% - 20px);
-        padding: 15px;
-    }
-
-    /* Stack approval signatures vertically */
-    .signature-group {
-        width: 100%;
-    }
-
-    .buttons {
-        flex-direction: column; /* Stack buttons on top of each other */
-        align-items: center;
-        margin-top: 80px;
-    }
-
-    .buttons button {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    /* Adjust document info table for small screens */
-    .doc-header {
-        width: 100%;
-    }
 }
 
 /* Submit Button */
@@ -419,46 +357,115 @@ footer {
     cursor: pointer;
     margin-top: 30px;
     margin-bottom: 40px;
-    margin-left: auto; /* Align right */
+    margin-left: auto;
     width: fit-content;
 }
 
 .submit-button:hover {
     opacity: 0.9;
 }
+
+/* Admin Comment Textarea */
 #admincomment {
-    /* Changed from none to auto so you can actually click/type in it */
-    pointer-events: none; 
-    
-    /* Layout and Sizing */
+    pointer-events: none;
     width: 100%;
-    box-sizing: border-box; /* Ensures padding doesn't push it out of the container */
+    box-sizing: border-box;
     display: block;
     margin-top: 10px;
-    
-    /* High Visibility Background & Border */
-    background-color: #fff9db;    /* Soft Warning Yellow */
-    color: #856404;               /* Deep Brown/Gold Text */
-    border: 2px solid #f59e0b;    /* Thick Amber Border */
-    border-left: 8px solid #f59e0b; /* Extra thick left accent */
-    
-    /* Shadow for depth */
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    
-    /* Typography */
     font-weight: 600;
     font-style: italic;
     padding: 20px;
     font-family: inherit;
-    
-    /* Visual Style */
     border-radius: 4px 12px 12px 4px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    resize: vertical; /* Allows user to drag it taller if needed */
+    resize: vertical;
 }
 
 #admincomment:focus {
     outline: none;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        max-width: 90%;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        max-width: 90%;
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+    
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+    
+    body {
+        margin-left: 0;
+    }
+    
+    .container {
+        margin: 80px auto 40px auto;
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 80px;
+    }
+    
+    .buttons button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .signature-group {
+        width: 100%;
+    }
+    
+    .doc-header {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .submit-button {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .add-row-btn,
+    .delete-row-btn {
+        width: 100%;
+    }
 }

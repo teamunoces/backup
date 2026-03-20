@@ -3,7 +3,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f5f5f5;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    margin-left: 150px; /* Account for fixed sidebar */
     display: flex;
     justify-content: center;
     min-height: 100vh;
@@ -42,10 +43,10 @@ body {
     max-width: 1100px;
     padding: 40px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    margin-top: 60px; /* Prevents overlap with fixed header */
-    margin-bottom: 40px;
+    margin: 80px auto 40px auto; /* Centered with auto margins */
     display: flex;
     flex-direction: column;
+    border-radius: 8px;
 }
 
 /* ===== Header Section ===== */
@@ -144,14 +145,14 @@ body {
     font-weight: bold;
     font-size: 14px;
     margin-right: 10px;
-    min-width: 140px; /* Prevents label wrapping */
+    min-width: 140px;
     flex-shrink: 0;
 }
 
 /* Input boxes for typing */
 .field input,
 .field textarea {
-    pointer-events: none; /* para dili ma edit  */
+    pointer-events: none;
     flex-grow: 1;
     padding: 6px 10px;
     font-size: 14px;
@@ -162,12 +163,12 @@ body {
 
 /* Table Styling */
 .program-table {
-    pointer-events: none; /* para dili ma edit  */
+    pointer-events: none;
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
     font-size: 11px;
-    table-layout: fixed; /* Ensures columns fit the container width */
+    table-layout: fixed;
 }
 
 .program-table th, 
@@ -175,7 +176,7 @@ body {
     border: 1px solid #a6a6a6;
     padding: 8px;
     text-align: center;
-    vertical-align: top; /* Text starts at the top */
+    vertical-align: top;
     min-height: 80px;
 }
 
@@ -186,31 +187,93 @@ body {
     padding: 10px 4px;
 }
 
-/* Editable table cells */
 .program-table td[contenteditable="true"] {
     background-color: #ffffff;
-    outline: none; /* Remove default outline when typing */
+    outline: none;
     padding: 6px;
 }
-.form-button {
-    display: inline-block; /* Changed from block so it doesn't span the whole width */
-    padding: 6px 12px;     /* Slightly more padding for better clickability */
-    border: 1px solid #1a1a1a;
-    background: #808080;   /* Standard grey */
-    color: white;
-    font-family: sans-serif;
+
+/* Admin Comment Section */
+.admin-comment {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.admin-comment-label {
     font-weight: bold;
-    text-transform: uppercase;
-    font-size: 13px;
+    font-size: 18px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#admincomment {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    min-height: 150px;
+    padding: 15px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: justify;
+    color: #333;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fafafa;
+    pointer-events: none;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 150px;
+    margin-top: 30px;
+}
+
+.rejectbtn, .approvebtn, .needFixes {
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
     cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 4px 15px rgba(61, 112, 37, 0.3);
+    width: fit-content;
 }
 
-.form-button:hover {
-    background: #666;      /* Darkens slightly when hovered */
+.rejectbtn {
+    background: linear-gradient(to right, #d9534f, #c12d2d);
 }
 
+.needFixes {
+    background: linear-gradient(to right, #f0ad4e, #d58512);
+}
+
+.approvebtn {
+    background: linear-gradient(to right, #63b32e, #3d7025);
+}
+
+.button-container button:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+    box-shadow: 0 6px 20px rgba(61, 112, 37, 0.4);
+}
 
 /* Footer Section */
 footer {
@@ -238,117 +301,49 @@ footer {
     width: auto;
 }
 
-/*__________________________________________________BUTTON___________________________________________*/
-.button-container {
-    display: flex;
-    justify-content: space-between; /* Pushes buttons to opposite sides */
-    gap: 200px; /* Optional spacing between buttons */
-    margin-top: 30px; /* spacing from top */
-}
-
-/* Keep individual button styling */
-.rejectbtn, .approvebtn, .needFixes{
-    padding: 12px 60px;
-    border-radius: 50px;
-    border: none;
-    color: #ffffff;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-    box-shadow: 0 4px 15px rgba(61, 112, 37, 0.3);
-    width: fit-content;
-}
-
-/* Optional: different colors for reject/approve */
-
-.rejectbtn {
-    background: linear-gradient(to right, #d9534f, #c12d2d); /* red gradient */
-}
-.needFixes {
-    background: linear-gradient(to right, #f0ad4e, #d58512); /* orange gradient */
-}
-.approvebtn {
-    background: linear-gradient(to right, #63b32e, #3d7025); /* green gradient */
-}
-
-/* Hover effect */
-.button-container button:hover {
-    transform: translateY(-2px);
-    opacity: 0.95;
-    box-shadow: 0 6px 20px rgba(61, 112, 37, 0.4);
-}
-
-.admin-comment-label{
-  font-weight: bold;
-  font-size: 35px;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  
-}
-#admincomment{
-    display: block; 
-    width: 100%;          /* Increased slightly for better paragraph width */
-    max-width: 1000px; 
-    margin: 20px auto; 
-    min-height: 150px;   /* Increased height to invite paragraph entry */
-    padding: 15px;
-    
-    /* Typography for Paragraphs */
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;    /* Essential for reading long paragraphs */
-    text-align: justify; /* Optional: gives a clean "block" look to paragraphs */
-    color: #333;
-
-    /* Behavior */
-    white-space: pre-wrap; /* Ensures line breaks and spaces are preserved */
-    overflow-wrap: break-word;
-    
-    /* Aesthetics */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    resize: vertical; 
-    outline: none;
-    transition: all 0.3s ease;
-    background-color: #fafafa; /* Subtle background color change */
-}
-
-
-/* ===== Print Optimization ===== */
-@media print {
-    body {
-        background-color: white;
-        padding: 0;
-        margin: 0;
-    }
-    
-    .form-container {
-        box-shadow: none;
-        width: 100%;
-        max-width: 100%;
-        padding: 20px;
-        margin: 0;
-    }
-    
-    #sidebarFrame,
-    #headerFrame {
-        display: none;
-    }
-    
-    .program-table th,
-    .program-table td {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-}
-
 /* ===== Responsive Adjustments ===== */
-@media screen and (max-width: 768px) {
+@media (max-width: 1200px) {
     .form-container {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 900px) {
+    .form-container {
+        max-width: 90%;
+        padding: 30px;
+    }
+    
+    .button-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .rejectbtn, .approvebtn, .needFixes {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+    
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+    
+    body {
+        margin-left: 0;
+    }
+    
+    .form-container {
+        margin: 80px auto 40px auto;
+        width: 90%;
         padding: 20px;
-        margin-top: 80px;
     }
     
     .header-content {
@@ -368,5 +363,55 @@ footer {
     .field {
         flex-direction: column;
         align-items: flex-start;
+    }
+    
+    .field label {
+        margin-bottom: 5px;
+    }
+    
+    .admin-comment-label {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .rejectbtn, .approvebtn, .needFixes {
+        font-size: 16px;
+        padding: 8px 20px;
+    }
+}
+
+/* ===== Print Optimization ===== */
+@media print {
+    body {
+        background-color: white;
+        margin: 0 !important;
+        padding: 0;
+    }
+    
+    .form-container {
+        box-shadow: none;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        margin: 0;
+    }
+    
+    #sidebarFrame,
+    #headerFrame,
+    .button-container,
+    .admin-comment {
+        display: none;
+    }
+    
+    .program-table th,
+    .program-table td {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 }

@@ -9,6 +9,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
   <title>3-Year Development Plan</title>
   <link rel="stylesheet" href="needfix.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
       <iframe 
@@ -34,9 +35,21 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
                                           <label for="admincomment" class="admin-comment-label">Admin Feedback</label>
                                           <textarea id="admincomment" placeholder="Enter admin comments here..." rows="5"></textarea>
                                     </div>
-    
-        <!-- Report Header -->
-        <iframe src="/admin/Dashboard/Pending/review/ReportHeader/header.html" id="reportHeaderFrame" frameborder="0" scrolling="no" title="Report Header"></iframe>
+
+
+                                <header class="report-header">
+                                    <img src="/admin/Dashboard/Pending/review/images/smcclogo.png" alt="SMCC Logo" class="logo left">
+                                    <div class="header-text">
+                                        <h1>Saint Michael College of Caraga</h1>
+                                        <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
+                                        <p>Tel. Nos. +63 085 343-3251 / Fax No. +63 085 808-0892</p>
+                                        <p class="website">www.smccnasipit.edu.ph</p>
+                                        <h2>OFFICE OF THE COMMUNITY EXTENSION SERVICE</h2>
+                                        <p id="psemester">First Semester, A.Y. 2025-2026</p>
+                                    </div>
+                                    <img src="/admin/Dashboard/Pending/review/images/ISOlogo.png" alt="Extension Logo" class="logo right">
+                                </header>
+      
 
         <header>
             <h1>3-Year Development Plan</h1>
@@ -129,7 +142,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
             <input type="hidden" id="currentReportType" value="<?php echo htmlspecialchars($reportType); ?>">
     </div>
                 
-
+    <script src="./darkmode.js"></script>
     <script src="./get.js"></script>
    
   </body>  

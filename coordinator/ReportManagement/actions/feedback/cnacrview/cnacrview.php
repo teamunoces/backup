@@ -14,6 +14,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Needs Assessment Report</title>
     <link rel="stylesheet" href="cnacrview.css">
+    <link rel="stylesheet" href="darkmode.css">">
 </head>
 <body>
 
@@ -223,7 +224,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
         });
     </script>
 
-
+    <script src="./darkmode.js"></script>
     <SCript src="./viewget.js"></SCript>
 
 </body>

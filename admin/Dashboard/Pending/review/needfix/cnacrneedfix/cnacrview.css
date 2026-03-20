@@ -8,9 +8,12 @@
 
 body {
     background-color: #f4f4f4;
-    padding: 40px;
+    margin: 0;
+    padding: 0;
+    margin-left: 150px; /* Account for fixed sidebar */
     display: flex;
     justify-content: center;
+    min-height: 100vh;
 }
 
 
@@ -109,12 +112,17 @@ body {
     margin-bottom: 25px;
 }
 
+/* Main Container - Centered */
 .report-container {
-    margin-top: 60px;
+    margin-top: 80px;
     background-color: #fff;
-    width: 850px; /* Standard A4 width-ish */
+    max-width: 1100px;
+    width: 100%;
     padding: 40px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
 }
 
 h1 {
@@ -122,6 +130,50 @@ h1 {
     font-size: 18px;
     margin-bottom: 25px;
     letter-spacing: 0.5px;
+}
+
+/* Admin Comment Section */
+.admin-comment {
+    margin-bottom: 25px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.admin-comment-label {
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#admincomment {
+    pointer-events: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    font-style: italic;
+    padding: 20px;
+    font-family: inherit;
+    border-radius: 4px 12px 12px 4px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    resize: vertical;
+}
+
+#admincomment:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
 }
 
 /* Header Grid Table */
@@ -174,7 +226,7 @@ h1 {
 .form-group {
     margin-bottom: 20px;
     display: flex;
-    flex-direction: column; /* Stacks label above the lines */
+    flex-direction: column;
 }
 
 .form-group label {
@@ -191,14 +243,11 @@ h1 {
     outline: none;
     resize: none;
     font-size: 16px;
-    line-height: 30px; /* This must match the gradient size below */
+    line-height: 30px;
     padding: 0;
     background-attachment: local;
-    
-    /* Creates the horizontal lines */
     background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
-    background-size: 100% 30px; /* 30px height matches line-height */
-    
+    background-size: 100% 30px;
     background-color: transparent;
     font-family: Arial, sans-serif;
     overflow: hidden;
@@ -208,7 +257,6 @@ h1 {
     color: #ccc;
     font-style: italic;
 }
-
 
 /* Footer Section */
 footer {
@@ -236,74 +284,74 @@ footer {
     width: auto;
 }
 
-/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+/* ===== 3. Approvals Section ===== */
 .approvals-container {
-  font-family: Arial, sans-serif;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  color: #000;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    color: #000;
 }
 
 .approval-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .signature-group {
-  width: 35%; /* Adjust width to match the line lengths in your image */
+    width: 35%;
 }
 
 .label {
-  font-weight: bold;
-  margin-bottom: 35px; /* Creates space for the signature signature */
+    font-weight: bold;
+    margin-bottom: 35px;
 }
 
 .signature-line {
-  border-bottom: 1.5px solid black;
-  margin-bottom: 5px;
+    border-bottom: 1.5px solid black;
+    margin-bottom: 5px;
+    min-height: 25px;
 }
 
 .title {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .left-align {
-  text-align: left;
-  width: 100%;
+    text-align: left;
+    width: 100%;
 }
 
-/* Centered Layout for VP and President */
 .approval-centered {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .admin-block {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 10px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .name-underlined {
-  font-weight: bold;
-  text-decoration: underline;
-  text-transform: uppercase;
-  font-size: 16px;
-  display: inline-block;
-  margin-bottom: 2px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 2px;
 }
 
-/* ===== 4. Document Info Table (The Navy Blue Style) ===== */
+/* ===== 4. Document Info Table ===== */
 .doc-header {
-    width: auto; /* Shrinks the table to fit the content */
-    margin-right: auto; /* Keeps it pushed to the left */
+    width: auto;
+    margin-right: auto;
 }
 
 .doc-header td {
@@ -319,29 +367,25 @@ footer {
 }
 
 .doc-header .value {
-    /* Reduced from 75% to 50% or 30% depending on how narrow you want it */
-    width: 70%; 
+    width: 70%;
     font-size: 11px;
-    /* This ensures the text stays aligned left within that narrower space */
-    text-align: left; 
+    text-align: left;
 }
-/*------------------------------------------ Container positioning */
+
 .document-info {
-    margin-top: 50px; /* Adjust based on space needed after approvals */
+    margin-top: 50px;
     width: 30%;
 }
 
-/* Table Styling */
 .doc-header {
     border-collapse: collapse;
     font-family: Arial, sans-serif;
-    font-size: 11px; /* Matches the compact look of the screenshot */
+    font-size: 11px;
     border: 1px solid #d1d1d1;
 }
 
-/* The first column (Dark Blue Background) */
 .doc-header td.label {
-    background-color: #002060; /* Dark Navy Blue */
+    background-color: #002060;
     color: white;
     font-weight: bold;
     padding: 4px 8px;
@@ -351,7 +395,6 @@ footer {
     width: 100px;
 }
 
-/* The middle colon column */
 .doc-header td:nth-child(2) {
     width: 2%;
     padding: 0 1px;
@@ -360,14 +403,12 @@ footer {
     border-bottom: 1px solid #d1d1d1;
 }
 
-/* The value column */
 .doc-header td.value {
     padding: 4px 10px;
     border: 1px solid #d1d1d1;
     min-width: 120px;
 }
 
-/* Styling the inputs/text inside the value cell */
 .doc-header td.value input, 
 .doc-header td.value p {
     border: none;
@@ -380,45 +421,134 @@ footer {
     width: 100%;
 }
 
-/* Remove default focus outline for disabled inputs */
 .doc-header td.value input:disabled {
     color: black;
     cursor: default;
 }
-#admincomment {
-    /* Changed from none to auto so you can actually click/type in it */
-    pointer-events: none; 
-    
-    /* Layout and Sizing */
-    width: 100%;
-    box-sizing: border-box; /* Ensures padding doesn't push it out of the container */
-    display: block;
-    margin-top: 10px;
-    
-    /* High Visibility Background & Border */
-    background-color: #fff9db;    /* Soft Warning Yellow */
-    color: #856404;               /* Deep Brown/Gold Text */
-    border: 2px solid #f59e0b;    /* Thick Amber Border */
-    border-left: 8px solid #f59e0b; /* Extra thick left accent */
-    
-    /* Shadow for depth */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    
-    /* Typography */
-    font-weight: 600;
-    font-style: italic;
-    padding: 20px;
-    font-family: inherit;
-    
-    /* Visual Style */
-    border-radius: 4px 12px 12px 4px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    resize: vertical; /* Allows user to drag it taller if needed */
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 1200px) {
+    .report-container {
+        max-width: 1000px;
+    }
 }
 
-#admincomment:focus {
-    outline: none;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+@media (max-width: 900px) {
+    .report-container {
+        max-width: 90%;
+        padding: 30px;
+    }
+    
+    .section-content {
+        padding: 15px 0 10px 20px;
+    }
 }
 
+@media (max-width: 768px) {
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+    
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+    
+    body {
+        margin-left: 0;
+    }
+    
+    .report-container {
+        margin-top: 80px;
+        width: 90%;
+        padding: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .college-info {
+        order: -1;
+    }
+    
+    .logo-left,
+    .logos-right img {
+        height: 60px;
+    }
+    
+    .header-grid {
+        grid-template-columns: 120px 1fr 120px 1fr;
+    }
+    
+    .section-content {
+        padding: 15px 0 10px 15px;
+    }
+    
+    .admin-comment-label {
+        font-size: 16px;
+    }
+    
+    .approval-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .signature-group {
+        width: 100%;
+    }
+    
+    .document-info {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .report-container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .header-grid {
+        grid-template-columns: 100px 1fr 100px 1fr;
+    }
+    
+    .label-box {
+        font-size: 12px;
+        padding: 6px;
+    }
+    
+    .section-content {
+        padding: 15px 0 10px 10px;
+    }
+}
+
+/* ===== Print Optimization ===== */
+@media print {
+    body {
+        background-color: white;
+        margin: 0 !important;
+        padding: 0;
+    }
+    
+    .report-container {
+        box-shadow: none;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        margin: 0;
+    }
+    
+    #sidebarFrame,
+    #headerFrame,
+    .admin-comment {
+        display: none;
+    }
+    
+    .paper-lines {
+        background-image: linear-gradient(to bottom, transparent 29px, #ccc 29px) !important;
+    }
+}

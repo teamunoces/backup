@@ -1,0 +1,276 @@
+/* ================= DARK MODE STYLES ================= */
+
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+/* Report Container */
+body.dark-mode .report-container {
+    background-color: #2d2d2d;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Admin Feedback Section */
+body.dark-mode .admin-comment {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+body.dark-mode .admin-comment-label {
+    color: #ffffff !important;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+body.dark-mode #admincomment {
+    background-color: #3d3d3d;
+    border: 1px solid #555;
+    color: #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+body.dark-mode #admincomment:focus {
+    border-color: #777;
+    outline: none;
+    background-color: #4a4a4a;
+}
+
+body.dark-mode #admincomment::placeholder {
+    color: #888;
+}
+
+/* Header Section */
+body.dark-mode .header-content {
+    border-bottom-color: #404040;
+}
+
+body.dark-mode .college-info h1 {
+    color: #fff;
+}
+
+body.dark-mode .college-info p,
+body.dark-mode .college-info a {
+    color: #b0b0b0;
+}
+
+body.dark-mode .office-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .double-line {
+    border-top-color: #404040;
+}
+
+/* Main Title */
+body.dark-mode h1 {
+    color: #fff;
+}
+
+/* Header Grid */
+body.dark-mode .header-grid {
+    border-color: #404040;
+}
+
+body.dark-mode .label-box {
+    background-color: #3d3d3d;
+    color: #e0e0e0;
+    border-color: #404040;
+}
+
+body.dark-mode .bg-gray {
+    background-color: #404040;
+}
+
+/* Input Fields */
+body.dark-mode input[type="text"] {
+    background-color: #3d3d3d;
+    border: 1px solid #555;
+    color: #e0e0e0;
+    padding: 8px;
+}
+
+body.dark-mode input[type="text"]:focus {
+    border-color: #777;
+    outline: none;
+    background-color: #4a4a4a;
+}
+
+body.dark-mode input[type="text"]::placeholder {
+    color: #888;
+}
+
+/* Section Headers */
+body.dark-mode .section-header {
+    background-color: #3d3d3d;
+    border-color: #404040;
+    color: #fff;
+}
+
+body.dark-mode .roman-num {
+    color: #e0e0e0;
+}
+
+/* Form Groups */
+body.dark-mode .form-group label {
+    color: #b0b0b0;
+}
+
+/* Paper Lines Textareas */
+body.dark-mode .paper-lines {
+    background-image: linear-gradient(to bottom, transparent 29px, #555 29px) !important;
+    color: #e0e0e0;
+}
+
+body.dark-mode .paper-lines::placeholder {
+    color: #888;
+}
+
+body.dark-mode .paper-lines:focus {
+    background-color: transparent;
+}
+
+/* Footer */
+body.dark-mode footer {
+    border-top-color: #404040;
+}
+
+body.dark-mode .footer-bottom {
+    border-top-color: #404040;
+}
+
+body.dark-mode .footer-logos img {
+    filter: brightness(0.8);
+}
+
+/* Submit Button (Re-submit) */
+body.dark-mode .submit-button {
+    background: linear-gradient(to right, #4c8c2a, #2d5720);
+    border: 1px solid #555;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s ease;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    width: fit-content;
+}
+
+body.dark-mode .submit-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Iframes */
+body.dark-mode iframe {
+    background-color: #2d2d2d;
+}
+
+/* Scrollbar for Dark Mode */
+body.dark-mode::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 6px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* Print Styles - Keep original print styles */
+@media print {
+    body.dark-mode {
+        background-color: #fff;
+        color: #000;
+    }
+    
+    body.dark-mode .report-container {
+        background-color: #fff;
+        box-shadow: none;
+    }
+    
+    body.dark-mode .admin-comment {
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+    
+    body.dark-mode #admincomment {
+        background-color: #fff;
+        border: 1px solid #000;
+        color: #000;
+    }
+    
+    body.dark-mode input[type="text"] {
+        border: none;
+        background-color: transparent;
+        color: #000;
+    }
+    
+    body.dark-mode .paper-lines {
+        background-image: linear-gradient(to bottom, transparent 29px, #ccc 29px) !important;
+        color: #000;
+    }
+    
+    body.dark-mode .section-header {
+        background-color: #d9d9d9;
+        color: #000;
+    }
+    
+    body.dark-mode .label-box {
+        background-color: #b3b3b3;
+        color: #000;
+    }
+    
+    body.dark-mode .bg-gray {
+        background-color: #b3b3b3;
+    }
+    
+    body.dark-mode .submit-button {
+        display: none;
+    }
+    
+    #sidebarFrame,
+    #headerFrame {
+        display: none !important;
+    }
+}
+
+/* Dark mode transitions */
+body, 
+body *,
+.report-container,
+input,
+button,
+textarea,
+.paper-lines,
+.section-header,
+.label-box,
+.admin-comment,
+#admincomment {
+    transition: background-color 0.3s ease, 
+                color 0.2s ease, 
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}

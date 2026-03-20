@@ -11,6 +11,7 @@ body {
     padding: 40px;
     display: flex;
     justify-content: center;
+    margin-left: 150px; /* Add margin to account for sidebar */
 }
 
 
@@ -109,12 +110,39 @@ body {
     margin-bottom: 25px;
 }
 
+/* Report Container - Centered properly */
 .report-container {
     margin-top: 60px;
     background-color: #fff;
-    width: 850px; /* Standard A4 width-ish */
+    width: 100%;
+    max-width: 1000px;
     padding: 40px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* For larger laptop screens */
+@media (min-width: 1400px) {
+    .report-container {
+        max-width: 1100px;
+    }
+}
+
+/* For smaller screens, reduce padding */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+        margin-left: 150px;
+    }
+    
+    .report-container {
+        padding: 20px;
+    }
+    
+    .section-content {
+        padding: 15px 0 10px 20px;
+    }
 }
 
 h1 {
@@ -174,7 +202,7 @@ h1 {
 .form-group {
     margin-bottom: 20px;
     display: flex;
-    flex-direction: column; /* Stacks label above the lines */
+    flex-direction: column;
 }
 
 .form-group label {
@@ -191,13 +219,13 @@ h1 {
     outline: none;
     resize: none;
     font-size: 16px;
-    line-height: 30px; /* This must match the gradient size below */
+    line-height: 30px;
     padding: 0;
     background-attachment: local;
     
     /* Creates the horizontal lines */
     background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
-    background-size: 100% 30px; /* 30px height matches line-height */
+    background-size: 100% 30px;
     
     background-color: transparent;
     font-family: Arial, sans-serif;
@@ -208,6 +236,7 @@ h1 {
     color: #ccc;
     font-style: italic;
 }
+
 /* Submit Button */
 .submit-button {
     display: block;
@@ -224,7 +253,7 @@ h1 {
     cursor: pointer;
     margin-top: 30px;
     margin-bottom: 40px;
-    margin-left: auto; /* Align right */
+    margin-left: auto;
     width: fit-content;
 }
 
@@ -257,4 +286,3 @@ footer {
     height: 40px;
     width: auto;
 }
-

@@ -14,6 +14,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Program Design Form - SMCC</title>
     <link rel="stylesheet" href="view.css">
+    <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
 
@@ -111,7 +112,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                 </table>
         </form>
 
-                    <!-- submit button-->>
+                    <!-- submit button-->
 
                         <div>
                            <button type="button" class="submit-button" id="resubmitBtn">Re-submit</button>
@@ -138,6 +139,6 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <script src="./get.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="download.js"></script>
-
+    <script src="./darkmode.js"></script>
 </body>
 </html>

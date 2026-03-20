@@ -110,7 +110,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Program 
                 </table>
         </form>
 
-                    <!-- submit button-->>
+                    <!-- submit button-->
 
                         <div>
                             <button type="submit" class="submit-button">Submit</button>

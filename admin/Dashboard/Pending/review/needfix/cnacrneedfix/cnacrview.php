@@ -14,16 +14,17 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Needs Assessment Report</title>
     <link rel="stylesheet" href="cnacrview.css">
+    <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
 
 
 
    <!-- HEADER -->
-  <iframe src="/coordinator/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
+  <iframe src="/admin/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
 
   <!-- SIDEBAR -->
-  <iframe src="/coordinator/Sidebar/sidebar.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+  <iframe src="/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
     <div class="report-container">
 
                                      <!--------------------feedback------------------ -->
@@ -56,30 +57,30 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
         <div class="header-grid">
             <div class="label-box bg-gray">Department</div>
-            <input type="text" name="department" id="department"  placeholder="Type here..." >
+            <input type="text" name="department" id="department"  placeholder="Type here..." readonly>
             <div class="label-box bg-gray">Date Submitted</div>
-            <input type="text" name="date" id="date_submitted" placeholder="Type here..." >
+            <input type="text" name="date" id="date_submitted" placeholder="Type here..." readonly>
         </div>
 
         <div class="section-content">
             <div class="form-group">
                 <label>A. Community Needs Assessment Date of Conduct:</label>
                 <div class="line-input">
-                    <textarea name="date_conduct" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="date_conduct" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>B. Participants:</label>
                 <div class="line-input">
-                    <textarea name="participants" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="participants" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>C. Location/Purok/district:</label>
                 <div class="line-input">
-                    <textarea name="location" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="location" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
         </div>
@@ -91,19 +92,19 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             <div class="form-group">
                 <label>A. Family Profile:</label>
                 <div class="line-input">
-                    <textarea name="family_profile" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="family_profile" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>B. Community Concerns:</label>
                <div class="line-input">
-                    <textarea name="community_concern" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="community_concern" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>C. Other Identified Needs:</label>
                 <div class="line-input">
-                    <textarea name="other_identified_needs" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="other_identified_needs" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
         </div>
@@ -115,31 +116,31 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             <div class="form-group">
                 <label>1. Kabayani ng Panginoon</label>
                 <div class="line-input">
-                    <textarea name="kabayani_ng_panginoon" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_panginoon" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>2. Kabayani ng Kalikasan Kabayani ng Buhay</label>
                 <div class="line-input">
-                    <textarea name="kabayani_ng_kalikasan" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_kalikasan" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
              <div class="form-group">
                 <label>3. Kabayani ng Buhay</label>
                   <div class="line-input">
-                    <textarea name="kabayani_ng_buhay" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_buhay" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>4. Kabayani ng Turismo</label>
                 <div class="line-input">
-                    <textarea name="kabayani_ng_turismo" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_turismo" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>5. Kabayani ng Kultura –</label>
                 <div class="line-input">
-                    <textarea name="kabayani_ng_kultura" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_kultura" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
         </div>
@@ -151,19 +152,19 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             <div class="form-group">
                 <label>Title of the Program:</label>
                 <div class="line-input">
-                    <textarea name="title_of_program" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="title_of_program" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>Objectives:</label>
                <div class="line-input">
-                    <textarea name="objectives" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="objectives" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>Beneficiaries:</label>
                 <div class="line-input">
-                    <textarea name="beneficiaries" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="beneficiaries" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
         </div>
@@ -175,13 +176,13 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             <div class="form-group">
                 <label>From the School:</label>
                 <div class="line-input">
-                    <textarea name="from_school" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="from_school" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>From the Community:</label>
                <div class="line-input">
-                    <textarea name="from_community" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="from_community" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..." readonly></textarea>
                 </div>
             </div>
         </div>
@@ -223,6 +224,6 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
 
     <SCript src="./viewget.js"></SCript>
-
+    <script src="./darkmode.js"></script>
 </body>
 </html>

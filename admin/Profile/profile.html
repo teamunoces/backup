@@ -122,6 +122,15 @@
 </div>
   
 
+<script>
+fetch("./session_user.php")
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("admin-toggle").textContent = data.username;
+    })
+    .catch(error => console.error("Error fetching user:", error));
+</script>
+
     <script src="menu.js"></script>
     <script src="edit/edit.js"></script>
     <script src="notifications.js"></script>

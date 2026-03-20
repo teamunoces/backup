@@ -10,6 +10,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Program Design Form - SMCC</title>
     <link rel="stylesheet" href="pd.css">
+    <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
 
@@ -141,5 +142,6 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <script>const reportType = "<?php echo $reportType; ?>";console.log(reportType);</script>
     <script src="./get.js" ></script>
     <script src="/admin/Dashboard/Pending/review/action/action.js"></script>
+    <script src="./darkmode.js"></script>
 </body>
 </html>

@@ -60,7 +60,7 @@ function getReportType($table_name) {
         case 'coordinator_cnacr':
             return 'Community Needs Assessment Consolidated Report';
         case 'mar_header':
-            return 'MAR Header';
+            return 'Monthly Accomplishment Report';
         case 'pd_main':
             return 'Program Design';
         default:
@@ -299,7 +299,7 @@ function fetchFromPDMain($conn, $department) {
     $columns = getTableColumns($conn, 'pd_main');
     
     // Determine which columns exist
-    $title_col = in_array('title', $columns) ? 'title' : (in_array('program_title', $columns) ? 'program_title' : null);
+    $title_col = in_array('title_of_activity', $columns) ? 'title_of_activity' : (in_array('program_title', $columns) ? 'program_title' : null);
     $desc_col = in_array('description', $columns) ? 'description' : (in_array('content', $columns) ? 'content' : null);
     $submitted_by_col = in_array('created_by_name', $columns) ? 'created_by_name' : (in_array('submitted_by', $columns) ? 'submitted_by' : null);
     
@@ -458,6 +458,7 @@ $debug_mode = false; // Set to true to see debug info
     <!-- External CSS -->
     <link rel="stylesheet" href="approve.css">
     <link rel="stylesheet" href="approved-reports.css">
+    <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
 
@@ -577,7 +578,8 @@ $debug_mode = false; // Set to true to see debug info
                         $attachments = getAttachments($conn, $report['id']);
                     ?>
                         <div class="report-card"
-                                data-report-date="<?php echo isset($report['created_at']) ? date('Y-m-d', strtotime($report['created_at'])) : ''; ?>"
+                                 data-report-type="<?php echo htmlspecialchars(getReportType($report['source_table'])); ?>"
+                                 data-report-date="<?php echo htmlspecialchars(date('Y-m-d', strtotime($report['created_at']))); ?>">
                                 data-report-type="<?php echo strtolower($report_type); ?>">
 
                                 <div class="report-header">
@@ -630,6 +632,7 @@ $debug_mode = false; // Set to true to see debug info
 
 <!-- JavaScript -->
 <script src="pdfviewer.js"></script>
+<script src="darkmode.js"></script>
 
 <?php
 // Close database connection
