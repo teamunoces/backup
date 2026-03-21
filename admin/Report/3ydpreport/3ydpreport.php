@@ -18,7 +18,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
     <iframe src="../../Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
 
     <!-- Sidebar -->
-    <iframe src="../../Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+    <iframe src="/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
 
     <div class="container">
        
@@ -85,12 +85,12 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
                         <thead>
                             <tr>
                                 <th rowspan="5">Program</th>
-                                <th rowspan="5">Milestones</th>
                                 <th rowspan="5">Objectives</th>
-                                <th rowspan="5">Strategies</th>
-                                <th rowspan="5">Persons/ Agencies Involved</th>
-                                <th rowspan="5">Resources Needed</th> 
-                                <th rowspan="5">Budget</th>          
+                                <th rowspan="5">Strategies and Action Plans</th>
+                                <th rowspan="5">Resources from the School</th>
+                                <th rowspan="5">Resources from the Community</th> 
+                                <th rowspan="5">Budget</th>     
+                                <th rowspan="5">Means of Verification</th>     
                                 <th rowspan="5">Time Frame</th>
                             </tr>
                         </thead>

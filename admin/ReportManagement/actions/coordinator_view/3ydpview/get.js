@@ -63,12 +63,12 @@ async function loadReport() {
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td><textarea rows="5">${p.program || ""}</textarea></td>
-                <td><textarea rows="5">${p.milestones || ""}</textarea></td>
                 <td><textarea rows="5">${p.objectives || ""}</textarea></td>
                 <td><textarea rows="5">${p.strategies || ""}</textarea></td>
                 <td><textarea rows="5">${p.persons_agencies_involved || ""}</textarea></td>
                 <td><textarea rows="5">${p.resources_needed || ""}</textarea></td>
                 <td><textarea rows="5">${p.budget || ""}</textarea></td>
+                <td><textarea rows="5">${p.means_of_verification || ""}</textarea></td>
                 <td><textarea rows="5">${p.time_frame || ""}</textarea></td>
             `;
             tableBody.appendChild(row);

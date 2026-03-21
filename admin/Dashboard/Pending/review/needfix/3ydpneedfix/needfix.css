@@ -209,79 +209,83 @@ input[type="text"]:focus, textarea:focus {
 /* ===== Table Section ===== */
 .table-section {
     margin: 40px 0;
+    width: 100%;
 }
 
+/* ===== Table Section Fixes ===== */
 .table-wrapper {
-    overflow-x: auto;
+    overflow-x: visible; /* Remove horizontal scroll */
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     border: 1px solid #e2e8f0;
-    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 1200px;
-    table-layout: fixed;
+    /* Removed min-width: 1200px to prevent sliding */
+    table-layout: fixed; /* Keeps columns equal width so they don't "jump" */
+    word-wrap: break-word; /* Ensures long text breaks to new lines */
 }
 
 table thead th {
+    font-weight: bold;
     background-color: #f8fafc;
     color: #475569;
-    font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.9rem; /* Smaller font to help 9 columns fit better */
+    padding: 8px 4px;
+    border: 1px solid #cbd5e1;
     text-transform: uppercase;
-    padding: 16px 12px;
-    border-bottom: 2px solid #e2e8f0;
-    border-right: 1px solid #e2e8f0;
-    position: sticky;
-    top: 0;
-    z-index: 20;
+    text-align: center;
+    word-wrap: break-word;
 }
 
 table td {
-    border-bottom: 1px solid #f1f5f9;
-    border-right: 1px solid #f1f5f9;
+    border: 1px solid #cbd5e1;
     padding: 0;
     vertical-align: top;
-    height: 1px;
 }
 
-table td textarea,
-table td input {
-    pointer-events: none;
-    field-sizing: content;
-    min-height: 50px;
-    width: 100%;
-    border: none;
-    padding: 15px;
-    background: transparent;
-    font-size: 0.95rem;
+table td textarea {
+    field-sizing: content; 
+    width: 100% !important;
+    min-height: 60px; 
+    border: none !important;
+    padding: 10px 5px !important;
+    background: transparent !important; /* Ensure no gradient background */
+    background-image: none !important;  /* Explicitly remove any inherited lines */
+    font-size: 0.85rem;
     color: #1e293b;
-    line-height: 1.5;
+    line-height: 1.4;
     display: block;
     box-sizing: border-box;
     outline: none;
-    overflow: hidden;
+    overflow: hidden; 
     resize: none;
-    transition: background 0.2s;
+    white-space: pre-wrap;
+   
 }
 
-table td textarea:focus,
-table td input:focus {
-    background-color: #ffffff;
-    box-shadow: inset 0 0 0 2px #3498db;
+/* Fixes the "Overlapping" on Focus */
+table td textarea:focus {
+    background-color: #f0f7ff;
+    box-shadow: inset 0 0 0 2px #3498db; 
     z-index: 10;
-    position: relative;
+    position: relative; 
 }
 
-table td:first-child textarea,
-table td:last-child input {
+/* Column-specific widths if you want to prioritize certain data */
+/* Example: Making the "Program" or "Objectives" column slightly wider */
+table th:nth-child(1), table td:nth-child(1) { width: 12%; } /* Program */
+table th:nth-child(3), table td:nth-child(3) { width: 15%; } /* Objectives */
+
+/* Specific Column Alignment */
+table td:first-child textarea {
     text-align: center;
     font-weight: 600;
 }
+
 
 /* Footer Section */
 footer {

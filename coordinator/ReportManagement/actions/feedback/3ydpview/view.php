@@ -102,25 +102,25 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
           <table id="programPlanTable">
             <thead>
               <tr>
-                <th>Program</th>
-                <th>Milestones</th>
-                <th>Objectives</th>
-                <th>Strategies</th>
-                <th>Persons/ Agencies Involved</th>
-                <th>Resources Needed</th>
-                <th>Budget</th>
-                <th>Time Frame</th>
+                                <th rowspan="5">Program</th>
+                                <th rowspan="5">Objectives</th>
+                                <th rowspan="5">Strategies and Action Plans</th>
+                                <th rowspan="5">Resources from the School</th>
+                                <th rowspan="5">Resources from the Community</th> 
+                                <th rowspan="5">Budget</th>     
+                                <th rowspan="5">Means of Verification</th>     
+                                <th rowspan="5">Time Frame</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><textarea id="program" rows="5"></textarea></td>
-                <td><textarea id="milestones" rows="5"></textarea></td>
                 <td><textarea id="objectives" rows="5"></textarea></td>
                 <td><textarea id="strategies" rows="5"></textarea></td>
                 <td><textarea id="persons_agencies_involved" rows="5"></textarea></td>
                 <td><textarea id="resources_needed" rows="5"></textarea></td>
                 <td><textarea id="budget" rows="5"></textarea></td>
+                <td><textarea id="means_of_verification" rows="5"></textarea></td>
                 <td><textarea id="time_frame" rows="5"></textarea></td>
               </tr>
             </tbody>

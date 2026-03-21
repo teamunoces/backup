@@ -73,8 +73,8 @@ body {
     font-size: 14px;
 }
 
-.header-banner.green { background: #55a630; }
-.header-banner.red { background: #b91d1d; }
+.header-banner.green { background: #b37a00; }
+.header-banner.red { background: #f59e0b; }
 
 .mt-20 { margin-top: 20px; }
 
@@ -94,8 +94,8 @@ body {
     font-weight: bold;
 }
 
-.type-badge.green { background: #558b2f; }
-.type-badge.red { background: #b91d1d; }
+.type-badge.green { background: #b37a00; }
+.type-badge.red { background: #f59e0b; }
 
 .table-header {
     padding: 8px 15px;
@@ -105,8 +105,8 @@ body {
     justify-content: space-between;
 }
 
-.green-bg { background: #6dbd45; }
-.red-bg { background: #b03a2e; }
+.green-bg { background: #b37a00; }
+.red-bg { background: #f59e0b; }
 
 /* ===== TABLE ===== */
 .report-table {
@@ -124,8 +124,8 @@ body {
     font-weight: bold;
 }
 
-.green-text { color: #558b2f; }
-.red-text { color: #b91d1d; }
+.green-text { color: #b37a00; }
+.red-text { color: #f59e0b; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {

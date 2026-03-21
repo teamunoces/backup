@@ -38,12 +38,12 @@ async function load3YDP(id) {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td><textarea rows="5">${prog.program || ''}</textarea></td>
-                    <td><textarea rows="5">${prog.milestones || ''}</textarea></td>
                     <td><textarea rows="5">${prog.objectives || ''}</textarea></td>
                     <td><textarea rows="5">${prog.strategies || ''}</textarea></td>
                     <td><textarea rows="5">${prog.persons_agencies_involved || ''}</textarea></td>
                     <td><textarea rows="5">${prog.resources_needed || ''}</textarea></td>
                     <td><textarea rows="5">${prog.budget || ''}</textarea></td>
+                    <td><textarea rows="5">${prog.means_of_verification || ''}</textarea></td>
                     <td><textarea rows="5">${prog.time_frame || ''}</textarea></td>
                 `;
                 tbody.appendChild(row);

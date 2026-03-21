@@ -97,12 +97,12 @@ function addProgramRow(tableBody, programData = {}) {
     const row = document.createElement("tr");
     row.innerHTML = `
         <td><textarea class="program-field" rows="5" placeholder="Enter program...">${escapeHtml(programData.program || '')}</textarea></td>
-        <td><textarea class="milestones-field" rows="5" placeholder="Enter milestones...">${escapeHtml(programData.milestones || '')}</textarea></td>
         <td><textarea class="objectives-field" rows="5" placeholder="Enter objectives...">${escapeHtml(programData.objectives || '')}</textarea></td>
         <td><textarea class="strategies-field" rows="5" placeholder="Enter strategies...">${escapeHtml(programData.strategies || '')}</textarea></td>
         <td><textarea class="persons-field" rows="5" placeholder="Enter persons/agencies...">${escapeHtml(programData.persons_agencies_involved || '')}</textarea></td>
         <td><textarea class="resources-field" rows="5" placeholder="Enter resources needed...">${escapeHtml(programData.resources_needed || '')}</textarea></td>
         <td><textarea class="budget-field" rows="5" placeholder="Enter budget...">${escapeHtml(programData.budget || '')}</textarea></td>
+        <td><textarea class="means-field" rows="5" placeholder="Enter means of verification...">${escapeHtml(programData.means_of_verification || '')}</textarea></td>
         <td><textarea class="timeframe-field" rows="5" placeholder="Enter time frame...">${escapeHtml(programData.time_frame || '')}</textarea></td>
     `;
     tableBody.appendChild(row);
@@ -182,12 +182,12 @@ function collectFormData() {
         rows.forEach(row => {
             const program = {
                 program: row.querySelector('.program-field')?.value || '',
-                milestones: row.querySelector('.milestones-field')?.value || '',
                 objectives: row.querySelector('.objectives-field')?.value || '',
                 strategies: row.querySelector('.strategies-field')?.value || '',
                 persons_agencies_involved: row.querySelector('.persons-field')?.value || '',
                 resources_needed: row.querySelector('.resources-field')?.value || '',
                 budget: row.querySelector('.budget-field')?.value || '',
+                means_of_verification: row.querySelector('.means-field')?.value || '',
                 time_frame: row.querySelector('.timeframe-field')?.value || ''
             };
             

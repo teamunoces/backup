@@ -2,6 +2,8 @@
 let currentUploadReportId = null;
 let currentUploadTable = null;
 let currentExistingFiles = [];
+let pendingReuploadFileId = null; // Track file being reuploaded
+let pendingReuploadFileName = null; // Track original filename
 const MAX_FILES = 4; // Maximum number of files allowed per report
 
 // Debug function to check if elements exist
@@ -181,60 +183,62 @@ function attachActionEvents(data) {
         });
     });
 
-// View icon events
-document.querySelectorAll(".view-icon").forEach((icon) => {
-    icon.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const reportId = icon.getAttribute("data-id");
-        const sourceTable = icon.getAttribute("data-source-table");
-        const row = icon.closest("tr");
-        
-        // Find the report that matches BOTH id and source_table
-        const report = data.find(r => r.id == reportId && r.source_table === sourceTable);
+    // View icon events
+    document.querySelectorAll(".view-icon").forEach((icon) => {
+        icon.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const reportId = icon.getAttribute("data-id");
+            const sourceTable = icon.getAttribute("data-source-table");
+            const row = icon.closest("tr");
+            
+            // Find the report that matches BOTH id and source_table
+            const report = data.find(r => r.id == reportId && r.source_table === sourceTable);
 
-        if (!report) {
-            console.error("Report not found in data array");
-            showNotification("Report not found", "error");
-            return;
-        }
-
-        // Check if this is in the rejected table
-        const parentTbody = row.closest('tbody');
-        if (parentTbody && parentTbody.id === 'coordinatorrejectedTableBody') {
-            // For rejected reports, show feedback modal instead of navigating
-            console.log("Rejected report view clicked - showing feedback");
-            
-            // Type mapping for display
-            const typeMap = {
-                "cnacr": "CNACR",
-                "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
-                "3ydp": "3 Year Development Plan",
-                "pd_main": "Program Design",
-                "mar_header": "Monthly Accomplishment Report"
-            };
-            
-            // Prepare report object with display info
-            const reportWithDisplay = {
-                ...report,
-                displayType: typeMap[report.source_table] || report.source_table
-            };
-            
-            // Show feedback modal
-            if (typeof window.showFeedbackModal === 'function') {
-                window.showFeedbackModal(reportId, sourceTable, reportWithDisplay);
-            } else {
-                console.error("showFeedbackModal function not found");
-                showNotification("Feedback feature not available", "error");
+            if (!report) {
+                console.error("Report not found in data array");
+                showNotification("Report not found", "error");
+                return;
             }
-        } else {
-            // For other tables, navigate to view page as before
-            const viewPath = getViewPath(report, row);
-            window.location.href = `${viewPath}?id=${reportId}`;
-        }
+
+            // Check if this is in the rejected table
+            const parentTbody = row.closest('tbody');
+            if (parentTbody && parentTbody.id === 'coordinatorrejectedTableBody') {
+                // For rejected reports, show feedback modal instead of navigating
+                console.log("Rejected report view clicked - showing feedback");
+                
+                // Type mapping for display
+                const typeMap = {
+                    "cnacr": "CNACR",
+                    "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
+                    "3ydp": "3 Year Development Plan",
+                    "pd_main": "Program Design",
+                    "mar_header": "Monthly Accomplishment Report"
+                };
+                
+                // Prepare report object with display info
+                const reportWithDisplay = {
+                    ...report,
+                    displayType: typeMap[report.source_table] || report.source_table
+                };
+                
+                // Show feedback modal
+                if (typeof window.showFeedbackModal === 'function') {
+                    window.showFeedbackModal(reportId, sourceTable, reportWithDisplay);
+                } else {
+                    console.error("showFeedbackModal function not found");
+                    showNotification("Feedback feature not available", "error");
+                }
+            } else {
+                // For other tables, navigate to view page as before
+                const viewPath = getViewPath(report, row);
+                if (viewPath) {
+                    window.location.href = `${viewPath}?id=${reportId}`;
+                }
+            }
+        });
     });
-});
 }
 
 function getViewPath(report, row) {
@@ -257,8 +261,6 @@ function getViewPath(report, row) {
             "default": "actions/coordinator_view/defaultview/view.php"
         },
         coordinatorRejected: {
-            // Return empty or null for rejected reports since we don't navigate
-            // These will be handled by the view icon click handler separately
             "default": null
         }
     };
@@ -357,6 +359,9 @@ function showUploadModal(reportId, reportTable, report = null) {
         uploadBtn.disabled = false;
     }
     
+    // Reset reupload mode
+    clearReuploadMode();
+    
     // Store current report info
     currentUploadReportId = reportId;
     currentUploadTable = reportTable;
@@ -375,6 +380,9 @@ function closeUploadModal() {
     currentUploadReportId = null;
     currentUploadTable = null;
     currentExistingFiles = [];
+    
+    // Clear reupload mode
+    clearReuploadMode();
     
     // Clear the file input
     const fileInput = document.getElementById("fileInput");
@@ -404,7 +412,63 @@ function handleFileSelect(input) {
     if (!selectedFilesList) return;
     
     if (input.files && input.files.length > 0) {
-        // Clear previous file list
+        // Check if we're in reupload mode
+        if (pendingReuploadFileId) {
+            // Reupload mode - only allow one file
+            if (input.files.length > 1) {
+                showNotification("Please select only one file for replacement.", "warning");
+                input.value = "";
+                return;
+            }
+            
+            const file = input.files[0];
+            
+            // Validate file type
+            if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith('.pdf')) {
+                showNotification("Please select a PDF file.", "error");
+                input.value = "";
+                return;
+            }
+            
+            // Validate file size (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                showNotification("File size must be less than 10MB.", "error");
+                input.value = "";
+                return;
+            }
+            
+            // Clear selected files list
+            selectedFilesList.innerHTML = "";
+            
+            // Display selected file for reupload
+            const fileItem = document.createElement("div");
+            fileItem.className = "selected-file-item";
+            fileItem.innerHTML = `
+                <i class="fas fa-file-pdf"></i>
+                <span class="file-name">${file.name}</span>
+                <span class="file-size">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                <span class="file-status">Ready to replace</span>
+                <button type="button" class="remove-file-btn" onclick="clearReuploadMode()" title="Cancel replacement">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            selectedFilesList.appendChild(fileItem);
+            
+            // Make sure upload button is visible and configured for reupload
+            const uploadBtn = document.querySelector(".upload-btn");
+            if (uploadBtn) {
+                uploadBtn.style.display = "inline-block";
+                uploadBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Replace File';
+                uploadBtn.onclick = function() { 
+                    reuploadFile(pendingReuploadFileId, pendingReuploadFileName); 
+                };
+                uploadBtn.disabled = false;
+            }
+            
+            return;
+        }
+        
+        // Normal upload mode - clear previous selection
         selectedFilesList.innerHTML = "";
         
         // Check total files (existing + new)
@@ -454,7 +518,7 @@ function handleFileSelect(input) {
             fileItem.setAttribute("data-file-index", i);
             fileItem.innerHTML = `
                 <i class="fas fa-file-pdf"></i>
-                <span class="file-name">${file.name}</span>
+                <span class="file-name">${escapeHtml(file.name)}</span>
                 <span class="file-size">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
                 <span class="file-status">Pending</span>
                 <button type="button" class="remove-file-btn" onclick="removeSelectedFile(${i})" title="Remove file">
@@ -465,12 +529,13 @@ function handleFileSelect(input) {
         }
         
         // Show upload button
-        document.querySelector(".upload-btn").style.display = "inline-block";
-        
-        // Reset reupload mode if active
         const uploadBtn = document.querySelector(".upload-btn");
-        uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Selected Files';
-        uploadBtn.onclick = uploadFiles;
+        if (uploadBtn) {
+            uploadBtn.style.display = "inline-block";
+            uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Selected Files';
+            uploadBtn.onclick = uploadFiles;
+            uploadBtn.disabled = false;
+        }
     } else {
         selectedFilesList.innerHTML = "<p class='no-files'>No files selected</p>";
         document.querySelector(".upload-btn").style.display = "none";
@@ -605,11 +670,13 @@ async function uploadFiles() {
     // Re-enable upload button
     uploadBtn.disabled = false;
     uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Selected Files';
-    uploadBtn.style.display = failCount > 0 ? "inline-block" : "none";
+    uploadBtn.style.display = failCount > 0 && successCount === 0 ? "inline-block" : "none";
 }
 
-// Reupload file
+// Reupload file (replace existing)
 async function reuploadFile(fileId, oldFileName) {
+    console.log("reuploadFile called with:", fileId, oldFileName);
+    
     const fileInput = document.getElementById("fileInput");
     if (!fileInput) {
         showNotification("File input not found", "error");
@@ -618,12 +685,12 @@ async function reuploadFile(fileId, oldFileName) {
     
     // Check if a file is selected
     if (fileInput.files.length === 0) {
-        showNotification("Please select a file to reupload.", "warning");
+        showNotification("Please select a file to replace the current one.", "warning");
         return;
     }
     
     if (fileInput.files.length > 1) {
-        showNotification("Please select only one file for reupload.", "warning");
+        showNotification("Please select only one file for replacement.", "warning");
         return;
     }
     
@@ -632,24 +699,32 @@ async function reuploadFile(fileId, oldFileName) {
     // Validate file type
     if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith('.pdf')) {
         showNotification("Please select a PDF file.", "error");
+        fileInput.value = "";
         return;
     }
     
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
         showNotification("File size must be less than 10MB.", "error");
+        fileInput.value = "";
         return;
     }
     
-    if (!confirm(`Replace "${oldFileName}" with "${file.name}"?`)) {
+    if (!confirm(`Replace "${oldFileName}" with "${file.name}"? This action cannot be undone.`)) {
         return;
     }
+    
+    // Disable upload button and show loading state
+    const uploadBtn = document.querySelector(".upload-btn");
+    uploadBtn.disabled = true;
+    uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Replacing...';
     
     const formData = new FormData();
     formData.append("file", file);
     formData.append("report_id", currentUploadReportId);
     formData.append("report_table", currentUploadTable);
     formData.append("existing_file_id", fileId);
+    formData.append("replace", "true");
     
     try {
         const response = await fetch("./php/upload.php", {
@@ -664,29 +739,76 @@ async function reuploadFile(fileId, oldFileName) {
         const result = await response.json();
         
         if (result.success) {
-            showNotification("File reuploaded successfully!", "success");
+            showNotification(`File replaced successfully!\nNew file: ${file.name}`, "success");
+            
+            // Clear reupload mode
+            clearReuploadMode();
+            
             // Refresh file list
             await loadReportFiles(currentUploadReportId, currentUploadTable);
-            // Clear file input
+            
+            // Clear file input and selected files list
             fileInput.value = "";
-            document.getElementById("selectedFilesList").innerHTML = "<p class='no-files'>No files selected</p>";
+            const selectedFilesList = document.getElementById("selectedFilesList");
+            if (selectedFilesList) {
+                selectedFilesList.innerHTML = "<p class='no-files'>No files selected</p>";
+            }
             
             // Reset upload button
-            const uploadBtn = document.querySelector(".upload-btn");
             uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Selected Files';
             uploadBtn.onclick = uploadFiles;
             uploadBtn.style.display = "none";
             
-            // Remove highlight from reupload target
-            document.querySelectorAll('.file-item').forEach(item => {
-                item.classList.remove('reupload-target');
-            });
         } else {
-            showNotification("Reupload failed: " + (result.error || "Unknown error"), "error");
+            showNotification("Replacement failed: " + (result.error || "Unknown error"), "error");
         }
     } catch (error) {
         console.error("Reupload error:", error);
-        showNotification("Error reuploading file. Please check your connection.", "error");
+        showNotification("Error replacing file. Please try again.", "error");
+    } finally {
+        uploadBtn.disabled = false;
+    }
+}
+
+// Clear reupload mode
+function clearReuploadMode() {
+    console.log("clearReuploadMode called");
+    
+    // Reset pending reupload variables
+    pendingReuploadFileId = null;
+    pendingReuploadFileName = null;
+    
+    // Remove highlight from all file items
+    document.querySelectorAll('.file-item').forEach(item => {
+        item.classList.remove('reupload-target');
+    });
+    
+    // Clear selected files list if it contains reupload mode message
+    const selectedFilesList = document.getElementById("selectedFilesList");
+    if (selectedFilesList && selectedFilesList.innerHTML.includes('Reupload mode')) {
+        selectedFilesList.innerHTML = "<p class='no-files'>No files selected</p>";
+    }
+    
+    // Reset file input
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) {
+        fileInput.value = "";
+        fileInput.disabled = false;
+    }
+    
+    // Reset upload button
+    const uploadBtn = document.querySelector(".upload-btn");
+    if (uploadBtn) {
+        uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Selected Files';
+        uploadBtn.onclick = uploadFiles;
+        uploadBtn.style.display = "none";
+        uploadBtn.disabled = false;
+    }
+    
+    // Remove reupload mode message from file list if exists
+    const reuploadMessage = document.querySelector('.reupload-active-message');
+    if (reuploadMessage) {
+        reuploadMessage.remove();
     }
 }
 
@@ -743,10 +865,10 @@ async function loadReportFiles(reportId, reportTable) {
                         <div class="file-item" id="file-${file.id}">
                             <i class="fas fa-file-pdf"></i>
                             <div class="file-details">
-                                <a href="${viewPath}" target="_blank" class="file-name">${file.file_name}${fileSize}</a>
-                                <span class="file-date">Uploaded: ${uploadDate}</span>
+                                <a href="${escapeHtml(viewPath)}" target="_blank" class="file-name">${escapeHtml(file.file_name)}${fileSize}</a>
+                                <span class="file-date">Uploaded: ${escapeHtml(uploadDate)}</span>
                             </div>
-                            <button onclick="prepareReupload(${file.id}, '${file.file_name.replace(/'/g, "\\'")}')" class="reupload-btn" title="Replace this file">
+                            <button onclick="prepareReupload(${file.id}, '${escapeHtml(file.file_name).replace(/'/g, "\\'")}')" class="reupload-btn" title="Replace this file">
                                 <i class="fas fa-sync-alt"></i> Replace
                             </button>
                         </div>
@@ -758,6 +880,9 @@ async function loadReportFiles(reportId, reportTable) {
                 const remaining = MAX_FILES - currentExistingFiles.length;
                 if (remaining > 0) {
                     html += `<p class='remaining-slots'><i class='fas fa-info-circle'></i> You can upload ${remaining} more file(s). Maximum ${MAX_FILES} files total.</p>`;
+                    // Enable file input
+                    const fileInput = document.getElementById("fileInput");
+                    if (fileInput) fileInput.disabled = false;
                 } else {
                     html += `<p class='max-files-reached'><i class='fas fa-exclamation-triangle'></i> Maximum files (${MAX_FILES}) reached. Replace existing files to update them.</p>`;
                     // Disable file input if max reached
@@ -777,7 +902,7 @@ async function loadReportFiles(reportId, reportTable) {
             }
         } else {
             console.error("Server returned error:", result.error);
-            fileListDiv.innerHTML = `<p class='error'>Error: ${result.error || 'Failed to load files'}</p>`;
+            fileListDiv.innerHTML = `<p class='error'>Error: ${escapeHtml(result.error || 'Failed to load files')}</p>`;
         }
     } catch (error) {
         console.error("Error loading files:", error);
@@ -799,10 +924,12 @@ function updateFileCount() {
 function prepareReupload(fileId, fileName) {
     console.log("prepareReupload called for file:", fileId, fileName);
     
-    // Remove highlight from any previously selected file
-    document.querySelectorAll('.file-item').forEach(item => {
-        item.classList.remove('reupload-target');
-    });
+    // Clear any existing reupload mode first
+    clearReuploadMode();
+    
+    // Set pending reupload variables
+    pendingReuploadFileId = fileId;
+    pendingReuploadFileName = fileName;
     
     // Highlight the file to be replaced
     const fileElement = document.getElementById(`file-${fileId}`);
@@ -811,15 +938,29 @@ function prepareReupload(fileId, fileName) {
         fileElement.scrollIntoView({ behavior: "smooth", block: "center" });
     }
     
-    // Change upload button to show reupload mode
-    const uploadBtn = document.querySelector(".upload-btn");
-    uploadBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Replace File';
-    uploadBtn.onclick = function() { reuploadFile(fileId, fileName); };
-    uploadBtn.style.display = "inline-block";
-    
-    // Show message
+    // Show reupload mode message in selected files list
     const selectedFilesList = document.getElementById("selectedFilesList");
-    selectedFilesList.innerHTML = `<p class='reupload-mode'><i class='fas fa-info-circle'></i> Reupload mode: Select one file to replace "${fileName}"</p>`;
+    if (selectedFilesList) {
+        selectedFilesList.innerHTML = `<div class='reupload-mode'>
+            <i class='fas fa-info-circle'></i> 
+            <strong>Reupload mode active:</strong> Select a PDF file to replace "${escapeHtml(fileName)}"
+            <br><small style="color: #666;">Maximum file size: 10MB</small>
+            <button type="button" class="cancel-reupload-btn" onclick="clearReuploadMode()" style="margin-left: 10px; padding: 2px 8px; background: #ff9800; color: white; border: none; border-radius: 3px; cursor: pointer;">
+                Cancel
+            </button>
+        </div>`;
+    }
+    
+    // Update upload button for reupload mode
+    const uploadBtn = document.querySelector(".upload-btn");
+    if (uploadBtn) {
+        uploadBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Replace File';
+        uploadBtn.onclick = function() { 
+            reuploadFile(pendingReuploadFileId, pendingReuploadFileName); 
+        };
+        uploadBtn.style.display = "inline-block";
+        uploadBtn.disabled = false;
+    }
     
     // Enable and focus file input
     const fileInput = document.getElementById("fileInput");
@@ -827,6 +968,20 @@ function prepareReupload(fileId, fileName) {
         fileInput.value = "";
         fileInput.disabled = false;
         fileInput.focus();
+    }
+    
+    // Add a message in the file list area
+    const fileListDiv = document.getElementById("fileList");
+    if (fileListDiv) {
+        // Remove existing message if any
+        const existingMessage = fileListDiv.querySelector('.reupload-active-message');
+        if (existingMessage) existingMessage.remove();
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'reupload-active-message';
+        messageDiv.style.cssText = 'background: #fff3e0; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #ff9800;';
+        messageDiv.innerHTML = '<i class="fas fa-sync-alt"></i> Ready to replace file. Select a new PDF and click "Replace File".';
+        fileListDiv.insertBefore(messageDiv, fileListDiv.firstChild);
     }
     
     showNotification(`Ready to replace "${fileName}". Select a new PDF file.`, "info");
@@ -903,7 +1058,15 @@ function showNotification(message, type = "info") {
     }, 5000);
 }
 
-// Add CSS animations
+// Helper function to escape HTML
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Add CSS animations and styles
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
@@ -966,6 +1129,101 @@ style.textContent = `
     .modal-body {
         padding: 20px;
     }
+    
+    .file-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin: 5px 0;
+        background: #f5f5f5;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    
+    .file-item.reupload-target {
+        background-color: #fff3e0;
+        border-left: 4px solid #ff9800;
+    }
+    
+    .reupload-btn {
+        background: #ff9800;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        margin-left: auto;
+        transition: background 0.3s ease;
+    }
+    
+    .reupload-btn:hover {
+        background: #f57c00;
+    }
+    
+    .reupload-mode {
+        background: #fff3e0;
+        padding: 12px;
+        border-radius: 5px;
+        border-left: 4px solid #ff9800;
+        margin: 10px 0;
+    }
+    
+    .remove-file-btn {
+        background: #f44336;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        cursor: pointer;
+        margin-left: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .remove-file-btn:hover {
+        background: #d32f2f;
+    }
+    
+    .selected-file-item {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        margin: 5px 0;
+        background: #e3f2fd;
+        border-radius: 4px;
+    }
+    
+    .selected-file-item.success {
+        background: #c8e6c9;
+    }
+    
+    .selected-file-item.error {
+        background: #ffcdd2;
+    }
+    
+    .file-status {
+        margin-left: 10px;
+        font-size: 12px;
+    }
+    
+    .upload-btn {
+        background: #2e7d32;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    
+    .upload-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
 `;
 document.head.appendChild(style);
 
@@ -998,3 +1256,4 @@ window.prepareReupload = prepareReupload;
 window.reuploadFile = reuploadFile;
 window.removeSelectedFile = removeSelectedFile;
 window.showNotification = showNotification;
+window.clearReuploadMode = clearReuploadMode;

@@ -15,6 +15,7 @@ try {
     $department = $_SESSION['department'];
     $role = $_SESSION['role'];
     $user_id = $_SESSION['user_id'];
+    $dean = $_SESSION['dean'] ?? 'N/A';
 
     $input = file_get_contents("php://input");
     $data = json_decode($input, true);
@@ -29,12 +30,12 @@ try {
     $beneficiaries = $data['beneficiaries'] ?? '';
     $program_plan_text = $data['program_plan_text'] ?? '';
 
-    // --- Insert main report including role and user_id ---
+    // --- Insert main report ---
     $stmt = $conn->prepare("INSERT INTO `3ydp`
-        (type, title_of_project, description_of_project, general_objectives, program_justification, beneficiaries, program_plan_text, created_by_name, department, role, user_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        (type, title_of_project, description_of_project, general_objectives, program_justification, beneficiaries, program_plan_text, created_by_name, department, role, user_id, dean)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param(
-        "ssssssssssi",
+        "ssssssssssis",
         $type,
         $title,
         $description,
@@ -45,10 +46,11 @@ try {
         $created_by_name,
         $department,
         $role,
-        $user_id
+        $user_id,
+        $dean
     );
     $stmt->execute();
-    $report_id = $conn->insert_id; // <-- all program rows use this ID
+    $report_id = $conn->insert_id;
     $stmt->close();
 
     // --- Insert program rows ---
@@ -57,20 +59,30 @@ try {
 
     if ($rows) {
         $stmt2 = $conn->prepare("INSERT INTO `3ydp_programs`
-            (report_id, program, objectives, milestones, strategies, persons_agencies_involved, resources_needed, budget, time_frame)
+            (report_id, program, objectives, strategies, persons_agencies_involved, resources_needed, budget, means_of_verification, time_frame)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        
         foreach ($rows as $row) {
+            $program = $row['program'] ?? '';
+            $objectives = $row['objectives'] ?? '';
+            $strategies = $row['strategies'] ?? '';
+            $persons_agencies = $row['persons_agencies_involved'] ?? '';
+            $resources_needed = $row['resources_needed'] ?? '';
+            $budget = $row['budget'] ?? '';
+            $means_of_verification = $row['means_of_verification'] ?? '';
+            $time_frame = $row['time_frame'] ?? '';
+            
             $stmt2->bind_param(
                 "issssssss",
                 $report_id,
-                $row['program'],
-                $row['objectives'],
-                $row['milestones'],
-                $row['strategies'],
-                $row['persons_agencies_involved'],
-                $row['resources_needed'],
-                $row['budget'],
-                $row['time_frame']
+                $program,
+                $objectives,
+                $strategies,
+                $persons_agencies,
+                $resources_needed,
+                $budget,
+                $means_of_verification,
+                $time_frame
             );
             if ($stmt2->execute()) $inserted++;
         }

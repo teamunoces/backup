@@ -79,20 +79,20 @@ try {
         // Insert new programs
         if (isset($data['programs']) && is_array($data['programs'])) {
             $stmt = $conn->prepare("INSERT INTO `3ydp_programs` 
-                (report_id, program, milestones, objectives, strategies, 
-                persons_agencies_involved, resources_needed, budget, time_frame) 
+                (report_id, program, objectives, strategies, 
+                persons_agencies_involved, resources_needed, budget, means_of_verification, time_frame) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             foreach ($data['programs'] as $program) {
                 $stmt->bind_param("issssssss", 
                     $reportId,
                     $program['program'],
-                    $program['milestones'],
                     $program['objectives'],
                     $program['strategies'],
                     $program['persons_agencies_involved'],
                     $program['resources_needed'],
                     $program['budget'],
+                    $program['means_of_verification'],
                     $program['time_frame']
                 );
 

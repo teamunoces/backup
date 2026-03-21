@@ -1,672 +1,653 @@
-/* =========================
-   Universal Responsive Design
-   Optimized for ALL Phones & Tablets
-   WIDE CONTAINER - Better Readability
-========================= */
+/* survey.css - Responsive Survey Form Styles */
 
-/* CSS Variables - Responsive First */
-:root {
-    /* Colors */
-    --primary: #2e7d32;
-    --primary-light: #4caf50;
-    --primary-hover: #1b5e20;
-    --accent: #0984e3;
-    --accent-light: #74b9ff;
-    --bg-body: #f8fafc;
-    --bg-card: #ffffff;
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --border-light: #e2e8f0;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    
-    /* Dynamic spacing - scales with screen size */
-    --space-xs: clamp(0.5rem, 2vw, 0.75rem);
-    --space-sm: clamp(0.75rem, 3vw, 1rem);
-    --space-md: clamp(1rem, 4vw, 1.5rem);
-    --space-lg: clamp(1.5rem, 5vw, 2rem);
-    --space-xl: clamp(2rem, 6vw, 3rem);
-    
-    /* Touch targets (WCAG compliant) */
-    --touch-min: 44px;
-    
-    /* Header - responsive */
-    --header-height-mobile: 70px;
-    --header-height-tablet: 90px;
-    --header-height-desktop: 120px;
-}
-
-/* Reset & Base */
+/* ===== RESET & BASE STYLES ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-    background: var(--bg-body);
-    color: var(--text-primary);
-    line-height: 1.5;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
+    min-height: 100vh;
+    padding: 20px;
+    font-size: 18px;
 }
 
-/* =========================
-   Responsive Header with Logout Button
-========================= */
+/* ===== HEADER IFRAME ===== */
 #headerFrame {
     width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
+    height: auto;
+    min-height: 80px;
     border: none;
-    z-index: 1000;
-    background: #ffffff;
-    box-shadow: var(--shadow-md);
-    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    background: transparent;
 }
 
-/* Make sure header content is visible and logout button is accessible */
-#headerFrame body,
-#headerFrame .header-content {
-    margin: 0;
-    padding: 0;
-}
-
-/* Mobile header - wider and accessible */
-@media (max-width: 640px) {
-    #headerFrame {
-        height: var(--header-height-mobile);
-    }
-    
-    /* Style for logout button inside header */
-    #headerFrame .logout-btn,
-    #headerFrame button[onclick*="logout"],
-    #headerFrame a[href*="logout"] {
-        min-height: 44px;
-        min-width: 44px;
-        padding: 10px 16px;
-        font-size: 14px;
-        font-weight: 600;
-        background: #ff4757;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1001;
-    }
-    
-    /* Header title/logo styling for mobile */
-    #headerFrame h1,
-    #headerFrame .logo {
-        font-size: 18px;
-        padding-left: 12px;
-        margin: 0;
-        line-height: var(--header-height-mobile);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 70%;
-    }
-}
-
-/* Tablet header */
-@media (min-width: 641px) and (max-width: 1024px) {
-    #headerFrame {
-        height: var(--header-height-tablet);
-    }
-    
-    #headerFrame .logout-btn,
-    #headerFrame button[onclick*="logout"],
-    #headerFrame a[href*="logout"] {
-        min-height: 44px;
-        padding: 12px 24px;
-        font-size: 16px;
-        right: 20px;
-    }
-}
-
-/* Desktop header */
-@media (min-width: 1025px) {
-    #headerFrame {
-        height: var(--header-height-desktop);
-    }
-    
-    #headerFrame .logout-btn,
-    #headerFrame button[onclick*="logout"],
-    #headerFrame a[href*="logout"] {
-        min-height: 48px;
-        padding: 12px 28px;
-        font-size: 16px;
-        right: 24px;
-    }
-}
-
-/* =========================
-   Main Container - WIDE & READABLE
-   Full width on phones for maximum readability
-========================= */
+/* ===== CONTAINER ===== */
 .container {
-    position: relative;
-    z-index: 1;
-    background: var(--bg-card);
-    box-shadow: var(--shadow-lg);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-in;
 }
 
-/* Mobile container - WIDE (full width with minimal padding) */
-@media (max-width: 640px) {
-    .container {
-        width: 100%;
-        max-width: 100%;
-        margin: calc(var(--header-height-mobile) + 8px) 0 0 0;
-        padding: 20px 16px;
-        border-radius: 0;
-        box-shadow: none;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Tablet container - still wide */
-@media (min-width: 641px) and (max-width: 1024px) {
-    .container {
-        width: 96%;
-        max-width: 1000px;
-        margin: calc(var(--header-height-tablet) + 20px) auto 30px;
-        padding: 28px 24px;
-        border-radius: var(--radius-lg);
-    }
-}
-
-/* Desktop container */
-@media (min-width: 1025px) {
-    .container {
-        width: 92%;
-        max-width: 1200px;
-        margin: calc(var(--header-height-desktop) + 30px) auto 40px;
-        padding: 40px 36px;
-        border-radius: var(--radius-lg);
-    }
-}
-
-/* Extra small phones - even wider with optimized padding */
-@media (max-width: 480px) {
-    .container {
-        padding: 16px 14px;
-        margin-top: calc(var(--header-height-mobile) + 4px);
-    }
-}
-
-/* Very small phones (under 380px) */
-@media (max-width: 380px) {
-    .container {
-        padding: 14px 12px;
-        margin-top: calc(var(--header-height-mobile) + 4px);
-    }
-}
-
-/* =========================
-   Typography - Larger & Readable on Phones
-========================= */
+/* ===== HEADINGS ===== */
 h1 {
-    font-size: clamp(1.6rem, 7vw, 2.5rem);
-    font-weight: 700;
-    color: var(--text-primary);
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
+    color: white;
+    padding: 30px 20px;
     text-align: center;
-    margin-bottom: var(--space-xs);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-size: 2.2rem;
+    margin: 0;
+    word-wrap: break-word;
 }
 
 h2 {
-    font-size: clamp(1.35rem, 6vw, 2rem);
-    font-weight: 600;
-    color: var(--text-primary);
+    background: #f0f0f0;
+    color: #254911;
+    padding: 15px 20px;
     text-align: center;
-    margin-bottom: var(--space-sm);
-    line-height: 1.3;
+    font-size: 1.6rem;
+    margin: 0;
+    border-bottom: 3px solid #59AF29;
+    word-wrap: break-word;
+    font-weight: 600;
 }
 
 h3 {
-    font-size: clamp(1.1rem, 5vw, 1.25rem);
+    background: #f8f9fa;
+    color: #59AF29;
+    padding: 15px 20px;
+    font-size: 1.6rem;
+    margin: 20px 0 15px 0;
+    border-left: 5px solid #59AF29;
+    position: relative;
     font-weight: 600;
-    color: var(--primary);
-    margin: var(--space-lg) 0 var(--space-sm);
-    padding-bottom: var(--space-xs);
-    border-bottom: 2px solid var(--primary-light);
+}
+
+/* ===== SECTIONS ===== */
+section {
+    padding: 25px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+/* ===== FORM ROWS ===== */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.row label {
+    font-weight: 600;
+    color: #254911;
+    min-width: 120px;
+    font-size: 1.1rem;
+}
+
+.row input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.row input:focus {
+    outline: none;
+    border-color: #59AF29;
+    box-shadow: 0 0 0 3px rgba(89, 175, 41, 0.1);
+}
+
+/* ===== FORM ELEMENTS ===== */
+input, select, textarea {
+    font-family: inherit;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #59AF29;
+    box-shadow: 0 0 0 3px rgba(89, 175, 41, 0.1);
+}
+
+.short {
+    width: auto;
+    min-width: 150px;
     display: inline-block;
 }
 
-p {
-    font-size: clamp(1rem, 4.5vw, 1.1rem);
-    color: var(--text-secondary);
-    margin-bottom: var(--space-sm);
-    line-height: 1.6;
-}
-
-/* Larger text on mobile for readability */
-@media (max-width: 640px) {
-    p, label, .checkbox-group label {
-        font-size: 16px;
-        line-height: 1.5;
-    }
-    
-    h3 {
-        font-size: 1.2rem;
-        width: 100%;
-    }
-}
-
-/* =========================
-   Form Layout - Adaptive Grid
-   Full width inputs on mobile
-========================= */
-.row {
-    display: grid;
-    gap: var(--space-md);
-    margin-bottom: var(--space-md);
-}
-
-/* Mobile: single column, full width */
-@media (max-width: 640px) {
-    .row {
-        grid-template-columns: 1fr;
-        gap: 18px;
-        margin-bottom: 20px;
-    }
-}
-
-/* Tablet: 2 columns when space allows */
-@media (min-width: 641px) and (max-width: 1024px) {
-    .row {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-md);
-    }
-    
-    /* Full width items */
-    .row .full-width,
-    .row:has(textarea),
-    .row:has(.checkbox-group) {
-        grid-column: 1 / -1;
-    }
-}
-
-/* Desktop: flexible columns */
-@media (min-width: 1025px) {
-    .row {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: var(--space-lg);
-    }
-}
-
-/* Form Elements - Large Touch Targets */
-label {
-    display: block;
-    font-weight: 600;
-    font-size: clamp(1rem, 4vw, 1.05rem);
-    color: var(--text-primary);
-    margin-bottom: 8px;
-}
-
-input, select, textarea {
+.long {
     width: 100%;
-    padding: clamp(14px, 4vw, 16px);
-    font-size: 16px; /* Prevents zoom on iOS */
-    font-family: inherit;
-    border: 1.5px solid var(--border-light);
-    border-radius: var(--radius-sm);
-    background: var(--bg-card);
-    transition: all 0.2s ease;
-    min-height: var(--touch-min);
+    margin-bottom: 10px;
 }
 
-/* Larger inputs on mobile */
-@media (max-width: 640px) {
-    input, select, textarea {
-        padding: 14px 16px;
-        font-size: 16px;
-        border-radius: 10px;
-    }
-}
-
-input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(9, 132, 227, 0.1);
-}
-
-input.short, input.long {
-    width: 100%;
-    padding: 14px 16px;
-    font-size: 16px;
-    border: 1.5px solid var(--border-light);
-    border-radius: var(--radius-sm);
-}
-
-/* =========================
-   Checkbox Groups - Full Width, Easy to Tap
-========================= */
+/* ===== CHECKBOX GROUPS ===== */
 .checkbox-group {
-    display: grid;
-    gap: 14px;
-    padding: 20px 16px;
-    background: #f8fafc;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-light);
-    margin: var(--space-sm) 0;
-}
-
-/* Mobile: single column, large touch areas */
-@media (max-width: 640px) {
-    .checkbox-group {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        padding: 18px 16px;
-    }
-}
-
-/* Tablet: 2 columns */
-@media (min-width: 641px) and (max-width: 1024px) {
-    .checkbox-group {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-md);
-        padding: var(--space-md);
-    }
-}
-
-/* Desktop: auto-fill columns */
-@media (min-width: 1025px) {
-    .checkbox-group {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: var(--space-md);
-        padding: var(--space-lg);
-    }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 15px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 10px;
 }
 
 .checkbox-group label {
     display: flex;
     align-items: center;
+    gap: 10px;
+    font-weight: normal;
     cursor: pointer;
-    margin-bottom: 0;
-    font-weight: 500;
-    min-height: 48px;
-    padding: 8px 0;
-    gap: 14px;
-    font-size: 16px;
+    padding: 8px 15px;
+    background: white;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    color: #333;
+}
+
+.checkbox-group label:hover {
+    background: #e8f5e9;
+    transform: translateX(3px);
+    border-left: 3px solid #59AF29;
 }
 
 .checkbox-group input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
-    min-width: 22px;
-    accent-color: var(--primary);
+    width: 20px;
+    height: 20px;
     cursor: pointer;
-    margin: 0;
+    accent-color: #59AF29;
 }
 
-/* Even larger checkboxes on mobile for easier tapping */
-@media (max-width: 640px) {
-    .checkbox-group input[type="checkbox"] {
-        width: 24px;
-        height: 24px;
-        min-width: 24px;
-    }
-}
-
-.checkbox-group input.short {
-    grid-column: 1 / -1;
-    margin-top: 12px;
-}
-
-/* =========================
-   Dropdown Groups - Full Width
-========================= */
+/* ===== DROPDOWN GROUPS ===== */
 .dropbox-group {
-    display: block;
-    width: 100%;
-    background: #f8fafc;
-    padding: 20px 16px;
-    border-radius: var(--radius-md);
-    margin: 16px 0;
-    border: 1px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 15px 0;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
 }
 
-@media (max-width: 640px) {
-    .dropbox-group {
-        padding: 18px 14px;
-    }
+.dropbox-group label {
+    font-weight: 600;
+    color: #254911;
+    margin-top: 10px;
+    display: block;
+    font-size: 1rem;
 }
 
 .dropbox-group select {
     width: 100%;
-    padding: 14px 16px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-light);
-    background: var(--bg-card);
+    margin-top: 8px;
+    background: white;
     cursor: pointer;
-    min-height: var(--touch-min);
+    font-size: 1rem;
+    padding: 12px;
 }
 
-.dropbox-group label {
-    margin-bottom: 10px;
+/* ===== PARAGRAPH STYLES ===== */
+p {
     font-weight: 600;
-    font-size: 16px;
+    color: #254911;
+    margin: 25px 0 12px 0;
+    font-size: 1.15rem;
+    padding: 8px 0;
+    border-bottom: 2px solid #e0e0e0;
 }
 
-/* =========================
-   Submit Button - Large & Easy to Tap
-========================= */
-.submit-btn {
-    display: block;
+/* ===== TEXTAREA ===== */
+textarea {
     width: 100%;
-    max-width: 100%;
-    margin: var(--space-xl) auto 0;
-    padding: 18px 24px;
-    background: var(--primary);
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    resize: vertical;
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #59AF29;
+    box-shadow: 0 0 0 3px rgba(89, 175, 41, 0.1);
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.submit-btn {
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
     color: white;
     border: none;
-    border-radius: 50px;
-    font-size: 18px;
+    padding: 18px 35px;
+    font-size: 1.2rem;
     font-weight: 700;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    min-height: 56px;
-    text-align: center;
-    box-shadow: var(--shadow-md);
-}
-
-/* Tablet submit button */
-@media (min-width: 641px) and (max-width: 1024px) {
-    .submit-btn {
-        max-width: 80%;
-        padding: 18px 28px;
-        font-size: 18px;
-    }
-}
-
-/* Desktop submit button */
-@media (min-width: 1025px) {
-    .submit-btn {
-        max-width: 400px;
-        padding: 18px 32px;
-        font-size: 18px;
-    }
+    width: 100%;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .submit-btn:hover {
-    background: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 20px rgba(37, 73, 17, 0.3);
+    background: linear-gradient(135deg, #6bc835 0%, #2f5a15 100%);
 }
 
 .submit-btn:active {
     transform: translateY(0);
 }
 
-/* =========================
-   Tablet Specific Optimizations
-========================= */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .container {
-        padding: 32px 28px;
-    }
-    
-    h1 {
-        font-size: 2.2rem;
-    }
-    
-    h2 {
-        font-size: 1.8rem;
-    }
+/* ===== FORM CONTAINER ===== */
+form {
+    padding: 0 25px 25px 25px;
 }
 
-/* =========================
-   Landscape Mode Optimization
-========================= */
-@media (orientation: landscape) and (max-height: 600px) {
-    .container {
-        margin-top: calc(var(--header-height-mobile) + 8px);
-        margin-bottom: 16px;
-        padding: 16px;
+/* ===== RESPONSIVE DESIGN ===== */
+/* Tablet Styles (768px and below) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 17px;
     }
     
     h1 {
-        font-size: 1.4rem;
-        margin-bottom: 4px;
+        font-size: 1.9rem;
+        padding: 20px 15px;
     }
     
     h2 {
-        font-size: 1.2rem;
-        margin-bottom: 4px;
+        font-size: 1.4rem;
+        padding: 12px 15px;
     }
     
     h3 {
-        margin-top: 12px;
-        margin-bottom: 8px;
+        font-size: 1.4rem;
+        padding: 12px 15px;
+    }
+    
+    section {
+        padding: 20px;
     }
     
     .row {
+        flex-direction: column;
+        align-items: stretch;
         gap: 12px;
-        margin-bottom: 12px;
+    }
+    
+    .row label {
+        min-width: auto;
+        margin-bottom: 5px;
+        font-size: 1rem;
+    }
+    
+    .row input {
+        width: 100%;
     }
     
     .checkbox-group {
-        padding: 12px;
+        gap: 12px;
     }
     
-    .submit-btn {
-        margin-top: 20px;
-        padding: 12px;
+    .checkbox-group label {
+        flex: 1;
+        min-width: calc(50% - 12px);
+        font-size: 0.95rem;
+        padding: 8px 12px;
+    }
+    
+    .short {
+        width: 100%;
+        margin-top: 5px;
+    }
+    
+    form {
+        padding: 0 20px 20px 20px;
+    }
+    
+    p {
+        font-size: 1.05rem;
     }
 }
 
-/* =========================
-   Small Phones (under 380px)
-========================= */
-@media (max-width: 380px) {
-    :root {
-        --space-md: 1rem;
-        --space-lg: 1.25rem;
-        --touch-min: 44px;
-    }
-    
-    .container {
-        padding: 14px 12px;
+/* Mobile Styles (480px and below) */
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+        font-size: 16px;
     }
     
     h1 {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
+        padding: 15px 10px;
     }
     
     h2 {
         font-size: 1.2rem;
+        padding: 12px 10px;
     }
     
-    .checkbox-group {
-        padding: 14px 12px;
+    h3 {
+        font-size: 1.2rem;
+        padding: 12px 10px;
+        margin: 15px 0 10px 0;
+    }
+    
+    section {
+        padding: 15px;
     }
     
     .checkbox-group label {
-        font-size: 15px;
+        min-width: 100%;
+        flex: auto;
+        font-size: 0.95rem;
     }
     
-    input, select, textarea {
-        padding: 12px 14px;
+    .dropbox-group {
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .dropbox-group label {
+        font-size: 0.95rem;
+    }
+    
+    .dropbox-group select {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        font-size: 0.95rem;
+        padding: 10px 12px;
     }
     
     .submit-btn {
-        padding: 14px 20px;
-        font-size: 16px;
-        min-height: 50px;
-    }
-}
-
-/* =========================
-   Accessibility & Motion
-========================= */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
+        padding: 14px 25px;
+        font-size: 1rem;
     }
     
-    .submit-btn:hover {
-        transform: none;
-    }
-}
-
-@media (prefers-contrast: high) {
-    :root {
-        --primary: #006400;
-        --primary-hover: #004d00;
-        --accent: #0000cd;
-        --border-light: #000000;
-    }
-    
-    input, select, textarea {
-        border-width: 2px;
-    }
-}
-
-/* Touch-friendly improvements */
-@media (hover: none) and (pointer: coarse) {
-    button, 
-    .submit-btn,
-    input[type="checkbox"],
-    select,
-    .checkbox-group label {
-        cursor: default;
-    }
-    
-    input, select, textarea {
-        font-size: 16px;
-    }
-}
-
-/* Print styles */
-@media print {
-    #headerFrame {
-        position: static;
-        height: auto;
+    p {
+        font-size: 1rem;
+        margin: 20px 0 10px 0;
     }
     
     .container {
-        margin: 0;
-        padding: 0;
-        box-shadow: none;
+        border-radius: 15px;
+    }
+}
+
+/* Extra Small Devices (375px and below) */
+@media (max-width: 375px) {
+    body {
+        padding: 5px;
+        font-size: 15px;
+    }
+    
+    h1 {
+        font-size: 1.4rem;
+        padding: 12px 8px;
+    }
+    
+    h2 {
+        font-size: 1.1rem;
+    }
+    
+    h3 {
+        font-size: 1.1rem;
+    }
+    
+    .checkbox-group label {
+        font-size: 0.9rem;
+        padding: 6px 10px;
     }
     
     .submit-btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+    
+    p {
+        font-size: 2rem;
+    }
+}
+
+/* ===== TOUCH-FRIENDLY INTERACTIONS ===== */
+@media (hover: none) and (pointer: coarse) {
+    .checkbox-group label,
+    .submit-btn,
+    input,
+    select,
+    textarea {
+        cursor: default;
+    }
+    
+    .checkbox-group label {
+        padding: 10px 15px;
+    }
+    
+    input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .submit-btn {
+        padding: 16px 25px;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+        font-size: 12pt;
+    }
+    
+    .container {
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    .submit-btn,
+    #headerFrame {
         display: none;
+    }
+    
+    .checkbox-group label {
+        break-inside: avoid;
+    }
+    
+    section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-center {
+    text-align: center;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #59AF29;
+}
+
+/* ===== LOADING STATE ===== */
+.submit-btn.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.submit-btn.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 3px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== FORM VALIDATION STYLES ===== */
+input:invalid,
+select:invalid,
+textarea:invalid {
+    border-color: #ff6b6b;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: block;
+}
+
+/* ===== SUCCESS MESSAGE ===== */
+.success-message {
+    background: #59AF29;
+    color: white;
+    padding: 18px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+    animation: slideDown 0.3s ease-out;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===== FOCUS VISIBLE FOR ACCESSIBILITY ===== */
+:focus-visible {
+    outline: 3px solid #59AF29;
+    outline-offset: 2px;
+}
+
+/* ===== ADDITIONAL TEXT ENHANCEMENTS ===== */
+label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+input::placeholder,
+textarea::placeholder {
+    font-size: 0.95rem;
+    color: #999;
+}
+
+option {
+    font-size: 1rem;
+    padding: 8px;
+}
+
+/* Increase readability for longer text */
+.checkbox-group label,
+.dropbox-group label,
+.row label {
+    line-height: 1.4;
+}
+
+/* Better spacing for mobile touch targets */
+@media (max-width: 768px) {
+    .checkbox-group label,
+    .row input,
+    select,
+    button {
+        min-height: 44px;
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+        min-height: 22px;
     }
 }
