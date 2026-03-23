@@ -338,7 +338,6 @@ td[contenteditable="false"] {
 }
 
 
-
 /* ===== 3. Approvals Section (The "Professional" Look) ===== */
 .approvals {
     display: flex;
@@ -385,6 +384,7 @@ td[contenteditable="false"] {
     border-bottom: 1px solid #000;
     width: 200px; /* adjust size */
 }
+
 /* ===== 4. Document Info Table (The Navy Blue Style) ===== */
 .doc-header {
     width: auto; /* Shrinks the table to fit the content */
@@ -465,21 +465,21 @@ td[contenteditable="false"] {
     width: 100%;
 }
 
-/* ===== 10. BUTTONS (Center Top of Container) ===== */
+/* ===== BUTTONS - Positioned Above Container ===== */
 .buttons {
-    position: relative;           /* relative to container wrapper */
+    position: fixed;
+    top: 70px;
+    right: 20px;
     display: flex;
-    justify-content: center;      /* horizontal center */
-    margin: 100px auto 5px auto; /* move above container, space below */
+    justify-content: flex-end;
     gap: 15px;
-    z-index: 100;                 /* above container content */
+    z-index: 1001;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .buttons button {
-
-    padding: 12px 24px;
-    font-size: 15px;
+    padding: 10px 20px;
+    font-size: 14px;
     font-weight: 600;
     border: none;
     border-radius: 8px;

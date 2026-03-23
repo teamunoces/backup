@@ -26,11 +26,6 @@ async function loadReport() {
             document.getElementById('title_of_activity').value = data.main.title_of_activity || '';
             document.getElementById('participants').value = data.main.participants || '';
             document.getElementById('location').value = data.main.location || '';
-            // Fill signature DIV elements - use .textContent, NOT .value
-            document.getElementById('coordinator_name').textContent = data.main.created_by_name || '';
-            document.getElementById('coordinator_dean').textContent = data.main.dean || '';
-
-
 
 
             // Populate table

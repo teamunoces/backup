@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$userName = $_SESSION['name'] ?? '';
+$userDean = $_SESSION['dean'] ?? '';
 $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Program Design";
 $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 ?>
@@ -12,6 +14,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Program Design Form - SMCC</title>
     <link rel="stylesheet" href="view.css">
+    <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
 
@@ -115,7 +118,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                         <div class="approval-row">
                             <div class="signature-group">
                             <div class="label">Prepared by:</div>
-                            <div class="signature-line" id="coordinator_name"></div>
+                            <div class="signature-line"><?php echo htmlspecialchars($userName); ?></div>
                             <div class="title bold">CES Coordinator</div>
                             </div>
                         </div>
@@ -123,7 +126,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                         <div class="label" style="margin-top: 20px;">Noted by:</div>
                         <div class="approval-row">
                             <div class="signature-group">
-                             <div class="signature-line" id="coordinator_dean"></div>
+                             <div class="signature-line"><?php echo htmlspecialchars($userDean); ?></div>
                             <div class="title bold">Dean</div>
                             </div>
                             <div class="signature-group">
@@ -209,6 +212,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <script src="/admin/ReportManagement/actions/js/getapproval.js"></script>
     <script src="./print.js"></script>
     <script src="./download.js"></script>
+    <script src="./darkmode.js"></script>
 
 </body>
 </html>

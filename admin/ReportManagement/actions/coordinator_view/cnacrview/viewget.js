@@ -15,7 +15,7 @@ function loadReportById(reportId) {
 }
 
 function populateFormFields(report) {
-    // Field mappings for input/textarea elements
+    // UPDATED: Matches your database column names exactly
     const fieldMappings = {
         'department': 'department',
         'date_submitted': 'date',
@@ -35,10 +35,8 @@ function populateFormFields(report) {
         'beneficiaries': 'beneficiaries',
         'from_school': 'from_school',
         'from_community': 'from_community'
-        // Removed coordinator_name and coordinator_dean from here since they're not input elements
     };
 
-    // Populate input/textarea elements
     for (const [dbField, formField] of Object.entries(fieldMappings)) {
         const element = document.querySelector(`textarea[name="${formField}"], input[name="${formField}"]`);
         if (element && report[dbField] !== undefined) {
@@ -48,24 +46,6 @@ function populateFormFields(report) {
             }
         }
     }
-    
-    // Populate signature div elements (these use the database column names directly)
-    const coordinatorNameDiv = document.getElementById('coordinator_name');
-    if (coordinatorNameDiv && report.created_by_name !== undefined) {  // ← FIXED: use created_by_name
-        coordinatorNameDiv.textContent = report.created_by_name;
-    }
-
-    const coordinatorDeanDiv = document.getElementById('coordinator_dean');
-    if (coordinatorDeanDiv && report.dean !== undefined) {  // ← FIXED: use dean
-        coordinatorDeanDiv.textContent = report.dean;
-    }
-    
-    otherSignatures.forEach(sig => {
-        const element = document.getElementById(sig.id);
-        if (element && report[sig.field] !== undefined) {
-            element.textContent = report[sig.field];
-        }
-    });
 }
 
 function autoExpand(element) {

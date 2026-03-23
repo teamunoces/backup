@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$userName = $_SESSION['name'] ?? '';
+$userDean = $_SESSION['dean'] ?? '';
 
 $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Community Needs Assessment Consolidated Report";
 $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
@@ -24,17 +26,17 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
   <!-- SIDEBAR -->
   <iframe src="/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
-
-
-                 
-    <div class="report-container">
-
-                                   <!-- ACTION BUTTONS -->
+             <!-- ACTION BUTTONS -->
                         <div class="buttons">
                             <button  onclick="printReport()">Print this Page</button>
                             <button id="downloadPDF" type="button">Download PDF</button>
                         </div>
 
+
+                 
+    <div class="report-container">
+
+                      
         <header>
             <div class="header-content">
                 <img src="/coordinator/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
@@ -198,7 +200,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                         <div class="approval-row">
                             <div class="signature-group">
                             <div class="label">Prepared by:</div>
-                            <div class="signature-line" id="coordinator_name"></div>
+                            <div class="signature-line"><?php echo htmlspecialchars($userName); ?></div>
                             <div class="title bold">CES Coordinator</div>
                             </div>
                         </div>
@@ -206,7 +208,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                         <div class="label" style="margin-top: 20px;">Noted by:</div>
                         <div class="approval-row">
                             <div class="signature-group">
-                            <div class="signature-line" id="coordinator_dean"></div>
+                            <div class="signature-line"><?php echo htmlspecialchars($userDean); ?></div>
                             <div class="title bold">Dean</div>
                             </div>
                             <div class="signature-group">

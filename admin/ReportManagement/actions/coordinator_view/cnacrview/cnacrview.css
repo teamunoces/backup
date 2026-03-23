@@ -8,11 +8,10 @@
 
 body {
     background-color: #f4f4f4;
-    padding: 40px;
-    display: flex;
-    justify-content: center;
+    margin: 0;
+    padding: 0;
+    margin-left: 150px; /* Account for fixed sidebar */
 }
-
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
@@ -109,12 +108,15 @@ body {
     margin-bottom: 25px;
 }
 
+/* Main Container - Centered */
 .report-container {
-    width: 210mm;
-    min-height: 297mm;
-    padding: 20mm;
-    margin: auto;
+    max-width: 1100px;
+    margin: 100px auto 40px auto; /* Top margin accounts for header + buttons */
     background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: calc(100% - 40px);
 }
 
 h1 {
@@ -174,7 +176,7 @@ h1 {
 .form-group {
     margin-bottom: 20px;
     display: flex;
-    flex-direction: column; /* Stacks label above the lines */
+    flex-direction: column;
 }
 
 .form-group label {
@@ -191,13 +193,13 @@ h1 {
     outline: none;
     resize: none;
     font-size: 16px;
-    line-height: 30px; /* This must match the gradient size below */
+    line-height: 30px;
     padding: 0;
     background-attachment: local;
     
     /* Creates the horizontal lines */
     background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
-    background-size: 100% 30px; /* 30px height matches line-height */
+    background-size: 100% 30px;
     
     background-color: transparent;
     font-family: Arial, sans-serif;
@@ -208,7 +210,6 @@ h1 {
     color: #ccc;
     font-style: italic;
 }
-
 
 /* Footer Section */
 footer {
@@ -236,74 +237,79 @@ footer {
     width: auto;
 }
 
-/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+/* ===== 3. Approvals Section ===== */
 .approvals-container {
-  font-family: Arial, sans-serif;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  color: #000;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto 0 auto;
+    color: #000;
 }
 
 .approval-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .signature-group {
-  width: 35%; /* Adjust width to match the line lengths in your image */
+    width: 35%;
 }
 
 .label {
-  font-weight: bold;
-  margin-bottom: 35px; /* Creates space for the signature signature */
+    font-weight: bold;
+    margin-bottom: 35px;
 }
 
 .signature-line {
-  border-bottom: 1.5px solid black;
-  margin-bottom: 5px;
+    border-bottom: 1.5px solid black;
+    margin-bottom: 5px;
+    min-height: 25px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .title {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .left-align {
-  text-align: left;
-  width: 100%;
+    text-align: left;
+    width: 100%;
 }
 
 /* Centered Layout for VP and President */
 .approval-centered {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .admin-block {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 10px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .name-underlined {
-  font-weight: bold;
-  text-decoration: underline;
-  text-transform: uppercase;
-  font-size: 16px;
-  display: inline-block;
-  margin-bottom: 2px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 2px;
+    min-width: 250px;
 }
 
-/* ===== 4. Document Info Table (The Navy Blue Style) ===== */
+/* ===== 4. Document Info Table ===== */
 .doc-header {
-    width: auto; /* Shrinks the table to fit the content */
-    margin-right: auto; /* Keeps it pushed to the left */
+    width: auto;
+    margin-right: auto;
 }
 
 .doc-header td {
@@ -319,15 +325,13 @@ footer {
 }
 
 .doc-header .value {
-    /* Reduced from 75% to 50% or 30% depending on how narrow you want it */
-    width: 70%; 
+    width: 70%;
     font-size: 11px;
-    /* This ensures the text stays aligned left within that narrower space */
-    text-align: left; 
+    text-align: left;
 }
-/*------------------------------------------ Container positioning */
+
 .document-info {
-    margin-top: 50px; /* Adjust based on space needed after approvals */
+    margin-top: 50px;
     width: 30%;
 }
 
@@ -335,13 +339,12 @@ footer {
 .doc-header {
     border-collapse: collapse;
     font-family: Arial, sans-serif;
-    font-size: 11px; /* Matches the compact look of the screenshot */
+    font-size: 11px;
     border: 1px solid #d1d1d1;
 }
 
-/* The first column (Dark Blue Background) */
 .doc-header td.label {
-    background-color: #002060; /* Dark Navy Blue */
+    background-color: #002060;
     color: white;
     font-weight: bold;
     padding: 4px 8px;
@@ -351,7 +354,6 @@ footer {
     width: 100px;
 }
 
-/* The middle colon column */
 .doc-header td:nth-child(2) {
     width: 2%;
     padding: 0 1px;
@@ -360,14 +362,12 @@ footer {
     border-bottom: 1px solid #d1d1d1;
 }
 
-/* The value column */
 .doc-header td.value {
     padding: 4px 10px;
     border: 1px solid #d1d1d1;
     min-width: 120px;
 }
 
-/* Styling the inputs/text inside the value cell */
 .doc-header td.value input, 
 .doc-header td.value p {
     border: none;
@@ -380,27 +380,26 @@ footer {
     width: 100%;
 }
 
-/* Remove default focus outline for disabled inputs */
 .doc-header td.value input:disabled {
     color: black;
     cursor: default;
 }
 
-/* ===== 10. BUTTONS (Center Top of Container) ===== */
+/* ===== BUTTONS - Positioned Above Container ===== */
 .buttons {
-    position: relative;           /* relative to container wrapper */
+    position: fixed;
+    top: 70px;
+    right: 20px;
     display: flex;
-    justify-content: center;      /* horizontal center */
-    margin: 10px auto 5px auto; /* move above container, space below */
+    justify-content: flex-end;
     gap: 15px;
-    z-index: 100;                 /* above container content */
+    z-index: 1001;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .buttons button {
-
-    padding: 12px 24px;
-    font-size: 15px;
+    padding: 10px 20px;
+    font-size: 14px;
     font-weight: 600;
     border: none;
     border-radius: 8px;
@@ -440,3 +439,133 @@ footer {
     transform: translateY(-2px);
 }
 
+.buttons button:active {
+    transform: scale(0.96);
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    .buttons,
+    #sidebarFrame,
+    #headerFrame {
+        display: none !important;
+    }
+
+    body {
+        background-color: #fff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .report-container {
+        margin: 0 !important;
+        padding: 20px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .college-info h1 {
+        color: #4f81bd !important;
+    }
+
+    .double-line {
+        border-top: 4px double #4f81bd !important;
+    }
+
+    .doc-header td.label {
+        background-color: #002060 !important;
+        color: #fff !important;
+    }
+
+    table, th, td {
+        border: 1px solid #000 !important;
+    }
+
+    .paper-lines {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 1200px) {
+    .report-container {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 900px) {
+    .report-container {
+        max-width: 90%;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+    
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+    
+    body {
+        margin-left: 0;
+    }
+    
+    .report-container {
+        margin: 80px auto 40px auto;
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .buttons {
+        position: static;
+        justify-content: center;
+        margin: 20px auto;
+        top: auto;
+        right: auto;
+    }
+    
+    .approval-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .signature-group {
+        width: 100%;
+    }
+    
+    .document-info {
+        width: 100%;
+    }
+    
+    .header-grid {
+        grid-template-columns: 120px 1fr 120px 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .report-container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .buttons button {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .section-content {
+        padding: 15px 0 10px 20px;
+    }
+}

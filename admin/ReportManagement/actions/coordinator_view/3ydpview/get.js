@@ -33,17 +33,6 @@ async function loadReport() {
         document.getElementById("program_justification").value = project.program_justification || "";
         document.getElementById("beneficiaries").value = project.beneficiaries || "";
         document.getElementById("program_plan_text").value = project.program_plan_text || "";
-      // FIXED: Access created_by_name and dean from project, not data.main
-        const coordinatorNameDiv = document.getElementById('coordinator_name');
-        if (coordinatorNameDiv) {
-            coordinatorNameDiv.textContent = project.created_by_name || '';
-        }
-        
-        const coordinatorDeanDiv = document.getElementById('coordinator_dean');
-        if (coordinatorDeanDiv) {
-            coordinatorDeanDiv.textContent = project.dean || '';
-        }
-
 
         /* Fill program table */
         const tableBody = document.querySelector("#programPlanTable tbody");

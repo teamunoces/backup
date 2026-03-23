@@ -21,7 +21,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
   <iframe src="/coordinator/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
 
   <!-- SIDEBAR -->
-  <iframe src="/coordinator/Sidebar/sidebar.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+  <iframe src="/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
 
   <!-- ACTION BUTTONS -->
   <div class="buttons">

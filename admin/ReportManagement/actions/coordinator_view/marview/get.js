@@ -42,31 +42,24 @@ function loadReportData() {
         });
 }
 
+// Function to populate header fields with correct column mappings
 function populateHeaderData(headerData) {
     try {
-        // Map database fields to form fields
+        // Map database fields to form fields based on your actual column names
         const fieldMappings = {
             'department': headerData.department,
             'month': headerData.month,
             'title_act': headerData.title_act,
             'location': headerData.location,
             'benefeciaries': headerData.benefeciaries,
-            'date_submitted': headerData.date_submitted,
-            'coordinator_name': headerData.created_by_name,  // ← FIXED TYPO
-            'coordinator_dean': headerData.dean
+            'date_submitted': headerData.date_submitted
         };
 
         // Populate each field if it exists
         for (const [fieldId, value] of Object.entries(fieldMappings)) {
             const element = document.getElementById(fieldId);
             if (element) {
-                // Check if it's an input element or a div
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'SELECT') {
-                    element.value = value || '';
-                } else {
-                    // For DIV, SPAN, and other elements, use textContent
-                    element.textContent = value || '';
-                }
+                element.value = value || '';
             }
         }
 
@@ -79,6 +72,7 @@ function populateHeaderData(headerData) {
         // Silently fail
     }
 }
+
 // Function to populate table data with correct column mappings
 function populateTableData(detailsData) {
     try {
