@@ -306,10 +306,10 @@ function attachSectionEvents(container) {
             } else {
                 // NORMAL VIEW (need fix)
                 viewMap = {
-                    "coordinator_cnacr": "./actions/feedback/cnacrview/cnacrview.php",
-                    "3ydp": "./actions/feedback/3ydpview/view.php",
-                    "pd_main": "./actions/feedback/pdview/view.php",
-                    "mar_header": "./actions/feedback/marview/marview.php",
+                    "coordinator_cnacr": "/admin/ReportManagement/actions/feedback/cnacrview/cnacrview.php",
+                    "3ydp": "/admin/ReportManagement/actions/feedback/3ydpview/view.php",
+                    "pd_main": "/admin/ReportManagement/actions/feedback/pdview/view.php",
+                    "mar_header": "/admin/ReportManagement/actions/feedback/marview/marview.php",
                     "dpir": "./actions/fix/dpirfix/view.php"
                 };
             }

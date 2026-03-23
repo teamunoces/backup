@@ -6,13 +6,6 @@ let pendingReuploadFileId = null;
 let pendingReuploadFileName = null;
 const MAX_FILES = 4;
 
-// Store all reports data from server
-let allReportsData = [];
-
-// Detect which page we're on (will be set after DOM is ready)
-let isAdminPage = false;
-let isCoordinatorPage = false;
-
 // Debug function to check if elements exist
 function debugElement(id) {
     const element = document.getElementById(id);
@@ -20,601 +13,118 @@ function debugElement(id) {
     return element;
 }
 
-function renderAdminTable(data) {
-    const adminTableBody = document.getElementById("adminTableBody");
-    if (!adminTableBody) return;
-
-    adminTableBody.innerHTML = "";
-
-    if (!data || data.length === 0) {
-        adminTableBody.innerHTML = `<tr><td colspan="6">No admin reports found.</td></tr>`;
-        return;
-    }
-
-    const typeMap = {
-        "cnacr": "CNACR",
-        "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
-        "3ydp": "3 Year Development Plan",
-        "pd_main": "Program Design",
-        "mar_header": "Monthly Accomplishment Report"
-    };
-
-    data.forEach((report, index) => {
-        const formattedDate = report.created_at 
-            ? new Date(report.created_at).toLocaleDateString() 
-            : "N/A";
-
-        const typeName = typeMap[report.source_table] || report.source_table;
-
-        const rowHTML = `
-        <tr data-index="${index}" data-id="${report.id}" data-source-table="${report.source_table}">
-            <td class="report-type-cell">${typeName}</td>
-            <td>${report.title || 'N/A'}</td>
-            <td>${report.department || 'N/A'}</td>
-            <td>${formattedDate}</td>
-            <td class="actions">
-                <i class="far fa-eye view-icon" data-id="${report.id}" data-source-table="${report.source_table}" style="cursor: pointer; margin-right: 10px;"></i>
-                <i class="fas fa-upload upload-icon" data-id="${report.id}" data-table="${report.source_table}" style="cursor: pointer; margin-right: 10px; color: #2e7d32;"></i>
-                <i class="fas fa-archive archive-icon" style="cursor: pointer; color: #f44336;"></i>
-            </td>
-        </tr>
-        `;
-
-        adminTableBody.innerHTML += rowHTML;
-    });
-
-    attachActionEvents(data);
-}
-
-function renderApprovedTable(data) {
-    const tbody = document.getElementById("coordinatorapprovedTableBody");
-    if (!tbody) return;
-
-    tbody.innerHTML = "";
-
-    if (!data || data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5">No approved reports found.</td></tr>`;
-        return;
-    }
-
-    const typeMap = {
-        "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
-        "3ydp": "3 Year Development Plan",
-        "pd_main": "Program Design",
-        "mar_header": "Monthly Accomplishment Report"
-    };
-
-    data.forEach((report, index) => {
-        const formattedDate = report.created_at 
-            ? new Date(report.created_at).toLocaleDateString() 
-            : "N/A";
-
-        const typeName = typeMap[report.source_table] || report.source_table;
-
-        const rowHTML = `
-        <tr data-index="${index}" data-id="${report.id}" data-source-table="${report.source_table}">
-            <td class="report-type-cell">${typeName}</td>
-            <td>${report.title || 'N/A'}</td>
-            <td>${report.department || 'N/A'}</td>
-            <td>${formattedDate}</td>
-            <td class="actions">
-                <i class="far fa-eye view-icon" data-id="${report.id}" data-source-table="${report.source_table}" style="cursor: pointer; margin-right: 10px;"></i>
-                <i class="fas fa-archive archive-icon" style="cursor: pointer; color: #f44336;"></i>
-            </td>
-        </tr>
-        `;
-
-        tbody.innerHTML += rowHTML;
-    });
-
-    attachActionEvents(data);
-}
-
-function renderRejectedTable(data) {
-    const tbody = document.getElementById("coordinatorrejectedTableBody");
-    if (!tbody) return;
-
-    tbody.innerHTML = "";
-
-    if (!data || data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5">No rejected reports found.</td></tr>`;
-        return;
-    }
-
-    const typeMap = {
-        "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
-        "3ydp": "3 Year Development Plan",
-        "pd_main": "Program Design",
-        "mar_header": "Monthly Accomplishment Report"
-    };
-
-    data.forEach((report, index) => {
-        const formattedDate = report.created_at 
-            ? new Date(report.created_at).toLocaleDateString() 
-            : "N/A";
-
-        const typeName = typeMap[report.source_table] || report.source_table;
-
-        const rowHTML = `
-        <tr data-index="${index}" data-id="${report.id}" data-source-table="${report.source_table}">
-            <td class="report-type-cell">${typeName}</td>
-            <td>${report.title || 'N/A'}</td>
-            <td>${report.department || 'N/A'}</td>
-            <td>${formattedDate}</td>
-            <td class="actions">
-                <i class="far fa-eye view-icon" data-id="${report.id}" data-source-table="${report.source_table}" style="cursor: pointer; margin-right: 10px;"></i>
-                <i class="fas fa-archive archive-icon" style="cursor: pointer; color: #f44336;"></i>
-            </td>
-        </tr>
-        `;
-
-        tbody.innerHTML += rowHTML;
-    });
-
-    attachActionEvents(data);
-}
-
-// Function to load reports from server
 async function loadReports() {
-    console.log("loadReports started");
+    console.log("loadReports started for Reports.html");
     try {
-        const response = await fetch("/admin/ReportManagement/php/get.php");
+        const response = await fetch("./php/get.php");
         const data = await response.json();
-        console.log("Reports data loaded:", data.length, "reports");
-        
-        // Store all data globally
-        allReportsData = data;
-        
-        // Render the tables with all data
-        renderAllTables();
-        
-        // Populate filter dropdowns with unique report types
-        populateFilterDropdowns();
-        
-        // Initialize filters
-        initFilters();
-        
+        console.log("Reports data loaded:", data);
+
+        const adminTableBody = document.getElementById("adminTableBody");
+
+        // Debug: Check if table body exists
+        console.log("adminTableBody:", adminTableBody ? 'Found' : 'NOT FOUND');
+
+        adminTableBody.innerHTML = "";
+
+        if (!Array.isArray(data) || data.length === 0) {
+            adminTableBody.innerHTML = `<tr><td colspan="5">No reports found.</td></tr>`;
+            return;
+        }
+
+        data.forEach((report, index) => {
+            let formattedDate = report.created_at 
+                ? new Date(report.created_at).toLocaleDateString() 
+                : "N/A";
+
+            const typeMap = {
+                "cnacr": "CNACR",
+                "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
+                "3ydp": "3 Year Development Plan",
+                "pd_main": "Program Design",
+                "mar_header": "Monthly Accomplishment Report"
+            };
+
+            const typeName = typeMap[report.source_table] || report.source_table;
+
+            // Role and status handling
+            const role = report.role ? report.role.toLowerCase() : 'unknown';
+            const status = report.status ? report.status.toLowerCase() : '';
+
+            if (role === 'admin') {
+                // Admin table with upload icon
+                const rowHTML = `
+                <tr data-index="${index}" data-id="${report.id}" data-source-table="${report.source_table}">
+                    <td>${typeName}</td>
+                    <td>${report.title || 'N/A'}</td>
+                    <td>${report.department || 'N/A'}</td>
+                    <td>${formattedDate}</td>
+                    <td class="actions">
+                        <i class="far fa-eye view-icon" data-id="${report.id}" data-source-table="${report.source_table}" style="cursor: pointer; margin-right: 10px;"></i>
+                        <i class="fas fa-upload upload-icon" data-id="${report.id}" data-table="${report.source_table}" style="cursor: pointer; margin-right: 10px; color: #2e7d32;"></i>
+                        <i class="fas fa-archive archive-icon" style="cursor: pointer; color: #f44336;"></i>
+                    </td>
+                </tr>
+                `;
+                adminTableBody.innerHTML += rowHTML;
+            }
+        });
+
+        if (adminTableBody.innerHTML === "") {
+            adminTableBody.innerHTML = `<tr><td colspan="5">No admin reports found.</td></tr>`;
+        }
+
+        attachActionEvents(data);
+        console.log("Action events attached");
+
     } catch (error) {
         console.error("Error loading reports:", error);
         showNotification("Error loading reports. Please refresh the page.", "error");
     }
 }
 
-// New function to render all tables
-function renderAllTables() {
-    // For admin page
-    if (isAdminPage) {
-        const adminReports = allReportsData.filter(report => {
-            const role = report.role ? report.role.toLowerCase() : '';
-            return role === 'admin';
-        });
-        renderAdminTable(adminReports);
-    }
-    
-    // For coordinator page
-    if (isCoordinatorPage) {
-        const approvedReports = allReportsData.filter(report => {
-            const role = report.role ? report.role.toLowerCase() : '';
-            const status = report.status ? report.status.toLowerCase() : '';
-            return role === 'coordinator' && status === 'approve';
-        });
-        renderApprovedTable(approvedReports);
-        
-        const rejectedReports = allReportsData.filter(report => {
-            const role = report.role ? report.role.toLowerCase() : '';
-            const status = report.status ? report.status.toLowerCase() : '';
-            return role === 'coordinator' && status === 'rejected';
-        });
-        renderRejectedTable(rejectedReports);
-    }
-}
-
-// Populate filter dropdowns with unique report types
-function populateFilterDropdowns() {
-    if (!allReportsData || allReportsData.length === 0) return;
-    
-    // Helper function to get unique types for a specific role and status
-    function getUniqueTypes(role, statusFilter = null) {
-        const types = new Set();
-        allReportsData.forEach(report => {
-            const reportRole = report.role ? report.role.toLowerCase() : '';
-            const reportStatus = report.status ? report.status.toLowerCase() : '';
-            const typeMap = {
-                "cnacr": "CNACR",
-                "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
-                "3ydp": "3 Year Development Plan",
-                "pd_main": "Program Design",
-                "mar_header": "Monthly Accomplishment Report"
-            };
-           const typeName = typeMap[report.source_table] || report.source_table;
-            
-            if (reportRole === role) {
-                if (statusFilter === null || reportStatus === statusFilter) {
-                    types.add(typeName);
-                }
-            }
-        });
-        return Array.from(types).sort();
-    }
-    
-    // Populate admin filter (reports with role='admin')
-    if (isAdminPage) {
-        const adminFilter = document.getElementById('adminFilterSelect');
-        if (adminFilter) {
-            const adminTypes = getUniqueTypes('admin');
-            console.log("Admin report types:", adminTypes);
-            
-            const currentValue = adminFilter.value;
-            adminFilter.innerHTML = '<option value="All type">All type</option>';
-            adminTypes.forEach(type => {
-                const option = document.createElement('option');
-                option.value = type;
-                option.textContent = type;
-                adminFilter.appendChild(option);
-            });
-            if (currentValue && adminTypes.includes(currentValue)) {
-                adminFilter.value = currentValue;
-            }
-        }
-    }
-    
-    // Populate coordinator filters (reports with role='coordinator')
-    if (isCoordinatorPage) {
-        // Approved reports
-        const approvedFilter = document.getElementById('approvedFilterSelect');
-        if (approvedFilter) {
-            const approvedTypes = getUniqueTypes('coordinator', 'approve');
-            console.log("Approved report types:", approvedTypes);
-            
-            const currentValue = approvedFilter.value;
-            approvedFilter.innerHTML = '<option value="All type">All type</option>';
-            approvedTypes.forEach(type => {
-                const option = document.createElement('option');
-                option.value = type;
-                option.textContent = type;
-                approvedFilter.appendChild(option);
-            });
-            if (currentValue && approvedTypes.includes(currentValue)) {
-                approvedFilter.value = currentValue;
-            }
-        }
-        
-        // Rejected reports
-        const rejectedFilter = document.getElementById('rejectedFilterSelect');
-        if (rejectedFilter) {
-            const rejectedTypes = getUniqueTypes('coordinator', 'rejected');
-            console.log("Rejected report types:", rejectedTypes);
-            
-            const currentValue = rejectedFilter.value;
-            rejectedFilter.innerHTML = '<option value="All type">All type</option>';
-            rejectedTypes.forEach(type => {
-                const option = document.createElement('option');
-                option.value = type;
-                option.textContent = type;
-                rejectedFilter.appendChild(option);
-            });
-            if (currentValue && rejectedTypes.includes(currentValue)) {
-                rejectedFilter.value = currentValue;
-            }
-        }
-    }
-}
-
-// Filter admin reports
-function filterAdminReports() {
-    console.log("=== filterAdminReports START ===");
-    
-    if (!isAdminPage) {
-        console.log("Not on admin page, skipping admin filter");
-        return;
-    }
-    
-    const filterSelect = document.getElementById('adminFilterSelect');
-    if (!filterSelect) {
-        console.log("Admin filter select not found");
-        return;
-    }
-    
-    const selectedType = filterSelect.value;
-    console.log(`Filtering admin reports by: "${selectedType}"`);
-    
-    // Filter only admin reports
-    let adminReports = allReportsData.filter(report => {
-        const role = report.role ? report.role.toLowerCase() : '';
-        return role === 'admin';
-    });
-    
-    // Apply type filter if not "All type"
-    if (selectedType !== "All type") {
-        adminReports = adminReports.filter(report => {
-            const typeMap = {
-                "cnacr": "CNACR",
-                "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
-                "3ydp": "3 Year Development Plan",
-                "pd_main": "Program Design",
-                "mar_header": "Monthly Accomplishment Report"
-            };
-            const typeName = typeMap[report.source_table] || report.source_table;
-            return typeName === selectedType;
-        });
-    }
-    
-    console.log(`Found ${adminReports.length} matching reports`);
-    renderAdminTable(adminReports);
-}
-
-// Filter approved reports
-function filterApprovedReports() {
-    console.log("=== filterApprovedReports START ===");
-    
-    if (!isCoordinatorPage) {
-        console.log("Not on coordinator page, skipping approved filter");
-        return;
-    }
-    
-    const filterSelect = document.getElementById('approvedFilterSelect');
-    if (!filterSelect) {
-        console.log("Approved filter select not found");
-        return;
-    }
-    
-    const selectedType = filterSelect.value;
-    console.log(`Filtering approved reports by: "${selectedType}"`);
-    
-    // Filter only approved coordinator reports
-    let approvedReports = allReportsData.filter(report => {
-        const role = report.role ? report.role.toLowerCase() : '';
-        const status = report.status ? report.status.toLowerCase() : '';
-        return role === 'coordinator' && status === 'approve';
-    });
-    
-    // Apply type filter if not "All type"
-    if (selectedType !== "All type") {
-        approvedReports = approvedReports.filter(report => {
-            const typeMap = {
-                "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
-                "3ydp": "3 Year Development Plan",
-                "pd_main": "Program Design",
-                "mar_header": "Monthly Accomplishment Report"
-            };
-            const typeName = typeMap[report.source_table] || report.source_table;
-            return typeName === selectedType;
-        });
-    }
-    
-    console.log(`Found ${approvedReports.length} matching approved reports`);
-    renderApprovedTable(approvedReports);
-}
-
-// Filter rejected reports
-function filterRejectedReports() {
-    console.log("=== filterRejectedReports START ===");
-    
-    if (!isCoordinatorPage) {
-        console.log("Not on coordinator page, skipping rejected filter");
-        return;
-    }
-    
-    const filterSelect = document.getElementById('rejectedFilterSelect');
-    if (!filterSelect) {
-        console.log("Rejected filter select not found");
-        return;
-    }
-    
-    const selectedType = filterSelect.value;
-    console.log(`Filtering rejected reports by: "${selectedType}"`);
-    
-    // Filter only rejected coordinator reports
-    let rejectedReports = allReportsData.filter(report => {
-        const role = report.role ? report.role.toLowerCase() : '';
-        const status = report.status ? report.status.toLowerCase() : '';
-        return role === 'coordinator' && status === 'rejected';
-    });
-    
-    // Apply type filter if not "All type"
-    if (selectedType !== "All type") {
-        rejectedReports = rejectedReports.filter(report => {
-            const typeMap = {
-                "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
-                "3ydp": "3 Year Development Plan",
-                "pd_main": "Program Design",
-                "mar_header": "Monthly Accomplishment Report"
-            };
-            const typeName = typeMap[report.source_table] || report.source_table;
-            return typeName === selectedType;
-        });
-    }
-    
-    console.log(`Found ${rejectedReports.length} matching rejected reports`);
-    renderRejectedTable(rejectedReports);
-}
-
-function initFilters() {
-    console.log("Initializing filters for", isAdminPage ? "Admin page" : isCoordinatorPage ? "Coordinator page" : "Unknown page");
-    
-    if (isAdminPage) {
-        const adminFilter = document.getElementById('adminFilterSelect');
-        if (adminFilter) {
-            console.log("Found admin filter select");
-            
-            // Remove existing listener by cloning
-            const newAdminFilter = adminFilter.cloneNode(true);
-            adminFilter.parentNode.replaceChild(newAdminFilter, adminFilter);
-            
-            newAdminFilter.addEventListener('change', function() {
-                console.log("✅ Admin filter CHANGE event triggered! New value:", this.value);
-                filterAdminReports();
-            });
-            console.log("Admin filter event attached successfully");
-        } else {
-            console.log("❌ Admin filter select NOT found! Make sure you have id='adminFilterSelect'");
-        }
-    }
-    
-    if (isCoordinatorPage) {
-        const approvedFilter = document.getElementById('approvedFilterSelect');
-        if (approvedFilter) {
-            console.log("Found approved filter select");
-            const newApprovedFilter = approvedFilter.cloneNode(true);
-            approvedFilter.parentNode.replaceChild(newApprovedFilter, approvedFilter);
-            
-            newApprovedFilter.addEventListener('change', function() {
-                console.log("✅ Approved filter changed to:", this.value);
-                filterApprovedReports();
-            });
-            console.log("Approved filter event attached");
-        } else {
-            console.log("❌ Approved filter select NOT found!");
-        }
-        
-        const rejectedFilter = document.getElementById('rejectedFilterSelect');
-        if (rejectedFilter) {
-            console.log("Found rejected filter select");
-            const newRejectedFilter = rejectedFilter.cloneNode(true);
-            rejectedFilter.parentNode.replaceChild(newRejectedFilter, rejectedFilter);
-            
-            newRejectedFilter.addEventListener('change', function() {
-                console.log("✅ Rejected filter changed to:", this.value);
-                filterRejectedReports();
-            });
-            console.log("Rejected filter event attached");
-        } else {
-            console.log("❌ Rejected filter select NOT found!");
-        }
-    }
-}
 function attachActionEvents(data) {
-    console.log("attachActionEvents called with", data.length, "reports");
+    console.log("attachActionEvents called");
     
-    // View icon events
-    document.querySelectorAll(".view-icon").forEach((icon) => {
-        icon.removeEventListener("click", icon._clickHandler);
-        
-        const clickHandler = (e) => {
+    // Upload icon events (only in admin table)
+    const uploadIcons = document.querySelectorAll("#adminTableBody .upload-icon");
+    console.log("Found upload icons:", uploadIcons.length);
+    
+    uploadIcons.forEach((icon, index) => {
+        console.log(`Attaching event to upload icon ${index}`);
+        icon.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
+            console.log("Upload icon clicked");
             
             const reportId = icon.getAttribute("data-id");
-            const sourceTable = icon.getAttribute("data-source-table");
-            const row = icon.closest("tr");
+            const reportTable = icon.getAttribute("data-table");
             
-            // Use the full allReportsData to find the report, not the filtered data
-            const report = allReportsData.find(r => r.id == reportId && r.source_table === sourceTable);
+            console.log("Report ID:", reportId, "Table:", reportTable);
             
-            if (!report) {
-                console.error("Report not found in allReportsData. Report ID:", reportId, "Source Table:", sourceTable);
-                console.log("Available reports:", allReportsData.map(r => ({id: r.id, table: r.source_table})));
-                showNotification("Report not found", "error");
-                return;
-            }
+            // Find the report details for display
+            const report = data.find(r => r.id == reportId && r.source_table === reportTable);
+            console.log("Found report:", report);
             
-            // Check which table this is in
-            const parentTbody = row.closest('tbody');
-            console.log("Parent tbody id:", parentTbody ? parentTbody.id : 'none');
-            console.log("Report found:", report.id, report.title);
-            
-            // For rejected table on coordinator page - show feedback modal
-            if (parentTbody && parentTbody.id === 'coordinatorrejectedTableBody' && isCoordinatorPage) {
-                console.log("Rejected report view clicked - showing feedback for report:", reportId);
-                
-                const typeMap = {
-                    "cnacr": "CNACR",
-                    "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
-                    "3ydp": "3 Year Development Plan",
-                    "pd_main": "Program Design",
-                    "mar_header": "Monthly Accomplishment Report"
-                };
-                
-                const reportWithDisplay = {
-                    ...report,
-                    displayType: typeMap[report.source_table] || report.source_table
-                };
-                
-                // Check if showFeedbackModal exists
-                if (typeof window.showFeedbackModal === 'function') {
-                    console.log("Calling showFeedbackModal with:", reportId, sourceTable);
-                    window.showFeedbackModal(reportId, sourceTable, reportWithDisplay);
-                } else {
-                    console.error("showFeedbackModal function not found");
-                    // Fallback: Show a simple alert with feedback
-                    if (report.feedback) {
-                        alert(`Feedback for rejected report:\n\n${report.feedback}`);
-                    } else {
-                        alert("No feedback available for this report.");
-                    }
-                }
-            } 
-            // For approved table on coordinator page - navigate to view
-            else if (parentTbody && parentTbody.id === 'coordinatorapprovedTableBody' && isCoordinatorPage) {
-                console.log("Approved report view clicked - navigating to view");
-                const viewPath = getViewPath(report, row);
-                if (viewPath) {
-                    window.location.href = `${viewPath}?id=${reportId}`;
-                } else {
-                    showNotification("View path not found", "error");
-                }
-            }
-            // For admin page - navigate to view
-            else if (isAdminPage) {
-                console.log("Admin report view clicked - navigating to view");
-                const viewPath = getViewPath(report, row);
-                if (viewPath) {
-                    window.location.href = `${viewPath}?id=${reportId}`;
-                }
-            }
-        };
-        
-        icon._clickHandler = clickHandler;
-        icon.addEventListener("click", clickHandler);
-    });
-    
-    // Upload icon events (only on admin page)
-    if (isAdminPage) {
-        document.querySelectorAll("#adminTableBody .upload-icon").forEach((icon) => {
-            icon.removeEventListener("click", icon._uploadHandler);
-            
-            const uploadHandler = (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log("Upload icon clicked");
-                
-                const reportId = icon.getAttribute("data-id");
-                const reportTable = icon.getAttribute("data-table");
-                
-                // Use allReportsData to find the report
-                const report = allReportsData.find(r => r.id == reportId && r.source_table === reportTable);
-                showUploadModal(reportId, reportTable, report);
-            };
-            
-            icon._uploadHandler = uploadHandler;
-            icon.addEventListener("click", uploadHandler);
+            // Show upload modal
+            showUploadModal(reportId, reportTable, report);
         });
-    }
-    
+    });
+
     // Archive icon events
     document.querySelectorAll(".archive-icon").forEach((icon) => {
-        icon.removeEventListener("click", icon._archiveHandler);
-        
-        const archiveHandler = async (e) => {
+        icon.addEventListener("click", async (e) => {
             e.preventDefault();
             e.stopPropagation();
             
             const row = icon.closest("tr");
-            const reportId = row.getAttribute("data-id");
-            const sourceTable = row.getAttribute("data-source-table");
-            
-            // Use allReportsData to find the report
-            const report = allReportsData.find(r => r.id == reportId && r.source_table === sourceTable);
-            
-            if (!report) {
-                showNotification("Report not found", "error");
-                return;
-            }
-            
+            const index = row.getAttribute("data-index");
+            const report = data[index];
+
             if (!confirm("Are you sure you want to archive this report?")) return;
-            
+
             try {
-                const response = await fetch("/admin/ReportManagement/php/archive.php", {
+                const response = await fetch("./php/archive.php", {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({
@@ -622,11 +132,11 @@ function attachActionEvents(data) {
                         table: report.source_table
                     })
                 });
-                
+
                 const result = await response.json();
                 if (result.success) {
                     showNotification("Report archived successfully!", "success");
-                    loadReports(); // Reload all reports after archive
+                    loadReports();
                 } else {
                     showNotification("Failed to archive report: " + (result.error || "Unknown error"), "error");
                 }
@@ -634,59 +144,49 @@ function attachActionEvents(data) {
                 console.error("Archive error:", error);
                 showNotification("Error archiving report", "error");
             }
-        };
-        
-        icon._archiveHandler = archiveHandler;
-        icon.addEventListener("click", archiveHandler);
+        });
+    });
+
+    // View icon events
+    document.querySelectorAll(".view-icon").forEach((icon) => {
+        icon.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const reportId = icon.getAttribute("data-id");
+            const sourceTable = icon.getAttribute("data-source-table");
+            
+            // Find the report that matches BOTH id and source_table
+            const report = data.find(r => r.id == reportId && r.source_table === sourceTable);
+
+            if (!report) {
+                console.error("Report not found in data array");
+                showNotification("Report not found", "error");
+                return;
+            }
+
+            // Navigate to view page
+            const viewPath = getViewPath(report);
+            if (viewPath) {
+                window.location.href = `${viewPath}?id=${reportId}`;
+            }
+        });
     });
 }
-function getViewPath(report, row) {
+
+function getViewPath(report) {
     const type = report.source_table.toLowerCase().trim();
-    
+
     const viewMappings = {
-        admin: {
-            "cnacr": "/admin/ReportManagement/actions/admin_view/resultview/cnacrview.php",
-            "coordinator_cnacr": "/admin/ReportManagement/actions/admin_view/coor_cnacrview/cnacrview.php",
-            "3ydp": "/admin/ReportManagement/actions/admin_view/3ydpview/3ydpview.php",
-            "pd_main": "/admin/ReportManagement/actions/admin_view/pdview/view.php",
-            "mar_header": "/admin/ReportManagement/actions/admin_view/marview/marview.php",
-            "default": "/admin/ReportManagement/actions/admin_view/defaultview/view.php"
-        },
-        coordinatorApproved: {
-            "coordinator_cnacr": "/admin/ReportManagement/actions/coordinator_view/cnacrview/cnacrview.php",
-            "3ydp": "/admin/ReportManagement/actions/coordinator_view/3ydpview/3ydpview.php",
-            "pd_main": "/admin/ReportManagement/actions/coordinator_view/pdview/pdview.php",
-            "mar_header": "/admin/ReportManagement/actions/coordinator_view/marview/marview.php",
-            "default": "/admin/ReportManagement/actions/coordinator_view/defaultview/view.php"
-        },
-        coordinatorRejected: {
-            "default": null
-        }
+        "cnacr": "actions/admin_view/resultview/cnacrview.php",
+        "coordinator_cnacr": "actions/admin_view/coor_cnacrview/cnacrview.php",
+        "3ydp": "actions/admin_view/3ydpview/3ydpview.php",
+        "pd_main": "actions/admin_view/pdview/view.php",
+        "mar_header": "actions/admin_view/marview/marview.php",
+        "default": "actions/admin_view/defaultview/view.php"
     };
-    
-    let tableKey = 'admin';
-    
-    const parentTbody = row.closest('tbody');
-    if (parentTbody) {
-        if (parentTbody.id === 'coordinatorapprovedTableBody') {
-            tableKey = 'coordinatorApproved';
-        } 
-        else if (parentTbody.id === 'coordinatorrejectedTableBody') {
-            tableKey = 'coordinatorRejected';
-        }
-    }
-    
-    console.log("getViewPath - tableKey:", tableKey, "type:", type);
-    
-    const mapping = viewMappings[tableKey];
-    
-    if (tableKey === 'coordinatorRejected') {
-        return null;
-    }
-    
-    const path = mapping[type] || mapping.default;
-    console.log("getViewPath - returning path:", path);
-    return path;
+
+    return viewMappings[type] || viewMappings.default;
 }
 
 // Show upload modal
@@ -705,10 +205,6 @@ function showUploadModal(reportId, reportTable, report = null) {
     
     const reportTitleSpan = document.getElementById("modalReportTitle");
     const fileCountSpan = document.getElementById("fileCount");
-    
-    // Debug: Check if elements exist
-    console.log("reportTitleSpan:", reportTitleSpan ? 'Found' : 'NOT FOUND');
-    console.log("fileCountSpan:", fileCountSpan ? 'Found' : 'NOT FOUND');
     
     // Type mapping for display
     const typeMap = {
@@ -1020,7 +516,7 @@ async function uploadFiles() {
                 fileItems[i].querySelector(".file-status").innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
             }
             
-            const response = await fetch("/admin/ReportManagement/php/upload.php", {
+            const response = await fetch("./php/upload.php", {
                 method: "POST",
                 body: formData
             });
@@ -1129,7 +625,7 @@ async function reuploadFile(fileId, oldFileName) {
     formData.append("replace", "true");
     
     try {
-        const response = await fetch("/admin/ReportManagement/php/upload.php", {
+        const response = await fetch("./php/upload.php", {
             method: "POST",
             body: formData
         });
@@ -1224,7 +720,7 @@ async function loadReportFiles(reportId, reportTable) {
     fileListDiv.innerHTML = "<p class='loading'><i class='fas fa-spinner fa-spin'></i> Loading files...</p>";
     
     try {
-        const url = `/admin/ReportManagement/php/get_report_files.php?report_id=${reportId}`;
+        const url = `./php/get_report_files.php?report_id=${reportId}`;
         console.log("Fetching files from:", url);
         
         const response = await fetch(url);
@@ -1631,19 +1127,13 @@ document.head.appendChild(style);
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("DOM fully loaded");
-    
-    // Detect page type after DOM is ready
-    isAdminPage = !!document.getElementById("adminTableBody");
-    isCoordinatorPage = !!document.getElementById("coordinatorapprovedTableBody") || !!document.getElementById("coordinatorrejectedTableBody");
-    
-    console.log("Page type detected:", isAdminPage ? "Admin Page (Report.html)" : isCoordinatorPage ? "Coordinator Page (ReportManagement.html)" : "Unknown page");
-    console.log("isCoordinatorPage:", isCoordinatorPage);
+    console.log("DOM fully loaded for Reports.html");
     
     // Check if modal exists
     debugElement("uploadModal");
     debugElement("fileInput");
     debugElement("fileList");
+    debugElement("adminTableBody");
     
     // Load reports
     loadReports();
@@ -1658,7 +1148,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Make functions available globally
+// Make functions available globally for onclick handlers
 window.closeUploadModal = closeUploadModal;
 window.handleFileSelect = handleFileSelect;
 window.prepareReupload = prepareReupload;

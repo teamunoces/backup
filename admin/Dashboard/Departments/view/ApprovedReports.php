@@ -580,7 +580,7 @@ $debug_mode = false; // Set to true to see debug info
                         <div class="report-card"
                                  data-report-type="<?php echo htmlspecialchars(getReportType($report['source_table'])); ?>"
                                  data-report-date="<?php echo htmlspecialchars(date('Y-m-d', strtotime($report['created_at']))); ?>">
-                                data-report-type="<?php echo strtolower($report_type); ?>">
+                              
 
                                 <div class="report-header">
                                     <h2 class="report-title">

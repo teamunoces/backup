@@ -28,49 +28,20 @@
     </iframe>
 
     <div class="container">
-     
-        <div class="card section-green">
-            <div class="filter-row">
-                <span class="label">Type:</span>
-                <select>
-                    <option>All Types</option>
-                </select>
-            </div>
-            
-            <div class="admin-table-container">
-                <div class="table-header header-green">
-                    <span> ADMIN'S REPORTS</span>
-                    <i class="fas fa-bars"></i>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Title</th>
-                            <th>Department</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adminTableBody">
-                        <!-- Rows will be dynamically added by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
         <!-- Rows will be dynamically added by JS -->
 
         <div class="card section-green">
+            
             <div class="filter-row">
+                
                 <span class="label">Type:</span>
-                <select>
+                 <select id="approvedFilterSelect">  <!-- ADD THIS ID -->
                      <option>All type</option>
                     <option value="3 Year Development Plan">3 Year Development Plan</option>
                     <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
                     <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
                     <option value="Program Design">Program Design</option>
-                    <option value="Departmental Planned Initiative Report">Departmental Planned Initiative Report</option>
                 </select>
             </div>
             
@@ -99,8 +70,12 @@
         <div class="card section-red">
             <div class="filter-row">
                 <span class="label">Type:</span>
-                <select class="select-red">
-                    <option>All Types</option>
+               <select id="rejectedFilterSelect">  <!-- ADD THIS ID -->
+                    <option>All type</option>
+                    <option value="3 Year Development Plan">3 Year Development Plan</option>
+                    <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
+                    <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
+                    <option value="Program Design">Program Design</option>
                 </select>
             </div>
             
@@ -128,58 +103,7 @@
     </div>
 
 
-   <!-- Upload Modal - Make sure this is before the closing body tag -->
-<div id="uploadModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2><i class="fas fa-file-pdf"></i> Manage Report Files</h2>
-            <span class="close" onclick="closeUploadModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            <!-- Report info -->
-            <div class="report-info">
-                <div class="report-title">
-                    <strong>Report:</strong> <span id="modalReportTitle"></span>
-                </div>
-                <div class="file-count">
-                    <strong>Files:</strong> <span id="fileCount" class="file-count-ok">0/4</span>
-                </div>
-            </div>
-            
-            <!-- Current Files Section -->
-            <div class="files-section">
-                <h3><i class="fas fa-folder-open"></i> Current Files</h3>
-                <div id="fileList" class="files-grid">
-                    <p class="loading">Loading files...</p>
-                </div>
-            </div>
-            
-            <!-- Upload Section -->
-            <div class="upload-section">
-                <h3><i class="fas fa-cloud-upload-alt"></i> Upload New Files</h3>
-                <p class="upload-info">Select up to 4 PDF files (max 10MB each)</p>
-                
-                <div class="file-input-container">
-                    <input type="file" id="fileInput" accept=".pdf" multiple>
-                    <label for="fileInput" class="file-input-label">
-                        <i class="fas fa-cloud-upload-alt"></i> Choose Files
-                    </label>
-                    <p class="file-input-hint">Hold Ctrl (or Cmd on Mac) to select multiple files</p>
-                </div>
-                
-                <!-- Selected Files List -->
-                <div id="selectedFilesList" class="selected-files-list">
-                    <p class="no-files">No files selected</p>
-                </div>
-                
-                <!-- Upload Button -->
-                <button class="upload-btn" style="display: none;">
-                    <i class="fas fa-upload"></i> Upload Selected Files
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="darkmode.js"></script>
     <script src="./js/feedback.js"></script>
