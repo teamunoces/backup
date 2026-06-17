@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Dashboard</title>
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
+    <title>Report Management Dashboard</title>
     <link rel="stylesheet" href="ReportManagement.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -45,8 +61,8 @@
                             The Report Has been Rejected. Please create a new one.
                         </div>
   <!-- Header -->
-    <iframe 
-        src="/coordinator/Profile/profile.html" 
+   <iframe 
+        src="http://localhost/SYSTEM_VERSION_!/coordinator/Profile/profile.html"
         id="headerFrame"
         frameborder="0"
         scrolling="no"
@@ -55,7 +71,7 @@
 
     <!-- Sidebar -->
     <iframe 
-        src="/coordinator/Sidebar/sidebar.html" 
+        src="http://localhost/SYSTEM_VERSION_!/coordinator/Sidebar/sidebar.html" 
         id="sidebarFrame"
         frameborder="0"
         scrolling="no"
@@ -69,15 +85,28 @@
 
         <div class="card section-green">
             <div class="filter-row">
-                <span class="label">Type:</span>
-                <select>
-                     <option>All type</option>
-                    <option value="3 Year Development Plan">3 Year Development Plan</option>
-                    <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
-                    <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
-                    <option value="Program Design">Program Design</option>
-                    <option value="Departmental Planned Initiative Report">Departmental Planned Initiative Report</option>
-                </select>
+                <div class="filter-group">
+                    <span class="label">Type:</span>
+                    <select id="approvedTypeFilter">
+                         <option>All type</option>
+                        <option value="3 Year Development Plan">3 Year Development Plan</option>
+                        <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
+                        <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
+                        <option value="Program Design">Program Design</option>
+                        <option value="Program Monitoring Form">Program Monitoring Form</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <span class="label">From:</span>
+                    <input type="date" id="approvedDateFrom">
+                </div>
+                <div class="filter-group">
+                    <span class="label">To:</span>
+                    <input type="date" id="approvedDateTo">
+                </div>
+                <button type="button" id="approvedShowAllBtn" class="show-all-btn green-btn" onclick="showAllSectionReports('approved')">
+                    Show All
+                </button>
             </div>
             
             <div class="table-container">
@@ -110,16 +139,29 @@
 
         <div class="card section-red">
             <div class="filter-row">
-                <span class="label">Type:</span>
-                <select class="select-red">
-                    <option>All type</option>
-                    <option value="3 Year Development Plan">3 Year Development Plan</option>
-                    <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
-                    <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
-                    <option value="Program Design">Program Design</option>
-                    <option value="Departamental Planned Initiative Report">Departamental Planned Initiative Report</option>
-                    
-                </select>
+                <div class="filter-group">
+                    <span class="label">Type:</span>
+                    <select id="rejectedTypeFilter" class="select-red">
+                        <option>All type</option>
+                        <option value="3 Year Development Plan">3 Year Development Plan</option>
+                        <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
+                        <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
+                        <option value="Program Design">Program Design</option>
+                        <option value="Program Monitoring Form">Program Monitoring Form</option>
+                        
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <span class="label">From:</span>
+                    <input type="date" id="rejectedDateFrom">
+                </div>
+                <div class="filter-group">
+                    <span class="label">To:</span>
+                    <input type="date" id="rejectedDateTo">
+                </div>
+                <button type="button" id="rejectedShowAllBtn" class="show-all-btn red-btn" onclick="showAllSectionReports('rejected')">
+                    Show All
+                </button>
             </div>
             
             <div class="table-container">
@@ -199,7 +241,7 @@
 </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="darkmode.js"></script>
+    <script src="./darkmode.js"></script>
     <script src="./js/get.js"></script>
    
 </body>

@@ -2,7 +2,7 @@
    VARIABLES & THEMES
 ========================================================= */
 :root {
-    --sidebar-w: 150px;
+    --sidebar-w: 100px;
     --header-h: 60px;
     
     /* Light Mode */
@@ -106,8 +106,17 @@ body {
     margin-bottom: 20px; 
     display: flex; 
     align-items: center; 
-    gap: 15px;
-    flex-wrap: wrap;
+    gap: 12px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
 }
 
 .label { 
@@ -125,6 +134,7 @@ select {
     padding: 8px 15px; 
     border-radius: 6px; 
     min-width: 200px;
+    max-width: 300px;
     background: var(--bg-card); 
     color: var(--text-main);
     border: 1px solid var(--border-color);
@@ -139,6 +149,49 @@ select:focus {
 
 .select-red:focus {
     border-color: var(--red-primary);
+}
+
+.filter-row input[type="date"] {
+    min-height: 36px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    min-width: 145px;
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    font-size: 14px;
+    outline: none;
+}
+
+.show-all-btn {
+    min-height: 36px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.show-all-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+.show-all-btn:active {
+    transform: scale(0.98);
+}
+
+.green-btn {
+    background: var(--green-primary);
+}
+
+.red-btn {
+    background: var(--red-primary);
 }
 
 .table-header {
@@ -287,12 +340,20 @@ tbody tr td[colspan="5"] {
     }
     
     .filter-row {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
     }
-    
-    select {
-        width: 100%;
+
+    .filter-group {
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    select,
+    .filter-row input[type="date"],
+    .show-all-btn {
+        width: auto;
     }
     
     .actions {
@@ -710,4 +771,116 @@ tbody tr td[colspan="5"] {
 .files-grid::-webkit-scrollbar-thumb:hover,
 .selected-files-list::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUT
+========================================================= */
+@media (min-width: 769px) {
+    body {
+        padding: calc(var(--header-h) + 20px) clamp(16px, 2vw, 24px) 24px calc(var(--sidebar-w) + clamp(16px, 2vw, 24px));
+    }
+
+    #headerFrame {
+        left: var(--sidebar-w);
+        width: calc(100% - var(--sidebar-w));
+    }
+
+    #sidebarFrame {
+        width: var(--sidebar-w);
+        transform: translateX(0);
+    }
+
+    .container {
+        width: min(100%, 1200px);
+    }
+}
+
+@media (max-width: 1366px) and (min-width: 769px) {
+    .container {
+        max-width: 1120px;
+        gap: 20px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    th,
+    td {
+        padding: 11px 10px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+    .search-section {
+        justify-content: stretch;
+    }
+
+    .search-container {
+        width: 100%;
+        max-width: 420px;
+        margin-left: auto;
+    }
+
+    .filter-row {
+        gap: 10px;
+    }
+
+    table {
+        min-width: 720px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: calc(var(--header-h) + 12px) 12px 20px;
+    }
+
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+
+    .container {
+        gap: 16px;
+    }
+
+    .search-section {
+        justify-content: stretch;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .filter-row {
+        align-items: stretch;
+    }
+
+    .label,
+    select {
+        width: 100%;
+    }
+
+    .report-info,
+    .file-item,
+    .selected-file-item {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .modal-content {
+        width: calc(100% - 24px);
+        margin: 20px auto;
+    }
 }

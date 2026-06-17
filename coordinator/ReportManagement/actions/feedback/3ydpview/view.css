@@ -4,16 +4,16 @@
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -28,14 +28,14 @@
 
 /* ===== General Styles ===== */
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
     letter-spacing: -0.011em;
     line-height: 1.6;
     color: #1a202c;
     background-color: #f4f7f9;
     margin: 0;
     padding: 0;
-    margin-left: 150px; /* Account for fixed sidebar */
+    margin-left: 150px; /* Add margin to account for sidebar */
 }
 
 .container {
@@ -118,21 +118,40 @@ body {
     margin-bottom: 25px;
 }
 
-/* Admin Feedback Section */
 .admin-comment {
-    margin-bottom: 25px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
+    pointer-events: none;
+    width: 100%; /* take full width of container */
+    max-width: 1100px; /* prevent overflow */
+    box-sizing: border-box;
+    display: block;
+    margin: 80px auto 40px auto; /* Center horizontally with auto margins */
+
+  
+}
+#admincomment{
+      pointer-events: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    font-style: italic;
+    padding: 20px;
+    font-family: inherit;
+    border-radius: 4px 12px 12px 4px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    resize: vertical;
 }
 
-.admin-comment-label {
-    font-weight: bold;
-    font-size: 14px;
-    color: #333;
-    display: block;
-    margin-bottom: 8px;
+#admincomment:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
 }
 
 /* ===== Form Title ===== */
@@ -194,38 +213,38 @@ input[type="text"]:focus, textarea:focus {
 }
 
 table {
-    width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
-    word-wrap: break-word;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+    border-collapse: collapse;
 }
 
 table thead th {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+    background-color: #e5e7eb; /* light gray like screenshot */
+    color: #000;
     font-weight: bold;
-    background-color: #f8fafc;
-    color: #475569;
-    font-size: 0.9rem;
-    padding: 8px 4px;
-    border: 1px solid #cbd5e1;
-    text-transform: uppercase;
+    font-size: 15px;
+    padding: 6px 4px;
+    border: 1px solid #000;
     text-align: center;
-    word-wrap: break-word;
+    vertical-align: middle;
+    line-height: 1.4;
 }
 
-table td {
-    border: 1px solid #cbd5e1;
-    padding: 0;
-    vertical-align: top;
+table th, table td {
+    border: 1px solid #000;
 }
 
 table td textarea {
-    field-sizing: content;
-    width: 100%;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif !important;
+    font-size: 14px;
+    field-sizing: content; 
+    width: 100% !important;
     min-height: 60px; 
-    border: none;
-    padding: 10px 5px;
-    background: transparent;
-    font-size: 0.85rem;
+    border: none !important;
+    padding: 10px 5px !important;
+    background: transparent !important; /* Ensure no gradient background */
+    background-image: none !important;  /* Explicitly remove any inherited lines */
     color: #1e293b;
     line-height: 1.4;
     display: block;
@@ -234,8 +253,8 @@ table td textarea {
     overflow: hidden; 
     resize: none;
     white-space: pre-wrap;
+   
 }
-
 table td textarea:focus {
     background-color: #f0f7ff;
     box-shadow: inset 0 0 0 2px #3498db; 

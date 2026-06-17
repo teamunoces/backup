@@ -16,7 +16,7 @@ async function loadReport() {
     }
 
     try {
-        const response = await fetch(`/admin/Dashboard/Pending/review/programdesign/get.php?id=${reportId}`);
+        const response = await fetch(`/SYSTEM_VERSION_!/admin/Dashboard/Pending/review/programdesign/get.php?id=${reportId}`);
         const data = await response.json();
 
         console.log("Fetched data:", data);
@@ -38,16 +38,18 @@ async function loadReport() {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td contenteditable="true">${escapeHtml(row.program || '')}</td>
-                        <td contenteditable="true">${escapeHtml(row.milestones || '')}</td>
-                        <td contenteditable="true">${escapeHtml(row.duration || '')}</td>
                         <td contenteditable="true">${escapeHtml(row.objectives || '')}</td>
-                        <td contenteditable="true">${escapeHtml(row.persons_involved || '')}</td>
-                        <td contenteditable="true">${escapeHtml(row.school_resources || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.program_content_and_activities || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.service_delivery || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.partnerships_and_stakeholders || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.facilitators_and_trainers || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.program_start_and_end_dates || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.frequency_of_activities || '')}</td>
                         <td contenteditable="true">${escapeHtml(row.community_resources || '')}</td>
-                        <td contenteditable="true">${escapeHtml(row.collaborating_agencies || '')}</td>
-                        <td contenteditable="true">${escapeHtml(row.budget || '')}</td>
-                        <td contenteditable="true">${escapeHtml(row.means_of_verification || '')}</td>
-                        <td contenteditable="true">${escapeHtml(row.remarks || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.school_resources || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.risk_management_and_contingency_plans || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.sustainability_and_follow_up || '')}</td>
+                        <td contenteditable="true">${escapeHtml(row.promotion_and_awareness || '')}</td>
                     `;
                     tableBody.appendChild(tr);
                 });
@@ -88,6 +90,8 @@ function addEmptyRow() {
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
     `;
     tableBody.appendChild(tr);
 }
@@ -112,23 +116,25 @@ function collectFormData() {
         details: []
     };
     
-    // Collect table data
+    // Collect table data - UPDATED for 13 columns
     const rows = document.querySelectorAll('.program-table tbody tr');
     rows.forEach(row => {
         const cells = row.querySelectorAll('td');
-        if (cells.length >= 11) {
+        if (cells.length >= 13) {
             formData.details.push({
                 program: cells[0]?.innerText || '',
-                milestones: cells[1]?.innerText || '',
-                duration: cells[2]?.innerText || '',
-                objectives: cells[3]?.innerText || '',
-                persons_involved: cells[4]?.innerText || '',
-                school_resources: cells[5]?.innerText || '',
-                community_resources: cells[6]?.innerText || '',
-                collaborating_agencies: cells[7]?.innerText || '',
-                budget: cells[8]?.innerText || '',
-                means_of_verification: cells[9]?.innerText || '',
-                remarks: cells[10]?.innerText || ''
+                objectives: cells[1]?.innerText || '',
+                program_content_and_activities: cells[2]?.innerText || '',
+                service_delivery: cells[3]?.innerText || '',
+                partnerships_and_stakeholders: cells[4]?.innerText || '',
+                facilitators_and_trainers: cells[5]?.innerText || '',
+                program_start_and_end_dates: cells[6]?.innerText || '',
+                frequency_of_activities: cells[7]?.innerText || '',
+                community_resources: cells[8]?.innerText || '',
+                school_resources: cells[9]?.innerText || '',
+                risk_management_and_contingency_plans: cells[10]?.innerText || '',
+                sustainability_and_follow_up: cells[11]?.innerText || '',
+                promotion_and_awareness: cells[12]?.innerText || ''
             });
         }
     });
@@ -136,37 +142,154 @@ function collectFormData() {
     return formData;
 }
 
-// Update the re-submit button event listener
+// Update the re-submit button event listener to use update.php
 document.getElementById('resubmitBtn').addEventListener('click', async () => {
     if (!confirm('Are you sure you want to re-submit this report? It will be sent back for review.')) {
         return;
     }
     
+    // Disable the button to prevent double submission
+    const submitBtn = document.getElementById('resubmitBtn');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    
     try {
         const formData = collectFormData();
         
-        const response = await fetch('/coordinator/ReportManagement/actions/feedback/pdview/get.php', {
+        // Validate that at least one detail row has data
+        const hasValidData = formData.details.some(row => {
+            return Object.values(row).some(value => value && value.trim() !== '');
+        });
+        
+        if (!hasValidData) {
+            alert('Please add at least one row with program details before submitting.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            return;
+        }
+        
+        // Validate required main fields
+        const requiredFields = ['department', 'title_of_activity', 'participants', 'location'];
+        const missingFields = requiredFields.filter(field => !formData[field] || formData[field].trim() === '');
+        
+        if (missingFields.length > 0) {
+            alert(`Please fill in all required fields: ${missingFields.join(', ')}`);
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            return;
+        }
+        
+        const response = await fetch('/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/pdview/update.php', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
             body: JSON.stringify(formData)
         });
 
+        // Check if response is OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const result = await response.json();
 
         if (result.success) {
-            alert('Report updated successfully and status set to Pending!');
-            // Redirect to pending reports page or wherever appropriate
-            window.location.href = '/coordinator/ReportManagement/ReportManagement.html'; // Adjust this URL as needed
+            alert(result.message || 'Report updated successfully and status set to Pending!');
+            
+            // Optional: Show success message with details
+            if (result.data) {
+                console.log('Submission details:', result.data);
+            }
+            
+            // Redirect to pending reports page or dashboard
+            window.location.href = '/SYSTEM_VERSION_!/coordinator/Report/Reports.html';
         } else {
             alert('Failed to update report: ' + (result.message || 'Unknown error'));
+            console.error('Error details:', result.error_details);
         }
     } catch (error) {
         console.error('Error updating report:', error);
         alert('Error updating report: ' + error.message);
+    } finally {
+        // Re-enable the button
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
     }
 });
 
-// ===== FIXED ADD/DELETE ROW FUNCTIONS =====
+// Add a function to auto-save as draft (optional)
+let autoSaveTimeout;
+function autoSaveDraft() {
+    clearTimeout(autoSaveTimeout);
+    autoSaveTimeout = setTimeout(async () => {
+        try {
+            const formData = collectFormData();
+            // You can add a draft endpoint here if needed
+            console.log('Auto-saving draft...', formData);
+        } catch (error) {
+            console.log('Auto-save failed:', error);
+        }
+    }, 30000); // Auto-save every 30 seconds of inactivity
+}
+
+// Add event listeners for auto-save
+document.addEventListener('DOMContentLoaded', () => {
+    // Listen for input changes
+    const inputs = document.querySelectorAll('input, textarea, [contenteditable="true"]');
+    inputs.forEach(input => {
+        input.addEventListener('input', autoSaveDraft);
+        input.addEventListener('keyup', autoSaveDraft);
+    });
+});
+
+// Add validation before submission
+function validateFormData(formData) {
+    const errors = [];
+    
+    // Validate main fields
+    if (!formData.department || formData.department.trim() === '') {
+        errors.push('Department is required');
+    }
+    if (!formData.title_of_activity || formData.title_of_activity.trim() === '') {
+        errors.push('Title of Activity is required');
+    }
+    if (!formData.participants || formData.participants.trim() === '') {
+        errors.push('Participants is required');
+    }
+    if (!formData.location || formData.location.trim() === '') {
+        errors.push('Location is required');
+    }
+    
+    // Validate details
+    if (!formData.details || formData.details.length === 0) {
+        errors.push('At least one program detail row is required');
+    }
+    
+    return errors;
+}
+
+// Enhance collectFormData to include validation
+const originalCollectFormData = collectFormData;
+window.collectFormData = function() {
+    try {
+        const data = originalCollectFormData();
+        const errors = validateFormData(data);
+        
+        if (errors.length > 0) {
+            console.warn('Form validation warnings:', errors);
+        }
+        
+        return data;
+    } catch (error) {
+        console.error('Error collecting form data:', error);
+        throw error;
+    }
+};
+
+// ===== FIXED ADD/DELETE ROW FUNCTIONS FOR 13 COLUMNS =====
 document.addEventListener("DOMContentLoaded", function() {
     // Load the report
     loadReport();
@@ -175,14 +298,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const addRowBtn = document.querySelector(".add-row-btn");
     const deleteRowBtn = document.querySelector(".delete-row-btn");
     
-    // Add Row Function
+    // Add Row Function - UPDATED for 13 columns
     if (addRowBtn) {
         addRowBtn.addEventListener("click", function() {
             const tableBody = document.querySelector('.program-table tbody');
             if (tableBody) {
                 const newRow = document.createElement("tr");
-                // Create 11 editable cells
-                for (let i = 0; i < 11; i++) {
+                // Create 13 editable cells (matching table columns)
+                for (let i = 0; i < 13; i++) {
                     const td = document.createElement("td");
                     td.contentEditable = "true";
                     newRow.appendChild(td);
@@ -212,6 +335,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-
-// Remove the old button declarations and event listeners at the bottom
-// The old code at lines 85-112 should be replaced with the above

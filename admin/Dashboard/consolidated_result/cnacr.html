@@ -3,16 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Barangay Profile Report</title>
-    <link rel="stylesheet" href="cnacr.css">
+    <link rel="stylesheet" href="cnacr.css?v=20260520c">
     <link rel="stylesheet" href="print.css" media="print">
-    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="darkmode.css?v=20260520b">
 </head>
 <body>
 
   <!-- Header -->
         <iframe 
-            src="../../Profile/profile.html" 
+            src="/SYSTEM_VERSION_!/admin/Profile/profile.html" 
             id="headerFrame"
             frameborder="0"
             scrolling="no"
@@ -21,7 +37,7 @@
 
         <!-- Sidebar -->
         <iframe 
-            src="../../Nav/navigation.html" 
+            src="/SYSTEM_VERSION_!/admin/Nav/navigation.html" 
             id="sidebarFrame"
             frameborder="0"
             scrolling="no"
@@ -29,42 +45,60 @@
         </iframe>
 
 <div class="main-wrapper">                                  
-                                    <div class="act">
+                                        <div class="act">
                                             <!-- Select Barangay -->
-                                                <div class="table-card">
-                                                    <label for="barangaySelect">Select Barangay:</label>
-                                                    <select id="barangaySelect">
-                                                        <option value="select" selected>SELECT LOCATION</option>
-                                                        <option value="camagong">BRGY. CAMAGONG</option>
-                                                        <option value="aclan">BRGY. ACLAN</option>
-                                                        <option value="amontay">BRGY. AMONTAY</option>
-                                                        <option value="ataatahon">BRGY. ATAATAHON</option>
-                                                        <option value="barangay1">BRGY. 1</option>
-                                                        <option value="barangay2">BRGY. 2</option>
-                                                        <option value="barangay3">BRGY. 3</option>
-                                                        <option value="barangay4">BRGY. 4</option>
-                                                        <option value="barangay5">BRGY. 5</option>
-                                                        <option value="barangay6">BRGY. 6</option>
-                                                        <option value="barangay7">BRGY. 7</option>
-                                                        <option value="cubicubi">BRGY. CUBICUBI</option>
-                                                        <option value="culit">BRGY. CULIT</option>
-                                                        <option value="jaguimitan">BRGY. JAGUIMITAN</option>
-                                                        <option value="kinabjangan">BRGY. KINABJANGAN</option>
-                                                        <option value="punta">BRGY. PUNTA</option>
-                                                        <option value="santaana">BRGY. SANTA ANA</option>
-                                                        <option value="talisay">BRGY. TALISAY</option>
-                                                        <option value="triangulo">BRGY. TRIANGULO</option>
-                                                    </select>
-                                                </div>
-                                        
+                                            <div class="table-card">
+                                                <label for="barangaySelect">Select Barangay:</label>
+                                                <select id="barangaySelect">
+                                                    <option value="select" selected>SELECT LOCATION</option>
+                                                    <option value="camagong">BRGY. CAMAGONG</option>
+                                                    <option value="aclan">BRGY. ACLAN</option>
+                                                    <option value="amontay">BRGY. AMONTAY</option>
+                                                    <option value="ataatahon">BRGY. ATAATAHON</option>
+                                                    <option value="barangay1">BRGY. 1</option>
+                                                    <option value="barangay2">BRGY. 2</option>
+                                                    <option value="barangay3">BRGY. 3</option>
+                                                    <option value="barangay4">BRGY. 4</option>
+                                                    <option value="barangay5">BRGY. 5</option>
+                                                    <option value="barangay6">BRGY. 6</option>
+                                                    <option value="barangay7">BRGY. 7</option>
+                                                    <option value="cubicubi">BRGY. CUBICUBI</option>
+                                                    <option value="culit">BRGY. CULIT</option>
+                                                    <option value="jaguimitan">BRGY. JAGUIMITAN</option>
+                                                    <option value="kinabjangan">BRGY. KINABJANGAN</option>
+                                                    <option value="punta">BRGY. PUNTA</option>
+                                                    <option value="santaana">BRGY. SANTA ANA</option>
+                                                    <option value="talisay">BRGY. TALISAY</option>
+                                                    <option value="triangulo">BRGY. TRIANGULO</option>
+                                                </select>
+                                            </div>
 
-                                                <div class="button-container">
-                                                    <button class="result_report" onclick="window.location.href='/admin/Dashboard/consolidated_result/Report/cnacr.php'">
-  Create Report
-</button>                                  
-                                                    <button id="downloadPdf">Download PDF</button>
-                                                </div>
-                                        </div>  
+                                            <!-- Add Year Filter -->
+                                            <div class="table-card">
+                                                <label for="yearSelect">Select Year:</label>
+                                                <select id="yearSelect">
+                                                    <option value="all" selected>SELECT</option>
+                                                    <option value="2025">2025</option>
+                                                    <option value="2026">2026</option>
+                                                    <option value="2027">2027</option>
+                                                    <option value="2028">2028</option>
+                                                    <option value="2029">2029</option>
+                                                    <option value="2030">2030</option>
+                                                    <option value="2031">2031</option>
+                                                    <option value="2032">2032</option>
+                                                    <option value="2033">2033</option>
+                                                    <option value="2034">2034</option>
+                                                    <option value="2035">2035</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="button-container">
+                                                <button hidden class="result_report" onclick="window.location.href='/SYSTEM_VERSION_!/admin/Dashboard/consolidated_result/Report/cnacr.php'">
+                                                    Create Report
+                                                </button>                                  
+                                                <button id="downloadPdf">Download PDF</button>
+                                            </div>
+                                        </div>
 
                                    
 
@@ -479,20 +513,24 @@
             // Get references to the select and the td
             const barangaySelect = document.getElementById('barangaySelect');
             const barangayNameTd = document.getElementById('barangayName');
+            const yearSelect = document.getElementById('yearSelect');
+
 
             // Listen for changes on the select
             barangaySelect.addEventListener('change', function() {
                 // Get the selected option's text (not value)
                 const selectedText = barangaySelect.options[barangaySelect.selectedIndex].text;
+                const selectedYear = yearSelect.options[yearSelect.selectedIndex].text;
                 
                 // Update the td
                 barangayNameTd.textContent = selectedText;
+                
             });
             </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="./js/get.js"></script>
+<script src="./js/get.js?v=20260520a"></script>
 <script src="./js/download.js"></script>
 <script src="./darkmode.js"></script>
 

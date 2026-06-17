@@ -1,6 +1,6 @@
 /* ===== Layout Frames (FIXED + PERFECT ALIGNMENT) ===== */
 :root {
-  --sidebar-w: 150px;
+  --sidebar-w: 100px;
   --header-h: 60px;
 }
 #sidebarFrame {

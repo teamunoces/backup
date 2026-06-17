@@ -1,6 +1,7 @@
 /* ================= DASHBOARD DARK MODE ================= */
 
 function applyDarkMode(enable) {
+    document.documentElement.classList.toggle('dark-mode', enable);
     document.body.classList.toggle('dark-mode', enable);
 
     const headerFrame = document.getElementById('headerFrame');

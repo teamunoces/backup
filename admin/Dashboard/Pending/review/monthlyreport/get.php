@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 $servername = "localhost";
 $username = "root"; 
 $password = ""; 
-$dbname = "ces_reports_db";
+$dbname = "ces_database";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -49,7 +49,7 @@ try {
                     created_by_name,
                     feedback,
                     status
-                FROM mar_header 
+                FROM report_mar_header 
                 WHERE id = ?";
 
     $stmt = $conn->prepare($main_sql);
@@ -73,7 +73,7 @@ try {
                         financial_report,
                         recommendations,
                         plans_for_next_months
-                    FROM mar_table 
+                    FROM report_mar_table 
                     WHERE report_id = ?";
 
     $stmt_details = $conn->prepare($details_sql);

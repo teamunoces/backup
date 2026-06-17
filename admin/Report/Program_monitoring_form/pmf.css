@@ -1,0 +1,471 @@
+
+/* ===== Frames (Layout Shell) ===== */
+#sidebarFrame {
+    width: 100px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 100px;
+    width: calc(100% - 100px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+.logo-left2 {
+    height: 80px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* ===== Office Title ===== */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.form-container {
+    background: #fff;
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: capitalize;
+}
+
+h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+/* Header Info Styling */
+.header-info {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 8px;
+    align-items: flex-end;
+}
+
+.input-group label {
+    font-weight: bold;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.input-group input {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    outline: none;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    font-size: 0.9em;
+    vertical-align: top;
+}
+
+th {
+    background-color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.center-text {
+    text-align: center;
+}
+
+tbody tr {
+    height: 30px;
+}
+
+/* Checkbox alignment */
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.checkbox-cell {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.followUp {
+    width: 70px;
+    padding: 4px;
+    text-align: center;
+    border: none;
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 0.9em;
+    resize: vertical;
+}
+
+/* Paper Lines Textarea Styling */
+.paper-lines {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size:  0.9em;
+    line-height: 30px;
+    padding: 0;
+    background-attachment: local;
+    
+    /* Creates the horizontal lines */
+    background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
+    background-size: 100% 30px;
+    
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.paper-lines::placeholder {
+    color: #ccc;
+    font-style: Arial, sans-serif;
+}
+
+/* Footer Underlines */
+.footer-notes {
+    margin-top: 20px;
+}
+
+.button-group {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.btn-print {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-submit {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-reset {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* This hides the buttons when you print the page */
+@media print {
+    .no-print {
+        display: none;
+    }
+    body {
+        background-color: white;
+        padding: 0;
+    }
+    .form-container {
+        box-shadow: none;
+        width: 100%;
+        max-width: none;
+    }
+    
+    .paper-lines {
+        background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
+        background-size: 100% 30px;
+        border: none;
+    }
+}
+
+#feedbackTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    table-layout: auto; /* Ensures table expands vertically */
+}
+
+#feedbackTable th, #feedbackTable td {
+    border: 1px solid #000;
+    padding: 10px;
+    vertical-align: top;
+}
+
+#feedbackTable th {
+    background-color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* THE FIX FOR THE TEXTAREAS */
+.feedbackSummary, .feedbackAction {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 2px;
+    padding: 8px;
+    font-family: inherit;
+    font-size:  0.9em;
+    resize: none; /* Turn off manual resize, we'll handle it automatically */
+    display: block;
+    overflow: hidden; /* Hide scrollbars to keep it clean */
+    min-height: 50px; /* Starting height */
+}
+
+.feedbackSummary:focus, .feedbackAction:focus {
+    outline: none;
+}
+
+#otherIssues {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    padding: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    resize: none;
+    display: block;
+    overflow: hidden;
+    min-height: 38px; /* Standard single-line height */
+}
+
+#otherIssues:focus {
+    outline: none;
+    background-color: #f9f9f9; /* Subtle hint that you are typing here */
+}
+
+/* Report Actions */
+.form-actions {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 30px 0 40px;
+}
+
+.form-actions .draft-button {
+    justify-self: start;
+}
+
+.form-actions .clear-button {
+    justify-self: center;
+}
+
+.form-actions .submit-button {
+    justify-self: end;
+}
+
+/* Submit Button */
+.submit-button {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: 1px solid #1a1a1a;
+    background: linear-gradient(to right, #63b32e, #3d7025);
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    margin: 0;
+    min-width: 150px;
+}
+
+.submit-button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 640px) {
+    .form-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions .draft-button,
+    .form-actions .clear-button,
+    .form-actions .submit-button {
+        justify-self: stretch;
+        width: 100%;
+    }
+}
+
+/* ===== Laptop / PC Responsive Layout ===== */
+@media (min-width: 769px) {
+    body {
+        padding: 80px clamp(18px, 2vw, 32px) 40px calc(100px + clamp(18px, 2vw, 32px));
+        margin: 0;
+    }
+
+    .form-container {
+        width: min(100%, 900px);
+        margin: 0 auto;
+        box-sizing: border-box;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 1366px) and (min-width: 769px) {
+    .form-container {
+        padding: 32px;
+    }
+
+    .logo-left {
+        height: 76px;
+    }
+
+    .logo-left2,
+    .logos-right img {
+        height: 68px;
+    }
+
+    .college-info h1 {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+    table,
+    #feedbackTable {
+        min-width: 820px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+
+    body {
+        padding: 80px 14px 28px;
+    }
+
+    .form-container {
+        width: 100%;
+        padding: 22px;
+        overflow-x: auto;
+    }
+
+    .header-content,
+    .input-group,
+    .button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

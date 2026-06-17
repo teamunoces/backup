@@ -1,0 +1,144 @@
+/* ================= GLOBAL DARK MODE ================= */
+
+body.dark-mode {
+    background-color: #000000 !important;
+    color: #e4e4e4 !important;
+}
+
+/* ================= FRAMES ================= */
+
+body.dark-mode #sidebarFrame,
+body.dark-mode #headerFrame {
+    background-color: #000000 !important;
+    box-shadow: none !important;
+}
+
+/* ================= CONTAINER ================= */
+
+body.dark-mode .report-container,
+body.dark-mode .container,
+body.dark-mode .form-container {
+    background-color: #2c2c2c !important;
+    color: #e4e4e4 !important;
+    border: 1px solid #444 !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* ================= HEADERS & TEXT ================= */
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode label,
+body.dark-mode .label,
+body.dark-mode .section-header,
+body.dark-mode .office-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .college-info h1 {
+    color: #ffffff !important;
+}
+
+body.dark-mode .college-info p {
+    color: #bbb !important;
+}
+
+body.dark-mode .college-info a {
+    color: #3498db !important;
+}
+
+body.dark-mode .double-line {
+    border-top-color: #444 !important;
+}
+
+/* ================= TEXTAREA ================= */
+
+body.dark-mode .line-input {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+    border-radius: 4px;
+    padding: 12px !important;
+}
+
+body.dark-mode .line-input:focus {
+    background-color: #252525 !important;
+    border-color: #3498db !important;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3) !important;
+    outline: none !important;
+}
+
+body.dark-mode .line-input::placeholder {
+    color: #888 !important;
+}
+
+/* ================= INPUTS ================= */
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    background-color: #252525 !important;
+    border-color: #3498db !important;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3) !important;
+    outline: none !important;
+}
+
+body.dark-mode ::placeholder {
+    color: #888 !important;
+}
+
+/* ================= BUTTON ================= */
+
+body.dark-mode .submit-button {
+    background: linear-gradient(to right, #63b32e, #3d7025) !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5) !important;
+    filter: saturate(0.9);
+}
+
+body.dark-mode .submit-button:hover {
+    opacity: 0.9;
+}
+
+/* ================= LISTS ================= */
+
+body.dark-mode .report-list li {
+    color: #e4e4e4 !important;
+}
+
+/* ================= IMAGES ================= */
+
+body.dark-mode img {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* ================= REMOVE WHITE GAPS ================= */
+
+html.dark-mode,
+body.dark-mode {
+    background-color: #000000 !important;
+}
+
+/* ================= PRINT FIX ================= */
+
+@media print {
+    body.dark-mode,
+    body.dark-mode .report-container,
+    body.dark-mode input,
+    body.dark-mode textarea {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+        border-color: black !important;
+    }
+}

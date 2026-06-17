@@ -21,10 +21,24 @@ body.dark-mode .act {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
 }
 
-body.dark-mode .table-card select {
-    background: #121212 !important;
+body.dark-mode .table-card select,
+body.dark-mode #barangaySelect,
+body.dark-mode #yearSelect {
+    background: #1f5f13 !important;
     color: #ffffff !important;
-    border: 1px solid #555 !important;
+    border: 1px solid rgba(255, 255, 255, 0.42) !important;
+}
+
+body.dark-mode #barangaySelect option,
+body.dark-mode #yearSelect option {
+    background: #1f5f13 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode #barangaySelect option:checked,
+body.dark-mode #yearSelect option:checked {
+    background: #59af29 !important;
+    color: #ffffff !important;
 }
 
 /* 4. The Main Container (The "Paper") */
@@ -43,7 +57,7 @@ body.dark-mode table {
 
 body.dark-mode th {
     background-color: #1a1a1a !important; /* Darker than the container */
-    color: #00ff88 !important; /* Neon Green for contrast */
+    color: #acc6aa !important;
     border: 1px solid #444 !important;
 }
 
@@ -69,17 +83,17 @@ body.dark-mode .pill-label,
 body.dark-mode .green-banner, 
 body.dark-mode .section-banner, 
 body.dark-mode .banner {
-    background: linear-gradient(to right, #008f4c, #00ff88) !important;
-    color: #000 !important; /* Black text on neon green for readability */
+    background: linear-gradient(to right, #254911, #59af29) !important;
+    color: #ffffff !important;
     border: 1px solid #444 !important;
 }
 
 /* 7. Button styling */
 body.dark-mode .button-container button {
-    border-color: #00ff88 !important;
-    color: #00ff88 !important;
+    border-color: #59af29 !important;
+    color: #acc6aa !important;
 }
 
 body.dark-mode .button-container button:hover {
-    background-color: rgba(0, 255, 136, 0.1) !important;
+    background-color: rgba(89, 175, 41, 0.16) !important;
 }

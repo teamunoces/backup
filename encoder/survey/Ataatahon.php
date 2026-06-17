@@ -6,6 +6,7 @@ $barangay = isset($_GET['barangay']) ? htmlspecialchars($_GET['barangay']) : "at
 <html lang="ceb">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Porma sa Pag-ila sa Panginahanglanon sa Komunidad</title>
     <link rel="stylesheet" href="survey.css">
 </head>

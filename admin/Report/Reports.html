@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Report Dashboard</title>
-    <link rel="stylesheet" href="Reports.css">
+  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="Reports.css">
 </head>
 <body>
     <!-- Header -->
@@ -26,46 +43,116 @@
         title="Navigation Sidebar">
     </iframe>
 
-    <!-- Reports Content -->
-    <div class="container">
+   <!-- Main Dashboard Content -->
+    <div class="dashboard-main">
+        <!-- Report Cards Row -->
         <div class="row outer-border">
-            <button class="card olive">
-                <div class="image-box" onclick="window.location.href='./ConsolidatedReport/cnacr.php?type=Consolidated Report'">
-                    <img src="/coordinator/Report/reportcardpic/cnacr.png" alt="CNACR">
+            <button class="card olive" onclick="window.location.href='./ConsolidatedReport/cnacr.php?type=Consolidated Report'">
+                <div class="image-box">
+                    <img src="/SYSTEM_VERSION_!/coordinator/Report/reportcardpic/cnacr.png" alt="Community Needs Assessment">
                 </div>
                 <p>Community Needs Assessment Consolidated Report</p>
             </button>
+
             <button class="card red" onclick="window.location.href='./3ydpreport/3ydpreport.php'">
                 <div class="image-box">
-                    <img src="/coordinator/Report/reportcardpic/3ydp.png" alt="3YDP">
+                    <img src="/SYSTEM_VERSION_!/coordinator/Report/reportcardpic/3ydp.png" alt="3 Year Development Plan">
                 </div>
-                <p>3 year Development Plan</p>
+                <p>3 Year Development Plan</p>
             </button>
-            <button class="card purple" onclick="window.location.href='./MonthlyAccomplishmentReport/mar.php'">
+
+            <button class="card purple" onclick="window.location.href='./MonthlyAccomplishmentReport/marreport.php'">
                 <div class="image-box">
-                    <img src="/coordinator/Report/reportcardpic/mar.png" alt="MAR">
+                    <img src="/SYSTEM_VERSION_!/coordinator/Report/reportcardpic/mar.png" alt="Monthly Accomplishment Report">
                 </div>
                 <p>MONTHLY ACCOMPLISHMENT REPORT</p>
             </button>
+
             <button class="card orange" onclick="window.location.href='./ProgramDesign/programdesign.php'">
                 <div class="image-box">
-                    <img src="/coordinator/Report/reportcardpic/pd.png" alt="Program Design">
+                    <img src="/SYSTEM_VERSION_!/coordinator/Report/reportcardpic/pd.png" alt="Program Design">
                 </div>
                 <p>PROGRAM DESIGN</p>
             </button>
+
+            <button>
+                <div class="card navy" onclick="window.location.href='./Program_monitoring_form/pmfreport.php'">
+                    <div class="image-box">
+                        <img src="/SYSTEM_VERSION_!/coordinator/Report/reportcardpic/prog.jpg" alt="Program Monitoring Form">
+                    </div>
+                    <p>PROGRAM MONITORING FORM</p>
+                </div>
+            </button>
+
+            <button>
+                <div class="card green" onclick="window.location.href='./Evaluation_sheet_for_extension_services/evaluation.php'">
+                    <div class="image-box">
+                        <img src="/SYSTEM_VERSION_!/coordinator/Report/reportcardpic/eval.png" alt="Evaluation Sheet for Extension Services">
+                    </div>
+                    <p>EVALUATION SHEET FOR EXTENSION SERVICES</p>
+                </div>
+            </button>
+
+            <button>
+                <div class="card teal" onclick="window.location.href='./Certificate_of_appearence/certificate.php'">
+                    <div class="image-box">
+                        <img src="/SYSTEM_VERSION_!/coordinator/Report/reportcardpic/certapp.png" alt="Evaluation Sheet for Extension Services">
+                    </div>
+                    <p>CERTIFICATE OF APPEARANCE</p>
+                </div>
+            </button>
+
+
+             <button>
+                <div class="card indigo" onclick="window.location.href='./Reflection_Paper/reflection.php'">
+                    <div class="image-box">
+                        <img src="/SYSTEM_VERSION_!/coordinator/Report/reportcardpic/ref.png" alt="Evaluation Sheet for Extension Services">
+                    </div>
+                    <p>MONTHLY ACCOMPLISHMENT REPORT- REFLECTION PAPER</p>
+                </div>
+            </button>
+
+             <button>
+                <div class="card cyan" onclick="window.location.href='./Narrative_Report/narrative.php'">
+                    <div class="image-box">
+                        <img src="/SYSTEM_VERSION_!/coordinator/Report/reportcardpic/narra.png" alt="Evaluation Sheet for Extension Services">
+                    </div>
+                    <p>MONTHLY ACCOMPLISHMENT REPORT- NARRATIVE REPORT</p>
+                </div>
+            </button>
+            
+            
         </div>
         <div class="section-green">
         <div class="reports-section">
         <div class="filter-row">
-            <span class="label">Type:</span>
-           <select id="adminFilterSelect">
+            <div class="filter-group">
+                <span class="label">Type:</span>
+                <select id="adminFilterSelect">
                     <option>All type</option>
                     <option value="3 Year Development Plan">3 Year Development Plan</option>
                     <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
                     <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
                     <option value="Program Design">Program Design</option>
-                    <option value="CNACR">Commnunity Needs Assessment Consolidated Results</option>
+                    <option value="CNACR">Community Needs Assessment Consolidated Results</option>
+                    <option value="Program Monitoring Form">Program Monitoring Form</option>
+                    <option value="Evaluation Sheet for Extension Services">Evaluation Sheet for Extension Services</option>
+                    <option value="Certificate of Appearance">Certificate of Appearance</option>
+                    <option value="Monthly Accomplishment Report- Reflection Paper">Monthly Accomplishment Report- Reflection Paper</option>
+                    <option value="Monthly Accomplishment Report- Narrative Report">Monthly Accomplishment Report- Narrative Report</option>
                 </select>
+            </div>
+            <div class="filter-group">
+                <span class="label">From:</span>
+                <input type="date" id="adminDateFrom">
+            </div>
+            <div class="filter-group">
+                <span class="label">To:</span>
+                <input type="date" id="adminDateTo">
+            </div>
+            <button type="button" id="adminShowAllBtn" class="show-all-btn" onclick="showAllAdminReports()">
+                Show All
+            </button>
         </div>
     </div>
     </div>
@@ -146,8 +233,7 @@
         </div>
     </div>
 
-    <script src="darkmode.js"></script>
-    <!-- CORRECT PATH: Go up one level to admin, then into ReportManagement/js/get.js -->
-    <script src="../ReportManagement/js/get.js"></script>
+    <script src="/SYSTEM_VERSION_!/admin/Report/darkmode.js"></script>
+    <script src="/SYSTEM_VERSION_!/admin/Report/reports.js?v=20260522a"></script>
 </body>
 </html>

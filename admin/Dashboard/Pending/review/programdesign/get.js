@@ -15,7 +15,7 @@ async function loadReport() {
     }
 
     try {
-        const response = await fetch(`/admin/Dashboard/Pending/review/programdesign/get.php?id=${reportId}`);
+        const response = await fetch(`/SYSTEM_VERSION_!/admin/Dashboard/Pending/review/programdesign/get.php?id=${reportId}`);
         const data = await response.json();
 
         console.log("Fetched data:", data);
@@ -31,20 +31,22 @@ async function loadReport() {
             const tableBody = document.querySelector('.program-table tbody');
             tableBody.innerHTML = ''; // clear existing rows
 
-            data.details.forEach(row => {
+           data.details.forEach(row => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td contenteditable="true">${row.program || ''}</td>
-                    <td contenteditable="true">${row.milestones || ''}</td>
-                    <td contenteditable="true">${row.duration || ''}</td>
-                    <td contenteditable="true">${row.objectives || ''}</td>
-                    <td contenteditable="true">${row.persons_involved || ''}</td>
-                    <td contenteditable="true">${row.school_resources || ''}</td>
-                    <td contenteditable="true">${row.community_resources || ''}</td>
-                    <td contenteditable="true">${row.collaborating_agencies || ''}</td>
-                    <td contenteditable="true">${row.budget || ''}</td>
-                    <td contenteditable="true">${row.means_of_verification || ''}</td>
-                    <td contenteditable="true">${row.remarks || ''}</td>
+                    <td>${row.program || ''}</td>
+                    <td>${row.objectives || ''}</td>
+                    <td>${row.program_content_and_activities || ''}</td>
+                    <td>${row.service_delivery || ''}</td>
+                    <td>${row.partnerships_and_stakeholders || ''}</td>
+                    <td>${row.facilitators_and_trainers || ''}</td>
+                    <td>${row.program_start_and_end_dates || ''}</td>
+                    <td>${row.frequency_of_activities || ''}</td>
+                    <td>${row.community_resources || ''}</td>
+                    <td>${row.school_resources || ''}</td>
+                    <td>${row.risk_management_and_contingency_plans || ''}</td>
+                    <td>${row.sustainability_and_follow_up || ''}</td>
+                    <td>${row.promotion_and_awareness || ''}</td>
                 `;
                 tableBody.appendChild(tr);
             });

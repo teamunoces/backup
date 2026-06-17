@@ -1,7 +1,7 @@
 <?php
 // Database configuration
 $host = 'localhost';
-$dbname = 'ces_reports_db';
+$dbname = 'ces_database';
 $username = 'root'; // Change this to your actual username
 $password = '';     // Change this to your actual password
 
@@ -29,14 +29,14 @@ if (isset($_GET['mar_id']) && !empty($_GET['mar_id'])) {
     if ($pdo) {
         try {
             // Fetch header data from mar_header table - using correct column names
-            $headerStmt = $pdo->prepare("SELECT * FROM mar_header WHERE id = :mar_id");
+            $headerStmt = $pdo->prepare("SELECT * FROM report_mar_header WHERE id = :mar_id");
             $headerStmt->execute([':mar_id' => $mar_id]);
             $headerData = $headerStmt->fetch(PDO::FETCH_ASSOC);
             
             if ($headerData) {
                 // Fetch detail data from mar_table - using correct column names
                 // Note: report_id in mar_table references id in mar_header
-                $detailStmt = $pdo->prepare("SELECT * FROM mar_table WHERE report_id = :mar_id");
+                $detailStmt = $pdo->prepare("SELECT * FROM report_mar_table WHERE report_id = :mar_id");
                 $detailStmt->execute([':mar_id' => $mar_id]);
                 $detailData = $detailStmt->fetchAll(PDO::FETCH_ASSOC);
                 

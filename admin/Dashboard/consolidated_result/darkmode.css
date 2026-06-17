@@ -25,15 +25,26 @@ body.dark-mode .table-card label {
     color: #e0e0e0;
 }
 
-body.dark-mode select {
-    background-color: #3d3d3d;
-    border: 1px solid #555;
-    color: #e0e0e0;
+body.dark-mode select,
+body.dark-mode #barangaySelect,
+body.dark-mode #yearSelect {
+    color-scheme: dark;
+    background-color: #1f5f13 !important;
+    border: 1px solid rgba(255, 255, 255, 0.42) !important;
+    color: #ffffff !important;
 }
 
-body.dark-mode select option {
-    background-color: #3d3d3d;
-    color: #e0e0e0;
+body.dark-mode select option,
+body.dark-mode #barangaySelect option,
+body.dark-mode #yearSelect option {
+    background-color: #1f5f13 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode #barangaySelect option:checked,
+body.dark-mode #yearSelect option:checked {
+    background-color: #59af29 !important;
+    color: #ffffff !important;
 }
 
 /* Buttons */

@@ -8,8 +8,25 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
   <title>3-Year Development Plan</title>
-  <link rel="stylesheet" href="3ydpreport.css">
+  <link rel="stylesheet" href="../shared/draft.css?v=20260520a">
+  <link rel="stylesheet" href="3ydpreport.css?v=20260520a">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="darkmode.css">
 </head>
@@ -18,13 +35,14 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
     <iframe src="../../Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
 
     <!-- Sidebar -->
-    <iframe src="/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+    <iframe  src="../../Nav/navigation.html"  id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
 
     <div class="container">
        
         <header>
             <div class="header-content">
                 <img src="../images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                <img src="../images/Ceslogo.png" alt="Ces Logo" class="logo-left2">
                 <div class="college-info">
                     <h1>Saint Michael College of Caraga</h1>
                     <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
@@ -82,18 +100,34 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
             <section class="table-section">
                 <div class="table-wrapper">
                     <table id="programPlanTable">
-                        <thead>
+                         <thead>
                             <tr>
-                                <th rowspan="5">Program</th>
-                                <th rowspan="5">Objectives</th>
-                                <th rowspan="5">Strategies and Action Plans</th>
-                                <th rowspan="5">Resources from the School</th>
-                                <th rowspan="5">Resources from the Community</th> 
-                                <th rowspan="5">Budget</th>     
-                                <th rowspan="5">Means of Verification</th>     
-                                <th rowspan="5">Time Frame</th>
-                            </tr>
-                        </thead>
+                                                <th rowspan="2">Program</th>
+                                                <th rowspan="2">Objectives</th>
+                                                <th rowspan="2">Strategies and<br>Action Plans</th>
+                                                <th colspan="3">Resources Needed</th>
+                                                <th rowspan="2">Means of<br>Verification</th>
+                                                <th rowspan="2">Time<br>Frame</th>
+                                            </tr>
+
+                                            <tr>
+                                                <th>
+                                                    Resources from the School<br>
+                                                    (Human Resources,<br>
+                                                    Collaborating Agencies<br>
+                                                    and Equipment)
+                                                </th>
+
+                                                <th>
+                                                    Resources from the Community<br>
+                                                    (Human Resources,<br>
+                                                    Collaborating Agencies<br>
+                                                    and Equipment)
+                                                </th>
+
+                                                <th>Budget and funding</th>
+                                            </tr>
+                            </thead>
                         <tbody>
                             <tr>
                                 <td><textarea rows="5" placeholder="..."></textarea></td>
@@ -115,10 +149,11 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 
             <!-- Submit Buttons -->
             <div class="form-actions">
-                <button type="submit" class="btn btn-submit">Submit</button>
-                <button type="button" class="btn btn-clear">Clear</button>
+                <button type="button" class="btn btn-draft draft-button">Save Draft</button>
+                <button type="button" class="btn btn-clear clear-button">Clear</button>
+                <button type="submit" class="btn btn-submit submit-button">Submit</button>
                 <button type="button" class="btn recommendation-btn">
-                    💡Recommendations
+                    AI Recommendations
                 </button>
             </div>
         </form>
@@ -138,9 +173,10 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
     const reportType = "<?php echo $reportType; ?>";
     console.log(reportType);
     </script>
-    <script src="./AI_RECOMMENDATION/AI.js" defer></script>
-    <script src="./js/post.js" defer></script>
+    <script src="../shared/draft-utils.js?v=20260520a" defer></script>
+    <script src="./js/post.js?v=20260520a" defer></script>
     <script src="paperlines.js"></script>
     <script src="./darkmode.js"></script>
+    <script src="./AI_RECOMMENDATION/AI.js?v=20260526c" defer></script>
 </body>
 </html>

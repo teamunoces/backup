@@ -1,16 +1,19 @@
 /* ================= DASHBOARD DARK MODE ================= */
 
 function applyDarkMode(enable) {
+    document.documentElement.classList.toggle('dark-mode', enable);
     document.body.classList.toggle('dark-mode', enable);
 
     const headerFrame = document.getElementById('headerFrame');
     const sidebarFrame = document.getElementById('sidebarFrame');
 
     if (headerFrame?.contentDocument?.body) {
+        headerFrame.contentDocument.documentElement.classList.toggle('dark-mode', enable);
         headerFrame.contentDocument.body.classList.toggle('dark-mode', enable);
     }
 
     if (sidebarFrame?.contentDocument?.body) {
+        sidebarFrame.contentDocument.documentElement.classList.toggle('dark-mode', enable);
         sidebarFrame.contentDocument.body.classList.toggle('dark-mode', enable);
     }
 }

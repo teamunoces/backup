@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function updatePendingCount() {
     try {
-        const response = await fetch('./get_barangays.php?action=pending');
+        const response = await fetch('/SYSTEM_VERSION_!/admin/Dashboard/get_barangays.php?action=pending');
         const data = await response.json();
 
         // Update the div showing the number

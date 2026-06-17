@@ -292,7 +292,7 @@ async function handleResubmit() {
         if (result.success) {
             alert('Report updated successfully and status set to Pending!');
             // Redirect to pending reports page
-            window.location.href = '/coordinator/ReportManagement/ReportManagement.html';
+            window.location.href = '/SYSTEM_VERSION_!/coordinator/Report/Reports.html';
         } else {
             alert('Failed to update report: ' + (result.message || 'Unknown error'));
         }

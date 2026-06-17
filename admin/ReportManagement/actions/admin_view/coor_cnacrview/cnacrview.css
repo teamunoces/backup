@@ -10,12 +10,12 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    margin-left: 150px; /* Account for fixed sidebar */
+    margin-left: 100px; /* Account for fixed sidebar */
 }
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -31,9 +31,9 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -52,12 +52,17 @@ body {
     height: 90px;
     width: auto;
 }
+.logo-left2 {
+    height: 80px;
+    width: auto;
+}
 
 .logos-right {
     display: flex;
     gap: 20px;
     align-items: center;
 }
+
 
 .logos-right img {
     height: 80px;
@@ -117,6 +122,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     width: calc(100% - 40px);
+    pointer-events: none;
 }
 
 h1 {
@@ -237,115 +243,137 @@ footer {
     width: auto;
 }
 
-/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+/* ===== 3. Approvals Section ===== */
 .approvals {
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-    margin-top: 50px;
     width: 100%;
-}
-
-.approval-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-}
-
-.signature-block {
-    flex: 1;
+    max-width: none;
+    margin: 50px 0 0 0;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center names/titles */
+    gap: 45px;
+    font-family: "Calibri", "Calibri Light", Arial, sans-serif;
+    font-size: 10pt;
+}
+
+/* labels: Prepared by, Recommending Approval, Approved by */
+.approvals .label,
+.signature-block .label {
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+/* prepared by block stays on the left */
+.ces-head-block {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+/* ===== CES HEAD (Prepared by) ===== */
+#ces_head {
+    display: inline-block;
+    border-bottom: 1px solid #000;
+
+    font-weight: normal;
+    text-transform: uppercase;
+
+    padding: 0 12px;
+    min-width: 180px;   /* short but visible */
+    max-width: 260px;   /* prevents long line */
+    width: auto;
+}
+
+/* ===== TITLE ===== */
+.ces-head {
+    display: block;
+    margin-top: 6px;
+    font-weight: bold;
+    border: none !important;
+}
+
+/* ===== CENTER SIGNATURES ===== */
+.signature-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
-.signature-block .label {
-    align-self: flex-start; /* "Noted by" stays left */
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-
+/* ===== NAME (Recommending / Approved) ===== */
 .signature-block .name {
-    width: 80%;
-    border-bottom: 1px solid #000; /* Signature Line */
+    display: inline-block;   /* key for short line */
+    border-bottom: 1px solid #000;
+
     font-weight: bold;
     text-transform: uppercase;
+
+    padding: 0 15px;
+    min-width: 260px;   /* shorter than before */
+    max-width: 340px;   /* prevents over-stretch */
+    width: auto;
+
     margin-bottom: 5px;
-    min-height: 20px;
 }
 
+/* ===== TITLE ===== */
 .signature-block .title {
-    font-size: 0.9rem;
+    margin-top: 6px;
     font-weight: bold;
 }
-.name{
-    border-bottom: 1px solid #000;
-    width: 200px; /* adjust size */
+
+/* remove old conflicting rule */
+.name {
+    width: auto;
+}
+/* ===== 4. Document Info Table (COMPACT VERSION) ===== */
+.document-info {
+    margin-top: 30px;   /* reduced space */
+    width: 22%;         /* smaller overall width */
 }
 
-/* ===== 4. Document Info Table ===== */
+/* Table */
 .doc-header {
     width: auto;
-    margin-right: auto;
-}
-
-.doc-header td {
-    border: 1px solid #000;
-    padding: 5px 10px;
-}
-
-.doc-header .label {
-    background-color: #002060;
-    color: #fff;
-    width: 25%;
-    font-size: 11px;
-}
-
-.doc-header .value {
-    width: 70%;
-    font-size: 11px;
-    text-align: left;
-}
-
-.document-info {
-    margin-top: 50px;
-    width: 30%;
-}
-
-/* Table Styling */
-.doc-header {
     border-collapse: collapse;
     font-family: Arial, sans-serif;
-    font-size: 11px;
+    font-size: 9.5px;   /* smaller text */
     border: 1px solid #d1d1d1;
 }
 
+/* ALL CELLS */
+.doc-header td {
+    border: 1px solid #d1d1d1;
+    padding: 2px 6px;   /* reduced padding */
+}
+
+/* LEFT LABEL (BLUE) */
 .doc-header td.label {
     background-color: #002060;
-    color: white;
+    color: #fff;
     font-weight: bold;
-    padding: 4px 8px;
-    border: 1px solid #d1d1d1;
-    text-align: left;
+    font-size: 9.5px;
     white-space: nowrap;
-    width: 100px;
+    width: 85px;        /* narrower */
+    padding: 2px 6px;
 }
 
+/* COLON */
 .doc-header td:nth-child(2) {
     width: 2%;
-    padding: 0 1px;
+    padding: 0 2px;
     font-weight: bold;
-    border-top: 1px solid #d1d1d1;
-    border-bottom: 1px solid #d1d1d1;
 }
 
+/* VALUE */
 .doc-header td.value {
-    padding: 4px 10px;
-    border: 1px solid #d1d1d1;
-    min-width: 120px;
+    padding: 2px 6px;
+    min-width: 90px;    /* smaller */
+    font-size: 9.5px;
 }
 
+/* INPUT / TEXT */
 .doc-header td.value input, 
 .doc-header td.value p {
     border: none;
@@ -358,6 +386,7 @@ footer {
     width: 100%;
 }
 
+/* DISABLED INPUT */
 .doc-header td.value input:disabled {
     color: black;
     cursor: default;
@@ -546,4 +575,21 @@ footer {
     .section-content {
         padding: 15px 0 10px 20px;
     }
+}
+.approvals,
+.approvals * {
+    font-weight: bold !important;
+}
+
+.approvals #ces_head,
+.approvals .signature-block .name {
+    display: inline-block;
+    width: auto;
+    min-width: 180px;
+    max-width: 100%;
+    padding: 0 12px 2px 12px;
+    border-bottom: 1px solid #000 !important;
+    text-decoration: none !important;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }

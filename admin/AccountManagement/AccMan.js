@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    const phpUrl = 'Api.php';
+    const phpUrl = '/SYSTEM_VERSION_!/admin/AccountManagement/Api.php';
     const tableBody = document.querySelector('.account-table tbody');
     const filterSelect = document.getElementById('filterSelect');
     const createAccountBtn = document.getElementById('createAccountBtn');

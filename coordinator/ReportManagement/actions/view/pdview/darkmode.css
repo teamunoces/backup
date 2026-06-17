@@ -347,6 +347,68 @@ body.dark-mode::-webkit-scrollbar-thumb:hover {
     background: #666;
 }
 
+/* ===== ADMIN COMMENT - EXCLUDED FROM DARK MODE ===== */
+/* Preserving original styling exactly as requested */
+.admin-comment {
+    pointer-events: none;
+    width: 100%;
+    max-width: 1100px;
+    box-sizing: border-box;
+    display: block;
+    margin: 80px auto 40px auto;
+}
+
+#admincomment {
+    pointer-events: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    font-style: italic;
+    padding: 20px;
+    font-family: inherit;
+    border-radius: 4px 12px 12px 4px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    resize: vertical;
+}
+
+/* Ensure dark mode does NOT affect admin comment */
+body.dark-mode .admin-comment {
+    pointer-events: none;
+    width: 100%;
+    max-width: 1100px;
+    box-sizing: border-box;
+    display: block;
+    margin: 80px auto 40px auto;
+    background: transparent;
+}
+
+body.dark-mode #admincomment {
+    pointer-events: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db !important;
+    color: #856404 !important;
+    border: 2px solid #f59e0b !important;
+    border-left: 8px solid #f59e0b !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    font-weight: 600 !important;
+    font-style: italic !important;
+    padding: 20px !important;
+    font-family: inherit !important;
+    border-radius: 4px 12px 12px 4px !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    resize: vertical !important;
+}
+
 /* Print Styles - Preserve Original Print Appearance */
 @media print {
     body.dark-mode {
@@ -394,5 +456,17 @@ body.dark-mode::-webkit-scrollbar-thumb:hover {
     body.dark-mode #sidebarFrame,
     body.dark-mode #headerFrame {
         display: none !important;
+    }
+    
+    /* Admin comment retains original print styles */
+    body.dark-mode .admin-comment {
+        margin: 80px auto 40px auto;
+    }
+    
+    body.dark-mode #admincomment {
+        background-color: #fff9db !important;
+        color: #856404 !important;
+        border: 2px solid #f59e0b !important;
+        border-left: 8px solid #f59e0b !important;
     }
 }

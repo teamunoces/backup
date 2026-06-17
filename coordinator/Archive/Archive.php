@@ -12,6 +12,22 @@ $currentUser = $_SESSION['name']; // logged-in user
 $currentRole = $_SESSION['role']; // user role
 $currentDepartment = $_SESSION['department']; // user department
 
+$reportTables = [
+    'report_3ydp',
+    'report_3ydp_programs',
+    'report_cert_appearance',
+    'report_cnacr',
+    'report_coordinator_cnacr',
+    'report_evaluation',
+    'report_mar_header',
+    'report_mar_table',
+    'report_narrative',
+    'report_pd_detail',
+    'report_pd_main',
+    'report_program_monitoring_form',
+    'report_reflection_paper'
+];
+
 // Handle restore request
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'restore') {
     handleRestore();
@@ -22,28 +38,26 @@ fetchArchiveData();
 
 function fetchArchiveData() {
 
-    global $currentUser, $currentRole, $currentDepartment;
+    global $currentUser, $currentRole, $currentDepartment, $reportTables;
 
     $response = [
         'archived_reports' => []
     ];
 
-    $conn = new mysqli("localhost", "root", "", "ces_reports_db");
+    $conn = new mysqli("localhost", "root", "", "ces_database");
 
     if ($conn->connect_error) {
         echo json_encode(['error' => 'Database connection failed']);
         exit;
     }
 
-    /* Get all tables */
-    $tables = $conn->query("SHOW TABLES");
-
-    while ($tableRow = $tables->fetch_array()) {
-
-        $tableName = $tableRow[0];
+    foreach ($reportTables as $tableName) {
         $tableName = preg_replace('/[^a-zA-Z0-9_]/', '', $tableName);
 
         if (empty($tableName)) continue;
+
+        $checkTable = $conn->query("SHOW TABLES LIKE '$tableName'");
+        if (!$checkTable || $checkTable->num_rows === 0) continue;
 
         /* Check archived column exists */
         $checkColumn = $conn->query("SHOW COLUMNS FROM `$tableName` LIKE 'archived'");
@@ -88,8 +102,14 @@ function fetchArchiveData() {
                             ? date("F j, Y", strtotime($row['created_at']))
                             : "N/A";
 
+                    $type =
+                        $row['type'] ??
+                        $row['report_type'] ??
+                        $tableName;
+
                     $response['archived_reports'][] = [
                         "id" => $row['id'],
+                        "type" => $type,
                         "title" => $title,
                         "department" => $department,
                         "created_at" => $created_at,
@@ -128,7 +148,15 @@ function handleRestore() {
     $id = intval($_POST['id']);
     $tableName = preg_replace('/[^a-zA-Z0-9_]/', '', $_POST['table']);
 
-    $conn = new mysqli("localhost", "root", "", "ces_reports_db");
+    global $reportTables;
+
+    if (!in_array($tableName, $reportTables, true)) {
+        $response['message'] = "Invalid report table";
+        echo json_encode($response);
+        return;
+    }
+
+    $conn = new mysqli("localhost", "root", "", "ces_database");
 
     if ($conn->connect_error) {
         $response['message'] = "Database connection failed";

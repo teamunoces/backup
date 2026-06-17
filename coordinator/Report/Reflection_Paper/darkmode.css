@@ -1,0 +1,236 @@
+/* ================= DARK MODE STYLES ================= */
+/* Add 'dark-mode' class to body to enable dark theme */
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* ===== Frames (Layout Shell) ===== */
+body.dark-mode #sidebarFrame {
+    background: #1e1e1e;
+    border-right: 1px solid #333;
+}
+
+body.dark-mode #headerFrame {
+    background: #1e1e1e;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    border-bottom: 1px solid #333;
+}
+
+/* ===== Container ===== */
+body.dark-mode .container {
+    background: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* ===== Header Section ===== */
+body.dark-mode .college-info h1 {
+    color: #7aa2f7;
+}
+
+body.dark-mode .college-info p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .college-info a {
+    color: #7aa2f7;
+}
+
+/* ===== Office Title ===== */
+body.dark-mode .office-title {
+    color: #c0c0c0;
+}
+
+body.dark-mode .double-line {
+    border-top-color: #7aa2f7;
+}
+
+/* ===== Headers ===== */
+body.dark-mode header h1 {
+    color: #e0e0e0;
+}
+
+/* ===== Input Lines ===== */
+body.dark-mode .line-input,
+body.dark-mode .signature-input,
+body.dark-mode .writing-lines-input {
+    border-bottom-color: #555;
+    color: #e0e0e0;
+    background-color: transparent;
+}
+
+body.dark-mode .line-input:focus,
+body.dark-mode .signature-input:focus {
+    border-bottom-color: #7aa2f7;
+    outline: none;
+}
+
+/* Paper lines effect - dark mode */
+body.dark-mode .writing-lines-input {
+    background-image: linear-gradient(transparent 31px, #555 31px);
+    background-size: 100% 32px;
+    color: #e0e0e0;
+}
+
+body.dark-mode .writing-lines-input:focus {
+    background-image: linear-gradient(transparent 31px, #7aa2f7 31px);
+}
+
+/* ===== Checkbox Grid ===== */
+body.dark-mode .check-item label {
+    color: #e0e0e0;
+}
+
+body.dark-mode input[type="checkbox"] {
+    accent-color: #7aa2f7;
+}
+
+/* ===== Questions Section ===== */
+body.dark-mode .questions-section h3 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .question {
+    color: #d0d0d0;
+}
+
+body.dark-mode .italic-trans {
+    color: #a0a0a0;
+}
+
+/* ===== Answer Section ===== */
+body.dark-mode .answer-block label {
+    color: #e0e0e0;
+}
+
+/* ===== Signature Section ===== */
+body.dark-mode .signature-label {
+    color: #b0b0b0;
+}
+
+/* ===== Translation Underline ===== */
+body.dark-mode .translation {
+    color: #7aa2f7;
+    text-decoration: underline;
+}
+
+/* ===== Instruction Text ===== */
+body.dark-mode .instruction {
+    color: #c0c0c0;
+}
+
+/* ===== Line Styling ===== */
+body.dark-mode .line {
+    border-bottom-color: #555;
+}
+
+/* ===== Submit Button ===== */
+body.dark-mode .submit-button {
+    background: linear-gradient(to right, #4a9e1f, #2d551c);
+    border-color: #555;
+}
+
+body.dark-mode .submit-button:hover {
+    opacity: 0.9;
+}
+
+/* ===== Placeholder Text ===== */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #666;
+}
+
+/* ===== Frame Content (for iframe documents) ===== */
+.dark-mode,
+.dark-mode body {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+iframe body.dark-mode {
+    background-color: #121212;
+}
+
+/* ===== Print Override for Dark Mode ===== */
+@media print {
+    body.dark-mode {
+        background-color: white;
+        color: black;
+    }
+    
+    body.dark-mode .container {
+        background: white;
+        box-shadow: none;
+    }
+    
+    body.dark-mode .line-input,
+    body.dark-mode .signature-input {
+        border-bottom-color: black;
+        color: black;
+    }
+    
+    body.dark-mode .writing-lines-input {
+        background-image: linear-gradient(transparent 31px, #000 31px);
+        color: black;
+    }
+    
+    body.dark-mode .college-info h1 {
+        color: #4f81bd;
+    }
+    
+    body.dark-mode .double-line {
+        border-top-color: #4f81bd;
+    }
+    
+    body.dark-mode .submit-button {
+        display: none;
+    }
+    
+    body.dark-mode .translation {
+        color: black;
+    }
+}
+
+/* ===== Scrollbar Styling for Dark Mode ===== */
+body.dark-mode::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ===== Focus Outlines for Accessibility ===== */
+body.dark-mode button:focus,
+body.dark-mode input:focus,
+body.dark-mode .line-input:focus,
+body.dark-mode .signature-input:focus,
+body.dark-mode .writing-lines-input:focus {
+    outline: 2px solid #7aa2f7;
+    outline-offset: 2px;
+}
+
+/* ===== Link Styling ===== */
+body.dark-mode a {
+    color: #7aa2f7;
+}
+
+body.dark-mode a:visited {
+    color: #bb9af7;
+}
+
+/* ===== Horizontal Rule ===== */
+body.dark-mode hr {
+    border-color: #444;
+}

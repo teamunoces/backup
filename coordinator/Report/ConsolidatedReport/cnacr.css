@@ -11,13 +11,13 @@ body {
     padding: 40px;
     display: flex;
     justify-content: center;
-    margin-left: 150px; /* Add margin to account for sidebar */
+    margin-left: 100px; /* Add margin to account for sidebar */
 }
 
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -33,9 +33,13 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
+   /* Alignment Fixes */
+    display: flex;
+    justify-content: flex-end; /* Pushes content to the right */
+    align-items: center;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -54,7 +58,10 @@ body {
     height: 90px;
     width: auto;
 }
-
+.logo-left2 {
+    height: 80px;
+    width: auto;
+}
 .logos-right {
     display: flex;
     gap: 20px;

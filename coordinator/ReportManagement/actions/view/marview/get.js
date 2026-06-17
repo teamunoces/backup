@@ -1,7 +1,59 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     loadReportData();
+    
+    // Attach event listener to re-submit button
+    const resubmitBtn = document.getElementById('resubmitBtn');
+    if (resubmitBtn) {
+        resubmitBtn.addEventListener('click', handleResubmit);
+    }
+    
+    // ===== ADD/DELETE ROW FUNCTIONALITY =====
+    setupTableButtons();
 });
+
+function setupTableButtons() {
+    const addRowBtn = document.querySelector(".add-row-btn");
+    const deleteRowBtn = document.querySelector(".delete-row-btn");
+    const tbody = document.querySelector('.main-table tbody');
+    
+    if (!tbody) {
+        console.error("Table body not found");
+        return;
+    }
+    
+    // Add Row Function
+    if (addRowBtn) {
+        // Remove any existing event listeners by cloning and replacing
+        const newAddBtn = addRowBtn.cloneNode(true);
+        addRowBtn.parentNode.replaceChild(newAddBtn, addRowBtn);
+        
+        newAddBtn.addEventListener("click", function() {
+            addEmptyRow(tbody);
+        });
+    } else {
+        console.error("Add row button not found");
+    }
+    
+    // Delete Row Function
+    if (deleteRowBtn) {
+        // Remove any existing event listeners by cloning and replacing
+        const newDeleteBtn = deleteRowBtn.cloneNode(true);
+        deleteRowBtn.parentNode.replaceChild(newDeleteBtn, deleteRowBtn);
+        
+        newDeleteBtn.addEventListener("click", function() {
+            const rows = tbody.querySelectorAll("tr");
+            
+            if (rows.length > 1) {
+                tbody.removeChild(rows[rows.length - 1]); // remove last row
+            } else {
+                alert("At least one row must remain.");
+            }
+        });
+    } else {
+        console.error("Delete row button not found");
+    }
+}
 
 function loadReportData() {
     // Try URL first
@@ -31,21 +83,34 @@ function loadReportData() {
         })
         .then(data => {
             if (data.success) {
+                // Display feedback in admin comment section (DISPLAY ONLY)
+                displayFeedback(data.header.feedback);
                 populateHeaderData(data.header);
                 populateTableData(data.details);
             }
-            // Silently fail without showing error messages
         })
         .catch(error => {
-            // Silently fail without showing error messages
-            console.log(); // Empty console log to avoid ESLint errors
+            console.log('Error loading report:', error);
         });
+}
+
+// Display feedback in admin comment (DISPLAY ONLY)
+function displayFeedback(feedback) {
+    const adminComment = document.getElementById('admincomment');
+    if (adminComment) {
+        adminComment.value = feedback || '';
+        // Make it read-only to indicate it's for display only
+        adminComment.readOnly = true;
+        // Optional: add a class to style it differently
+        adminComment.classList.add('feedback-display');
+    }
 }
 
 // Function to populate header fields with correct column mappings
 function populateHeaderData(headerData) {
+    displayApprovalDocumentInfo(headerData);
     try {
-        // Map database fields to form fields based on your actual column names
+        // Map database fields to form fields
         const fieldMappings = {
             'department': headerData.department,
             'month': headerData.month,
@@ -62,14 +127,8 @@ function populateHeaderData(headerData) {
                 element.value = value || '';
             }
         }
-
-        // Also populate type if you have a field for it
-        const typeElement = document.getElementById('report_type');
-        if (typeElement && headerData.type) {
-            typeElement.value = headerData.type;
-        }
     } catch (error) {
-        // Silently fail
+        console.log('Error populating header:', error);
     }
 }
 
@@ -85,63 +144,139 @@ function populateTableData(detailsData) {
         
         if (detailsData && detailsData.length > 0) {
             detailsData.forEach((row, index) => {
-                const tr = document.createElement('tr');
-                tr.setAttribute('data-row-id', row.id || index);
-                
-                // Map database columns to table cells based on your actual column names
-                const cellValues = [
-                    row.date_of_act || '',                    // Date column
-                    row.activities_conducted || '',           // Activities Conducted
-                    row.objectives || '',                      // Objectives
-                    row.act_status || '',                      // Status (act_status)
-                    row.issues_or_concerns || '',              // Issues or Concerns
-                    row.financial_report || '',                // Financial Report
-                    row.recommendations || '',                 // Recommendations
-                    row.plans_for_next_months || ''            // Plans for Next Months
-                ];
-                
-                cellValues.forEach(cellValue => {
-                    const td = document.createElement('td');
-                    td.contentEditable = 'true';
-                    td.textContent = cellValue;
-                    tr.appendChild(td);
-                });
-                
-                tbody.appendChild(tr);
+                addTableRow(tbody, row);
             });
         } else {
             addEmptyRow(tbody);
         }
     } catch (error) {
-        // Silently fail
+        console.log('Error populating table:', error);
     }
+}
+
+// Add a table row with data
+function addTableRow(tbody, rowData = {}) {
+    const tr = document.createElement('tr');
+    
+    // Map database columns to table cells
+    const cellValues = [
+        rowData.date_of_act || '',                    // Date column
+        rowData.activities_conducted || '',           // Activities Conducted
+        rowData.objectives || '',                      // Objectives
+        rowData.act_status || '',                      // Status
+        rowData.issues_or_concerns || '',              // Issues or Concerns
+        rowData.financial_report || '',                // Financial Report
+        rowData.recommendations || '',                 // Recommendations
+        rowData.plans_for_next_months || ''            // Plans for Next Months
+    ];
+    
+    cellValues.forEach(cellValue => {
+        const td = document.createElement('td');
+        td.contentEditable = 'true';
+        td.textContent = cellValue;
+        tr.appendChild(td);
+    });
+    
+    tbody.appendChild(tr);
 }
 
 // Function to add an empty row
 function addEmptyRow(tbody) {
-    const tr = document.createElement('tr');
-    for (let i = 0; i < 8; i++) {
-        const td = document.createElement('td');
-        td.contentEditable = 'true';
-        td.textContent = '';
-        tr.appendChild(td);
-    }
-    tbody.appendChild(tr);
+    addTableRow(tbody, {});
 }
+
+// Collect all form data for update (EXCLUDING admincomment)
+function collectFormData() {
+    const params = new URLSearchParams(window.location.search);
+    let reportId = params.get("id") || document.getElementById('currentReportId')?.value;
+    
+    if (!reportId) {
+        throw new Error("No report ID found");
+    }
+    
+    // Collect header fields (EXCLUDING feedback)
+    const formData = {
+        id: reportId,
+        department: document.getElementById('department')?.value || '',
+        month: document.getElementById('month')?.value || '',
+        title_act: document.getElementById('title_act')?.value || '',
+        location: document.getElementById('location')?.value || '',
+        benefeciaries: document.getElementById('benefeciaries')?.value || '',
+        date_submitted: document.getElementById('date_submitted')?.value || '',
+        details: []
+    };
+    
+    // Collect table data
+    const tbody = document.querySelector('.main-table tbody');
+    if (tbody) {
+        const rows = tbody.querySelectorAll('tr');
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells.length >= 8) {
+                const detail = {
+                    date_of_act: cells[0]?.textContent || '',
+                    activities_conducted: cells[1]?.textContent || '',
+                    objectives: cells[2]?.textContent || '',
+                    act_status: cells[3]?.textContent || '',
+                    issues_or_concerns: cells[4]?.textContent || '',
+                    financial_report: cells[5]?.textContent || '',
+                    recommendations: cells[6]?.textContent || '',
+                    plans_for_next_months: cells[7]?.textContent || ''
+                };
+                
+                // Only add if at least one field has data
+                if (Object.values(detail).some(value => value.trim() !== '')) {
+                    formData.details.push(detail);
+                }
+            }
+        });
+    }
+    
+    console.log('Collected form data (feedback excluded):', formData);
+    return formData;
+}
+
+
 
 // Function to add a new row (can be called from a button)
 function addNewRow() {
     const tbody = document.querySelector('.main-table tbody');
     if (tbody) {
-        const tr = document.createElement('tr');
-        
-        for (let i = 0; i < 8; i++) {
-            const td = document.createElement('td');
-            td.contentEditable = 'true';
-            td.textContent = '';
-            tr.appendChild(td);
-        }
-        
-        tbody.appendChild(tr);
+        addEmptyRow(tbody);
     }
+}
+
+function formatNameWithSuffix(name, suffix) {
+    const cleanName = String(name || '').trim();
+    const cleanSuffix = String(suffix || '').trim();
+
+    if (!cleanName) return cleanSuffix;
+    if (!cleanSuffix) return cleanName;
+
+    return `${cleanName}, ${cleanSuffix}`;
+}
+
+function setTextIfExists(id, value) {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value || '';
+}
+
+function setInputByNameIfExists(name, value) {
+    const element = document.querySelector(`[name="${name}"]`);
+    if (element) element.value = value || '';
+}
+
+function displayApprovalDocumentInfo(report) {
+    if (!report) return;
+
+    setTextIfExists('dean', report.dean || '');
+    setTextIfExists('ces_head', formatNameWithSuffix(report.ces_head, report.ces_head_suffix));
+    setTextIfExists('vp_acad', formatNameWithSuffix(report.vp_acad, report.vp_acad_suffix));
+    setTextIfExists('vp_admin', formatNameWithSuffix(report.vp_admin, report.vp_admin_suffix));
+    setTextIfExists('school_president', formatNameWithSuffix(report.school_president, report.school_president_suffix));
+
+    setInputByNameIfExists('issue_status', report.issue_status);
+    setInputByNameIfExists('revision_number', report.revision_number);
+    setInputByNameIfExists('date_effective', report.date_effective);
+    setInputByNameIfExists('approved_by', report.approved_by);
 }

@@ -16,9 +16,9 @@ $pass = "";
 
 try {
 
-    // approval database
+    // CES database
     $pdo = new PDO(
-        "mysql:host=$host;dbname=approval_db;charset=utf8mb4",
+        "mysql:host=$host;dbname=ces_database;charset=utf8mb4",
         $user,
         $pass,
         [
@@ -50,6 +50,15 @@ function fetchRow($pdo, $sql) {
     return $row ? $row : [];
 }
 
+function fetchPreparedRow($pdo, $sql, $params) {
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    $row = $stmt->fetch();
+
+    return $row ? $row : [];
+}
+
 /* ==========================================
    GET REQUEST
 ========================================== */
@@ -58,14 +67,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     try {
 
-        /* ---------- GET DEAN FROM accounts.users ---------- */
+        $department = trim($_SESSION["department"] ?? "");
+
+        if ($department === "") {
+            throw new Exception("Cannot load approval data because no department was found in the session.");
+        }
+
+        /* ---------- GET DEAN FROM ces_database.users ---------- */
 
         $dean = "";
 
         if (isset($_SESSION['user_id'])) {
 
             $accountsPDO = new PDO(
-                "mysql:host=$host;dbname=accounts;charset=utf8mb4",
+                "mysql:host=$host;dbname=ces_database;charset=utf8mb4",
                 $user,
                 $pass,
                 [
@@ -93,8 +108,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         /* ---------- APPROVAL DATA ---------- */
 
-        $approvals = fetchRow($pdo, "
+        $approvals = fetchPreparedRow($pdo, "
             SELECT 
+                dean,
                 ces_head,
                 ces_head_suffix,
                 vp_acad,
@@ -103,10 +119,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 vp_admin_suffix,
                 school_president,
                 school_president_suffix
-            FROM coordinator_approvals
+            FROM approvals_coordinator
+            WHERE department = :department
             ORDER BY updated_at DESC
             LIMIT 1
-        ");
+        ", [
+            ":department" => $department
+        ]);
+
+        if (!array_key_exists("dean", $approvals) || $approvals["dean"] === null || $approvals["dean"] === "") {
+            $approvals["dean"] = $dean;
+        }
 
         /* ---------- DOCUMENT INFO ---------- */
 
@@ -116,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 revision_number,
                 date_effective,
                 approved_by
-            FROM document_info
+            FROM approvals_document_info
             ORDER BY updated_at DESC
             LIMIT 1
         ");
@@ -124,7 +147,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         /* ---------- MERGE RESULTS ---------- */
 
         $result = array_merge(
-            ["dean" => $dean],
             $approvals,
             $documentInfo
         );
@@ -174,68 +196,45 @@ try {
 
     $pdo->beginTransaction();
 
-    /* ---------- SAVE DEAN INTO accounts.users ---------- */
+    /* ---------- SAVE DEAN INTO ces_database.users ---------- */
 
-    if (isset($_SESSION['user_id'])) {
+    $dean = trim($data["dean"] ?? "");
+    $department = trim($_SESSION["department"] ?? "");
 
-        $accountsPDO = new PDO(
-            "mysql:host=$host;dbname=accounts;charset=utf8mb4",
-            $user,
-            $pass,
-            [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-            ]
-        );
-
-        $stmt = $accountsPDO->prepare("
-            UPDATE users
-            SET dean = :dean
-            WHERE id = :id
-        ");
-
-        $stmt->execute([
-            ":dean" => $data["dean"] ?? "",
-            ":id"   => $_SESSION["user_id"]
-        ]);
+    if (!isset($_SESSION['user_id'])) {
+        throw new Exception("Cannot save dean because no logged-in user was found.");
     }
 
-    /* ---------- COORDINATOR APPROVALS ---------- */
+    if ($department === "") {
+        throw new Exception("Cannot save approval data because no department was found in the session.");
+    }
 
-    $stmt = $pdo->prepare("
-        INSERT INTO coordinator_approvals (
-            id,
-            ces_head,
-            ces_head_suffix,
-            vp_acad,
-            vp_acad_suffix,
-            vp_admin,
-            vp_admin_suffix,
-            school_president,
-            school_president_suffix
-        )
-        VALUES (
-            1,
-            :ces_head,
-            :ces_head_suffix,
-            :vp_acad,
-            :vp_acad_suffix,
-            :vp_admin,
-            :vp_admin_suffix,
-            :school_president,
-            :school_president_suffix
-        )
-        ON DUPLICATE KEY UPDATE
-            ces_head = VALUES(ces_head),
-            ces_head_suffix = VALUES(ces_head_suffix),
-            vp_acad = VALUES(vp_acad),
-            vp_acad_suffix = VALUES(vp_acad_suffix),
-            vp_admin = VALUES(vp_admin),
-            vp_admin_suffix = VALUES(vp_admin_suffix),
-            school_president = VALUES(school_president),
-            school_president_suffix = VALUES(school_president_suffix)
+    $accountsPDO = new PDO(
+        "mysql:host=$host;dbname=ces_database;charset=utf8mb4",
+        $user,
+        $pass,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ]
+    );
+
+    $stmt = $accountsPDO->prepare("
+        UPDATE users
+        SET dean = :dean
+        WHERE id = :id
     ");
 
     $stmt->execute([
+        ":dean" => $dean,
+        ":id"   => $_SESSION["user_id"]
+    ]);
+
+    $_SESSION["dean"] = $dean;
+
+    /* ---------- COORDINATOR APPROVALS ---------- */
+
+    $approvalParams = [
+        ":dean" => $dean,
         ":ces_head" => $data["ces_head"] ?? "",
         ":ces_head_suffix" => $data["ces_head_suffix"] ?? "",
         ":vp_acad" => $data["vp_acad"] ?? "",
@@ -243,13 +242,75 @@ try {
         ":vp_admin" => $data["vp_admin"] ?? "",
         ":vp_admin_suffix" => $data["vp_admin_suffix"] ?? "",
         ":school_president" => $data["school_president"] ?? "",
-        ":school_president_suffix" => $data["school_president_suffix"] ?? ""
+        ":school_president_suffix" => $data["school_president_suffix"] ?? "",
+        ":department" => $department
+    ];
+
+    $existingApproval = fetchPreparedRow($pdo, "
+        SELECT id
+        FROM approvals_coordinator
+        WHERE department = :department
+        ORDER BY updated_at DESC
+        LIMIT 1
+    ", [
+        ":department" => $department
     ]);
+
+    if ($existingApproval) {
+        $stmt = $pdo->prepare("
+            UPDATE approvals_coordinator
+            SET
+                dean = :dean,
+                ces_head = :ces_head,
+                ces_head_suffix = :ces_head_suffix,
+                vp_acad = :vp_acad,
+                vp_acad_suffix = :vp_acad_suffix,
+                vp_admin = :vp_admin,
+                vp_admin_suffix = :vp_admin_suffix,
+                school_president = :school_president,
+                school_president_suffix = :school_president_suffix,
+                department = :department
+            WHERE id = :id
+        ");
+
+        $stmt->execute(array_merge($approvalParams, [
+            ":id" => $existingApproval["id"]
+        ]));
+    } else {
+        $stmt = $pdo->prepare("
+            INSERT INTO approvals_coordinator (
+                dean,
+                ces_head,
+                ces_head_suffix,
+                vp_acad,
+                vp_acad_suffix,
+                vp_admin,
+                vp_admin_suffix,
+                school_president,
+                school_president_suffix,
+                department
+            )
+            VALUES (
+                :dean,
+                :ces_head,
+                :ces_head_suffix,
+                :vp_acad,
+                :vp_acad_suffix,
+                :vp_admin,
+                :vp_admin_suffix,
+                :school_president,
+                :school_president_suffix,
+                :department
+            )
+        ");
+
+        $stmt->execute($approvalParams);
+    }
 
     /* ---------- DOCUMENT INFO ---------- */
 
     $stmt = $pdo->prepare("
-        INSERT INTO document_info (
+        INSERT INTO approvals_document_info (
             id,
             issue_status,
             revision_number,

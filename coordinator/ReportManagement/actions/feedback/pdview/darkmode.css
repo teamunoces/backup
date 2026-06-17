@@ -323,6 +323,57 @@ body.dark-mode #sidebarFrame {
     background-color: #1a1a1a !important;
 }
 
+/* Admin Feedback Section */
+body.dark-mode .admin-comment {
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 80px auto 40px auto !important;
+}
+
+body.dark-mode .admin-comment-label,
+body.dark-mode .admin-comment label,
+body.dark-mode label.admin-comment-label,
+body.dark-mode .admin-comment > label[for="admincomment"],
+body.dark-mode .admin-comment .admin-comment-label {
+    color: #ffffff !important;
+    display: block !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin-bottom: 4px !important;
+    position: relative;
+    z-index: 1002;
+}
+
+body.dark-mode #admincomment {
+    min-height: 170px !important;
+    background-color: #fff9db !important;
+    border: 2px solid #f59e0b !important;
+    border-left: 10px solid #f59e0b !important;
+    color: #856404 !important;
+    border-radius: 4px 12px 12px 4px !important;
+    padding: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    resize: none !important;
+    font-family: inherit !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    font-style: italic !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode #admincomment:focus {
+    border-color: #f59e0b !important;
+    outline: none !important;
+    background-color: #fff9db !important;
+}
+
+body.dark-mode #admincomment::placeholder {
+    color: #a16207 !important;
+}
+
 /* Horizontal Rules */
 body.dark-mode hr {
     border-color: #404040 !important;

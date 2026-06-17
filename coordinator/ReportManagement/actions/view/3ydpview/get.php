@@ -1,4 +1,5 @@
 <?php
+session_start();
 ob_start();
 header('Content-Type: application/json');
 error_reporting(E_ALL);
@@ -24,6 +25,19 @@ $project = $stmt->get_result()->fetch_assoc();
 if (!$project) {
     echo json_encode(["error" => "Report not found"]);
     exit;
+}
+
+if (empty($project['created_by_name'])) {
+    $project['created_by_name'] = $_SESSION['name'] ?? '';
+
+    if (empty($project['created_by_name']) && !empty($project['user_id'])) {
+        $userStmt = $conn->prepare("SELECT name FROM users WHERE id = ? LIMIT 1");
+        $userStmt->bind_param("i", $project['user_id']);
+        $userStmt->execute();
+        $user = $userStmt->get_result()->fetch_assoc();
+        $project['created_by_name'] = $user['name'] ?? '';
+        $userStmt->close();
+    }
 }
 
 // Programs

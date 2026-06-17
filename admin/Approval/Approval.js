@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log("Data being sent:", data); // Check that document info is included
 
-            fetch('Approval.php', {
+            fetch('/SYSTEM_VERSION_!/admin/Dashboard/Approval/Approval.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)

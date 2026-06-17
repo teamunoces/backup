@@ -1,0 +1,176 @@
+/* ================= DARK MODE STYLES ================= */
+/* Add 'dark-mode' class to body to enable dark theme */
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* ===== Frames (Layout Shell) ===== */
+body.dark-mode #sidebarFrame {
+    background: #1e1e1e;
+    border-right: 1px solid #333;
+}
+
+body.dark-mode #headerFrame {
+    background: #1e1e1e;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    border-bottom: 1px solid #333;
+}
+
+/* ===== Report Container ===== */
+body.dark-mode .report-container {
+    background-color: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* ===== Header Section ===== */
+body.dark-mode .college-info h1 {
+    color: #7aa2f7;
+}
+
+body.dark-mode .college-info p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .college-info a {
+    color: #7aa2f7;
+}
+
+/* ===== Office Title ===== */
+body.dark-mode .office-title {
+    color: #c0c0c0;
+}
+
+body.dark-mode .double-line {
+    border-top-color: #7aa2f7;
+}
+
+/* ===== Headers ===== */
+body.dark-mode header h1 {
+    color: #e0e0e0;
+}
+
+/* ===== Report List ===== */
+body.dark-mode .report-list {
+    color: #e0e0e0;
+}
+
+body.dark-mode .report-list li {
+    color: #d0d0d0;
+}
+
+body.dark-mode .label {
+    color: #e0e0e0;
+}
+
+/* ===== Textarea Input - Pure white background override for dark mode ===== */
+/* Note: The original design specifies white background, so we adjust for dark mode */
+body.dark-mode .line-input {
+    background: #2a2a2a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .line-input:focus {
+    background: #2a2a2a;
+}
+
+body.dark-mode .line-input::placeholder {
+    color: #777;
+    font-style: italic;
+}
+
+/* ===== Submit Button ===== */
+body.dark-mode .submit-button {
+    background: linear-gradient(to right, #4a9e1f, #2d551c);
+    border-color: #555;
+}
+
+body.dark-mode .submit-button:hover {
+    opacity: 0.9;
+}
+
+/* ===== Frame Content (for iframe documents) ===== */
+.dark-mode,
+.dark-mode body {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+iframe body.dark-mode {
+    background-color: #121212;
+}
+
+/* ===== Print Override for Dark Mode ===== */
+@media print {
+    body.dark-mode {
+        background-color: white;
+        color: black;
+    }
+    
+    body.dark-mode .report-container {
+        background-color: white;
+        box-shadow: none;
+    }
+    
+    body.dark-mode .line-input {
+        background: white;
+        color: black;
+    }
+    
+    body.dark-mode .line-input::placeholder {
+        color: #999;
+    }
+    
+    body.dark-mode .college-info h1 {
+        color: #4f81bd;
+    }
+    
+    body.dark-mode .double-line {
+        border-top-color: #4f81bd;
+    }
+    
+    body.dark-mode .submit-button {
+        display: none;
+    }
+}
+
+/* ===== Scrollbar Styling for Dark Mode ===== */
+body.dark-mode::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ===== Focus Outlines for Accessibility ===== */
+body.dark-mode button:focus,
+body.dark-mode .line-input:focus {
+    outline: 2px solid #7aa2f7;
+    outline-offset: 2px;
+}
+
+/* ===== Link Styling ===== */
+body.dark-mode a {
+    color: #7aa2f7;
+}
+
+body.dark-mode a:visited {
+    color: #bb9af7;
+}
+
+/* ===== Horizontal Rule ===== */
+body.dark-mode hr {
+    border-color: #444;
+}

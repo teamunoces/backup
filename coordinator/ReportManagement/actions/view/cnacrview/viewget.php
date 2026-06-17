@@ -15,6 +15,11 @@ if ($conn->connect_error) {
 
 $conn->set_charset("utf8");
 
+function mergeApprovalDocumentInfo($conn, $row) {
+    return $row;
+}
+
+
 if (isset($_GET['id'])) {
     $reportId = intval($_GET['id']);
     // Replace 'cnacr_reports' with your actual table name if different
@@ -24,6 +29,7 @@ if (isset($_GET['id'])) {
     $result = $stmt->get_result();
 
     if ($report = $result->fetch_assoc()) {
+        $report = mergeApprovalDocumentInfo($conn, $report);
         echo json_encode(['success' => true, 'report' => $report]);
     } else {
         echo json_encode(['success' => false, 'message' => 'Report not found']);

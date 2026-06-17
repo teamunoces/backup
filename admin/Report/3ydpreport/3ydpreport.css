@@ -4,9 +4,9 @@
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -14,7 +14,7 @@
 
 /* ===== Sidebar ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -40,6 +40,11 @@
     height: 90px;
     width: auto;
 }
+.logo-left2 {
+    height: 80px;
+    width: auto;
+}
+
 
 .logos-right {
     display: flex;
@@ -135,23 +140,30 @@ header h1 {
 
 .input-group {
     margin-bottom: 20px;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
 }
 
 .input-group label {
     display: block;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
     font-weight: bold;
+    font-size: 15px;
+    line-height: 1.4;
     margin-bottom: 8px;
-    color: #444;
+    color: #000;
 }
 
 input[type="text"], textarea {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 14px;
+    line-height: 1.4;
     transition: border-color 0.3s;
     box-sizing: border-box;
+    color: #1e293b;
 }
 
 input[type="text"]:focus, textarea:focus {
@@ -178,30 +190,34 @@ input[type="text"]:focus, textarea:focus {
 table {
     width: 100%;
     border-collapse: collapse;
-    /* Removed min-width: 1200px to prevent sliding */
-    table-layout: fixed; /* Keeps columns equal width so they don't "jump" */
-    word-wrap: break-word; /* Ensures long text breaks to new lines */
-}
-
-table thead th {
-    font-weight: bold;
-    background-color: #f8fafc;
-    color: #475569;
-    font-size: 0.9rem; /* Smaller font to help 9 columns fit better */
-    padding: 8px 4px;
-    border: 1px solid #cbd5e1;
-    text-transform: uppercase;
-    text-align: center;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+    table-layout: fixed;
     word-wrap: break-word;
 }
 
+table thead th {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+    font-weight: bold;
+    background-color: #e5e7eb;
+    color: #000;
+    font-size: 15px;
+    padding: 6px 4px;
+    border: 1px solid #000;
+    text-align: center;
+    vertical-align: top;
+    line-height: 1.4;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
 table td {
-    border: 1px solid #cbd5e1;
+    border: 1px solid #000;
     padding: 0;
     vertical-align: top;
 }
 
 table td textarea {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif !important;
     field-sizing: content; 
     width: 100% !important;
     min-height: 60px; 
@@ -209,7 +225,7 @@ table td textarea {
     padding: 10px 5px !important;
     background: transparent !important; /* Ensure no gradient background */
     background-image: none !important;  /* Explicitly remove any inherited lines */
-    font-size: 0.85rem;
+    font-size: 14px;
     color: #1e293b;
     line-height: 1.4;
     display: block;
@@ -238,6 +254,55 @@ table th:nth-child(3), table td:nth-child(3) { width: 15%; } /* Objectives */
 table td:first-child textarea {
     text-align: center;
     font-weight: 600;
+}
+
+#programPlanTable {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    word-wrap: break-word;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+}
+
+#programPlanTable th,
+#programPlanTable td {
+    border: 1px solid #000;
+}
+
+#programPlanTable thead th {
+    background-color: #e5e7eb;
+    color: #000;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 6px 4px;
+    text-align: center;
+    vertical-align: top;
+    line-height: 1.4;
+    white-space: normal;
+}
+
+#programPlanTable td {
+    padding: 0;
+    vertical-align: top;
+}
+
+#programPlanTable td textarea {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif !important;
+    font-size: 14px;
+    width: 100% !important;
+    min-height: 60px;
+    border: none !important;
+    padding: 10px 5px !important;
+    background: transparent !important;
+    background-image: none !important;
+    color: #1e293b;
+    line-height: 1.4;
+    display: block;
+    box-sizing: border-box;
+    outline: none;
+    overflow: hidden;
+    resize: none;
+    white-space: pre-wrap;
 }
 
 /* ===== Add Row Button ===== */
@@ -565,5 +630,58 @@ table td:first-child textarea {
     .container {
         width: 95%;
         padding: 15px;
+    }
+}
+
+/* ===== Laptop / PC Responsive Layout ===== */
+@media (min-width: 769px) {
+    body {
+        margin-left: 0;
+        padding: 80px clamp(18px, 2vw, 32px) 40px calc(100px + clamp(18px, 2vw, 32px));
+    }
+
+    .container {
+        width: min(100%, 1100px);
+        margin: 0 auto;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 1366px) and (min-width: 769px) {
+    .container {
+        max-width: 1000px;
+        padding: 32px;
+    }
+
+    .logo-left {
+        height: 76px;
+    }
+
+    .logo-left2,
+    .logos-right img {
+        height: 68px;
+    }
+
+    .college-info h1 {
+        font-size: 23px;
+    }
+
+    table thead th,
+    #programPlanTable thead th {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+    .container {
+        max-width: calc(100vw - 140px);
+    }
+
+    table,
+    #programPlanTable {
+        min-width: 900px;
     }
 }

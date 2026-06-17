@@ -1,0 +1,284 @@
+/* General Styling */
+
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background-color: #f0f0f0;
+    color: #000;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===== Frames (Layout Shell) ===== */
+#sidebarFrame {
+    width: 100px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 100px;
+    width: calc(100% - 100px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+
+/* ===== Certificate Container ===== */
+.certificate-container {
+    background-color: #fff;
+    width: 850px;
+    padding: 60px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Admin Comment wrapper (correct width already) */
+.wrapper {
+    width: 970px;
+    max-width: 100%;
+    margin: 80px auto 80px auto;
+    display: block;
+}
+
+/* Admin Comment container */
+.admin-comment {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    margin: 0;
+}
+
+/* FIX: make border NOT affect total width */
+#admincomment {
+    width: 100%;
+    min-height: 135px;
+
+    display: block;
+    margin: 0;
+
+    background-color: #fff9db;
+    color: #856404;
+
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+
+    padding: 20px;
+
+    font-weight: 600;
+    font-style: italic;
+    font-family: inherit;
+
+    border-radius: 4px 12px 12px 4px;
+
+    resize: none;
+
+    /* 🔥 THIS IS THE KEY FIX */
+    box-sizing: border-box;
+}
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* ===== Office Title ===== */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+/* Force all text to normal weight */
+p, span, div, h1, .office-title {
+    font-weight: normal !important; 
+}
+
+header h1 {
+    text-align: center;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+/* Form Inputs as Lines */
+input[type="text"] {
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 1rem;
+    padding: 0 5px;
+    outline: none;
+    background: transparent;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.line-wrap {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.sub-label {
+    font-size: 0.85rem;
+    margin-top: 1px;
+}
+
+.sub-label-center {
+    text-align: center;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+/* Specific Line Widths */
+.short-line { width: 60px; margin-top: 20px;}
+.med-line   { width: 100%; }
+.long-line  { width: 280px; }
+.full-line  { width: 90%;  }
+
+.full-width-line-group {
+    margin: 20px 0;
+}
+
+/* Signature Section */
+.signatures {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.sig-line {
+    margin-top: 30px;
+    width: 300px;
+}
+
+.sig-line input {
+    width: 100%;
+}
+
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+
+/* Submit Button */
+.submit-button {
+    display: block;
+    padding: 6px 30px;
+    border-radius: 50px;
+    border: 1px solid #1a1a1a;
+    background: linear-gradient(to right, #63b32e, #3d7025);
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    width: fit-content;
+}
+
+.submit-button:hover {
+    opacity: 0.9;
+}

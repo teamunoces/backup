@@ -8,11 +8,42 @@ let currentUploadReportId = null;
 let currentUploadTable = null;
 let currentExistingFiles = []; // Track existing files
 const MAX_FILES = 4; // Maximum number of files allowed
+const DEFAULT_REPORT_LIMIT = 5;
+const showAllState = {
+    approved: false,
+    needfix: false,
+    rejected: false
+};
+
+const sectionConfig = {
+    approved: {
+        tableBodyId: "approvedTableBody",
+        sectionSelector: ".section-green",
+        reports: () => approvedReports,
+        noDataMessage: "No approved reports found.",
+        includeUpload: true
+    },
+    needfix: {
+        tableBodyId: "needfixTableBody",
+        sectionSelector: ".section-Orange",
+        reports: () => needFixReports,
+        noDataMessage: "No reports needing fix found.",
+        includeUpload: false
+    },
+    rejected: {
+        tableBodyId: "rejectedTableBody",
+        sectionSelector: ".section-red",
+        reports: () => rejectedReports,
+        noDataMessage: "No rejected reports found.",
+        includeUpload: false
+    }
+};
 
 async function loadReports() {
     try {
         
-        const response = await fetch("/coordinator/ReportManagement/php/get.php");
+        const reportEndpoint = window.reportDataEndpoint || "/SYSTEM_VERSION_!/coordinator/ReportManagement/php/get.php";
+        const response = await fetch(reportEndpoint);
         const data = await response.json();
 
         if (!Array.isArray(data) || data.length === 0) {
@@ -21,11 +52,24 @@ async function loadReports() {
         }
 
         const typeNameMap = {
+            "report_coordinator_cnacr": "Community Needs Assessment Consolidated Report",
+            "report_3ydp": "3 Year Development Plan",
+            "report_pd_main": "Program Design",
+            "report_mar_header": "Monthly Accomplishment Report",
+            "report_program_monitoring_form": "Program Monitoring Form",
+            "report_evaluation": "Evaluation Sheet for Extension Services",
+            "report_cert_appearance": "Certificate of Appearance",
+            "report_reflection_paper": "Monthly Accomplishment Report- Reflection Paper",
+            "report_narrative": "Monthly Accomplishment Report- Narrative Report",
             "coordinator_cnacr": "Community Needs Assessment Consolidated Report",
             "3ydp": "3 Year Development Plan",
             "pd_main": "Program Design",
-            "dpir": "Departmental Planned Initiative Report",
-            "mar_header": "Monthly Accomplishment Report"
+            "mar_header": "Monthly Accomplishment Report",
+            "program_monitoring_form": "Program Monitoring Form",
+            "evaluation_reports": "Evaluation Sheet for Extension Services",
+            "cert_appearance" : "Certificate of Appearance",
+            "reflection_paper" : "Monthly Accomplishment Report- Reflection Paper",
+            "narrative_report" : "Monthly Accomplishment Report- Narrative Report"
         };
 
         // Clear previous data
@@ -38,11 +82,13 @@ async function loadReports() {
             const status = (report.status || "").toLowerCase().trim();
             const reportWithMeta = {
                 ...report,
-                displayType: typeNameMap[report.source_table] || report.source_table,
+                displayType: report.type || typeNameMap[report.source_table] || "N/A",
                 index: index
             };
 
-            if (status === "approve" || status === "approved") {
+            
+
+            if (status === "approve") {
                 approvedReports.push(reportWithMeta);
             } else if (status === "need fix") {
                 needFixReports.push(reportWithMeta);
@@ -50,6 +96,8 @@ async function loadReports() {
                 rejectedReports.push(reportWithMeta);
             }
         });
+
+
 
         // Initialize filter event listeners
         initFilterListeners();
@@ -76,140 +124,138 @@ function displayNoReportsMessage() {
     if (rejectedTable) rejectedTable.innerHTML = noDataRow;
 }
 
-// Render Approved table with its own filter
-function renderApprovedTable() {
-    const tableBody = document.getElementById("approvedTableBody");
-    if (!tableBody) return;
-    
-    const filterSelect = document.querySelector('.section-green .filter-row select');
-    const selectedType = filterSelect ? filterSelect.value : 'All type';
-    
-    tableBody.innerHTML = "";
-    
-    // Filter reports based on selected type
-    let filteredReports = approvedReports;
-    if (selectedType !== 'All type') {
-        filteredReports = approvedReports.filter(report => report.displayType === selectedType);
+function getReportTime(report) {
+    if (!report || !report.created_at) {
+        return 0;
     }
-    
-    if (filteredReports.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No approved reports found.</td></tr>`;
+
+    const dateMatch = String(report.created_at).match(/^(\d{4}-\d{2}-\d{2})(?:[ T](\d{2}:\d{2}:\d{2}))?/);
+    const normalizedDate = dateMatch
+        ? `${dateMatch[1]}T${dateMatch[2] || "00:00:00"}`
+        : String(report.created_at).replace(" ", "T");
+    const parsedDate = new Date(normalizedDate);
+
+    return Number.isNaN(parsedDate.getTime()) ? 0 : parsedDate.getTime();
+}
+
+function getReportDateOnly(report) {
+    if (!report || !report.created_at) {
+        return "";
+    }
+
+    return String(report.created_at).split(/[ T]/)[0];
+}
+
+function getSectionFilterValues(section) {
+    const config = sectionConfig[section];
+    const sectionElement = config ? document.querySelector(config.sectionSelector) : null;
+    const typeFilter = sectionElement?.querySelector(".filter-row select");
+    const dateFromFilter = document.getElementById(`${section}DateFrom`);
+    const dateToFilter = document.getElementById(`${section}DateTo`);
+
+    return {
+        type: typeFilter ? typeFilter.value : "All type",
+        dateFrom: dateFromFilter ? dateFromFilter.value : "",
+        dateTo: dateToFilter ? dateToFilter.value : ""
+    };
+}
+
+function sectionHasActiveFilter(section) {
+    const { type, dateFrom, dateTo } = getSectionFilterValues(section);
+    return type !== "All type" || dateFrom !== "" || dateTo !== "";
+}
+
+function getFilteredSectionReports(section) {
+    const config = sectionConfig[section];
+    if (!config) {
+        return [];
+    }
+
+    const { type, dateFrom, dateTo } = getSectionFilterValues(section);
+
+    return config.reports()
+        .slice()
+        .sort((first, second) => getReportTime(second) - getReportTime(first))
+        .filter(report => {
+            const reportDate = getReportDateOnly(report);
+            const matchesType = type === "All type" || report.displayType === type;
+            const matchesFrom = !dateFrom || (reportDate && reportDate >= dateFrom);
+            const matchesTo = !dateTo || (reportDate && reportDate <= dateTo);
+
+            return matchesType && matchesFrom && matchesTo;
+        });
+}
+
+function renderReportTable(section) {
+    const config = sectionConfig[section];
+    if (!config) {
         return;
     }
-    
-    // Build HTML for filtered reports
-    let html = "";
-    filteredReports.forEach(report => {
-        const formattedDate = report.created_at?.split(" ")[0] || "N/A";
-        
-        html += `
+
+    const tableBody = document.getElementById(config.tableBodyId);
+    if (!tableBody) {
+        return;
+    }
+
+    const filteredReports = getFilteredSectionReports(section);
+    const shouldLimit = !showAllState[section] && !sectionHasActiveFilter(section);
+    const visibleReports = shouldLimit
+        ? filteredReports.slice(0, DEFAULT_REPORT_LIMIT)
+        : filteredReports;
+
+    if (visibleReports.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">${config.noDataMessage}</td></tr>`;
+        updateShowAllButton(section);
+        return;
+    }
+
+    tableBody.innerHTML = visibleReports.map(report => {
+        const formattedDate = getReportDateOnly(report) || "N/A";
+        const uploadIcon = config.includeUpload
+            ? `<i class="fas fa-cloud-upload-alt upload-icon" data-id="${report.id}" data-table="${report.source_table}" title="Upload/Manage PDFs"></i>`
+            : "";
+
+        return `
             <tr data-report-id="${report.id}" data-table="${report.source_table}">
                 <td>${report.displayType}</td>
-                <td>${report.title || 'N/A'}</td>
-                <td>${report.department || 'N/A'}</td>
+                <td>${report.title || "N/A"}</td>
+                <td>${report.department || "N/A"}</td>
                 <td>${formattedDate}</td>
-                <td class="actions">
-                    <i class="far fa-eye view-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
-                    <i class="fas fa-cloud-upload-alt upload-icon" data-id="${report.id}" data-table="${report.source_table}" title="Upload/Manage PDFs"></i>
-                    <i class="fas fa-archive archive-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
+                <td>
+                    <div class="actions">
+                        <i class="far fa-eye view-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
+                        ${uploadIcon}
+                        <i class="fas fa-archive archive-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
+                    </div>
                 </td>
             </tr>`;
-    });
-    
-    tableBody.innerHTML = html;
-    
-    // Attach events only to this section's icons
+    }).join("");
+
     attachSectionEvents(tableBody);
+    updateShowAllButton(section);
+}
+
+function updateShowAllButton(section) {
+    const showAllButton = document.getElementById(`${section}ShowAllBtn`);
+
+    if (showAllButton) {
+        showAllButton.textContent = showAllState[section] ? "Show Latest" : "Show All";
+    }
+}
+
+// Render Approved table with its own filter
+function renderApprovedTable() {
+    renderReportTable("approved");
 }
 
 // Render Need Fix table with its own filter
 function renderNeedFixTable() {
-    const tableBody = document.getElementById("needfixTableBody");
-    if (!tableBody) return;
-    
-    const filterSelect = document.querySelector('.section-Orange .filter-row select');
-    const selectedType = filterSelect ? filterSelect.value : 'All type';
-    
-    tableBody.innerHTML = "";
-    
-    // Filter reports based on selected type
-    let filteredReports = needFixReports;
-    if (selectedType !== 'All type') {
-        filteredReports = needFixReports.filter(report => report.displayType === selectedType);
-    }
-    
-    if (filteredReports.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No reports needing fix found.</td></tr>`;
-        return;
-    }
-    
-    // Build HTML for filtered reports
-    let html = "";
-    filteredReports.forEach(report => {
-        const formattedDate = report.created_at?.split(" ")[0] || "N/A";
-        
-        html += `
-            <tr data-report-id="${report.id}" data-table="${report.source_table}">
-                <td>${report.displayType}</td>
-                <td>${report.title || 'N/A'}</td>
-                <td>${report.department || 'N/A'}</td>
-                <td>${formattedDate}</td>
-                <td class="actions">
-                    <i class="far fa-eye view-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
-                    <i class="fas fa-archive archive-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
-                </td>
-            </tr>`;
-    });
-    
-    tableBody.innerHTML = html;
-    
-    // Attach events only to this section's icons
-    attachSectionEvents(tableBody);
+    renderReportTable("needfix");
 }
 
 // Render Rejected table with its own filter
 function renderRejectedTable() {
-    const tableBody = document.getElementById("rejectedTableBody");
-    if (!tableBody) return;
-    
-    const filterSelect = document.querySelector('.section-red .filter-row select');
-    const selectedType = filterSelect ? filterSelect.value : 'All type';
-    
-    tableBody.innerHTML = "";
-    
-    // Filter reports based on selected type
-    let filteredReports = rejectedReports;
-    if (selectedType !== 'All type') {
-        filteredReports = rejectedReports.filter(report => report.displayType === selectedType);
-    }
-    
-    if (filteredReports.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No rejected reports found.</td></tr>`;
-        return;
-    }
-    
-    // Build HTML for filtered reports
-    let html = "";
-    filteredReports.forEach(report => {
-        const formattedDate = report.created_at?.split(" ")[0] || "N/A";
-        
-        html += `
-            <tr data-report-id="${report.id}" data-table="${report.source_table}">
-                <td>${report.displayType}</td>
-                <td>${report.title || 'N/A'}</td>
-                <td>${report.department || 'N/A'}</td>
-                <td>${formattedDate}</td>
-                <td class="actions">
-                    <i class="far fa-eye view-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
-                    <i class="fas fa-archive archive-icon" data-id="${report.id}" data-table="${report.source_table}"></i>
-                </td>
-            </tr>`;
-    });
-    
-    tableBody.innerHTML = html;
-    
-    // Attach events only to this section's icons
-    attachSectionEvents(tableBody);
+    renderReportTable("rejected");
 }
 
 // Attach events to icons within a specific section
@@ -226,7 +272,7 @@ function attachSectionEvents(container) {
             if (!confirm("Archive this report?")) return;
 
             try {
-                const response = await fetch("/coordinator/ReportManagement/php/archive.php", {
+                const response = await fetch("/SYSTEM_VERSION_!/coordinator/ReportManagement/php/archive.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ id: reportId, table: reportTable })
@@ -237,7 +283,7 @@ function attachSectionEvents(container) {
                     alert("Report archived successfully.");
                     loadReports(); // Reload all reports
                 } else {
-                    alert("Archive failed.");
+                    alert("Archive failed: " + (result.error || "Unknown error"));
                 }
 
             } catch (error) {
@@ -297,20 +343,46 @@ function attachSectionEvents(container) {
             if (status === "approve" || status === "approved") {
                 // DIFFERENT PATHS for approved
                 viewMap = {
-                    "coordinator_cnacr": "./actions/view/cnacrview/cnacrview.php",
-                    "3ydp": "./actions/view/3ydpview/3ydpview.php",
-                    "pd_main": "./actions/view/pdview/pdview.php",
-                    "mar_header": "./actions/view/marview/marview.php",
-                    "dpir": "./actions/view/dpirview/view.php"
+                    "report_coordinator_cnacr": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/cnacrview/cnacrview.php",
+                    "report_3ydp": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/3ydpview/3ydpview.php",
+                    "report_pd_main": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/pdview/pdview.php",
+                    "report_mar_header": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/marview/marview.php",
+                    "report_program_monitoring_form": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/pmfview/pmfview.php",
+                    "report_evaluation": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/evaluationview/evaluationview.php",
+                    "report_cert_appearance": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/coaview/coaview.php",
+                    "report_reflection_paper": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/reflectionview/reflectionview.php",
+                    "report_narrative": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/narrativeview/narrativeview.php",
+                    "coordinator_cnacr": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/cnacrview/cnacrview.php",
+                    "3ydp": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/3ydpview/3ydpview.php",
+                    "pd_main": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/pdview/pdview.php",
+                    "mar_header": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/marview/marview.php",
+                    "program_monitoring_form": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/pmfview/pmfview.php",
+                    "evaluation_reports": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/evaluationview/evaluationview.php",
+                    "cert_appearance" : "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/coaview/coaview.php",
+                    "reflection_paper" : "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/reflectionview/reflectionview.php",
+                    "narrative_report" : "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/narrativeview/narrativeview.php"
                 };
             } else {
                 // NORMAL VIEW (need fix)
                 viewMap = {
-                    "coordinator_cnacr": "/admin/ReportManagement/actions/feedback/cnacrview/cnacrview.php",
-                    "3ydp": "/admin/ReportManagement/actions/feedback/3ydpview/view.php",
-                    "pd_main": "/admin/ReportManagement/actions/feedback/pdview/view.php",
-                    "mar_header": "/admin/ReportManagement/actions/feedback/marview/marview.php",
-                    "dpir": "./actions/fix/dpirfix/view.php"
+                    "report_coordinator_cnacr": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/cnacrview/cnacrneedview.php",
+                    "report_3ydp": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/3ydpview/3ydpneedview.php",
+                    "report_pd_main": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/pdview/pdneedview.php",
+                    "report_mar_header": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/marview/marneedview.php",
+                    "report_program_monitoring_form": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/pmfview/pmfneedview.php",
+                    "report_evaluation": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/evaluationview/evaluationneedview.php",
+                    "report_cert_appearance": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/coaview/coaneedview.php",
+                    "report_reflection_paper": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/reflectionview/reflectionneedview.php",
+                    "report_narrative": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/narrativeview/narrativeneedview.php",
+                    "coordinator_cnacr": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/cnacrview/cnacrneedview.php",
+                    "3ydp": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/3ydpview/3ydpneedview.php",
+                    "pd_main": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/pdview/pdneedview.php",
+                    "mar_header": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/marview/marneedview.php",
+                    "program_monitoring_form": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/pmfview/pmfneedview.php",
+                    "evaluation_reports": "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/evaluationview/evaluationneedview.php",
+                    "cert_appearance" : "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/coaview/coaneedview.php",
+                    "reflection_paper" : "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/reflectionview/reflectionneedview.php",
+                    "narrative_report" : "/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/narrativeview/narrativeneedview.php"
                 };
             }
 
@@ -480,7 +552,7 @@ async function loadFeedback(reportId, reportTable) {
     
     try {
         // Use the correct path based on your structure
-        const url = `/coordinator/ReportManagement/php/get_feedback.php?report_id=${reportId}&table=${encodeURIComponent(reportTable)}`;
+        const url = `/SYSTEM_VERSION_!/coordinator/ReportManagement/php/get_feedback.php?report_id=${reportId}&table=${encodeURIComponent(reportTable)}`;
         console.log("Fetching feedback from:", url);
         
         const response = await fetch(url);
@@ -785,7 +857,7 @@ async function uploadFiles() {
                 fileItems[i].querySelector(".file-status").innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
             }
             
-            const response = await fetch("/coordinator/ReportManagement/php/upload.php", {
+            const response = await fetch("/SYSTEM_VERSION_!/coordinator/ReportManagement/php/upload.php", {
                 method: "POST",
                 body: formData
             });
@@ -889,7 +961,7 @@ async function reuploadFile(fileId, oldFileName) {
     formData.append("replace", "true");
     
     try {
-        const response = await fetch("/coordinator/ReportManagement/php/upload.php", {
+        const response = await fetch("/SYSTEM_VERSION_!/coordinator/ReportManagement/php/upload.php", {
             method: "POST",
             body: formData
         });
@@ -965,7 +1037,8 @@ async function loadReportFiles(reportId, reportTable) {
     fileListDiv.innerHTML = "<p>Loading files...</p>";
     
     try {
-        const url = `/coordinator/ReportManagement/php/get_report_files.php?report_id=${reportId}`;
+        // IMPORTANT: Add report_table to the URL
+        const url = `/SYSTEM_VERSION_!/coordinator/ReportManagement/php/get_report_files.php?report_id=${reportId}&report_table=${encodeURIComponent(reportTable)}`;
         console.log("Fetching files from:", url);
         
         const response = await fetch(url);
@@ -1001,7 +1074,7 @@ async function loadReportFiles(reportId, reportTable) {
                     }
                     
                     // Fix the file path
-                    const filePath = file.file_path.startsWith('/') ? file.file_path : `/coordinator/ReportManagement/${file.file_path}`;
+                    const filePath = file.file_path.startsWith('/') ? file.file_path : `/SYSTEM_VERSION_!/coordinator/ReportManagement/${file.file_path}`;
                     html += `
                         <div class="file-item existing" id="file-${file.id}">
                             <i class="fas fa-file-pdf"></i>
@@ -1102,52 +1175,79 @@ function prepareReupload(fileId, fileName) {
 
 // Initialize filter event listeners for each section independently
 function initFilterListeners() {
-    // Approved section filter
-    const approvedFilter = document.querySelector('.section-green .filter-row select');
-    if (approvedFilter) {
-        approvedFilter.addEventListener('change', function() {
-            renderApprovedTable();
+    Object.keys(sectionConfig).forEach(section => {
+        const config = sectionConfig[section];
+        const sectionElement = document.querySelector(config.sectionSelector);
+        const controls = [
+            sectionElement?.querySelector(".filter-row select"),
+            document.getElementById(`${section}DateFrom`),
+            document.getElementById(`${section}DateTo`)
+        ];
+
+        controls.forEach(control => {
+            if (!control || control.dataset.filterBound === "true") {
+                return;
+            }
+
+            control.dataset.filterBound = "true";
+            control.addEventListener("change", function() {
+                showAllState[section] = false;
+                renderReportTable(section);
+            });
         });
+    });
+}
+
+function showAllSectionReports(section) {
+    const config = sectionConfig[section];
+    const sectionElement = config ? document.querySelector(config.sectionSelector) : null;
+    const typeFilter = sectionElement?.querySelector(".filter-row select");
+    const dateFromFilter = document.getElementById(`${section}DateFrom`);
+    const dateToFilter = document.getElementById(`${section}DateTo`);
+    const shouldShowAll = !showAllState[section];
+
+    if (typeFilter) {
+        typeFilter.value = "All type";
     }
-    
-    // Need Fix section filter
-    const needFixFilter = document.querySelector('.section-Orange .filter-row select');
-    if (needFixFilter) {
-        needFixFilter.addEventListener('change', function() {
-            renderNeedFixTable();
-        });
+
+    if (dateFromFilter) {
+        dateFromFilter.value = "";
     }
-    
-    // Rejected section filter
-    const rejectedFilter = document.querySelector('.section-red .filter-row select');
-    if (rejectedFilter) {
-        rejectedFilter.addEventListener('change', function() {
-            renderRejectedTable();
-        });
+
+    if (dateToFilter) {
+        dateToFilter.value = "";
     }
+
+    showAllState[section] = shouldShowAll;
+    renderReportTable(section);
 }
 
 // Reset filter for a specific section
 function resetSectionFilter(section) {
-    if (section === 'approved') {
-        const filter = document.querySelector('.section-green .filter-row select');
-        if (filter) filter.value = 'All type';
-        renderApprovedTable();
-    } else if (section === 'needfix') {
-        const filter = document.querySelector('.section-Orange .filter-row select');
-        if (filter) filter.value = 'All type';
-        renderNeedFixTable();
-    } else if (section === 'rejected') {
-        const filter = document.querySelector('.section-red .filter-row select');
-        if (filter) filter.value = 'All type';
-        renderRejectedTable();
-    }
+    const config = sectionConfig[section];
+    const sectionElement = config ? document.querySelector(config.sectionSelector) : null;
+    const filter = sectionElement?.querySelector(".filter-row select");
+    const dateFromFilter = document.getElementById(`${section}DateFrom`);
+    const dateToFilter = document.getElementById(`${section}DateTo`);
+
+    if (filter) filter.value = 'All type';
+    if (dateFromFilter) dateFromFilter.value = "";
+    if (dateToFilter) dateToFilter.value = "";
+
+    showAllState[section] = false;
+    renderReportTable(section);
 }
 
 // Reset all filters
 function resetAllFilters() {
     document.querySelectorAll('.filter-row select').forEach(select => {
         if (select) select.value = 'All type';
+    });
+    document.querySelectorAll('.filter-row input[type="date"]').forEach(input => {
+        if (input) input.value = "";
+    });
+    Object.keys(showAllState).forEach(section => {
+        showAllState[section] = false;
     });
     renderApprovedTable();
     renderNeedFixTable();

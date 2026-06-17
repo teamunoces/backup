@@ -10,7 +10,7 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding-top: 80px;      /* Header space */
-    padding-left: 150px;    /* Sidebar space */
+    padding-left: 100px;    /* Sidebar space */
    
 }
 
@@ -20,9 +20,9 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -35,7 +35,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     background: #fff;

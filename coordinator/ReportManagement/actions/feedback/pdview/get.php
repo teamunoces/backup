@@ -56,36 +56,39 @@ try {
     }
     $stmt->close();
     
-    // Insert new details
-    if (isset($data['details']) && is_array($data['details'])) {
-        $stmt = $conn->prepare("INSERT INTO pd_detail 
-            (report_id, program, milestones, duration, objectives, persons_involved, 
-            school_resources, community_resources, collaborating_agencies, budget, 
-            means_of_verification, remarks) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+// Insert new details
+if (isset($data['details']) && is_array($data['details'])) {
+    $stmt = $conn->prepare("INSERT INTO pd_detail 
+        (report_id, program, objectives, program_content_and_activities, service_delivery, 
+        partnerships_and_stakeholders, facilitators_and_trainers, program_start_and_end_dates, 
+        frequency_of_activities, community_resources, school_resources, 
+        risk_management_and_contingency_plans, sustainability_and_follow_up, promotion_and_awareness) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    foreach ($data['details'] as $row) {
+        $stmt->bind_param("isssssssssssss", 
+            $reportId,
+            $row['program'],
+            $row['objectives'],
+            $row['program_content_and_activities'],
+            $row['service_delivery'],
+            $row['partnerships_and_stakeholders'],
+            $row['facilitators_and_trainers'],
+            $row['program_start_and_end_dates'],
+            $row['frequency_of_activities'],
+            $row['community_resources'],
+            $row['school_resources'],
+            $row['risk_management_and_contingency_plans'],
+            $row['sustainability_and_follow_up'],
+            $row['promotion_and_awareness']
+        );
         
-        foreach ($data['details'] as $row) {
-            $stmt->bind_param("isssssssssss", 
-                $reportId,
-                $row['program'],
-                $row['milestones'],
-                $row['duration'],
-                $row['objectives'],
-                $row['persons_involved'],
-                $row['school_resources'],
-                $row['community_resources'],
-                $row['collaborating_agencies'],
-                $row['budget'],
-                $row['means_of_verification'],
-                $row['remarks']
-            );
-            
-            if (!$stmt->execute()) {
-                throw new Exception("Failed to insert detail: " . $stmt->error);
-            }
+        if (!$stmt->execute()) {
+            throw new Exception("Failed to insert detail: " . $stmt->error);
         }
-        $stmt->close();
     }
+    $stmt->close();
+}
     
     // Commit transaction
     $conn->commit();

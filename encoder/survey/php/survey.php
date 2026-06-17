@@ -38,12 +38,32 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
    BARANGAY TABLE
 ========================= */
 $barangay = strtolower(trim($_POST['barangay'] ?? 'camagong'));
-$allowedTables = ['aclan','amontay','ataatahon','barangay1','barangay2','barangay3','barangay4','barangay5','barangay6','barangay7','camagong','cubicubi','culit','jaguimitan','kinabajangan','punta','santaana','talisay','triangulo'];
-if (!in_array($barangay, $allowedTables)) {
+$allowedTables = [
+    'aclan' => 'survey_aclan',
+    'amontay' => 'survey_amontay',
+    'ataatahon' => 'survey_ataatahon',
+    'barangay1' => 'survey_barangay1',
+    'barangay2' => 'survey_barangay2',
+    'barangay3' => 'survey_barangay3',
+    'barangay4' => 'survey_barangay4',
+    'barangay5' => 'survey_barangay5',
+    'barangay6' => 'survey_barangay6',
+    'barangay7' => 'survey_barangay7',
+    'camagong' => 'survey_camagong',
+    'cubicubi' => 'survey_cubicubi',
+    'culit' => 'survey_culit',
+    'jaguimitan' => 'survey_jaguimitan',
+    'kinajabangan' => 'survey_kinajabangan',
+    'punta' => 'survey_punta',
+    'santaana' => 'survey_santaana',
+    'talisay' => 'survey_talisay',
+    'triangulo' => 'survey_triangulo'
+];
+if (!isset($allowedTables[$barangay])) {
     echo json_encode(["success" => false,"message" => "Invalid barangay: $barangay"]);
     exit;
 }
-$table = $barangay;
+$table = $allowedTables[$barangay];
 
 /* =========================
    HELPER FUNCTION TO SAFE STRING

@@ -1,45 +1,195 @@
 document.addEventListener('DOMContentLoaded', function () {
     
     // ------------------------------------------
-    // 1. SMART CONTEXT GATHERING
-    // ------------------------------------------
-    function getFormContext() {
-        const title = document.getElementById('title_of_project')?.value || "";
-        const description = document.getElementById('description_of_project')?.value || "";
-        const objectives = document.getElementById('general_objectives')?.value || "";
-        const justification = document.getElementById('program_justification')?.value || "";
-        const beneficiaries = document.getElementById('beneficiaries')?.value || "";
-        
-        return `${title} ${description} ${objectives} ${justification} ${beneficiaries}`.trim();
-    }
-    
-    // ------------------------------------------
-    // 2. RECOMMENDATION LOGIC
+    // 1. RECOMMENDATION LOGIC
     // ------------------------------------------
     const recommendationButton = document.querySelector('.recommendation-btn');
     const recommendationContainer = document.getElementById('recommendation-container'); 
     const recommendationList = document.getElementById('recommendation-list');
     const aiSearchInput = document.getElementById('ai-input');
+    const AI_SERVER_URL = "http://127.0.0.1:5000";
+    const STOPWORDS = new Set([
+        "a", "an", "and", "are", "as", "at", "be", "by", "for", "from", "in", "into",
+        "is", "of", "on", "or", "the", "to", "with", "program", "project", "month",
+        "week", "campaign", "initiative", "activity", "activities", "plan", "plans",
+        "community", "barangay", "youth", "volunteer", "volunteers", "residents",
+        "promote", "increase", "enhance", "develop", "conduct", "organize", "organized",
+        "engage", "practices", "seminar", "seminars", "workshop", "workshops",
+        "awareness", "action", "drive"
+    ]);
+    const TOKEN_NORMALIZATIONS = {
+        clean: "cleanup",
+        cleaning: "cleanup",
+        cleanups: "cleanup",
+        litter: "cleanup",
+        littering: "cleanup",
+        eco: "environment",
+        ecological: "environment",
+        ecosystem: "environment",
+        ecosystems: "environment",
+        environmental: "environment",
+        conservation: "environment",
+        protect: "environment",
+        protection: "environment",
+        preserve: "environment",
+        preservation: "environment",
+        rehabilitation: "environment",
+        sustainable: "sustainability",
+        marine: "coastal",
+        beach: "coastal",
+        mangrove: "coastal",
+        fisherfolk: "coastal",
+        trees: "tree",
+        planting: "plant",
+        planted: "plant",
+        arts: "art",
+        artistic: "art",
+        creative: "art",
+        creativity: "art",
+        culture: "art",
+        cultural: "art",
+        multimedia: "media",
+        digital: "media"
+    };
+    const TOPIC_CATEGORIES = {
+        environment: new Set(["environment", "coastal", "cleanup", "tree", "plant", "sustainability", "climate", "pollution", "waste"]),
+        health: new Set(["health", "medical", "nutrition", "fitness", "recreation"]),
+        food: new Set(["food", "nutrition"]),
+        education: new Set(["education", "literacy", "technology", "ict", "coding", "stem"]),
+        arts_media: new Set(["art", "media", "journalism", "film", "photo", "photography", "video", "design", "music", "dance", "theater"]),
+        disaster: new Set(["disaster", "relief"]),
+        social: new Set(["senior", "elderly", "pwd"]),
+        livelihood: new Set(["financial", "entrepreneurship"])
+    };
+
+    function topicTokens(text) {
+        const tokens = new Set();
+        String(text || "").toLowerCase().replace(/-/g, " ").match(/[a-z0-9]+/g)?.forEach(token => {
+            if (token.length < 3 || STOPWORDS.has(token)) return;
+            tokens.add(TOKEN_NORMALIZATIONS[token] || token);
+        });
+        return tokens;
+    }
+
+    function topicCategories(tokens) {
+        const categories = new Set();
+        Object.entries(TOPIC_CATEGORIES).forEach(([category, categoryTokens]) => {
+            for (const token of tokens) {
+                if (categoryTokens.has(token)) {
+                    categories.add(category);
+                    break;
+                }
+            }
+        });
+        return categories;
+    }
+
+    function intersectionSize(a, b) {
+        let count = 0;
+        a.forEach(value => {
+            if (b.has(value)) count++;
+        });
+        return count;
+    }
+
+    function programText(program) {
+        return [
+            program.program,
+            program.objectives,
+            program.strategies,
+            program.persons_agencies_involved,
+            program.resources_needed,
+            program.means_of_verification,
+            program.time_frame
+        ].filter(Boolean).join(" ");
+    }
+
+    function filterAccuratePrograms(projectTitle, programs) {
+        const titleTokens = topicTokens(projectTitle);
+        const titleCategories = topicCategories(titleTokens);
+
+        if (!Array.isArray(programs) || titleTokens.size === 0) return [];
+
+        return programs
+            .map((program, originalIndex) => {
+                const nameTokens = topicTokens(program.program || "");
+                const rowTokens = topicTokens(programText(program));
+                const rowCategories = topicCategories(new Set([...nameTokens, ...rowTokens]));
+                const nameOverlap = intersectionSize(titleTokens, nameTokens);
+                const rowOverlap = intersectionSize(titleTokens, rowTokens);
+
+                if (titleCategories.size > 0 && intersectionSize(titleCategories, rowCategories) === 0) return null;
+
+                return {
+                    program,
+                    originalIndex,
+                    score: (nameOverlap * 100) + (rowOverlap * 20)
+                };
+            })
+            .filter(Boolean)
+            .sort((a, b) => b.score - a.score || a.originalIndex - b.originalIndex)
+            .slice(0, 3)
+            .map(item => item.program);
+    }
+
+    async function waitForAiServer(timeoutMs = 900000) {
+        const startedAt = Date.now();
+
+        while (Date.now() - startedAt < timeoutMs) {
+            try {
+                const response = await fetch(`${AI_SERVER_URL}/health`, { cache: "no-store" });
+                if (response.ok) {
+                    return true;
+                }
+            } catch (error) {
+                // The server may still be loading the AI model after login.
+            }
+
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        }
+
+        return false;
+    }
+
+    aiSearchInput.addEventListener('keydown', function (event) {
+        if (event.key !== 'Enter' || event.repeat || recommendationButton.disabled) {
+            return;
+        }
+
+        event.preventDefault();
+        recommendationButton.click();
+    });
     
         recommendationButton.addEventListener('click', async function () {
-            const aiInputValue = aiSearchInput.value.trim();
-            const formContext = getFormContext();
-            
-            // 1. Prioritize Search Bar, then Form Fields, then a Default Keyword
-            const finalQuery = aiInputValue || formContext || "general recommendations"; 
+            const finalQuery = aiSearchInput.value.trim();
 
-            // Remove the 'if (!finalQuery)' alert block entirely or change it to:
-            // if (!finalQuery) { ... } is no longer needed because finalQuery will always have a value.
+            if (!finalQuery) {
+                alert("Please type what recommendation you want in the search bar first.");
+                aiSearchInput.focus();
+                return;
+            }
 
             recommendationButton.innerHTML = "<span>⏳ AI is Analyzing...</span>";
             recommendationButton.disabled = true;
             
             try {
-                const response = await fetch("http://127.0.0.1:5000/recommend", {
+                recommendationButton.innerHTML = "<span>Starting AI server...</span>";
+                const serverReady = await waitForAiServer();
+
+                if (!serverReady) {
+                    throw new Error("AI server did not become ready on port 5000.");
+                }
+
+                recommendationButton.innerHTML = "<span>AI is Analyzing...</span>";
+                const response = await fetch(`${AI_SERVER_URL}/recommend`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     // Sending the query (which is now never empty)
-                    body: JSON.stringify({ text: finalQuery, user_id: "default" })
+                    body: JSON.stringify({
+                        text: finalQuery,
+                        user_id: "default",
+                        source: "search"
+                    })
                 });
             
             if (!response.ok) {
@@ -76,8 +226,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     const tableBody = document.querySelector('#programPlanTable tbody');
                     tableBody.innerHTML = ""; // Clear existing rows
                     
-                    if (rec.program && Array.isArray(rec.program) && rec.program.length > 0) {
-                        rec.program.forEach(p => {
+                    const accuratePrograms = filterAccuratePrograms(finalQuery, rec.program);
+                    if (accuratePrograms.length > 0) {
+                        accuratePrograms.forEach(p => {
                             const row = document.createElement('tr');
                             const rowData = [
                                 p.program || "",
@@ -111,16 +262,20 @@ document.addEventListener('DOMContentLoaded', function () {
                             tableBody.appendChild(row);
                         });
                     } else {
-                        // Add at least one empty row
-                        const emptyRow = document.createElement('tr');
-                        for (let i = 0; i < 8; i++) {
-                            const td = document.createElement('td');
-                            const input = (i === 5 || i === 7) ? document.createElement('input') : document.createElement('textarea');
-                            input.value = "";
-                            td.appendChild(input);
-                            emptyRow.appendChild(td);
+                        for (let rowIndex = 0; rowIndex < 1; rowIndex++) {
+                            const emptyRow = document.createElement('tr');
+                            for (let i = 0; i < 8; i++) {
+                                const td = document.createElement('td');
+                                const input = document.createElement('textarea');
+                                input.value = "";
+                                input.classList.add('table-input');
+                                input.readOnly = false;
+                                input.rows = 2;
+                                td.appendChild(input);
+                                emptyRow.appendChild(td);
+                            }
+                            tableBody.appendChild(emptyRow);
                         }
-                        tableBody.appendChild(emptyRow);
                     }
                     
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -134,90 +289,11 @@ document.addEventListener('DOMContentLoaded', function () {
             
         } catch (error) {
             console.error("Fetch Error:", error);
-            alert("Could not connect to the AI server. Make sure it's running on port 5000.");
+            alert("Could not connect to the AI server. Please log in again or check AI_RECOMMENDATION/ai_server.log.");
         } finally {
-            recommendationButton.innerHTML = "💡 Get AI-Generated Recommendations";
+            recommendationButton.innerHTML = "AI Recommendations";
             recommendationButton.disabled = false;
         }
     });
     
-    // ------------------------------------------
-    // 3. ADD NEW ROW LOGIC
-    // ------------------------------------------
-    const addRowBtn = document.querySelector('.add-row-btn');
-    const tableBody = document.querySelector('#programPlanTable tbody');
-    
-        // Add new row logic
-        if (addRowBtn) {
-            addRowBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const newRow = document.createElement('tr');
-                
-                for (let i = 0; i < 8; i++) {
-                    const td = document.createElement('td');
-                    // Use textarea for ALL fields
-                    const input = document.createElement('textarea');
-                    input.rows = 2;
-                    
-                    if (i === 7) input.placeholder = "...";
-                    if (i === 5) input.placeholder = "...";
-                    else input.placeholder = "...";
-                    
-                    input.classList.add('table-input');
-                    td.appendChild(input);
-                    newRow.appendChild(td);
-                }
-                
-                tableBody.appendChild(newRow);
-            });
-        }
-    
-    // Delete row button handler
-    const deleteRowBtn = document.querySelector('.delete-row-btn');
-    if (deleteRowBtn) {
-        deleteRowBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (tableBody.rows.length > 1) {
-                tableBody.deleteRow(tableBody.rows.length - 1);
-            } else {
-                alert("At least one row must remain.");
-            }
-        });
-    }
-    
-    // ------------------------------------------
-    // 4. AUTO-SAVE (Every 30 seconds)
-    // ------------------------------------------
-    setInterval(() => {
-        const formData = {};
-        document.querySelectorAll('#programPlanTable textarea, #programPlanTable input').forEach((el, i) => {
-            formData[`table_field_${i}`] = el.value;
-        });
-        
-        const formFields = [
-            'title_of_project', 'description_of_project', 'general_objectives',
-            'program_justification', 'beneficiaries', 'program_plan'
-        ];
-        
-        formFields.forEach(field => {
-            const el = document.getElementById(field);
-            if (el) formData[field] = el.value;
-        });
-        
-        localStorage.setItem('3ydp_draft', JSON.stringify(formData));
-        console.log("Draft saved");
-    }, 30000);
-    
-    // Load draft on page load
-    const savedDraft = localStorage.getItem('3ydp_draft');
-    if (savedDraft) {
-        const formData = JSON.parse(savedDraft);
-        
-        // Restore form fields
-        Object.keys(formData).forEach(key => {
-            if (key.startsWith('table_field_')) return;
-            const el = document.getElementById(key);
-            if (el) el.value = formData[key];
-        });
-    }
 });

@@ -2,7 +2,7 @@
 // db_connection.php
 
 $host = 'localhost';
-$db   = 'questionnaire';
+$db   = 'ces_database';
 $user = 'root';
 $pass = '';
 

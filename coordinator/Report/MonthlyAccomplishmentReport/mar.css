@@ -1,6 +1,6 @@
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -16,8 +16,8 @@
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
-    width: calc(100% - 150px);
+    left: 100px;
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -30,8 +30,8 @@ body {
     margin: 0;
 
     /* Space for fixed sidebar and header */
-    margin-left: 150px;
-    margin-top: 60px;
+    margin-left: 100px;
+    margin-top: 100px;
 }
 
 /* ===== Main Content ===== */
@@ -54,6 +54,10 @@ body {
 
 .logo-left {
     height: 90px;
+    width: auto;
+}
+.logo-left2 {
+    height: 80px;
     width: auto;
 }
 
@@ -359,3 +363,125 @@ footer {
 /* Helpers */
 .hidden { display: none; }
 .flex-row { display: flex; gap: 10px; }
+
+/* ===== Laptop / Monitor Responsiveness ===== */
+:root {
+    --sidebar-width: 100px;
+    --header-height: 60px;
+    --page-gutter: clamp(16px, 3vw, 40px);
+    --report-max-width: 1100px;
+}
+
+body {
+    margin-left: var(--sidebar-width);
+    margin-top: calc(var(--header-height) + 30px);
+    overflow-x: hidden;
+}
+
+#sidebarFrame {
+    width: var(--sidebar-width);
+}
+
+#headerFrame {
+    left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+}
+
+.report-container {
+    width: min(var(--report-max-width), calc(100vw - var(--sidebar-width) - (var(--page-gutter) * 2)));
+    max-width: var(--report-max-width);
+    box-sizing: border-box;
+}
+
+.college-info {
+    min-width: 0;
+}
+
+.input_cell input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+}
+
+th,
+td {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+@media (min-width: 1440px) {
+    :root {
+        --report-max-width: 1200px;
+        --page-gutter: 48px;
+    }
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --report-max-width: 1000px;
+        --page-gutter: 24px;
+    }
+
+    .report-container {
+        padding: 28px;
+    }
+
+    .logo-left {
+        height: 78px;
+    }
+
+    .logo-left2,
+    .logos-right img {
+        height: 70px;
+    }
+
+    .college-info h1 {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 900px) {
+    .header-content {
+        gap: 12px;
+    }
+
+    .college-info {
+        padding: 0 10px;
+    }
+
+    table {
+        min-width: 760px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+
+    body {
+        margin-left: 0;
+        margin-top: calc(var(--header-height) + 20px);
+        padding: 0 var(--page-gutter);
+    }
+
+    .report-container {
+        width: calc(100vw - (var(--page-gutter) * 2));
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    table {
+        min-width: 0;
+    }
+}

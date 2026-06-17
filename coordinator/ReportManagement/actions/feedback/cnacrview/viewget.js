@@ -147,7 +147,7 @@ async function handleResubmit() {
         const formData = collectFormData();
         console.log('Submitting data:', formData); // For debugging
         
-        const response = await fetch('/coordinator/ReportManagement/actions/feedback/cnacrview/update.php', {
+        const response = await fetch('/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/cnacrview/update.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
@@ -158,7 +158,7 @@ async function handleResubmit() {
         if (result.success) {
             alert('Report updated successfully and status set to Pending!');
             // Redirect to pending reports page - adjust this URL as needed
-            window.location.href = '/coordinator/ReportManagement/ReportManagement.html';
+            window.location.href = '/SYSTEM_VERSION_!/coordinator/Report/Reports.html';
         } else {
             alert('Failed to update report: ' + (result.message || 'Unknown error'));
         }

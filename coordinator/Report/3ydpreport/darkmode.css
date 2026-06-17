@@ -153,3 +153,38 @@ body.dark-mode .btn-submit {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5) !important;
     filter: saturate(0.8); /* Slightly less neon to fit the dark aesthetic */
 }
+
+/* ===== FIX WHITE GAPS AROUND FIXED HEADER/SIDEBAR ===== */
+html.dark-mode,
+body.dark-mode {
+    background: #000000 !important;
+}
+
+/* page area beside sidebar / below header */
+body.dark-mode::before {
+    content: "";
+    position: fixed;
+    top: 60px;
+    left: 100px;
+    width: calc(100% - 100px);
+    height: 100vh;
+    background: #000000;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* remove white backgrounds from layout wrappers */
+body.dark-mode .main,
+body.dark-mode .main-content,
+body.dark-mode .content,
+body.dark-mode .content-wrapper,
+body.dark-mode .page-wrapper,
+body.dark-mode .dashboard-main {
+    background: transparent !important;
+}
+
+/* keep iframe areas dark */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame {
+    background: #1a1a1a !important;
+}

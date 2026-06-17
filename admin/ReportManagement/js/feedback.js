@@ -187,7 +187,7 @@ async function loadFeedback(reportId, reportTable) {
     
     try {
         // Use the correct absolute path
-        const url = `/admin/ReportManagement/php/get_feedback.php?report_id=${reportId}&table=${encodeURIComponent(reportTable)}`;
+        const url = `/SYSTEM_VERSION_!/admin/ReportManagement/php/get_feedback.php?report_id=${reportId}&table=${encodeURIComponent(reportTable)}`;
         console.log("Fetching feedback from:", url);
         
         const response = await fetch(url);

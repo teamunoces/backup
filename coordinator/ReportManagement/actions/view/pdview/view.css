@@ -12,7 +12,7 @@ body {
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -27,18 +27,56 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+.wrapper {
+    position: relative;
+    max-width: 1100px;
+    margin: 10px auto 40px auto;
+}
+.admin-comment {
+    pointer-events: none;
+    width: 100%; /* take full width of container */
+    max-width: 1100px;
+    box-sizing: border-box;
+    display: block;
+    margin: 80px auto 40px auto; /* Center horizontally with auto margins */
 
+  
+}
+#admincomment{
+    pointer-events: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    font-style: italic;
+    padding: 20px;
+    font-family: inherit;
+    border-radius: 4px 12px 12px 4px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    resize: vertical;
+}
+
+#admincomment:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+}
 /* ===== Main Form Container ===== */
 .form-container {
     background-color: white;
-    width: 100%;
     max-width: 1100px;
     padding: 40px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
@@ -72,6 +110,10 @@ body {
 
 .logo-left {
     height: 90px;
+    width: auto;
+}
+.logo-left2 {
+    height: 80px;
     width: auto;
 }
 
@@ -238,9 +280,6 @@ footer {
 }
 
 
-
-
-
 /* ===== BUTTONS - Positioned Above Container ===== */
 .buttons {
     position: fixed;
@@ -299,34 +338,37 @@ footer {
     transform: scale(0.96);
 }
 
-/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+/* ===== 3. Approvals Section ===== */
 .approvals-container {
-    
   font-family: Arial, sans-serif;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  width: 95%;              /* same width as table/header/input */
+  max-width: none;         /* remove 900px limit */
+  margin: 40px 0 0 0;      /* add space from table and align left */
   color: #000;
+  box-sizing: border-box;
 }
 
 .approval-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  align-items: flex-start;
+  margin-bottom: 35px;
+  width: 100%;
 }
 
 .signature-group {
-  width: 35%; /* Adjust width to match the line lengths in your image */
+  width: 35%;
 }
 
 .label {
   font-weight: bold;
-  margin-bottom: 35px; /* Creates space for the signature signature */
+  margin-bottom: 35px;
 }
 
 .signature-line {
   border-bottom: 1.5px solid black;
   margin-bottom: 5px;
+  min-height: 18px;
 }
 
 .title {
@@ -342,11 +384,12 @@ footer {
   width: 100%;
 }
 
-/* Centered Layout for VP and President */
 .approval-centered {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 95%;
+  margin-top: 35px;
 }
 
 .admin-block {
@@ -451,7 +494,6 @@ footer {
 }
 
 
-
 /* ===== Responsive Adjustments ===== */
 @media screen and (max-width: 768px) {
     .form-container {
@@ -478,4 +520,67 @@ footer {
         flex-direction: column;
         align-items: flex-start;
     }
+}
+/* ===== Laptop / Monitor Responsiveness ===== */
+:root {
+    --sidebar-width: 100px;
+    --header-height: 60px;
+    --page-gutter: clamp(16px, 3vw, 40px);
+    --report-max-width: 1100px;
+}
+
+body {
+    margin-left: var(--sidebar-width);
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+#sidebarFrame { width: var(--sidebar-width); }
+#headerFrame { left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); }
+
+.wrapper,
+.form-container,
+.admin-comment {
+    width: var(--report-max-width);
+    max-width: calc(100vw - var(--sidebar-width) - (var(--page-gutter) * 2));
+    box-sizing: border-box;
+}
+
+.college-info { min-width: 0; }
+.form-container table { width: 100%; max-width: 100%; table-layout: fixed; }
+th, td { overflow-wrap: anywhere; word-break: break-word; }
+
+@media (min-width: 1440px) {
+    :root { --page-gutter: 48px; }
+}
+
+@media (max-width: 1200px) {
+    :root { --page-gutter: 24px; }
+    .form-container { padding: 32px; }
+    .logo-left, .logo-left2, .logos-right img { height: 70px; }
+    .college-info h1 { font-size: 23px; }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame { transform: translateX(-100%); }
+    #headerFrame { left: 0; width: 100%; }
+    body { margin-left: 0; padding: calc(var(--header-height) + 20px) var(--page-gutter) 30px var(--page-gutter); }
+    .wrapper, .form-container, .admin-comment { width: calc(100vw - (var(--page-gutter) * 2)); }
+}
+
+.approvals-container,
+.approvals-container * {
+    font-weight: bold !important;
+}
+
+.approvals-container .signature-line {
+    display: inline-block;
+    width: auto;
+    min-width: 180px;
+    max-width: 100%;
+    padding: 0 12px 2px 12px;
+    border-bottom: 1.5px solid #000 !important;
+    text-align: inherit;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }

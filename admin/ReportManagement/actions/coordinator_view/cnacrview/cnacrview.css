@@ -10,12 +10,12 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    margin-left: 150px; /* Account for fixed sidebar */
+    margin-left: 100px; /* Account for fixed sidebar */
 }
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -31,9 +31,9 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -50,6 +50,10 @@ body {
 
 .logo-left {
     height: 90px;
+    width: auto;
+}
+.logo-left2 {
+    height: 80px;
     width: auto;
 }
 
@@ -108,6 +112,42 @@ body {
     margin-bottom: 25px;
 }
 
+.admin-comment {
+    pointer-events: none;
+    width: 100%; /* take full width of container */
+    max-width: 1100px; /* prevent overflow */
+    box-sizing: border-box;
+    display: block;
+    margin: 80px auto 40px auto; /* Center horizontally with auto margins */
+
+  
+}
+#admincomment{
+      pointer-events: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    font-style: italic;
+    padding: 20px;
+    font-family: inherit;
+    border-radius: 4px 12px 12px 4px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    resize: vertical;
+}
+
+#admincomment:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+}
+
 /* Main Container - Centered */
 .report-container {
     max-width: 1100px;
@@ -129,7 +169,7 @@ h1 {
 /* Header Grid Table */
 .header-grid {
     display: grid;
-    grid-template-columns: 150px 1fr 150px 1fr;
+    grid-template-columns: 145px 1fr 150px 1fr;
     border: 1px solid #000;
     margin-bottom: 30px;
 }
@@ -241,14 +281,15 @@ footer {
 .approvals-container {
     font-family: Arial, sans-serif;
     width: 100%;
-    max-width: 900px;
-    margin: 40px auto 0 auto;
+    max-width: none;
+    margin: 40px 0 0 0;
     color: #000;
 }
 
 .approval-row {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -268,6 +309,9 @@ footer {
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
+}
+#created_by_name, #dean{
+    text-align: left;
 }
 
 .title {
@@ -306,85 +350,78 @@ footer {
     min-width: 250px;
 }
 
-/* ===== 4. Document Info Table ===== */
-.doc-header {
-    width: auto;
-    margin-right: auto;
-}
-
-.doc-header td {
-    border: 1px solid #000;
-    padding: 5px 10px;
-}
-
-.doc-header .label {
-    background-color: #002060;
-    color: #fff;
-    width: 25%;
-    font-size: 11px;
-}
-
-.doc-header .value {
-    width: 70%;
-    font-size: 11px;
-    text-align: left;
-}
-
+/* ===== 4. DOCUMENT INFO TABLE (FINAL CLEAN VERSION) ===== */
 .document-info {
     margin-top: 50px;
-    width: 30%;
+    width: 255px;
+    max-width: 255px;
 }
 
-/* Table Styling */
+/* TABLE */
 .doc-header {
+    width: 255px;
     border-collapse: collapse;
+    table-layout: fixed;
     font-family: Arial, sans-serif;
-    font-size: 11px;
-    border: 1px solid #d1d1d1;
+    font-size: 10px;
+    background: #fff;
+    border: 1px solid #808080; /* OUTER BORDER FIX */
 }
 
+/* ALL CELLS */
+.doc-header td {
+    border: 1px solid #808080; /* FULL GRID BORDER */
+    padding: 3px 6px;
+    height: 20px;
+    vertical-align: middle;
+    line-height: 1.1;
+}
+
+/* LABEL COLUMN (BLUE) */
 .doc-header td.label {
     background-color: #002060;
-    color: white;
+    color: #fff;
     font-weight: bold;
-    padding: 4px 8px;
-    border: 1px solid #d1d1d1;
     text-align: left;
     white-space: nowrap;
-    width: 100px;
+    width: 105px;
 }
 
+/* COLON COLUMN */
 .doc-header td:nth-child(2) {
-    width: 2%;
-    padding: 0 1px;
+    width: 10px;
+    text-align: center;
+    padding: 0;
     font-weight: bold;
-    border-top: 1px solid #d1d1d1;
-    border-bottom: 1px solid #d1d1d1;
+    background: #fff;
 }
 
+/* VALUE COLUMN */
 .doc-header td.value {
-    padding: 4px 10px;
-    border: 1px solid #d1d1d1;
-    min-width: 120px;
+    width: 140px;
+    text-align: left !important;
+    padding-left: 6px;
+    white-space: nowrap;
 }
 
-.doc-header td.value input, 
-.doc-header td.value p {
-    border: none;
-    background: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    color: #333;
+/* FORCE TEXT LEFT */
+.doc-header td.value *,
+.doc-header td.value input,
+.doc-header td.value p,
+.doc-header td.value span {
+    text-align: left !important;
     margin: 0;
     padding: 0;
+}
+
+/* REMOVE INPUT STYLE */
+.doc-header td.value input {
+    border: none;
+    background: transparent;
     width: 100%;
+    font-family: inherit;
+    font-size: inherit;
 }
-
-.doc-header td.value input:disabled {
-    color: black;
-    cursor: default;
-}
-
 /* ===== BUTTONS - Positioned Above Container ===== */
 .buttons {
     position: fixed;
@@ -443,56 +480,7 @@ footer {
     transform: scale(0.96);
 }
 
-/* ===== Print Styles ===== */
-@media print {
-    .buttons,
-    #sidebarFrame,
-    #headerFrame {
-        display: none !important;
-    }
 
-    body {
-        background-color: #fff !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .report-container {
-        margin: 0 !important;
-        padding: 20px !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
-
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .college-info h1 {
-        color: #4f81bd !important;
-    }
-
-    .double-line {
-        border-top: 4px double #4f81bd !important;
-    }
-
-    .doc-header td.label {
-        background-color: #002060 !important;
-        color: #fff !important;
-    }
-
-    table, th, td {
-        border: 1px solid #000 !important;
-    }
-
-    .paper-lines {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-}
 
 /* ===== Responsive Adjustments ===== */
 @media (max-width: 1200px) {
@@ -536,6 +524,7 @@ footer {
         right: auto;
     }
     
+    /* Only stack on mobile screen, not on print */
     .approval-row {
         flex-direction: column;
         gap: 20px;
@@ -568,4 +557,37 @@ footer {
     .section-content {
         padding: 15px 0 10px 20px;
     }
+}
+/* ===== Laptop / PC Responsive Layout ===== */
+@media (min-width: 769px) {
+    body { margin-left: 0; padding: 80px clamp(18px, 2vw, 32px) 40px calc(100px + clamp(18px, 2vw, 32px)); }
+    .report-container, .admin-comment { width: min(100%, 1100px); margin-left: auto; margin-right: auto; }
+    .report-container { margin-top: 0; overflow-x: auto; }
+    .admin-comment { margin-top: 0; margin-bottom: 24px; }
+}
+@media (max-width: 1366px) and (min-width: 769px) {
+    .report-container, .admin-comment { max-width: 1000px; }
+    .report-container { padding: 32px; }
+    .header-grid { grid-template-columns: 130px minmax(0, 1fr) 130px minmax(0, 1fr); }
+    .logo-left { height: 76px; }
+    .logo-left2, .logos-right img { height: 68px; }
+    .college-info h1 { font-size: 23px; }
+}
+@media (max-width: 1100px) and (min-width: 769px) { .header-grid { grid-template-columns: 130px minmax(0, 1fr); } }
+
+.approvals-container,
+.approvals-container * {
+    font-weight: bold !important;
+}
+
+.approvals-container .signature-line {
+    display: inline-block;
+    width: auto;
+    min-width: 180px;
+    max-width: 100%;
+    padding: 0 12px 2px 12px;
+    border-bottom: 1.5px solid #000 !important;
+    text-align: inherit;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }

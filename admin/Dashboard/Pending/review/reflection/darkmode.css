@@ -1,0 +1,159 @@
+/* ================= DARK MODE STYLES ================= */
+
+/* ===== MAIN BODY ===== */
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+}
+
+/* ===== MAIN CONTAINER ===== */
+body.dark-mode .container {
+    background: #1e1e1e !important;
+    color: #f1f1f1 !important;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6) !important;
+}
+
+/* ===== HEADER / FRAMES ===== */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame {
+    background: #1a1a1a !important;
+    color: #fff !important;
+    box-shadow: 0 2px 6px rgba(255,255,255,0.05) !important;
+}
+
+/* ===== TEXT ===== */
+body.dark-mode p,
+body.dark-mode label,
+body.dark-mode span,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #f1f1f1 !important;
+}
+
+/* ===== COLLEGE INFO ===== */
+body.dark-mode .college-info h1 {
+    color: #7fb7ff !important;
+}
+
+body.dark-mode .college-info p,
+body.dark-mode .college-info a {
+    color: #dcdcdc !important;
+}
+
+/* ===== OFFICE TITLE ===== */
+body.dark-mode .office-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .double-line {
+    border-top: 4px double #7fb7ff !important;
+}
+
+/* ===== INPUTS ===== */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: #2b2b2b !important;
+    color: #ffffff !important;
+    border: 1px solid #555 !important;
+}
+
+/* ===== LINE INPUT ===== */
+body.dark-mode .line-input,
+body.dark-mode .signature-input {
+    background: transparent !important;
+    color: #fff !important;
+    border-bottom: 1px solid #ffffff !important;
+}
+
+/* ===== WRITING LINES ===== */
+body.dark-mode .writing-lines-input {
+    color: #ffffff !important;
+    background-image: linear-gradient(transparent 31px, #777 31px) !important;
+}
+
+/* ===== CHECKBOXES ===== */
+body.dark-mode input[type="checkbox"] {
+    accent-color: #63b32e;
+}
+
+/* ===== TRANSLATION TEXT ===== */
+body.dark-mode .translation {
+    color: #ffffff !important;
+}
+
+/* ===== QUESTIONS ===== */
+body.dark-mode .questions-section h3 {
+    color: #ffffff !important;
+}
+
+/* ===== ADMIN COMMENT ===== */
+body.dark-mode #admincomment {
+    background-color: #2b2b2b !important;
+    color: #ffffff !important;
+    border: 1px solid #666 !important;
+}
+
+/* ===== BUTTONS ===== */
+body.dark-mode .approvebtn {
+    background: linear-gradient(to right, #4caf50, #2e7d32) !important;
+}
+
+body.dark-mode .rejectbtn {
+    background: linear-gradient(to right, #ef5350, #c62828) !important;
+}
+
+body.dark-mode .needFixes {
+    background: linear-gradient(to right, #ffb74d, #ef6c00) !important;
+}
+
+/* ===== BUTTON HOVER ===== */
+body.dark-mode .button-container button:hover {
+    box-shadow: 0 6px 20px rgba(255,255,255,0.12) !important;
+}
+
+/* ===== LINES ===== */
+body.dark-mode .line {
+    border-bottom: 1px solid #ffffff !important;
+}
+
+/* ===== SCROLLBAR ===== */
+body.dark-mode ::-webkit-scrollbar {
+    width: 10px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ===== RESPONSIVE DARK MODE ===== */
+@media (max-width: 900px) {
+    body.dark-mode .container {
+        background: #1e1e1e !important;
+    }
+}
+/* ===== DO NOT AFFECT MENU CARDS ===== */
+body.dark-mode .menu-card,
+body.dark-mode .menu-card *,
+body.dark-mode .card-menu,
+body.dark-mode .card-menu *,
+body.dark-mode .menu-container,
+body.dark-mode .menu-container * {
+    background-color: initial !important;
+    color: initial !important;
+    border-color: initial !important;
+    box-shadow: initial !important;
+}

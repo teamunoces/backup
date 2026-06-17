@@ -1,6 +1,6 @@
 <?php
 session_start();
-$username = $_SESSION['name'];
+$username = $_SESSION['name'] ?? $_SESSION['username'] ?? 'Guest';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,11 +14,11 @@ $username = $_SESSION['name'];
 
 <header class="main-header">
     <div class="profile-container">
-        <img src="/encoder/images/ces.png" alt="Profile Picture" class="profile-pic">
+        <img src="/SYSTEM_VERSION_!/encoder/images/ces.png" alt="Profile Picture" class="profile-pic">
         
         <!-- DISPLAY USERNAME DIRECTLY FROM SESSION -->
         <span class="username">
-            <?php echo htmlspecialchars($username); ?> &#9662;
+            <?php echo htmlspecialchars($username); ?>
         </span>
 
         <div class="dropdown">

@@ -1,6 +1,6 @@
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -16,8 +16,8 @@
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
-    width: calc(100% - 150px);
+    left: 100px;
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -30,10 +30,44 @@ body {
     margin: 0;
 
     /* Space for fixed sidebar and header */
-    margin-left: 150px;
+    margin-left: 100px;
     margin-top: 60px;
 }
+.admin-comment {
+    pointer-events: none;
+    width: 100%; /* take full width of container */
+    max-width: 1100px; /* prevent overflow */
+    box-sizing: border-box;
+    display: block;
+    margin: 80px auto 40px auto; /* Center horizontally with auto margins */
 
+  
+}
+#admincomment{
+      pointer-events: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    font-style: italic;
+    padding: 20px;
+    font-family: inherit;
+    border-radius: 4px 12px 12px 4px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    resize: vertical;
+}
+
+#admincomment:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+}
 /* ===== Main Content ===== */
 .report-container {
     background-color: #fff;
@@ -41,6 +75,7 @@ body {
     max-width: 1100px;
     margin: 30px auto;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    pointer-events: none;
 }
 
 /* ===== Header Section ===== */
@@ -53,6 +88,10 @@ body {
 }
 
 .logo-left {
+    height: 90px;
+    width: auto;
+}
+.logo-left2 {
     height: 90px;
     width: auto;
 }
@@ -343,14 +382,15 @@ td[contenteditable="false"] {
 .approvals-container {
   font-family: Arial, sans-serif;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 30px 0 0 0;
   color: #000;
 }
 
 .approval-row {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -539,4 +579,68 @@ td[contenteditable="false"] {
 
 .buttons button:active {
     transform: scale(0.96);
+}
+
+/* ===== Laptop / Monitor Responsiveness ===== */
+:root {
+    --sidebar-width: 100px;
+    --header-height: 60px;
+    --page-gutter: clamp(16px, 3vw, 40px);
+    --report-max-width: 1100px;
+}
+
+body {
+    margin-left: var(--sidebar-width);
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+#sidebarFrame { width: var(--sidebar-width); }
+#headerFrame { left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); }
+
+.report-container,
+.admin-comment {
+    width: min(var(--report-max-width), calc(100vw - var(--sidebar-width) - (var(--page-gutter) * 2)));
+    max-width: var(--report-max-width);
+    box-sizing: border-box;
+}
+
+.college-info { min-width: 0; }
+.input_cell input[type="text"] { width: 100%; box-sizing: border-box; }
+table { width: 100%; max-width: 100%; table-layout: fixed; }
+th, td { overflow-wrap: anywhere; word-break: break-word; }
+
+@media (min-width: 1440px) {
+    :root { --report-max-width: 1200px; --page-gutter: 48px; }
+}
+
+@media (max-width: 1200px) {
+    :root { --report-max-width: 1000px; --page-gutter: 24px; }
+    .report-container { padding: 28px; }
+    .logo-left, .logo-left2, .logos-right img { height: 70px; }
+    .college-info h1 { font-size: 23px; }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame { transform: translateX(-100%); }
+    #headerFrame { left: 0; width: 100%; }
+    body { margin-left: 0; padding: calc(var(--header-height) + 20px) var(--page-gutter) 30px var(--page-gutter); }
+    .report-container, .admin-comment { width: calc(100vw - (var(--page-gutter) * 2)); }
+}
+
+.approvals-container,
+.approvals-container * {
+    font-weight: bold !important;
+}
+
+.approvals-container .signature-line {
+    display: inline-block;
+    width: auto;
+    min-width: 180px;
+    max-width: 100%;
+    padding: 0 12px 2px 12px;
+    border-bottom: 1.5px solid #000 !important;
+    text-align: inherit;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }

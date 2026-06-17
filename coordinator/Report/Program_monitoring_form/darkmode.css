@@ -1,0 +1,253 @@
+/* ================= DARK MODE STYLES ================= */
+/* Add these styles to enable a professional dark theme for the entire application.
+   These styles work in conjunction with the darkmode.js file which toggles the 'dark-mode' class. */
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* ===== Frames (Layout Shell) ===== */
+body.dark-mode #sidebarFrame {
+    background: #1e1e1e;
+    border-right: 1px solid #333;
+}
+
+body.dark-mode #headerFrame {
+    background: #1e1e1e;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    border-bottom: 1px solid #333;
+}
+
+/* ===== Header Section ===== */
+body.dark-mode .college-info h1 {
+    color: #7aa2f7; /* Softer blue for dark mode */
+}
+
+body.dark-mode .college-info p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .college-info a {
+    color: #7aa2f7;
+}
+
+/* ===== Office Title ===== */
+body.dark-mode .office-title {
+    color: #c0c0c0;
+}
+
+body.dark-mode .double-line {
+    border-top-color: #7aa2f7;
+}
+
+/* ===== Form Container ===== */
+body.dark-mode .form-container {
+    background: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* ===== Input Fields ===== */
+body.dark-mode .input-group input {
+    border-bottom-color: #555;
+    background-color: transparent;
+    color: #e0e0e0;
+}
+
+body.dark-mode .input-group input:focus {
+    border-bottom-color: #7aa2f7;
+}
+
+/* ===== Tables ===== */
+body.dark-mode th,
+body.dark-mode td {
+    border-color: #444;
+}
+
+body.dark-mode th {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+body.dark-mode td {
+    background-color: #1e1e1e;
+    color: #d0d0d0;
+}
+
+/* ===== Checkboxes ===== */
+body.dark-mode input[type="checkbox"] {
+    accent-color: #7aa2f7;
+}
+
+/* ===== Textareas ===== */
+body.dark-mode textarea,
+body.dark-mode .feedbackSummary,
+body.dark-mode .feedbackAction,
+body.dark-mode #otherIssues {
+    background-color: #2a2a2a;
+    border-color: #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode textarea:focus,
+body.dark-mode .feedbackSummary:focus,
+body.dark-mode .feedbackAction:focus,
+body.dark-mode #otherIssues:focus {
+    background-color: #333;
+    outline: none;
+    border-color: #7aa2f7;
+}
+
+/* ===== Paper Lines Textarea ===== */
+body.dark-mode .paper-lines {
+    background-image: linear-gradient(to bottom, transparent 29px, #555 29px);
+    color: #e0e0e0;
+}
+
+body.dark-mode .paper-lines::placeholder {
+    color: #666;
+}
+
+/* ===== Buttons (Preserve original colors but adjust for dark mode) ===== */
+body.dark-mode .btn-print {
+    background-color: #5a6268;
+}
+
+body.dark-mode .btn-submit {
+    background-color: #0069d9;
+}
+
+body.dark-mode .btn-reset {
+    background-color: #c82333;
+}
+
+/* ===== Submit Button ===== */
+body.dark-mode .submit-button {
+    background: linear-gradient(to right, #4a9e1f, #2d551c);
+    border-color: #555;
+}
+
+/* ===== Frame Content (for iframe documents) ===== */
+/* These styles apply when the dark-mode class is present inside iframes */
+.dark-mode,
+.dark-mode body {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+/* Ensure any iframe content also gets dark background */
+iframe body.dark-mode {
+    background-color: #121212;
+}
+
+/* ===== Print Override for Dark Mode ===== */
+@media print {
+    body.dark-mode {
+        background-color: white;
+        color: black;
+    }
+    
+    body.dark-mode .form-container {
+        background: white;
+        box-shadow: none;
+    }
+    
+    body.dark-mode th,
+    body.dark-mode td {
+        border-color: black;
+    }
+    
+    body.dark-mode th {
+        background-color: #f0f0f0;
+        color: black;
+    }
+    
+    body.dark-mode td {
+        background-color: white;
+        color: black;
+    }
+    
+    body.dark-mode .paper-lines {
+        background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
+    }
+}
+
+/* ===== Additional UI Polish for Dark Mode ===== */
+
+/* Scrollbar styling for dark mode */
+body.dark-mode::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* Placeholder text styling */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #777;
+}
+
+/* Disabled input styling */
+body.dark-mode input:disabled,
+body.dark-mode textarea:disabled {
+    background-color: #2a2a2a;
+    color: #888;
+    border-color: #444;
+}
+
+/* Select dropdown styling */
+body.dark-mode select {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+body.dark-mode select option {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+/* Link styling */
+body.dark-mode a {
+    color: #7aa2f7;
+}
+
+body.dark-mode a:visited {
+    color: #bb9af7;
+}
+
+/* Horizontal rule */
+body.dark-mode hr {
+    border-color: #444;
+}
+
+/* Feedback table specific overrides */
+body.dark-mode #feedbackTable th,
+body.dark-mode #feedbackTable td {
+    border-color: #444;
+}
+
+body.dark-mode #feedbackTable th {
+    background-color: #2a2a2a;
+}
+
+/* Focus outlines for accessibility */
+body.dark-mode button:focus,
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    outline: 2px solid #7aa2f7;
+    outline-offset: 1px;
+}

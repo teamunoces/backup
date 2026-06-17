@@ -4,9 +4,9 @@
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -14,7 +14,7 @@
 
 /* ===== Sidebar ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -129,26 +129,32 @@ header h1 {
 }
 
 .input-group {
-    pointer-events: none;
     margin-bottom: 20px;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+    pointer-events: none;
 }
 
 .input-group label {
     display: block;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
     font-weight: bold;
+    font-size: 15px;
+    line-height: 1.4;
     margin-bottom: 8px;
-    color: #444;
+    color: #000;
 }
 
 input[type="text"], textarea {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 14px;
+    line-height: 1.4;
     transition: border-color 0.3s;
     box-sizing: border-box;
-    background-color: #fafafa;
+    color: #1e293b;
 }
 
 input[type="text"]:focus, textarea:focus {
@@ -156,21 +162,6 @@ input[type="text"]:focus, textarea:focus {
     outline: none;
     background-color: #f9fbff;
 }
-
-/* ===== Table Section ===== */
-.table-section {
-    margin: 40px 0;
-}
-
-.table-wrapper {
-    overflow-x: auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    border: 1px solid #e2e8f0;
-    position: relative;
-}
-
 /* ===== Table Section ===== */
 .table-section {
     margin: 40px 0;
@@ -187,32 +178,33 @@ input[type="text"]:focus, textarea:focus {
 }
 
 table {
-    width: 100%;
     border-collapse: collapse;
-    /* Removed min-width: 1200px to prevent sliding */
-    table-layout: fixed; /* Keeps columns equal width so they don't "jump" */
-    word-wrap: break-word; /* Ensures long text breaks to new lines */
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+    border-collapse: collapse;
+    pointer-events: none;
 }
 
+table th, table td {
+    border: 1px solid #000;
+}
 table thead th {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+    background-color: #e5e7eb; /* light gray like screenshot */
+    color: #000;
     font-weight: bold;
-    background-color: #f8fafc;
-    color: #475569;
-    font-size: 0.9rem; /* Smaller font to help 9 columns fit better */
-    padding: 8px 4px;
-    border: 1px solid #cbd5e1;
-    text-transform: uppercase;
+    font-size: 15px;
+    padding: 6px 4px;
+    border: 1px solid #000;
     text-align: center;
-    word-wrap: break-word;
+    vertical-align: top;
+    line-height: 1.4;
 }
 
-table td {
-    border: 1px solid #cbd5e1;
-    padding: 0;
-    vertical-align: top;
-}
+
 
 table td textarea {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif !important;
+    font-size: 14px;
     field-sizing: content; 
     width: 100% !important;
     min-height: 60px; 
@@ -220,7 +212,6 @@ table td textarea {
     padding: 10px 5px !important;
     background: transparent !important; /* Ensure no gradient background */
     background-image: none !important;  /* Explicitly remove any inherited lines */
-    font-size: 0.85rem;
     color: #1e293b;
     line-height: 1.4;
     display: block;
@@ -250,7 +241,6 @@ table td:first-child textarea {
     text-align: center;
     font-weight: 600;
 }
-
 /* Admin Comment Section */
 .admin-comment {
     margin-top: 30px;
@@ -610,3 +600,16 @@ body.dark-mode .footer-logos img {
         print-color-adjust: exact;
     }
 }
+
+/* ===== Laptop / PC Responsive Layout ===== */
+@media (min-width: 769px) {
+    body { margin-left: 0; padding: 80px clamp(18px, 2vw, 32px) 40px calc(100px + clamp(18px, 2vw, 32px)); }
+    .container { width: min(100%, 1100px); margin: 0 auto; overflow-x: auto; }
+    .table-wrapper { overflow-x: auto; }
+}
+@media (max-width: 1366px) and (min-width: 769px) {
+    .container { max-width: 1000px; padding: 32px; }
+    .report-header .logo { height: 66px; }
+    .report-header .header-text h1 { font-size: 21px; }
+}
+@media (max-width: 1100px) and (min-width: 769px) { table { min-width: 900px; } }

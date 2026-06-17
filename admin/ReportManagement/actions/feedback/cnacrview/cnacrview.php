@@ -12,6 +12,22 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Community Needs Assessment Report</title>
     <link rel="stylesheet" href="cnacrview.css">
 </head>

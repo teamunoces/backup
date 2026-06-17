@@ -12,23 +12,55 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Program Design Form - SMCC</title>
     <link rel="stylesheet" href="view.css">
     <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
 
- <!-- HEADER -->
-  <iframe src="/admin/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
+ <iframe 
+        src="http://localhost/SYSTEM_VERSION_!/admin/Profile/profile.html"
+        id="headerFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Header">
+    </iframe>
 
-  <!-- SIDEBAR -->
-  <iframe src="/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+    <!-- Sidebar -->
+    <iframe 
+        src="http://localhost/SYSTEM_VERSION_!/admin/Nav/navigation.html" 
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
 
         <!-- ACTION BUTTONS -->
                           <div class="buttons">
-                                <button  onclick="printReport()">Print this Page</button>
-                                <button id="downloadPDF" type="button">Download PDF</button>
+                                <button  onclick="printReport()">Print</button>
+                                <!--  <button id="downloadPDF" type="button">Download PDF</button>-->
                             </div>
+                            <div class="wrapper">
+                                    <div class="admin-comment">
+                                          <label for="admincomment" class="admin-comment-label" style="font-weight: bold;">Admin Feedback</label>
+                                          <textarea id="admincomment" placeholder="Enter admin comments here..." rows="5"></textarea>
+                                    </div>
 
 
     <div class="form-container">
@@ -38,7 +70,8 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                       
         <header>
             <div class="header-content">
-                <img src="/admin/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/Ceslogo.png" alt="CES Logo" class="logo-left2">
                 <div class="college-info">
                     <h1>Saint Michael College of Caraga</h1>
                     <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
@@ -47,7 +80,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                     <a href="http://www.smccnasipit.edu.ph">www.smccnasipit.edu.ph</a>
                 </div>
                 <div class="logos-right">
-                    <img src="/admin/ReportManagement/actions/images/ISOlogo.png" alt="SOCOTEC Logo">
+                    <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/ISOlogo.png" alt="SOCOTEC Logo">
                 </div>
             </div>
             <h2 class="office-title">OFFICE OF THE COMMUNITY EXTENSION SERVICES</h2>
@@ -76,19 +109,26 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
         </div>
         <form class="table_form">
                 <table class="program-table">
-                    <thead>
+                   <thead>
                         <tr>
-                            <th>Program</th>
-                            <th>Milestones</th>
-                            <th>Duration</th>
-                            <th>Objectives</th>
-                            <th>Persons Involved</th>
-                            <th>Resources Needed from the School (funds, equipment)</th>
-                            <th>Resources Needed from the Community (funds, equipment)</th>
-                            <th>Collaborating Agencies</th>
-                            <th>Budget</th>
-                            <th>Means of Verification</th>
-                            <th>Remarks</th>
+                            <th rowspan="2">Program Title</th>
+                            <th rowspan="2">Objectives</th>
+                            <th rowspan="2">Program Content and Activities</th>
+                            <th colspan="3">Approach and Methodology</th>
+                            <th colspan="2">Program Timeline and Milestones</th>
+                            <th colspan="2">Resources Needed</th>
+                            <th rowspan="2" class="narrow">Risk Management and Contingency Plans</th>
+                            <th rowspan="2" class="narrow">Sustainability and Follow-up</th>
+                            <th rowspan="2" class="narrow">Promotion & Awareness</th>
+                        </tr>
+                        <tr class="sub-header">
+                            <th>Service Delivery</th>
+                            <th>Partnerships and Stakeholders</th>
+                            <th>Facilitators and Trainers</th>
+                            <th>Program's Start and End Dates</th>
+                            <th>Frequency of Activities</th>
+                            <th>Community Material Resources and Financial Resources</th>
+                            <th>School Material Resources and Financial Resources</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,10 +144,10 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                             <td contenteditable="true"></td>
                             <td contenteditable="true"></td>
                             <td contenteditable="true"></td>
+                            <td contenteditable="true"></td>
+                            <td contenteditable="true"></td>
                         </tr>
                     </tbody>
-                   
-                
                 </table>
         </form>
 
@@ -118,7 +158,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                         <div class="approval-row">
                             <div class="signature-group">
                             <div class="label">Prepared by:</div>
-                            <div class="signature-line"><?php echo htmlspecialchars($userName); ?></div>
+                            <div class="signature-line" id="created_by_name"></div>
                             <div class="title bold">CES Coordinator</div>
                             </div>
                         </div>
@@ -126,7 +166,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                         <div class="label" style="margin-top: 20px;">Noted by:</div>
                         <div class="approval-row">
                             <div class="signature-group">
-                             <div class="signature-line"><?php echo htmlspecialchars($userDean); ?></div>
+                             <div class="signature-line" id="dean"></div>
                             <div class="title bold">Dean</div>
                             </div>
                             <div class="signature-group">
@@ -193,7 +233,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                     <footer>
                         <div class="footer-bottom">
                             <div class="footer-logos">
-                                <img src="/admin/ReportManagement/actions/images/footerlogo.png" alt="Org Logo 1">
+                                <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/footerlogo.png" alt="Org Logo 1">
                             </div>
                         </div>
                     </footer>
@@ -202,6 +242,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
     
     </div>
+    </div>
 
          <input type="hidden" id="currentReportId" value="<?php echo htmlspecialchars($_GET['id'] ?? ''); ?>">
           <input type="hidden" id="currentReportType" value="<?php echo $reportType; ?>">
@@ -209,10 +250,10 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     <script>const reportType = "<?php echo $reportType; ?>";console.log(reportType);</script>
     <script src="./get.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="/admin/ReportManagement/actions/js/getapproval.js"></script>
-    <script src="./print.js"></script>
+    <script src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/js/getapproval.js"></script>
     <script src="./download.js"></script>
     <script src="./darkmode.js"></script>
+    <script src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/pdview/print.js"></script>
 
 </body>
 </html>

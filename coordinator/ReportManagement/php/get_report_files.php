@@ -15,7 +15,7 @@ if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
 $host = "localhost";
 $user = "root";
 $pass = "";
-$dbname = "ces_reports_db";
+$dbname = "ces_database";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
@@ -24,9 +24,10 @@ if ($conn->connect_error) {
 }
 
 $report_id = $_GET['report_id'] ?? null;
+$report_table = $_GET['report_table'] ?? null;
 
-if (!$report_id) {
-    echo json_encode(["success" => false, "error" => "Missing report ID"]);
+if (!$report_id || !$report_table) {
+    echo json_encode(["success" => false, "error" => "Missing report ID or report table"]);
     exit;
 }
 
@@ -36,15 +37,15 @@ if (!is_numeric($report_id)) {
     exit;
 }
 
-// Get files for this report - using created_at instead of uploaded_at
-$sql = "SELECT id, file_name, file_path, created_at FROM report_files WHERE report_id = ? ORDER BY created_at DESC";
+// Get files for this report - filter by both report_id and report_table
+$sql = "SELECT id, file_name, file_path, created_at FROM coordinator_report_files WHERE report_id = ? AND report_table = ? ORDER BY created_at DESC";
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
     echo json_encode(["success" => false, "error" => "Database prepare error: " . $conn->error]);
     exit;
 }
 
-$stmt->bind_param("i", $report_id);
+$stmt->bind_param("is", $report_id, $report_table);
 if (!$stmt->execute()) {
     echo json_encode(["success" => false, "error" => "Database execute error: " . $stmt->error]);
     exit;
@@ -58,14 +59,13 @@ while ($row = $result->fetch_assoc()) {
         'id' => (int)$row['id'],
         'file_name' => $row['file_name'],
         'file_path' => $row['file_path'],
-        'uploaded_at' => $row['created_at'] // Map created_at to uploaded_at for JavaScript
+        'uploaded_at' => $row['created_at']
     ];
 }
 
 $stmt->close();
 $conn->close();
 
-// Always return success true even if no files
 echo json_encode([
     "success" => true, 
     "files" => $files

@@ -1,7 +1,7 @@
 <?php
 // Database connection
 $host = 'localhost';
-$dbname = 'accounts';
+$dbname = 'ces_database';
 $username = 'root';
 $password = '';
 
@@ -14,6 +14,20 @@ try {
 
 // Set response header for JSON
 header('Content-Type: application/json');
+
+$allowedDepartments = [
+    'ELEMENTARY',
+    'SHS',
+    'JHS',
+    'CBMA',
+    'CTHM',
+    'CCIS',
+    'CCJE',
+    'CAS',
+    'CTE',
+    'CSF',
+    'LRC'
+];
 
 // Handle GET requests for fetching accounts
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'get_accounts') {
@@ -44,6 +58,10 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             echo json_encode(['success' => false, 'message' => 'All fields are required.']);
             exit;
         }
+        if (!in_array($department, $allowedDepartments, true)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid department selected.']);
+            exit;
+        }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo json_encode(['success' => false, 'message' => 'Invalid email format.']);
             exit;
@@ -62,9 +80,10 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 exit;
             }
 
-            // Insert password as plain text (no hashing)
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
             $stmt = $pdo->prepare("INSERT INTO users (username, name, email, role, department, password, is_active) VALUES (?, ?, ?, ?, ?, ?, 1)");
-            $stmt->execute([$username, $name, $email, $role, $department, $password]);
+            $stmt->execute([$username, $name, $email, $role, $department, $hashedPassword]);
 
             echo json_encode(['success' => true, 'message' => 'Account created successfully.']);
         } catch (PDOException $e) {

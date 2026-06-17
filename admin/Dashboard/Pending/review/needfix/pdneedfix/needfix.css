@@ -4,7 +4,7 @@ body {
     background-color: #f5f5f5;
     margin: 0;
     padding: 0;
-    margin-left: 150px; /* Account for fixed sidebar */
+    margin-left: 100px; /* Account for fixed sidebar */
     display: flex;
     justify-content: center;
     min-height: 100vh;
@@ -12,7 +12,7 @@ body {
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -28,9 +28,9 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -62,6 +62,11 @@ body {
     height: 90px;
     width: auto;
 }
+.logo-left2 {
+    height: 80px;
+    width: auto;
+}
+
 
 .logos-right {
     display: flex;
@@ -201,6 +206,14 @@ body {
 }
 
 /* Table Styling */
+.table_form {
+    pointer-events: none;
+}
+
+.table_form * {
+    pointer-events: none;
+}
+
 .program-table {
     pointer-events: none;
     width: 100%;
@@ -226,10 +239,11 @@ body {
     padding: 10px 4px;
 }
 
-.program-table td[contenteditable="true"] {
+.program-table td {
     background-color: #ffffff;
     outline: none;
     padding: 6px;
+    pointer-events: none;
 }
 
 /* Footer Section */
@@ -364,3 +378,16 @@ footer {
         print-color-adjust: exact;
     }
 }
+
+/* ===== Laptop / PC Responsive Layout ===== */
+@media (min-width: 769px) {
+    body { margin-left: 0; padding: 80px clamp(18px, 2vw, 32px) 40px calc(100px + clamp(18px, 2vw, 32px)); display: block; }
+    .form-container { width: min(100%, 1100px); margin: 0 auto; box-sizing: border-box; overflow-x: auto; }
+}
+@media (max-width: 1366px) and (min-width: 769px) {
+    .form-container { max-width: 1000px; padding: 32px; }
+    .logo-left { height: 76px; }
+    .logo-left2, .logos-right img { height: 68px; }
+    .college-info h1 { font-size: 23px; }
+}
+@media (max-width: 1100px) and (min-width: 769px) { .program-table, table { min-width: 960px; } }

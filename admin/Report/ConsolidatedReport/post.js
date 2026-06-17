@@ -1,94 +1,143 @@
-async function submitReport() {
-    // Manually collect all form data
-    const data = {
-        // Header fields
-        type: document.querySelector('[name="report_type"]')?.value || 'Community Needs Assessment Consolidated Report',
-        department: document.getElementById('department')?.value || '',
-        date_submitted: document.getElementById('date_submitted')?.value || '',
-        
-        // Section A-C fields
-        date_conduct: document.querySelector('[name="date_conduct"]')?.value || '',
-        participants: document.querySelector('[name="participants"]')?.value || '',
-        location: document.querySelector('[name="location"]')?.value || '',
-        
-        // Section I fields
-        family_profile: document.querySelector('[name="family_profile"]')?.value || '',
-        community_concern: document.querySelector('[name="community_concern"]')?.value || '',
-        other_identified_needs: document.querySelector('[name="other_identified_needs"]')?.value || '',
-        
-        // Section II fields - Kabayani Programs
-        kabayani_ng_panginoon: document.querySelector('[name="kabayani_ng_panginoon"]')?.value || '',
-        kabayani_ng_kalikasan: document.querySelector('[name="kabayani_ng_kalikasan"]')?.value || '',
-        kabayani_ng_buhay: document.querySelector('[name="kabayani_ng_buhay"]')?.value || '',
-        kabayani_ng_turismo: document.querySelector('[name="kabayani_ng_turismo"]')?.value || '',
-        kabayani_ng_kultura: document.querySelector('[name="kabayani_ng_kultura"]')?.value || '',
-        
-        // Section III fields - Outreach Program
-        title_of_program: document.querySelector('[name="title_of_program"]')?.value || '',
-        objectives: document.querySelector('[name="objectives"]')?.value || '',
-        beneficiaries: document.querySelector('[name="beneficiaries"]')?.value || '',
-        
-        // Section IV fields - Allocation of Resources
-        from_school: document.querySelector('[name="from_school"]')?.value || '',
-        from_community: document.querySelector('[name="from_community"]')?.value || '',
-        
-        // These fields will be overwritten by PHP session data
-        // but we include them to match database columns
-        created_by_name: '',  // Will be set by PHP
-        role: '',             // Will be set by PHP
-        user_id: '',          // Will be set by PHP
-        feedback: '',         // Default empty
-        status: 'pending',    // Default status
-        archived: 'not archived' // Default archived status
+function showSuccessBanner(message = 'Report submitted successfully!') {
+    let banner = document.getElementById('submissionSuccessBanner');
+
+    if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'submissionSuccessBanner';
+        banner.setAttribute('role', 'status');
+        banner.style.position = 'fixed';
+        banner.style.top = '78px';
+        banner.style.right = '24px';
+        banner.style.zIndex = '10000';
+        banner.style.maxWidth = '420px';
+        banner.style.padding = '14px 18px';
+        banner.style.borderRadius = '8px';
+        banner.style.background = 'linear-gradient(135deg, #59AF29 0%, #254911 100%)';
+        banner.style.color = '#ffffff';
+        banner.style.boxShadow = '0 10px 24px rgba(37, 73, 17, 0.28)';
+        banner.style.fontFamily = 'Inter, Segoe UI, Arial, sans-serif';
+        banner.style.fontSize = '14px';
+        banner.style.fontWeight = '700';
+        banner.style.letterSpacing = '0';
+        banner.style.lineHeight = '1.4';
+        banner.style.opacity = '0';
+        banner.style.transform = 'translateY(-10px)';
+        banner.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+        document.body.appendChild(banner);
+    }
+
+    banner.textContent = message;
+    requestAnimationFrame(() => {
+        banner.style.opacity = '1';
+        banner.style.transform = 'translateY(0)';
+    });
+
+    clearTimeout(window.submissionSuccessBannerTimer);
+    window.submissionSuccessBannerTimer = setTimeout(() => {
+        banner.style.opacity = '0';
+        banner.style.transform = 'translateY(-10px)';
+    }, 3500);
+}
+
+function fieldValue(selector) {
+    return document.querySelector(selector)?.value || '';
+}
+
+function collectCnacr() {
+    return {
+        type: 'Community Needs Assessment Consolidated Report',
+        department: fieldValue('#department'),
+        date_submitted: fieldValue('#date_submitted'),
+        date_conduct: fieldValue('[name="date_conduct"]'),
+        participants: fieldValue('[name="participants"]'),
+        location: fieldValue('[name="location"]'),
+        family_profile: fieldValue('[name="family_profile"]'),
+        community_concern: fieldValue('[name="community_concern"]'),
+        other_identified_needs: fieldValue('[name="other_identified_needs"]'),
+        kabayani_ng_panginoon: fieldValue('[name="kabayani_ng_panginoon"]'),
+        kabayani_ng_kalikasan: fieldValue('[name="kabayani_ng_kalikasan"]'),
+        kabayani_ng_buhay: fieldValue('[name="kabayani_ng_buhay"]'),
+        kabayani_ng_turismo: fieldValue('[name="kabayani_ng_turismo"]'),
+        kabayani_ng_kultura: fieldValue('[name="kabayani_ng_kultura"]'),
+        title_of_program: fieldValue('[name="title_of_program"]'),
+        objectives: fieldValue('[name="objectives"]'),
+        beneficiaries: fieldValue('[name="beneficiaries"]'),
+        from_school: fieldValue('[name="from_school"]'),
+        from_community: fieldValue('[name="from_community"]')
     };
-    
-    // Remove empty fields to let database defaults work
-    Object.keys(data).forEach(key => {
-        if (data[key] === '') {
-            delete data[key];
+}
+
+function setValue(selector, value) {
+    const element = document.querySelector(selector);
+    if (element) element.value = value || '';
+}
+
+function fillCnacr(data) {
+    setValue('#department', data.department);
+    setValue('#date_submitted', data.date_submitted);
+    setValue('[name="date_conduct"]', data.date_conduct);
+    setValue('[name="participants"]', data.participants);
+    setValue('[name="location"]', data.location);
+    setValue('[name="family_profile"]', data.family_profile);
+    setValue('[name="community_concern"]', data.community_concern);
+    setValue('[name="other_identified_needs"]', data.other_identified_needs);
+    setValue('[name="kabayani_ng_panginoon"]', data.kabayani_ng_panginoon);
+    setValue('[name="kabayani_ng_kalikasan"]', data.kabayani_ng_kalikasan);
+    setValue('[name="kabayani_ng_buhay"]', data.kabayani_ng_buhay);
+    setValue('[name="kabayani_ng_turismo"]', data.kabayani_ng_turismo);
+    setValue('[name="kabayani_ng_kultura"]', data.kabayani_ng_kultura);
+    setValue('[name="title_of_program"]', data.title_of_program);
+    setValue('[name="objectives"]', data.objectives);
+    setValue('[name="beneficiaries"]', data.beneficiaries);
+    setValue('[name="from_school"]', data.from_school);
+    setValue('[name="from_community"]', data.from_community);
+}
+
+function clearCnacr() {
+    document.querySelectorAll('textarea').forEach(field => {
+        field.value = '';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const draftManager = ReportDrafts.create({
+        storageKey: 'admin_cnacr',
+        endpoint: 'post.php',
+        collect: collectCnacr,
+        fill: fillCnacr,
+        clear: clearCnacr
+    });
+
+    draftManager.checkDatabaseDraft();
+
+    document.querySelector('.submit-button')?.addEventListener('click', async event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        try {
+            const response = await fetch('post.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(draftManager.applySubmitMeta(collectCnacr()))
+            });
+            const responseText = await response.text();
+            let result;
+
+            try {
+                result = JSON.parse(responseText);
+            } catch (parseError) {
+                throw new Error(responseText || 'Submission failed.');
+            }
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || result.error || 'Submission failed.');
+            }
+
+            draftManager.completeSubmit();
+            showSuccessBanner(result.message || 'Report submitted successfully!');
+            clearCnacr();
+        } catch (error) {
+            alert(`Error: ${error.message}`);
         }
     });
-    
-    console.log("Final data object:", data);
-    console.log("JSON being sent:", JSON.stringify(data));
-    
-    try {
-        const response = await fetch("post.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
-        
-        console.log("Response status:", response.status);
-        
-        // Get the response text first
-        const responseText = await response.text();
-        console.log("Raw response:", responseText);
-        
-        // Try to parse as JSON
-        try {
-            const result = JSON.parse(responseText);
-            console.log("Parsed response:", result);
-            
-            if(result.success){
-                alert("Report submitted successfully!");
-                // Clear all fields after successful submission
-                document.querySelectorAll('textarea, input[type="text"]').forEach(field => {
-                    field.value = '';
-                });
-            } else {
-                alert("Error: " + (result.error || "Unknown error"));
-                if(result.received) {
-                    console.error("Received data:", result.received);
-                }
-            }
-        } catch (parseError) {
-            console.error("JSON parse error:", parseError);
-            alert("Server returned invalid JSON. Check console for details.");
-        }
-        
-    } catch(err){
-        console.error("Fetch error:", err);
-        alert("An unexpected error occurred. Please check the console for details.");
-    }
-}
+});

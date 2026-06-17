@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Department Submission Status</title>
     <link rel="stylesheet" href="Departments.css">
     <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="monitoring.css">
+    <link rel="stylesheet" href="monitoring_darkmode.css">
 </head>
 <body>
 
@@ -33,54 +51,168 @@
         <main class="main-wrapper">
 
             <div class="green-banner">DEPARTMENTS</div>
-
-
             <!-- ===== DEPARTMENT GRID ===== -->
             <section class="department-grid">
 
-                <button class="dept-card" onclick="location.href='/admin/Dashboard/Departments/view/ApprovedReports.php?department=CCIS'">
+                <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=CCIS'">
                     <div class="dept-name">CCIS</div>
                 </button>
 
-                <button class="dept-card" onclick="location.href='/admin/Dashboard/Departments/view/ApprovedReports.php?department=CTHM'">
+                <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=CTHM'">
                     <div class="dept-name">CTHM</div>
                 </button>
 
-                <button class="dept-card" onclick="location.href='/admin/Dashboard/Departments/view/ApprovedReports.php?department=CAS'">
+                <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=CAS'">
                     <div class="dept-name">CAS</div>
                 </button>
 
-                <button class="dept-card" onclick="location.href='/admin/Dashboard/Departments/view/ApprovedReports.php?department=CBM'">
+                <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=CBM'">
                     <div class="dept-name">CBM</div>
                 </button>
 
-                <button class="dept-card" onclick="location.href='/admin/Dashboard/Departments/view/ApprovedReports.php?department=JHS'">
+                <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=JHS'">
                     <div class="dept-name">JHS</div>
                 </button>
 
-                <button class="dept-card" onclick="location.href='/admin/Dashboard/Departments/view/ApprovedReports.php?department=SHS'">
+                <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=SHS'">
                     <div class="dept-name">SHS</div>
                 </button>
 
-                <button class="dept-card" onclick="location.href='/admin/Dashboard/Departments/view/ApprovedReports.php?department=CTE'">
+                <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=CTE'">
                     <div class="dept-name">CTE</div>
                 </button>
 
-                <button class="dept-card" onclick="location.href='/admin/Dashboard/Departments/view/ApprovedReports.php?department=CCJE'">
+                <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=CCJE'">
                     <div class="dept-name">CCJE</div>
                 </button>
 
-                <button class="dept-card" onclick="location.href='/admin/Dashboard/Departments/view/ApprovedReports.php?department=CCF'">
+                <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=CCF'">
                     <div class="dept-name">CCF</div>
+                </button>
+
+                 <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=ELEMENTARY'">
+                    <div class="dept-name">ELEMENTARY</div>
+                </button>
+                    <button class="dept-card" onclick="location.href='/SYSTEM_VERSION_!/admin/Dashboard/Departments/view/ApprovedReports.php?department=LRC'">
+                    <div class="dept-name">LRC</div>
                 </button>
 
             </section>
 
+
+            
+            <div class="table-container">
+                    <div class="title-header">
+                        <div>
+                            <h1 style="font-size: 16px; color: white;">SUBMISSION TRACKER</h1>
+                        </div>
+                    </div>
+
+                    <div class="responsive-wrapper" id="tableWrapper">
+                        <table class="submission-table" id="dataTable">
+                            <thead id="tableHeader">
+                                <!-- Header will be dynamically generated by JavaScript -->
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Body will be dynamically generated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer>
+                        <strong>10 Departments:</strong> CCIS | CTHM | CAS | CBM | JHS | SHS | CTE | CCJE | CCF | ELEMENTARY &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <strong>4 Documents:</strong> 3-Year Development Plan | Community Needs Assessment Consolidated Report | Monthly Accomplishment Report | Program Design &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <strong>12 Months:</strong> January - December &nbsp;&nbsp;|&nbsp;&nbsp; Click department name in header or button to filter
+                    </footer>
+                </div>
+
+                <section class="development-plan-monitor" aria-labelledby="developmentPlanTitle">
+                    <div class="plan-monitor-header">
+                        <div>
+                            <p class="monitor-kicker">3-Year Development Plan</p>
+                            <h2 id="developmentPlanTitle">Progress Monitor</h2>
+                        </div>
+                        <div class="monitor-filters" aria-label="Development plan filters">
+                            <label class="monitor-field" for="departmentSelect">
+                                <span>Department</span>
+                                <select id="departmentSelect">
+                                    <option value="">Select Department</option>
+                                    <option value="ELEMENTARY">ELEMENTARY</option>
+                                    <option value="JHS">JHS</option>
+                                    <option value="SHS">SHS</option>
+                                    <option value="CBMA">CBMA</option>
+                                    <option value="CTHM">CTHM</option>
+                                    <option value="CCIS">CCIS</option>
+                                    <option value="CCJE">CCJE</option>
+                                    <option value="CAS">CAS</option>
+                                    <option value="CTE">CTE</option>
+                                    <option value="CSF">CSF</option>
+                                    <option value="LRC">LRC</option>
+                                </select>
+                            </label>
+
+                            <label class="monitor-field" for="coordinatorSelect">
+                                <span>Coordinator</span>
+                                <select id="coordinatorSelect" disabled>
+                                    <option value="">Select Coordinator</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="monitor-empty-state" id="planEmptyState">
+                        Select a department and coordinator to view the status overview and plan details.
+                    </div>
+
+                    <div class="plan-dashboard" id="planDashboard" hidden>
+                        <div class="status-title" aria-label="Status">STATUS</div>
+
+                        <div class="status-overview" id="statusOverview">
+                            <article class="status-item">
+                                <div class="progress-ring completed" data-plan-card="plan1">
+                                    <div class="progress-value">
+                                        <strong id="plan1Percent">0%</strong>
+                                        <span>COMPLETED</span>
+                                    </div>
+                                </div>
+                                <button class="plan-toggle active" type="button" data-plan="plan1">Plan 1</button>
+                            </article>
+
+                            <article class="status-item">
+                                <div class="progress-ring incomplete" data-plan-card="plan2">
+                                    <div class="progress-value">
+                                        <strong id="plan2Percent">0%</strong>
+                                        <span>DID NOT COMPLETE</span>
+                                    </div>
+                                </div>
+                                <button class="plan-toggle" type="button" data-plan="plan2">Plan 2</button>
+                            </article>
+
+                            <article class="status-item">
+                                <div class="progress-ring upcoming" data-plan-card="plan3">
+                                    <div class="progress-value">
+                                        <strong id="plan3Percent">0%</strong>
+                                        <span>NOT STARTED</span>
+                                    </div>
+                                </div>
+                                <button class="plan-toggle" type="button" data-plan="plan3">Plan 3</button>
+                            </article>
+                        </div>
+
+                        <div class="plan-banner">PLAN</div>
+
+                        <div class="plan-details" id="planDetails" aria-live="polite"></div>
+                    </div>
+                </section>
+             
+
         </main>
+
+
     </div>
 </div>
-
+<script src="./monitoring.js"></script>
 <script src="./darkmode.js"></script>
+<script src="./3year_monitoring.js?v=20260519a"></script>
 
 </body>
 </html>

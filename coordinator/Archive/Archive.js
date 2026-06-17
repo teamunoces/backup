@@ -1,4 +1,16 @@
 $(document).ready(function () {
+    const isDebug = new URLSearchParams(window.location.search).has('debug');
+    const debugLog = (...args) => {
+        if (isDebug) {
+            console.log(...args);
+        }
+    };
+    const debugWarn = (...args) => {
+        if (isDebug) {
+            console.warn(...args);
+        }
+    };
+
     const typeMap = {
         "cnacr": "CNACR",
         "3ydp": "3 Year Development Plan",
@@ -8,14 +20,14 @@ $(document).ready(function () {
     };
 
     function loadArchiveData() {
-        console.log("Loading archive data..."); // Debug log
+        debugLog("Loading archive data...");
         
         $.getJSON('Archive.php', function (data) {
-            console.log("Data received:", data); // Debug log
+            debugLog("Data received:", data);
             
             // Check if there's an error
             if (data.error) {
-                console.error("Server error:", data.error);
+                debugWarn("Server error:", data.error);
                 $('#archivedReportsBody').html(`<tr><td colspan="6">Error: ${data.error}</td></tr>`);
                 return;
             }
@@ -28,7 +40,7 @@ $(document).ready(function () {
                 reportBody.append('<tr><td colspan="6">No archived reports found.</td></tr>');
             } else {
                 data.archived_reports.forEach(report => {
-                    const typeName = typeMap[report.source_table] || report.source_table;
+                    const typeName = report.type || typeMap[report.source_table] || report.source_table;
                     reportBody.append(`
                         <tr>
                             <td>${escapeHtml(typeName.toUpperCase())}</td>
@@ -44,7 +56,7 @@ $(document).ready(function () {
                 });
             }
         }).fail(function(xhr, status, error) {
-            console.error("AJAX Error:", {
+            debugWarn("AJAX Error:", {
                 status: status,
                 error: error,
                 response: xhr.responseText
@@ -59,14 +71,14 @@ $(document).ready(function () {
         const table = $(this).data('table');
         
         if (confirm('Are you sure you want to restore this report?')) {
-            console.log("Restoring:", {id: id, table: table}); // Debug log
+            debugLog("Restoring:", {id: id, table: table});
             
             $.post('Archive.php', { 
                 action: 'restore',
                 id: id, 
                 table: table 
             }, function (response) {
-                console.log("Restore response:", response); // Debug log
+                debugLog("Restore response:", response);
                 
                 if (response.success) {
                     alert(response.message || 'Report restored successfully!');
@@ -75,7 +87,7 @@ $(document).ready(function () {
                     alert('Failed to restore: ' + (response.message || 'Unknown error'));
                 }
             }, 'json').fail(function(xhr, status, error) {
-                console.error("Restore error:", {status: status, error: error, response: xhr.responseText});
+                debugWarn("Restore error:", {status: status, error: error, response: xhr.responseText});
                 alert('Error connecting to server: ' + error);
             });
         }

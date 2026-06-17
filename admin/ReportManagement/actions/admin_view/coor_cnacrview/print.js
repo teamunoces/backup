@@ -1,488 +1,650 @@
-function downloadPDF() {
-    // Get the report container element
+// print.js - COMMUNITY NEEDS ASSESSMENT CONSOLIDATED REPORT
+function printReport() {
     const reportContainer = document.querySelector('.report-container');
-    const buttons = document.querySelector('.buttons');
-    const iframes = document.querySelectorAll('iframe');
-    
-    // Store original display values
-    const originalButtonDisplay = buttons ? buttons.style.display : '';
-    const originalIframeDisplays = [];
-    
-    // Hide buttons and iframes temporarily
-    if (buttons) buttons.style.display = 'none';
-    
-    iframes.forEach((frame, index) => {
-        originalIframeDisplays[index] = frame.style.display;
-        frame.style.display = 'none';
-    });
-    
-    // Get the current date for filename
-    const now = new Date();
-    const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '');
-    const filename = `CNA_Consolidated_Report_${dateStr}.pdf`;
-    
-    // Create a style element for PDF styling (matching the print styles)
-    const pdfStyle = document.createElement('style');
-    pdfStyle.innerHTML = `
-        /* Tighter spacing for PDF */
-        .report-container {
-            box-shadow: none;
-            margin-top: 0;
-            width: 100%;
-            max-width: 850px;
-            padding: 20px 30px !important;
-            background-color: white;
+
+    if (!reportContainer) {
+        console.error('Report container not found');
+        alert('Could not find report content to print.');
+        return;
+    }
+
+    const printClone = reportContainer.cloneNode(true);
+    syncFormValues(reportContainer, printClone);
+    convertTextareasForPrint(printClone);
+
+    const headerElements = [...printClone.querySelectorAll('header')];
+    const footerElement = printClone.querySelector('footer');
+
+    const headerHTML = headerElements.map(el => el.outerHTML).join('');
+    const footerHTML = footerElement ? footerElement.outerHTML : '';
+
+    headerElements.forEach(el => el.remove());
+    if (footerElement) footerElement.remove();
+
+    const printContainer = document.createElement('div');
+    printContainer.id = 'print-container';
+
+    printContainer.innerHTML = `
+        <table class="print-shell" role="presentation" aria-hidden="true">
+            <thead>
+                <tr>
+                    <td>
+                        <div class="print-header">
+                            ${headerHTML}
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+
+            <tfoot>
+                <tr>
+                    <td>
+                        <div class="print-footer">
+                            ${footerHTML}
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="print-body">
+                            ${printClone.innerHTML}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    `;
+
+    const styleElement = document.createElement('style');
+    styleElement.setAttribute('data-print-runtime', 'true');
+    styleElement.textContent = `
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
         }
-        
-        .header-content {
-            margin-bottom: 5px !important;
-        }
-        
-        .college-info h1 {
-            font-size: 22px !important;
-            margin-bottom: 2px !important;
-            font-family: "Times New Roman", Times, serif;
-            color: #4f81bd !important;
-        }
-        
-        .college-info p {
-            font-size: 9px !important;
-            margin: 0 !important;
-            line-height: 1.2 !important;
-            color: #333 !important;
-        }
-        
-        .college-info a {
-            font-size: 10px !important;
-            color: #0000EE !important;
-        }
-        
-        .office-title {
-            font-size: 14px !important;
-            margin: 5px 0 2px 0 !important;
-            color: #595959 !important;
-            font-weight: bold !important;
-            text-transform: uppercase !important;
-        }
-        
-        .double-line {
-            border-top: 3px double #4f81bd !important;
-            margin-bottom: 10px !important;
-        }
-        
-        h1 {
-            font-size: 16px !important;
-            margin: 5px 0 10px 0 !important;
-            text-align: center !important;
-        }
-        
-        .header-grid {
-            display: grid !important;
-            grid-template-columns: 120px 1fr 120px 1fr !important;
-            border: 1px solid #000 !important;
-            margin-bottom: 10px !important;
-        }
-        
-        .label-box {
-            padding: 4px 6px !important;
-            font-weight: bold !important;
-            font-size: 12px !important;
-            border-right: 1px solid #000 !important;
-        }
-        
-        .header-grid input {
-            padding: 4px 6px !important;
-            font-size: 12px !important;
-            border: none !important;
-            outline: none !important;
-            width: 100% !important;
-        }
-        
-        .bg-gray {
-            background-color: #b3b3b3 !important;
-        }
-        
-        .section-header {
-            background-color: #b3b3b3 !important;
-            border: 1px solid #000 !important;
-            padding: 4px 10px !important;
-            font-weight: bold !important;
-            font-size: 13px !important;
-            margin-top: 10px !important;
-            display: flex !important;
-        }
-        
-        .roman-num {
-            width: 30px !important;
-        }
-        
-        .section-content {
-            padding: 5px 0 2px 20px !important;
-        }
-        
-        .form-group {
-            margin-bottom: 3px !important;
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        
-        .form-group label {
-            font-weight: bold !important;
-            font-size: 12px !important;
-            margin-bottom: 0 !important;
-            color: #333 !important;
-        }
-        
-        /* Paper lines styling */
-        .paper-lines {
-            width: 100% !important;
-            border: none !important;
-            outline: none !important;
-            resize: none !important;
-            font-size: 12px !important;
-            line-height: 25px !important;
-            padding: 0 2px !important;
-            background-attachment: local !important;
-            background-image: linear-gradient(to bottom, transparent 24px, #000 24px) !important;
-            background-size: 100% 25px !important;
-            background-repeat: repeat-y !important;
-            background-color: transparent !important;
-            font-family: Arial, sans-serif !important;
-            overflow: hidden !important;
-            min-height: 25px !important;
-            color: #000 !important;
-        }
-        
-        .paper-lines::placeholder {
-            color: #ccc !important;
-            font-style: italic !important;
-        }
-        
-        /* Preserve all colors and backgrounds */
-        .label-box.bg-gray,
-        .section-header {
-            background-color: #b3b3b3 !important;
-        }
-        
-        /* Approval section spacing */
-        .approvals-container {
-            font-family: Arial, sans-serif !important;
-            width: 100% !important;
-            max-width: 900px !important;
-            margin: 10px auto 5px auto !important;
-            color: #000 !important;
-        }
-        
-        .approval-row {
-            display: flex !important;
-            justify-content: space-between !important;
-            margin-bottom: 5px !important;
-        }
-        
-        .signature-group {
-            width: 35% !important;
-        }
-        
-        .label {
-            font-weight: bold !important;
-            margin-bottom: 8px !important;
-            font-size: 12px !important;
-        }
-        
-        .signature-line {
-            border-bottom: 1.5px solid black !important;
-            min-height: 20px !important;
-            font-size: 12px !important;
-            margin-bottom: 2px !important;
-        }
-        
-        .title {
-            font-size: 11px !important;
-            font-weight: bold !important;
-        }
-        
-        .bold {
-            font-weight: bold !important;
-        }
-        
-        .left-align {
-            text-align: left !important;
-            width: 100% !important;
-        }
-        
-        .approval-centered {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            margin-top: 5px !important;
-        }
-        
-        .admin-block {
-            text-align: center !important;
-            margin-top: 8px !important;
-            margin-bottom: 2px !important;
-        }
-        
-        .name-underlined {
-            font-weight: bold !important;
-            text-decoration: underline !important;
-            text-transform: uppercase !important;
-            font-size: 12px !important;
-            min-height: 20px !important;
-            display: inline-block !important;
-            margin-bottom: 2px !important;
-        }
-        
-        /* Document info table */
-        .document-info {
-            margin-top: 15px !important;
-            width: 40% !important;
-        }
-        
-        .doc-header {
-            border-collapse: collapse !important;
-            font-family: Arial, sans-serif !important;
-            font-size: 10px !important;
-            border: 1px solid #d1d1d1 !important;
-            width: 100% !important;
-        }
-        
-        .doc-header td {
-            border: 1px solid #000 !important;
-            padding: 2px 4px !important;
-        }
-        
-        .doc-header td.label {
-            background-color: #002060 !important;
-            color: white !important;
-            font-weight: bold !important;
-            white-space: nowrap !important;
-            width: 100px !important;
-        }
-        
-        .doc-header td:nth-child(2) {
-            width: 15px !important;
-            text-align: center !important;
-            font-weight: bold !important;
-        }
-        
-        .doc-header td.value {
-            padding: 2px 4px !important;
-        }
-        
-        .doc-header td.value input,
-        .doc-header td.value p {
-            border: none !important;
-            background: transparent !important;
-            font-family: inherit !important;
-            font-size: 10px !important;
-            color: #333 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-        }
-        
-        .doc-header td.value input:disabled {
-            color: black !important;
-            cursor: default !important;
-        }
-        
-        .document_type {
-            margin: 0 !important;
-            font-size: 10px !important;
-        }
-        
-        /* Footer */
-        footer {
-            margin-top: 15px !important;
-            width: 100% !important;
-        }
-        
-        .footer-bottom {
-            display: flex !important;
-            align-items: flex-end !important;
-            justify-content: flex-end !important;
-            padding-bottom: 5px !important;
-            width: 100% !important;
-        }
-        
-        .footer-logos {
-            display: flex !important;
-            align-items: center !important;
-            gap: 15px !important;
-            margin-left: 30px !important;
-        }
-        
-        .footer-logos img {
-            height: 25px !important;
-            width: auto !important;
-        }
-        
-        /* Page break preferences */
-        .section-content,
-        .approvals-container,
-        header {
-            page-break-inside: avoid !important;
+
+        @media print {
+            @page {
+                margin: 12mm;
+                size: auto;
+            }
+
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                outline: none !important;
+                background: white !important;
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+                line-height: 1.4;
+                color: #333;
+            }
+
+            body > *:not(#print-container):not(style[data-print-runtime]) {
+                display: none !important;
+            }
+
+            #print-container {
+                display: block !important;
+                width: 100%;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                outline: none !important;
+                background: white !important;
+            }
+
+            #sidebarFrame,
+            #headerFrame,
+            .buttons,
+            .admin-comment,
+            .action-buttons,
+            .wrapper,
+            .no-print,
+            .print-hide,
+            [data-no-print="true"] {
+                display: none !important;
+            }
+
+            .print-shell {
+                width: 100%;
+                margin: 0 !important;
+                padding: 0 !important;
+                border-collapse: collapse;
+                border-spacing: 0;
+                table-layout: fixed;
+                border: none !important;
+                outline: none !important;
+                background: white !important;
+            }
+
+            .print-shell thead {
+                display: table-header-group;
+            }
+
+            .print-shell tfoot {
+                display: table-footer-group;
+            }
+
+            .print-shell tbody {
+                display: table-row-group;
+            }
+
+            .print-shell > thead > tr,
+            .print-shell > tbody > tr,
+            .print-shell > tfoot > tr,
+            .print-shell > thead > tr > td,
+            .print-shell > tbody > tr > td,
+            .print-shell > tfoot > tr > td {
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                outline: none !important;
+                vertical-align: top;
+                background: white !important;
+            }
+
+            .print-header,
+            .print-footer,
+            .print-body {
+                width: 100%;
+                margin: 0 !important;
+                background: white !important;
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+            }
+
+            .print-header {
+                padding: 0 0 8px 0 !important;
+            }
+
+            .print-footer {
+                padding: 8px 0 0 0 !important;
+            }
+
+            .print-body {
+                padding: 0 0 55px 0 !important;
+            }
+
+            .report-container {
+                max-width: none !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                background: white !important;
+                border-radius: 0 !important;
+            }
+
+            header,
+            footer,
+            .print-header,
+            .print-footer,
+            .header-content,
+            .footer-bottom,
+            .footer-logos {
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+            }
+
+            .header-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                gap: 12px;
+                flex-wrap: nowrap;
+                margin: 0 0 10px 0 !important;
+                padding: 0 !important;
+            }
+
+            .logo-left {
+                height: 90px;
+                width: auto;
+                flex: 0 0 auto;
+            }
+
+            .logos-right {
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                flex: 0 0 auto;
+                margin-right: 12px;
+            }
+
+            .logos-right img {
+                height: 80px;
+                width: auto;
+            }
+
+            .college-info {
+                text-align: center;
+                flex: 1 1 auto;
+                padding: 0 10px;
+            }
+
+            .college-info h1 {
+                font-family: "Times New Roman", Times, serif;
+                color: #4f81bd !important;
+                font-size: 26px;
+                margin: 0;
+                font-weight: normal;
+                line-height: 1.2;
+            }
+
+            .college-info p {
+                font-size: 11px;
+                margin: 2px 0;
+                color: #333;
+                line-height: 1.3;
+            }
+
+            .college-info a {
+                font-size: 13px;
+                color: #0000EE !important;
+                text-decoration: underline;
+                word-break: break-all;
+            }
+
+            .office-title {
+                text-align: center;
+                font-size: 18px;
+                color: #595959 !important;
+                font-weight: bold;
+                margin: 5px 0;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+            }
+
+            .double-line {
+                border-top: 4px double #4f81bd !important;
+                margin-bottom: 15px;
+            }
+
+            header h1 {
+                text-align: center;
+                font-size: 18px;
+                text-decoration: underline;
+                margin: 15px 0 20px 0;
+            }
+
+            .header-grid {
+                display: grid !important;
+                grid-template-columns: 145px 1fr 150px 1fr !important;
+                border: 1px solid #000 !important;
+                margin-bottom: 30px !important;
+            }
+
+            .bg-gray {
+                background-color: #b3b3b3 !important;
+            }
+
+            .section-header {
+                background-color: #b3b3b3 !important;
+                border: 1px solid #000 !important;
+                margin-top: 20px !important;
+            }
+
+            .paper-lines,
+            textarea.paper-lines,
+            .print-textarea-block.paper-lines {
+                background-image: linear-gradient(to bottom, transparent 29px, #000 29px) !important;
+                background-size: 100% 30px !important;
+                background-attachment: local !important;
+            }
+
+            .approval-row {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                gap: 24px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .signature-group {
+                width: 35% !important;
+            }
+
+            .signature-line {
+                border-bottom: 1.5px solid black !important;
+                margin-bottom: 5px !important;
+            }
+
+            .name-underlined {
+                text-decoration: underline !important;
+            }
+
+            /* ===== DOCUMENT INFO - SMALLER + NO FOOTER OVERLAP ===== */
+            .document-info {
+                width: 22% !important;
+                max-width: 22% !important;
+                margin-top: 18px !important;
+                margin-bottom: 45px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .doc-header {
+                width: auto !important;
+                border-collapse: collapse !important;
+                table-layout: auto !important;
+                font-family: Arial, sans-serif !important;
+                font-size: 9px !important;
+                border: 1px solid #d1d1d1 !important;
+            }
+
+            .doc-header td {
+                border: 1px solid #d1d1d1 !important;
+                padding: 2px 5px !important;
+                line-height: 1.15 !important;
+                vertical-align: middle !important;
+            }
+
+            .doc-header td.label {
+                background-color: #002060 !important;
+                color: white !important;
+                font-weight: bold !important;
+                font-size: 9px !important;
+                width: 78px !important;
+                min-width: 78px !important;
+                max-width: 78px !important;
+                padding: 2px 5px !important;
+                text-align: left !important;
+                white-space: nowrap !important;
+            }
+
+            .doc-header td:nth-child(2) {
+                width: 8px !important;
+                min-width: 8px !important;
+                max-width: 8px !important;
+                padding: 0 1px !important;
+                font-weight: bold !important;
+                text-align: center !important;
+                border-top: 1px solid #d1d1d1 !important;
+                border-bottom: 1px solid #d1d1d1 !important;
+            }
+
+            .doc-header td.value {
+                font-size: 9px !important;
+                padding: 2px 5px !important;
+                min-width: 88px !important;
+                max-width: 130px !important;
+                text-align: left !important;
+                white-space: nowrap !important;
+            }
+
+            .doc-header td.value input,
+            .doc-header td.value p {
+                border: none !important;
+                background: transparent !important;
+                font-family: inherit !important;
+                font-size: inherit !important;
+                color: #000 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                line-height: 1.15 !important;
+                box-shadow: none !important;
+                outline: none !important;
+            }
+
+            .doc-header td.value input:disabled {
+                color: #000 !important;
+                cursor: default !important;
+                opacity: 1 !important;
+                -webkit-text-fill-color: #000 !important;
+            }
+
+            .approvals-container,
+            .section-header,
+            .approval-row,
+            .signature-group,
+            .approval-centered,
+            .header-grid {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            table, tr, td, th {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            textarea,
+            .paper-lines,
+            .print-body textarea,
+            .print-body .paper-lines,
+            .print-textarea-block {
+                height: auto !important;
+                min-height: 120px !important;
+                overflow: visible !important;
+                resize: none !important;
+                display: block !important;
+                white-space: pre-wrap !important;
+                word-break: break-word !important;
+                overflow-wrap: anywhere !important;
+                padding: 0 !important;
+                border: none !important;
+                outline: none !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+            }
+
+            .print-textarea-block {
+                width: 100% !important;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            footer {
+                width: 100%;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .footer-bottom {
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-end;
+                width: 100%;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .footer-logos {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                width: 100%;
+                gap: 0;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .footer-logos img {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                object-fit: contain;
+            }
+
+            h1, h2, h3, h4, h5, h6, p {
+                page-break-after: avoid;
+                break-after: avoid-page;
+                orphans: 3;
+                widows: 3;
+            }
+
+            .approvals-container,
+            .approvals-container *,
+            .approvals,
+            .approvals * {
+                font-weight: bold !important;
+            }
+
+            .approvals-container .signature-line,
+            .approvals-container .name-underlined,
+            .approvals .signature-line,
+            .approvals .name-underlined,
+            .approvals .signature-block .name,
+            .approvals #ces_head {
+                display: inline-block !important;
+                width: auto !important;
+                min-width: 180px !important;
+                max-width: 100% !important;
+                padding: 0 12px 2px 12px !important;
+                border-bottom: 1px solid #000 !important;
+                text-decoration: none !important;
+                white-space: normal !important;
+                overflow-wrap: anywhere !important;
+            }
         }
     `;
-    
-    // Add the style to the document temporarily
-    document.head.appendChild(pdfStyle);
-    
-    // Show loading indicator
-    showLoadingIndicator();
-    
-    // Options for HTML2PDF
-    const options = {
-        margin: [0.5, 0.5, 0.5, 0.5],
-        filename: filename,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-            scale: 2,
-            letterRendering: true,
-            useCORS: true,
-            logging: false,
-            allowTaint: false,
-            backgroundColor: '#ffffff'
-        },
-        jsPDF: { 
-            unit: 'in', 
-            format: 'a4', 
-            orientation: 'portrait',
-            compress: true
-        },
-        pagebreak: { mode: ['css', 'legacy'] }
+
+    document.head.appendChild(styleElement);
+    document.body.appendChild(printContainer);
+
+    const cleanup = () => {
+        if (printContainer.parentNode) {
+            printContainer.parentNode.removeChild(printContainer);
+        }
+
+        if (styleElement.parentNode) {
+            styleElement.parentNode.removeChild(styleElement);
+        }
+
+        window.removeEventListener('afterprint', cleanup);
     };
-    
-    // Ensure all images are loaded before generating PDF
-    waitForImages(reportContainer).then(() => {
-        // Use html2pdf to generate PDF
-        html2pdf().set(options).from(reportContainer).save().then(() => {
-            // Restore buttons and iframes
-            if (buttons) buttons.style.display = originalButtonDisplay;
-            
-            iframes.forEach((frame, index) => {
-                frame.style.display = originalIframeDisplays[index] || '';
-            });
-            
-            // Remove the temporary style
-            document.head.removeChild(pdfStyle);
-            
-            // Hide loading indicator
-            hideLoadingIndicator();
-        }).catch(error => {
-            console.error('PDF generation failed:', error);
-            alert('Failed to generate PDF. Please try again.');
-            
-            // Restore buttons and iframes on error
-            if (buttons) buttons.style.display = originalButtonDisplay;
-            
-            iframes.forEach((frame, index) => {
-                frame.style.display = originalIframeDisplays[index] || '';
-            });
-            
-            // Remove the temporary style
-            document.head.removeChild(pdfStyle);
-            
-            hideLoadingIndicator();
+
+    const waitForImages = () => {
+        const images = [...printContainer.querySelectorAll('img')];
+
+        if (!images.length) {
+            window.addEventListener('afterprint', cleanup);
+            window.print();
+            setTimeout(cleanup, 1500);
+            return;
+        }
+
+        let done = 0;
+
+        const finish = () => {
+            done += 1;
+
+            if (done >= images.length) {
+                window.addEventListener('afterprint', cleanup);
+                window.print();
+                setTimeout(cleanup, 1500);
+            }
+        };
+
+        images.forEach((img) => {
+            if (img.complete) {
+                finish();
+            } else {
+                img.addEventListener('load', finish, { once: true });
+                img.addEventListener('error', finish, { once: true });
+            }
+        });
+    };
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            waitForImages();
         });
     });
 }
 
-// Loading indicator functions
-function showLoadingIndicator() {
-    if (!document.getElementById('pdf-loading-overlay')) {
-        const overlay = document.createElement('div');
-        overlay.id = 'pdf-loading-overlay';
-        overlay.innerHTML = `
-            <div style="
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.7);
-                z-index: 9999;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-            ">
-                <div style="
-                    background: white;
-                    padding: 30px;
-                    border-radius: 10px;
-                    text-align: center;
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-                ">
-                    <div style="
-                        border: 5px solid #f3f3f3;
-                        border-top: 5px solid #254911;
-                        border-radius: 50%;
-                        width: 50px;
-                        height: 50px;
-                        animation: spin 1s linear infinite;
-                        margin: 0 auto 20px auto;
-                    "></div>
-                    <p style="
-                        font-family: Arial, sans-serif;
-                        font-size: 16px;
-                        color: #333;
-                        margin: 10px 0;
-                    ">Generating PDF...</p>
-                    <p style="
-                        font-family: Arial, sans-serif;
-                        font-size: 14px;
-                        color: #666;
-                        margin: 5px 0;
-                    ">Please wait while we prepare your document.</p>
-                </div>
-            </div>
-            <style>
-                @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                }
-            </style>
-        `;
-        document.body.appendChild(overlay);
-    }
-}
+function syncFormValues(source, clone) {
+    const sourceInputs = source.querySelectorAll('input, textarea, select');
+    const cloneInputs = clone.querySelectorAll('input, textarea, select');
 
-function hideLoadingIndicator() {
-    const overlay = document.getElementById('pdf-loading-overlay');
-    if (overlay) {
-        overlay.remove();
-    }
-}
+    sourceInputs.forEach((original, index) => {
+        const target = cloneInputs[index];
 
-// Function to ensure all images are loaded before PDF generation
-function waitForImages(element) {
-    const images = element.getElementsByTagName('img');
-    const imagePromises = [];
-    
-    for (let img of images) {
-        if (!img.complete) {
-            const promise = new Promise(resolve => {
-                img.onload = resolve;
-                img.onerror = resolve;
-            });
-            imagePromises.push(promise);
+        if (!target) return;
+
+        const tag = target.tagName.toLowerCase();
+        const type = (target.getAttribute('type') || '').toLowerCase();
+
+        if (type === 'checkbox' || type === 'radio') {
+            if (original.checked) {
+                target.setAttribute('checked', 'checked');
+                target.checked = true;
+            } else {
+                target.removeAttribute('checked');
+                target.checked = false;
+            }
+
+            return;
         }
-    }
-    
-    return Promise.all(imagePromises);
+
+        if (tag === 'textarea') {
+            target.value = original.value;
+            target.textContent = original.value;
+            target.style.height = 'auto';
+            target.style.minHeight = Math.max(original.scrollHeight, 120) + 'px';
+            return;
+        }
+
+        if (tag === 'select') {
+            [...target.options].forEach((opt, i) => {
+                opt.selected = original.options[i]?.selected || false;
+
+                if (opt.selected) {
+                    opt.setAttribute('selected', 'selected');
+                } else {
+                    opt.removeAttribute('selected');
+                }
+            });
+
+            return;
+        }
+
+        target.value = original.value;
+        target.setAttribute('value', original.value || '');
+    });
 }
 
-// Initialize PDF download button when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    const downloadBtn = document.getElementById('downloadPDF');
-    if (downloadBtn) {
-        // Remove any existing event listeners
-        downloadBtn.replaceWith(downloadBtn.cloneNode(true));
-        document.getElementById('downloadPDF').addEventListener('click', downloadPDF);
-    }
-});
+function convertTextareasForPrint(root) {
+    const textareas = root.querySelectorAll('textarea');
 
-// Make functions globally available
-window.downloadPDF = downloadPDF;
+    textareas.forEach((textarea) => {
+        const div = document.createElement('div');
+
+        div.className = textarea.classList.contains('paper-lines')
+            ? 'paper-lines print-textarea-block'
+            : 'print-textarea-block';
+
+        div.textContent = textarea.value || textarea.textContent || '';
+        div.style.minHeight = Math.max(textarea.scrollHeight || 120, 120) + 'px';
+        div.style.whiteSpace = 'pre-wrap';
+        div.style.wordBreak = 'break-word';
+        div.style.overflowWrap = 'anywhere';
+
+        textarea.replaceWith(div);
+    });
+}
+
+window.printReport = printReport;

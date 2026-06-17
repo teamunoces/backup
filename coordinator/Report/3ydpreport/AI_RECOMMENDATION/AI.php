@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
+    <title>Admin Dashboard Header</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-left">
+            <i class="fas fa-th-large dashboard-icon"></i>
+            <h1 class="header-title"></h1>
+        </div>
+
+        
+
+        <div class="header-right">
+            <img src="../../login/images/ces.png" alt="School Logo" class="admin-logo">
+            <div class="notification-icon" id="notificationBell">
+                <i class="fa-solid fa-bell"></i>
+                <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+            </div>
+            <span class="admin-text" id="admin-toggle">Coordinator</span>
+
+            
+
+            <!-- Moved inside .header-right for proper dropdown positioning -->
+            <div class="menu-card" id="menu-card">
+                <div class="menu-item">
+                    <label class="switch">
+                        <input type="checkbox" id="mode-toggle">
+                        <span class="slider">
+                            <i class="fa-solid fa-sun icon-sun"></i>
+                            <i class="fa-solid fa-moon icon-moon"></i>
+                        </span>
+                    </label>
+                    <span class="menu-text">System mode</span>
+                </div>
+
+                <div class="menu-item" id="profileBtn">
+                    <div class="icon-circle">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="menu-text">Profile</div>
+
+                </div>
+
+                <div class="menu-item" id="logoutBtn">
+                    <div class="icon-logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </div>
+                    <span class="menu-text">Log out</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+   <div id="overlay" class="overlay" style="display:none;">
+        <div id="profileModal" class="profile-modal">
+            <h2>Edit Profile</h2>
+
+            <input type="hidden" id="userId">
+
+            <label>Username</label>
+            <input type="text" id="username">
+
+            <label>Name</label>
+            <input type="text" id="name">
+
+            <label>Email</label>
+            <input type="email" id="email">
+
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Leave blank if unchanged">
+
+            <label>Role</label>
+            <input type="text" id="role">
+
+            <label>Department</label>
+            <input type="text" id="department">
+
+            <button onclick="updateProfile()">Save Changes</button>
+            <button onclick="closeProfile()">Cancel</button>
+    </div>
+
+                       <!-- Notification Modal HTML - make sure it's visible but hidden initially -->
+                    <div id="notificationModalContainer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000;">
+                        <div id="notificationModal" class="notification-modal">
+                            <div class="notification-header">
+                                <h2><i class="fa-solid fa-bell notification-bell"></i></i> Send Notification</h2>
+                                <button class="close-btn" id="closeNotificationBtn"><i class="fa-solid fa-times"></i></button>
+                            </div>
+                            
+                            <!-- Send Message Tab -->
+                            <div id="sendTab" class="tab-content active">
+                                <div class="form-group">
+                                    <label><i class="fa-solid fa-user-tie"></i> Send to Departments/Coordinators:</label>
+                                    <select id="departmentSelect" class="form-control" multiple size="8">
+                                        <option value="" disabled>Loading departments...</option>
+                                    </select>
+                                    <small class="form-text"><i class="fa-solid fa-info-circle"></i> Click to select multiple (hold Ctrl/Cmd for multiple)</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fa-solid fa-message"></i> Message:</label>
+                                    <textarea id="messageContent" class="form-control" rows="4" placeholder="Type your message here..."></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fa-solid fa-flag"></i> Priority:</label>
+                                    <select id="messagePriority" class="form-control">
+                                        <option value="normal">Normal</option>
+                                        <option value="important">Important</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="modal-actions">
+                                    <button class="btn-send" id="sendNotificationBtn">
+                                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                                    </button>
+                                    <button class="btn-cancel" id="cancelNotificationBtn">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+
+
+
+<script>
+fetch("./session_user.php")
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("admin-toggle").textContent = data.username;
+    })
+    .catch(error => console.error("Error fetching user:", error));
+</script>
+
+   <script src="/SYSTEM_VERSION_!/coordinator/Profile/notifications.js"></script>
+    <script src="/SYSTEM_VERSION_!/coordinator/Profile/menu.js"></script>
+    <script src="/SYSTEM_VERSION_!/coordinator/Profile/edit/edit.js"></script>
+
+</body>
+</html>

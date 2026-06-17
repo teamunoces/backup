@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Dashboard - Report Status</title>
 
     <link rel="stylesheet" href="Pending.css">
@@ -42,21 +58,46 @@
                         <option value="All">All Types</option>
                         <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
                         <option value="3-year Development Plan">3-year Development Plan</option>
-                        <option value="Program Design">Program Design</option>    
-                        <option value="Departamental Planned Initiative Report">Departamental Planned Initiative Report</option>
+                        <option value="Program Design">Program Design</option>
+                        <option value="Departmental Planned Initiative Report">Departmental Planned Initiative Report</option>
                         <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
+                        <option value="Program Monitoring Form">Program Monitoring Form</option>
+                        <option value="Evaluation Sheet for Extension Services">Evaluation Sheet for Extension Services</option>
+                        <option value="Certificate of Appearance">Certificate of Appearance</option>
+                        <option value="Monthly Accomplishment Report- Reflection Paper">Monthly Accomplishment Report- Reflection Paper</option>
+                        <option value="Monthly Accomplishment Report- Narrative Report">Monthly Accomplishment Report- Narrative Report</option>
                     </select>
+
+                    <span class="type-badge green">Department:</span>
+                    <select id="pendingDepartmentFilter" onchange="applyFilter('pending', 'pendingTableBody')">
+                        <option value="All">All Departments</option>
+                        <option value="ELEMENTARY">ELEMENTARY</option>
+                        <option value="SHS">SHS</option>
+                        <option value="JHS">JHS</option>
+                        <option value="CBMA">CBMA</option>
+                        <option value="CTHM">CTHM</option>
+                        <option value="CCIS">CCIS</option>
+                        <option value="CCJE">CCJE</option>
+                        <option value="CAS">CAS</option>
+                        <option value="CTE">CTE</option>
+                        <option value="CSF">CSF</option>
+                        <option value="LRC">LRC</option>
+                    </select>
+
+                    <button type="button" class="clear-filter-btn green" onclick="clearFilters('pending', 'pendingTableBody')">
+                        Clear Filters
+                    </button>
                 </div>
 
                 <table class="report-table">
                     <thead>
                         <tr>
-                            <th class="green-text">Type</th>
-                            <th class="green-text">Title</th>
-                            <th class="green-text">Created by</th>
-                            <th class="green-text">Department</th>
-                            <th class="green-text">Date</th>
-                            <th class="green-text">Action</th>
+                            <th class="red-text">Type</th>
+                            <th class="red-text">Title</th>
+                            <th class="red-text">Created by</th>
+                            <th class="red-text">Department</th>
+                            <th class="red-text">Date</th>
+                            <th class="red-text">Action</th>
                         </tr>
                     </thead>
                     <tbody id="pendingTableBody">
@@ -79,10 +120,35 @@
                         <option value="All">All Types</option>
                         <option value="Community Needs Assessment Consolidated Report">Community Needs Assessment Consolidated Report</option>
                         <option value="3-year Development Plan">3-year Development Plan</option>
-                        <option value="Program Design">Program Design</option>   
-                        <option value="Departamental Planned Initiative  Report">Departamental Planned Initiative Report</option>
+                        <option value="Program Design">Program Design</option>
+                        <option value="Departmental Planned Initiative Report">Departmental Planned Initiative Report</option>
                         <option value="Monthly Accomplishment Report">Monthly Accomplishment Report</option>
+                        <option value="Program Monitoring Form">Program Monitoring Form</option>
+                        <option value="Evaluation Sheet for Extension Services">Evaluation Sheet for Extension Services</option>
+                        <option value="Certificate of Appearance">Certificate of Appearance</option>
+                        <option value="Monthly Accomplishment Report- Reflection Paper">Monthly Accomplishment Report- Reflection Paper</option>
+                        <option value="Monthly Accomplishment Report- Narrative Report">Monthly Accomplishment Report- Narrative Report</option>
                     </select>
+
+                    <span class="type-badge red">Department:</span>
+                    <select id="needFixDepartmentFilter" onchange="applyFilter('need fix', 'needFixesTableBody')">
+                        <option value="All">All Departments</option>
+                        <option value="ELEMENTARY">ELEMENTARY</option>
+                        <option value="SHS">SHS</option>
+                        <option value="JHS">JHS</option>
+                        <option value="CBMA">CBMA</option>
+                        <option value="CTHM">CTHM</option>
+                        <option value="CCIS">CCIS</option>
+                        <option value="CCJE">CCJE</option>
+                        <option value="CAS">CAS</option>
+                        <option value="CTE">CTE</option>
+                        <option value="CSF">CSF</option>
+                        <option value="LRC">LRC</option>
+                    </select>
+
+                    <button type="button" class="clear-filter-btn red" onclick="clearFilters('need fix', 'needFixesTableBody')">
+                        Clear Filters
+                    </button>
                 </div>
 
                 <table class="report-table">
@@ -108,8 +174,8 @@
     </main>
 </div>
 
-<script src="./js/getPending.js"></script>
-<script src="darkmode.js"></script>
+<script src="/SYSTEM_VERSION_!/admin/Dashboard/Pending/js/getPending.js?v=20260611a"></script>
+<script src="/SYSTEM_VERSION_!/admin/Dashboard/Pending/darkmode.js"></script>
 
 </body>
 </html>

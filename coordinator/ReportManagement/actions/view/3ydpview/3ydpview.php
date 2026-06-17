@@ -10,6 +10,22 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
   <title><?php echo $reportType; ?></title>
   <link rel="stylesheet" href="view.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -17,24 +33,41 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 </head>
 <body>
 
-  <!-- HEADER -->
-  <iframe src="/coordinator/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
+  <iframe 
+        src="http://localhost/SYSTEM_VERSION_!/coordinator/Profile/profile.html"
+        id="headerFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Header">
+    </iframe>
 
-  <!-- SIDEBAR -->
-  <iframe src="/coordinator/Sidebar/sidebar.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+    <!-- Sidebar -->
+    <iframe 
+        src="http://localhost/SYSTEM_VERSION_!/coordinator/Sidebar/sidebar.html" 
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
 
   <!-- ACTION BUTTONS -->
   <div class="buttons">
-    <button  onclick="printReport()">Print this Page</button>
-    <button id="downloadPDF" type="button">Download PDF</button>
+    <button  onclick="printReport()">Print</button>
+   <!-- <button id="downloadPDF" type="button">Download PDF</button> -->
   </div>
+
+                                    <div class="admin-comment">
+                                          <label for="admincomment" class="admin-comment-label" style="font-weight: bold;">Admin Feedback</label>
+                                          <textarea id="admincomment" placeholder="Enter admin comments here..." rows="5"></textarea>
+                                    </div>
 
   <!-- MAIN PRINT CONTAINER -->
   <div class="container">
     
                    <header>
                       <div class="header-content">
-                          <img src="/admin/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                          <img src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                          <img src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/images/Ceslogo.png" alt="CES logo" class="logo-left2">
                           <div class="college-info">
                               <h1>Saint Michael College of Caraga</h1>
                               <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
@@ -43,7 +76,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
                               <a href="http://www.smccnasipit.edu.ph">www.smccnasipit.edu.ph</a>
                           </div>
                           <div class="logos-right">
-                              <img src="/admin/ReportManagement/actions/images/ISOlogo.png" alt="SOCOTEC Logo">
+                              <img src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/images/ISOlogo.png" alt="SOCOTEC Logo">
                           </div>
                       </div>
                       <h2 class="office-title">OFFICE OF THE COMMUNITY EXTENSION SERVICES</h2>
@@ -99,16 +132,32 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
         <section class="table-section">
           <table id="programPlanTable">
             <thead>
-              <tr>
-                                <th rowspan="5">Program</th>
-                                <th rowspan="5">Objectives</th>
-                                <th rowspan="5">Strategies and Action Plans</th>
-                                <th rowspan="5">Resources from the School</th>
-                                <th rowspan="5">Resources from the Community</th> 
-                                <th rowspan="5">Budget</th>     
-                                <th rowspan="5">Means of Verification</th>     
-                                <th rowspan="5">Time Frame</th>
-              </tr>
+               <tr>
+                                <th rowspan="2">Program</th>
+                                <th rowspan="2">Objectives</th>
+                                <th rowspan="2">Strategies and<br>Action Plans</th>
+                                <th colspan="3">Resources Needed</th>
+                                <th rowspan="2">Means of<br>Verification</th>
+                                <th rowspan="2">Time<br>Frame</th>
+                            </tr>
+
+                            <tr>
+                                <th>
+                                    Resources from the School<br>
+                                    (Human Resources,<br>
+                                    Collaborating Agencies<br>
+                                    and Equipment)
+                                </th>
+
+                                <th>
+                                    Resources from the Community<br>
+                                    (Human Resources,<br>
+                                    Collaborating Agencies<br>
+                                    and Equipment)
+                                </th>
+
+                                <th>Budget and funding</th>
+                            </tr>
             </thead>
             <tbody>
               <tr>
@@ -130,7 +179,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
           <div class="approval-row">
             <div class="signature-group">
               <div class="label">Prepared by:</div>
-               <div class="signature-line"><?php echo htmlspecialchars($userName); ?></div>
+               <div class="signature-line" id="created_by_name"></div>
               <div class="title bold">CES Coordinator</div>
             </div>
           </div>
@@ -138,7 +187,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
           <div class="label" style="margin-top: 20px;">Noted by:</div>
           <div class="approval-row">
             <div class="signature-group">
-              <div class="signature-line"><?php echo htmlspecialchars($userDean); ?></div>
+              <div class="signature-line" id="dean"></div>
               <div class="title bold">Dean</div>
             </div>
             <div class="signature-group">
@@ -214,28 +263,9 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
   </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="get.js"></script>
-  <script src="/admin/ReportManagement/actions/js/getapproval.js"></script>
   <script src="download.js"></script>
   <script src="./darkmode.js"></script>
-
-  <script>
-          function printReport() {
-              // Select elements you want to hide
-              const buttons = document.querySelectorAll('.buttons');
-              const iframes = document.querySelectorAll('iframe');
-
-              // Hide them before printing
-              buttons.forEach(btn => btn.style.display = 'none');
-              iframes.forEach(frame => frame.style.display = 'none');
-
-              // Trigger print
-              window.print();
-
-              // Restore visibility after print
-              buttons.forEach(btn => btn.style.display = '');
-              iframes.forEach(frame => frame.style.display = '');
-          }
-</script>
-
+  <script src="./print.js"></script>
+  
 </body>
 </html>

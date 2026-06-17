@@ -9,15 +9,27 @@ body.dark-mode {
     color: #e0e0e0;
 }
 
-/* ===== HEADER IFRAME DARK MODE ===== */
-body.dark-mode #headerFrame {
-    background: #1e1e1e;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-/* ===== SIDEBAR IFRAME DARK MODE ===== */
+/* ===== IFRAME FIXES - Prevent grey tint in dark mode ===== */
 body.dark-mode #sidebarFrame {
     background: #1a1a1a;
+    /* Force proper rendering */
+    color-scheme: dark;
+}
+
+/* Fix for iframe content appearing grey */
+body.dark-mode iframe {
+    background: #1a1a1a;
+    /* Prevent any transparency or overlay effects */
+    opacity: 1;
+    /* Force proper color rendering */
+    color-scheme: dark;
+}
+
+/* If you can access the iframe content, add this style to ensure
+   the iframe's body also has proper dark mode colors */
+body.dark-mode #sidebarFrame,
+body.dark-mode iframe[src*="sidebar"] {
+    background-color: #1a1a1a !important;
 }
 
 /* ===== CONTENT AREA DARK MODE ===== */
@@ -93,9 +105,17 @@ body.dark-mode a:hover {
     color: #b2dfdb;
 }
 
-/* Ensure iframe content has proper dark mode background */
-body.dark-mode iframe {
-    background: #1e1e1e;
+/* Fix for text and icons in iframes becoming grey */
+body.dark-mode iframe * {
+    /* Prevent inherited opacity that might cause greyness */
+    opacity: 1 !important;
+}
+
+/* Specific fix for sidebar iframe content */
+body.dark-mode #sidebarFrame * {
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
 }
 
 /* Style for any scrollbars in dark mode (optional, for WebKit browsers) */
@@ -142,4 +162,174 @@ body.dark-mode .dept-card,
 body.dark-mode .dept-card::before,
 body.dark-mode .dept-card::after {
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* ===== 3-YEAR DEVELOPMENT PLAN MONITOR DARK MODE ===== */
+body.dark-mode .development-plan-monitor,
+body.dark-mode .plan-monitor-header,
+body.dark-mode .status-title,
+body.dark-mode .progress-ring::before,
+body.dark-mode .plan-details,
+body.dark-mode .plan-detail-card,
+body.dark-mode .objective-box,
+body.dark-mode .plan-toggle,
+body.dark-mode .plan-pill,
+body.dark-mode .monitor-field select {
+    background: #ffffff;
+}
+
+body.dark-mode .development-plan-monitor,
+body.dark-mode .plan-monitor-header h2,
+body.dark-mode .monitor-field span,
+body.dark-mode .monitor-empty-state,
+body.dark-mode .status-title,
+body.dark-mode .progress-value,
+body.dark-mode .plan-toggle,
+body.dark-mode .plan-pill,
+body.dark-mode .program-title span,
+body.dark-mode .program-title strong,
+body.dark-mode .objective-box span,
+body.dark-mode .objective-box p,
+body.dark-mode .monitor-field select {
+    color: #111111;
+}
+
+body.dark-mode .monitor-kicker {
+    color: #38761d;
+}
+
+body.dark-mode .monitor-empty-state {
+    background: #f4f6f2;
+}
+
+body.dark-mode .program-title {
+    background: #d9d9d9;
+}
+
+body.dark-mode .plan-banner,
+body.dark-mode .plan-toggle:hover,
+body.dark-mode .plan-toggle.active {
+    color: #ffffff;
+}
+
+body.dark-mode .progress-ring .progress-value {
+    color: #ffffff;
+}
+
+body.dark-mode .progress-ring.upcoming .progress-value {
+    color: #687064;
+}
+
+/* ===== TRUE DARK MODE: 3-YEAR DEVELOPMENT PLAN MONITOR ===== */
+body.dark-mode .development-plan-monitor {
+    background: #1e1e1e !important;
+    border: 1px solid #333 !important;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55) !important;
+    color: #e4e4e4 !important;
+}
+
+body.dark-mode .development-plan-monitor .plan-monitor-header {
+    background: #2c6e2c !important;
+    border-bottom: 1px solid #355d35 !important;
+}
+
+body.dark-mode .development-plan-monitor .monitor-kicker,
+body.dark-mode .development-plan-monitor .plan-monitor-header h2 {
+    color: #ffffff !important;
+}
+
+body.dark-mode .development-plan-monitor .monitor-field span {
+    color: #c8e6b5 !important;
+}
+
+body.dark-mode .development-plan-monitor .monitor-field select {
+    background: #252525 !important;
+    border: 1px solid #444 !important;
+    color: #e4e4e4 !important;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.dark-mode .development-plan-monitor .monitor-field select:disabled {
+    background: #1a1a1a !important;
+    color: #888 !important;
+}
+
+body.dark-mode .development-plan-monitor .monitor-empty-state {
+    background: #222 !important;
+    border: 1px dashed #4b6f3d !important;
+    color: #b8d9aa !important;
+}
+
+body.dark-mode .development-plan-monitor .plan-dashboard {
+    background: #1e1e1e !important;
+}
+
+body.dark-mode .development-plan-monitor .status-title,
+body.dark-mode .development-plan-monitor .plan-toggle,
+body.dark-mode .development-plan-monitor .plan-pill {
+    background: #2a2a2a !important;
+    border: 1px solid #444 !important;
+    color: #e4e4e4 !important;
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.45) !important;
+}
+
+body.dark-mode .development-plan-monitor .status-overview::before {
+    background: #555 !important;
+}
+
+body.dark-mode .development-plan-monitor .plan-toggle:hover,
+body.dark-mode .development-plan-monitor .plan-toggle.active {
+    background: #55a630 !important;
+    border-color: #6cc24a !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .development-plan-monitor .progress-ring {
+    border: 1px solid #555 !important;
+    box-shadow: 0 13px 22px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .development-plan-monitor .progress-ring.upcoming {
+    background: #2a2a2a !important;
+    border-color: #555 !important;
+}
+
+body.dark-mode .development-plan-monitor .progress-ring .progress-value,
+body.dark-mode .development-plan-monitor .progress-ring .progress-value span {
+    color: #ffffff !important;
+}
+
+body.dark-mode .development-plan-monitor .progress-ring.upcoming .progress-value,
+body.dark-mode .development-plan-monitor .progress-ring.upcoming .progress-value span {
+    color: #e4e4e4 !important;
+}
+
+body.dark-mode .development-plan-monitor .plan-banner {
+    background: #2c6e2c !important;
+    color: #ffffff !important;
+    box-shadow: 6px 5px 8px rgba(0, 0, 0, 0.45) !important;
+}
+
+body.dark-mode .development-plan-monitor .plan-details,
+body.dark-mode .development-plan-monitor .plan-detail-card,
+body.dark-mode .development-plan-monitor .objective-box {
+    background: #222 !important;
+    border-color: #444 !important;
+    color: #e4e4e4 !important;
+    box-shadow: 9px 8px 9px rgba(0, 0, 0, 0.45) !important;
+}
+
+body.dark-mode .development-plan-monitor .program-title {
+    background: #2a2a2a !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode .development-plan-monitor .program-title span,
+body.dark-mode .development-plan-monitor .objective-box span {
+    color: #b8d9aa !important;
+}
+
+body.dark-mode .development-plan-monitor .program-title strong,
+body.dark-mode .development-plan-monitor .objective-box p {
+    color: #e4e4e4 !important;
 }

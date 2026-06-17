@@ -1,0 +1,103 @@
+[01-Apr-2026 04:49:16 UTC] Update request received: Array
+(
+    [q1] => 1
+    [q2] => 2
+    [q3] => 3
+    [q4] => 4
+    [q5] => 3
+    [q6] => 2
+    [q7] => 1
+    [q8] => 2
+    [q9] => 3
+    [q10] => 4
+    [q11] => 3
+    [q12] => 2
+    [q13] => 1
+    [q14] => 2
+    [q15] => 3
+    [service_types] => Array
+        (
+            [0] => Sustainable Livelihood Program
+            [1] => Gardening Program
+        )
+
+    [venue] => try again
+    [implementing_department] => (UPDATE) computer sciences
+    [evaluated_by] => try again
+    [signature] => try again
+    [date] => try again
+    [id] => 4
+)
+
+[01-Apr-2026 04:49:16 UTC] Fatal error: The number of elements in the type definition string must match the number of bind variables
+[01-Apr-2026 04:49:16 UTC] Stack trace: #0 C:\wamp64\www\SYSTEM_VERSION_!\coordinator\ReportManagement\actions\feedback\evaluationview\update.php(125): mysqli_stmt->bind_param('sssssssssssssss...', 'try again', '(UPDATE) comput...', 'Sustainable Liv...', 1, 2, 3, 4, 3, 2, 1, 2, 3, 4, 3, 2, 1, 2, 3, 'try again', 'try again', 'try again', 4)
+#1 {main}
+[01-Apr-2026 05:05:20 UTC] Update request received: Array
+(
+    [q1] => 1
+    [q2] => 2
+    [q3] => 3
+    [q4] => 4
+    [q5] => 3
+    [q6] => 2
+    [q7] => 1
+    [q8] => 2
+    [q9] => 3
+    [q10] => 4
+    [q11] => 3
+    [q12] => 2
+    [q13] => 1
+    [q14] => 2
+    [q15] => 3
+    [service_types] => Array
+        (
+            [0] => Sustainable Livelihood Program
+            [1] => Gardening Program
+        )
+
+    [venue] => try again
+    [implementing_department] => (UPDATE) computer sciences
+    [evaluated_by] => try again
+    [signature] => try again
+    [date] => try again
+    [id] => 4
+)
+
+[01-Apr-2026 05:05:20 UTC] Types string: sssiiiiiiiiiiiiiiisssi
+[01-Apr-2026 05:05:20 UTC] Number of parameters: 22
+[01-Apr-2026 05:05:20 UTC] Update executed successfully. Affected rows: 1
+[01-Apr-2026 05:07:29 UTC] Update request received: Array
+(
+    [q1] => 1
+    [q2] => 2
+    [q3] => 3
+    [q4] => 4
+    [q5] => 3
+    [q6] => 2
+    [q7] => 1
+    [q8] => 2
+    [q9] => 3
+    [q10] => 4
+    [q11] => 3
+    [q12] => 2
+    [q13] => 1
+    [q14] => 2
+    [q15] => 3
+    [service_types] => Array
+        (
+            [0] => Sustainable Livelihood Program
+            [1] => Gardening Program
+        )
+
+    [venue] => try again
+    [implementing_department] => (UPDATE status) computer sciences
+    [evaluated_by] => try again
+    [signature] => try again
+    [date] => try again
+    [id] => 4
+)
+
+[01-Apr-2026 05:07:29 UTC] Types string: sssiiiiiiiiiiiiiiissssi
+[01-Apr-2026 05:07:29 UTC] Number of parameters: 23
+[01-Apr-2026 05:07:29 UTC] Update executed successfully. Affected rows: 1
+[01-Apr-2026 05:07:29 UTC] Status changed from 'need fix' to 'pending' for report ID: 4

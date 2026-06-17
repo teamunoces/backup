@@ -1,33 +1,161 @@
+const isDebug = new URLSearchParams(window.location.search).has("debug");
+const debugLog = (...args) => {
+    if (isDebug) {
+        console.log(...args);
+    }
+};
+const debugWarn = (...args) => {
+    if (isDebug) {
+        console.warn(...args);
+    }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     const barangaySelect = document.getElementById("barangaySelect");
-    loadBarangayData(barangaySelect.value);
+    const yearSelect = document.getElementById("yearSelect");
+    
+    // Set initial state - clear tables initially
+    clearAllTables();
 
-    // Reload data whenever the user picks a different barangay
+    // Check if both are selected before loading data
+    function checkAndLoadData() {
+        const selectedBarangay = barangaySelect.value;
+        const selectedYear = yearSelect.value;
+        
+        // Only load data if both are selected and barangay is not 'select'
+        if (selectedBarangay && selectedBarangay.toLowerCase() !== 'select location' && selectedBarangay !== 'select' && selectedYear && selectedYear !== 'all') {
+            loadBarangayData(selectedBarangay, selectedYear);
+        } else {
+            clearAllTables();
+        }
+    }
+
+    // Reload data when barangay changes
     barangaySelect.addEventListener('change', function() {
-        loadBarangayData(this.value);
+        checkAndLoadData();
     });
+    
+    // Reload data when year changes
+    yearSelect.addEventListener('change', function() {
+        checkAndLoadData();
+    });
+
+    initCustomSelect(barangaySelect);
+    initCustomSelect(yearSelect);
 });
 
-function loadBarangayData(barangay) {
-    fetch(`./php/get.php?barangay=${barangay}`) // pass barangay to PHP
+function initCustomSelect(select) {
+    if (!select || select.dataset.customized === 'true') return;
+
+    select.dataset.customized = 'true';
+    select.classList.add('native-select-hidden');
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-select';
+
+    const trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'custom-select-trigger';
+    trigger.setAttribute('aria-haspopup', 'listbox');
+    trigger.setAttribute('aria-expanded', 'false');
+
+    const list = document.createElement('div');
+    list.className = 'custom-select-list';
+    list.setAttribute('role', 'listbox');
+
+    const updateTrigger = () => {
+        const selectedOption = select.options[select.selectedIndex];
+        trigger.textContent = selectedOption ? selectedOption.text : 'SELECT';
+    };
+
+    Array.from(select.options).forEach((option) => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'custom-select-option';
+        item.textContent = option.text;
+        item.dataset.value = option.value;
+        item.setAttribute('role', 'option');
+
+        item.addEventListener('click', () => {
+            select.value = option.value;
+            updateTrigger();
+            wrapper.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+
+        list.appendChild(item);
+    });
+
+    trigger.addEventListener('click', () => {
+        document.querySelectorAll('.custom-select.open').forEach((openSelect) => {
+            if (openSelect !== wrapper) {
+                openSelect.classList.remove('open');
+                openSelect.querySelector('.custom-select-trigger')?.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        const isOpen = wrapper.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!wrapper.contains(event.target)) {
+            wrapper.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    select.addEventListener('change', updateTrigger);
+    updateTrigger();
+
+    select.parentNode.insertBefore(wrapper, select.nextSibling);
+    wrapper.appendChild(trigger);
+    wrapper.appendChild(list);
+}
+
+function loadBarangayData(barangay, selectedYear) {
+    // Show loading state
+    showLoadingState();
+    
+    // Build URL with parameters
+    let url = `./php/get.php?barangay=${encodeURIComponent(barangay)}`;
+    
+    // Only add year parameter if it's not 'all'
+    if (selectedYear && selectedYear !== 'all') {
+        url += `&year=${encodeURIComponent(selectedYear)}`;
+    }
+    
+    debugLog("Fetching URL:", url);
+    
+    fetch(url)
         .then(response => {
             if (!response.ok) throw new Error("Network response was not OK");
             return response.json();
         })
         .then(data => {
-
-            console.log("Database Data:", data);
-
+            debugLog("Full response data:", data);
+            
+            if (data.error) {
+                debugWarn("Server error:", data.error);
+                showErrorMessage(data.error);
+                return;
+            }
             // ----------------- SUMMARY -----------------
             const totalPopulation = data.demographics?.[barangay]?.population ?? 0;
             const totalHousehold = data.demographics?.[barangay]?.households ?? 0;
             const totalRespondents = data.respondents?.[barangay] ?? 0;
             const responsePercent = totalPopulation ? ((totalRespondents / totalPopulation) * 100).toFixed(2) : "-";
 
-            document.getElementById("totalPopulation").innerText = totalPopulation;
-            document.getElementById("totalHousehold").innerText = totalHousehold;
-            document.getElementById("totalRespondents").innerText = totalRespondents;
+            document.getElementById("totalPopulation").innerText = totalPopulation.toLocaleString();
+            document.getElementById("totalHousehold").innerText = totalHousehold.toLocaleString();
+            document.getElementById("totalRespondents").innerText = totalRespondents.toLocaleString();
             document.getElementById("responsePercent").innerText = responsePercent + "%";
+            
+            // Update barangay name display
+            const barangaySelect = document.getElementById("barangaySelect");
+            const selectedText = barangaySelect.options[barangaySelect.selectedIndex]?.text || barangay.toUpperCase();
+            document.getElementById("barangayName").innerText = selectedText;
 
             // ----------------- RELIGION TABLE -----------------
             const religionTbody = document.getElementById("religionTable");
@@ -37,10 +165,10 @@ function loadBarangayData(barangay) {
                     const percent = totalRespondents ? ((r.total / totalRespondents) * 100).toFixed(2) : "-";
                     religionTbody.innerHTML += `
                         <tr>
-                            <td>${r.religion || "N/A"}</td>
+                            <td>${escapeHtml(r.religion || "N/A")}</td>
                             <td>${r.total ?? 0}</td>
-                            <td>${percent}%</td>
-                            <td>${index + 1}</td>
+                            <td>${percent}%}%</td>
+                             <td>${index + 1}</td>
                         </tr>
                     `;
                 });
@@ -57,7 +185,7 @@ function loadBarangayData(barangay) {
                         const percent = totalRespondents ? ((inc.total / totalRespondents) * 100).toFixed(2) : "-";
                         incomeTbody.innerHTML += `
                             <tr>
-                                <td>${inc.source || "N/A"}</td>
+                                <td>${escapeHtml(inc.source || "N/A")}</td>
                                 <td>${inc.total ?? 0}</td>
                                 <td>${percent}%</td>
                                 <td>${index + 1}</td>
@@ -74,13 +202,14 @@ function loadBarangayData(barangay) {
             if (monthlyTbody && Array.isArray(data.monthlyIncome)) {
                 monthlyTbody.innerHTML = "";
                 data.monthlyIncome.forEach((item, index) => {
+                    const percentValue = typeof item.percentage === 'number' ? item.percentage.toFixed(2) : item.percentage;
                     monthlyTbody.innerHTML += `
                         <tr>
-                            <td>${item.label}</td>
+                            <td>${escapeHtml(item.label)}</td>
                             <td>${item.bana}</td>
                             <td>${item.asawa}</td>
                             <td>${item.total}</td>
-                            <td>${item.percentage}%</td>
+                            <td>${percentValue}%</td>
                             <td>${index + 1}</td>
                         </tr>
                     `;
@@ -94,7 +223,7 @@ function loadBarangayData(barangay) {
                 data.education.forEach(item => {
                     eduTbody.innerHTML += `
                         <tr>
-                            <td>${item.level}</td>
+                            <td>${escapeHtml(item.level)}</td>
                             <td>${item.total}</td>
                             <td>${item.percentage}%</td>
                             <td>${item.rank}</td>
@@ -112,7 +241,7 @@ function loadBarangayData(barangay) {
                         .forEach((item, index) => {
                     ageTbody.innerHTML += `
                         <tr>
-                            <td>${item.group}</td>
+                            <td>${escapeHtml(item.group)}</td>
                             <td>${item.total}</td>
                             <td>${item.percentage}%</td>
                             <td>${index + 1}</td>
@@ -128,7 +257,7 @@ function loadBarangayData(barangay) {
                 data.pwd.forEach(item => {
                     pwdTbody.innerHTML += `
                         <tr>
-                            <td>${item.pwd}</td>
+                            <td>${escapeHtml(item.pwd)}</td>
                             <td>${item.total}</td>
                             <td>${item.percentage}%</td>
                             <td>${item.rank}</td>
@@ -144,7 +273,7 @@ function loadBarangayData(barangay) {
                 data.heal.forEach(item => {
                     concernTbody.innerHTML += `
                         <tr>
-                            <td>${item.heal}</td>
+                            <td>${escapeHtml(item.heal)}</td>
                             <td>${item.total}</td>
                             <td>${item.wm}</td>
                             <td>${item.rank}</td>
@@ -152,6 +281,7 @@ function loadBarangayData(barangay) {
                     `;
                 });
             }
+            
             // ----------------- Toilet Type -----------------
             const toiletTbody = document.getElementById("toiletTable");
             if (toiletTbody && Array.isArray(data.toilet)) {
@@ -159,7 +289,7 @@ function loadBarangayData(barangay) {
                 data.toilet.forEach(item => {
                     toiletTbody.innerHTML += `
                         <tr>
-                            <td>${item.toilet}</td>
+                            <td>${escapeHtml(item.toilet)}</td>
                             <td>${item.total}</td>
                             <td>${item.percentage}%</td>
                             <td>${item.rank}</td>
@@ -167,6 +297,7 @@ function loadBarangayData(barangay) {
                     `;
                 });
             }
+            
             // ----------------- Waste Disposal -----------------
             const wasteTbody = document.getElementById("wasteTable");
             if (wasteTbody && Array.isArray(data.waste)) {
@@ -174,7 +305,7 @@ function loadBarangayData(barangay) {
                 data.waste.forEach(item => {
                     wasteTbody.innerHTML += `
                         <tr>
-                            <td>${item.waste}</td>
+                            <td>${escapeHtml(item.waste)}</td>
                             <td>${item.total}</td>
                             <td>${item.percentage}%</td>
                             <td>${item.rank}</td>
@@ -183,14 +314,14 @@ function loadBarangayData(barangay) {
                 });
             }
 
-             // ----------------- Main District Problem -----------------
+            // ----------------- Main District Problem -----------------
             const urgentTbody = document.getElementById("urgentTable");
             if (urgentTbody && Array.isArray(data.problem)) {
                 urgentTbody.innerHTML = "";
                 data.problem.forEach(item => {
                     urgentTbody.innerHTML += `
                         <tr>
-                            <td>${item.problem}</td>
+                            <td>${escapeHtml(item.problem)}</td>
                             <td>${item.total}</td>
                             <td>${item.percentage}%</td>
                             <td>${item.rank}</td>
@@ -198,16 +329,15 @@ function loadBarangayData(barangay) {
                     `;
                 });
             }
-            
 
-             // ----------------- Peace and order -----------------
+            // ----------------- Peace and order -----------------
             const peaceTbody = document.getElementById("peaceTable");
             if (peaceTbody && Array.isArray(data.peace)) {
                 peaceTbody.innerHTML = "";
                 data.peace.forEach(item => {
                     peaceTbody.innerHTML += `
                         <tr>
-                            <td>${item.peace}</td>
+                            <td>${escapeHtml(item.peace)}</td>
                             <td>${item.total}</td>
                             <td>${item.percentage}%</td>
                             <td>${item.rank}</td>
@@ -216,14 +346,14 @@ function loadBarangayData(barangay) {
                 });
             }
 
-            // -----------------  Tanod Training -----------------
+            // ----------------- Tanod Training -----------------
             const neccessityTrainingTbody = document.getElementById("neccessityTrainingTable");
             if (neccessityTrainingTbody && Array.isArray(data.necessity)) {
                 neccessityTrainingTbody.innerHTML = "";
                 data.necessity.forEach(item => {
                     neccessityTrainingTbody.innerHTML += `
                         <tr>
-                            <td>${item.necessity}</td>
+                            <td>${escapeHtml(item.necessity)}</td>
                             <td>${item.total}</td>
                             <td>${item.percentage}%</td>
                             <td>${item.rank}</td>
@@ -232,149 +362,175 @@ function loadBarangayData(barangay) {
                 });
             }
 
-                        // ----------------- TRAINING TABLE -----------------
-                const essentialTrainingbody = document.getElementById("essentialTrainingTable");
+            // ----------------- TRAINING TABLE -----------------
+            const essentialTrainingbody = document.getElementById("essentialTrainingTable");
+            if (essentialTrainingbody && Array.isArray(data.training_need)) {
+                essentialTrainingbody.innerHTML = "";
+                data.training_need.forEach(item => {
+                    essentialTrainingbody.innerHTML += `
+                        <tr>
+                            <td>${escapeHtml(item.training)}</td>
+                            <td>${item.responses ?? 0}</td>
+                            <td>${item.average_rank ?? 0}</td>
+                            <td>${item.rank ?? 0}</td>
+                        </tr>
+                    `;
+                });
+            }
 
-                if (essentialTrainingbody && Array.isArray(data.training_need)) {
-                    essentialTrainingbody.innerHTML = "";
+            // ----------------- seminar TABLE -----------------
+            const seminarbody = document.getElementById("seminarTable");
+            if (seminarbody && Array.isArray(data.seminar_need)) {
+                seminarbody.innerHTML = "";
+                data.seminar_need.forEach(item => {
+                    seminarbody.innerHTML += `
+                        <tr>
+                            <td>${escapeHtml(item.seminar)}</td>
+                            <td>${item.responses ?? 0}</td>
+                            <td>${item.average_rank ?? 0}</td>
+                            <td>${item.rank ?? 0}</td>
+                        </tr>
+                    `;
+                });
+            }
 
-                    data.training_need.forEach(item => {
-                        essentialTrainingbody.innerHTML += `
-                            <tr>
-                                <td>${item.training}</td>
-                                <td>${item.responses ?? 0}</td>
-                                <td>${item.average_rank ?? 0}</td>
-                                <td>${item.rank ?? 0}</td>
-                            </tr>
-                        `;
-                    });
-                }
-            
-                         // ----------------- seminar TABLE -----------------
-                const seminarbody = document.getElementById("seminarTable");
+            // ----------------- district table -----------------
+            const trainingTbody = document.getElementById("trainingTable");
+            if (trainingTbody && Array.isArray(data.dtr)) {
+                trainingTbody.innerHTML = "";
+                data.dtr.forEach(item => {
+                    trainingTbody.innerHTML += `
+                        <tr>
+                            <td>${escapeHtml(item.dtr)}</td>
+                            <td>${item.total}</td>
+                            <td>${item.percentage}%</td>
+                            <td>${item.rank}</td>
+                        </tr>
+                    `;
+                });
+            }
 
-                if (seminarbody && Array.isArray(data.seminar_need)) {
-                    seminarbody.innerHTML = "";
+            // ----------------- most desired religious activities -----------------
+            const desireTbody = document.getElementById("mostDesiredTable");
+            if (desireTbody && Array.isArray(data.religious_act)) {
+                desireTbody.innerHTML = "";
+                data.religious_act.forEach(item => {
+                    desireTbody.innerHTML += `
+                        <tr>
+                            <td>${escapeHtml(item.religious_act)}</td>
+                            <td>${item.total}</td>
+                            <td>${item.percentage}%</td>
+                            <td>${item.rank}</td>
+                        </tr>
+                    `;
+                });
+            }
 
-                    data.seminar_need.forEach(item => {
-                        seminarbody.innerHTML += `
-                            <tr>
-                                <td>${item.seminar}</td>
-                                <td>${item.responses ?? 0}</td>
-                                <td>${item.average_rank ?? 0}</td>
-                                <td>${item.rank ?? 0}</td>
-                            </tr>
-                        `;
-                    });
-                }
+            // ----------------- spiritual life priorities -----------------
+            const importantTbody = document.getElementById("spiritualLifeTable");
+            if (importantTbody && Array.isArray(data.ira)) {
+                importantTbody.innerHTML = "";
+                data.ira.forEach(item => {
+                    importantTbody.innerHTML += `
+                        <tr>
+                            <td>${escapeHtml(item.ira)}</td>
+                            <td>${item.total}</td>
+                            <td>${item.percentage}%</td>
+                            <td>${item.rank}</td>
+                        </tr>
+                    `;
+                });
+            }
 
-                        // ----------------- district table -----------------
-                    const trainingTbody = document.getElementById("trainingTable");
-                    if (trainingTbody && Array.isArray(data.dtr)) {
-                        trainingTbody.innerHTML = "";
-                        data.dtr.forEach(item => {
-                            trainingTbody.innerHTML += `
-                                <tr>
-                                    <td>${item.dtr}</td>
-                                    <td>${item.total}</td>
-                                    <td>${item.percentage}%</td>
-                                    <td>${item.rank}</td>
-                                </tr>
-                            `;
-                        });
-                    }
+            // ----------------- deepening spirituality -----------------
+            const deepTbody = document.getElementById("deepeningSpiritualityTable");
+            if (deepTbody && Array.isArray(data.growth)) {
+                deepTbody.innerHTML = "";
+                data.growth.forEach(item => {
+                    deepTbody.innerHTML += `
+                        <tr>
+                            <td>${escapeHtml(item.growth)}</td>
+                            <td>${item.total}</td>
+                            <td>${item.percentage}%</td>
+                            <td>${item.rank}</td>
+                        </tr>
+                    `;
+                });
+            }
 
-                      // ----------------- district table -----------------
-                    const desireTbody = document.getElementById("mostDesiredTable");
-                    if (desireTbody && Array.isArray(data.religious_act)) {
-                        desireTbody.innerHTML = "";
-                        data.religious_act.forEach(item => {
-                            desireTbody.innerHTML += `
-                                <tr>
-                                    <td>${item.religious_act}</td>
-                                    <td>${item.total}</td>
-                                    <td>${item.percentage}%</td>
-                                    <td>${item.rank}</td>
-                                </tr>
-                            `;
-                        });
-                    }
+            // ----------------- participation frequency -----------------
+            const participationTbody = document.getElementById("participationTable");
+            if (participationTbody && Array.isArray(data.freq)) {
+                participationTbody.innerHTML = "";
+                data.freq.forEach(item => {
+                    participationTbody.innerHTML += `
+                        <tr>
+                            <td>${escapeHtml(item.freq)}</td>
+                            <td>${item.total}</td>
+                            <td>${item.percentage}%</td>
+                            <td>${item.rank}</td>
+                        </tr>
+                    `;
+                });
+            }
 
-                    // ----------------- important religious activity table -----------------
-                    const importantTbody = document.getElementById("spiritualLifeTable");
-                    if (importantTbody && Array.isArray(data.ira)) {
-                        importantTbody.innerHTML = "";
-                        data.ira.forEach(item => {
-                            importantTbody.innerHTML += `
-                                <tr>
-                                    <td>${item.ira}</td>
-                                    <td>${item.total}</td>
-                                    <td>${item.percentage}%</td>
-                                    <td>${item.rank}</td>
-                                </tr>
-                            `;
-                        });
-                    }
-
-                     // ----------------- important religious activity table -----------------
-                    const deepTbody = document.getElementById("deepeningSpiritualityTable");
-                    if (deepTbody && Array.isArray(data.growth)) {
-                        deepTbody.innerHTML = "";
-                        data.growth.forEach(item => {
-                            deepTbody.innerHTML += `
-                                <tr>
-                                    <td>${item.growth}</td>
-                                    <td>${item.total}</td>
-                                    <td>${item.percentage}%</td>
-                                    <td>${item.rank}</td>
-                                </tr>
-                            `;
-                        });
-                    }
-                    
-                     // ----------------- important religious activity table -----------------
-                    const participationTbody = document.getElementById("participationTable");
-                    if (participationTbody && Array.isArray(data.freq)) {
-                        participationTbody.innerHTML = "";
-                        data.freq.forEach(item => {
-                            participationTbody.innerHTML += `
-                                <tr>
-                                    <td>${item.freq}</td>
-                                    <td>${item.total}</td>
-                                    <td>${item.percentage}%</td>
-                                    <td>${item.rank}</td>
-                                </tr>
-                            `;
-                        });
-                    }
-
-
-                       // ----------------- important religious activity table -----------------
-                    const barangayNeedsTbody = document.getElementById("otherBarangayNeedsTable");
-                    if (barangayNeedsTbody && Array.isArray(data.helps)) {
-                        barangayNeedsTbody.innerHTML = "";
-                        data.helps.forEach(item => {
-                            barangayNeedsTbody.innerHTML += `
-                                <tr>
-                                    <td>${item.helps}</td>
-                                    <td>${item.total}</td>
-                                    <td>${item.percentage}%</td>
-                                    <td>${item.rank}</td>
-                                </tr>
-                            `;
-                        });
-                    }
-
-
+            // ----------------- other barangay needs -----------------
+            const barangayNeedsTbody = document.getElementById("otherBarangayNeedsTable");
+            if (barangayNeedsTbody && Array.isArray(data.helps)) {
+                barangayNeedsTbody.innerHTML = "";
+                data.helps.forEach(item => {
+                    barangayNeedsTbody.innerHTML += `
+                        <tr>
+                            <td>${escapeHtml(item.helps)}</td>
+                            <td>${item.total}</td>
+                            <td>${item.percentage}%</td>
+                            <td>${item.rank}</td>
+                        </tr>
+                    `;
+                });
+            }
         })
-
-        
         .catch(error => {
-            console.error("Error loading data:", error);
-            const tables = ["religionTable","incomeTable","monthlyIncomeTable","educationTable","ageTable","pwdTable","healthTable","toiletTable"];
-            tables.forEach(id => {
-                const tbody = document.getElementById(id);
-                if(tbody) tbody.innerHTML = `<tr><td colspan="5">Error loading data</td></tr>`;
-            });
+            debugWarn("Error loading data:", error);
+            showErrorMessage("Failed to load data: " + error.message);
         });
+}
+
+// [Keep all your existing helper functions]
+function showLoadingState() {
+    const tables = ["religionTable","incomeTable","monthlyIncomeTable","educationTable","ageTable","pwdTable","healthTable","toiletTable","wasteTable","urgentTable","peaceTable","neccessityTrainingTable","essentialTrainingTable","seminarTable","trainingTable","mostDesiredTable","spiritualLifeTable","deepeningSpiritualityTable","participationTable","otherBarangayNeedsTable"];
+    tables.forEach(id => {
+        const tbody = document.getElementById(id);
+        if(tbody) tbody.innerHTML = `<tr><td colspan="5">Loading...</td></tr>`;
+    });
+}
+
+function showErrorMessage(message) {
+    const tables = ["religionTable","incomeTable","monthlyIncomeTable","educationTable","ageTable","pwdTable","healthTable","toiletTable","wasteTable","urgentTable","peaceTable","neccessityTrainingTable","essentialTrainingTable","seminarTable","trainingTable","mostDesiredTable","spiritualLifeTable","deepeningSpiritualityTable","participationTable","otherBarangayNeedsTable"];
+    tables.forEach(id => {
+        const tbody = document.getElementById(id);
+        if(tbody) tbody.innerHTML = `<tr><td colspan="5">Error: ${escapeHtml(message)}</td></tr>`;
+    });
+}
+
+function clearAllTables() {
+    const tables = ["religionTable","incomeTable","monthlyIncomeTable","educationTable","ageTable","pwdTable","healthTable","toiletTable","wasteTable","urgentTable","peaceTable","neccessityTrainingTable","essentialTrainingTable","seminarTable","trainingTable","mostDesiredTable","spiritualLifeTable","deepeningSpiritualityTable","participationTable","otherBarangayNeedsTable"];
+    tables.forEach(id => {
+        const tbody = document.getElementById(id);
+        if(tbody) tbody.innerHTML = `<tr><td colspan="5">Please select a barangay</td></tr>`;
+    });
+    
+    // Clear summary
+    document.getElementById("totalPopulation").innerText = "-";
+    document.getElementById("totalHousehold").innerText = "-";
+    document.getElementById("totalRespondents").innerText = "-";
+    document.getElementById("responsePercent").innerText = "-";
+    document.getElementById("barangayName").innerText = "-";
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }

@@ -216,7 +216,7 @@ async function handleResubmit() {
         const paths = [
             'update.php',
             './update.php',
-            '/coordinator/ReportManagement/actions/feedback/3ydp/update.php'
+            '/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/feedback/3ydp/update.php'
         ];
         
         let response = null;
@@ -259,7 +259,7 @@ async function handleResubmit() {
         if (result.success) {
             alert('Report updated successfully and status set to Pending!');
             // Redirect to pending reports page
-            window.location.href = '/coordinator/ReportManagement/ReportManagement.html';
+            window.location.href = '/SYSTEM_VERSION_!/coordinator/Report/Reports.html';
         } else {
             alert('Failed to update report: ' + (result.message || 'Unknown error'));
         }

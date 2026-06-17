@@ -12,10 +12,16 @@ body.dark-mode {
     --red-badge: #b04b4b;
 }
 
+html.dark-mode {
+    min-height: 100%;
+    background-color: #000000 !important;
+}
+
 /* =====================================================
    BODY, HEADER, SIDEBAR
 ===================================================== */
 body.dark-mode {
+    min-height: 100vh;
     background-color: var(--bg-pure-black) !important;
     color: var(--text-color);
     margin: 0;

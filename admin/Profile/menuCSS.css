@@ -1,58 +1,95 @@
 .menu-card {
-    width: 220px;
-    background: #ffffff;
+    width: 250px;
+    background: #ffffff !important;
+    color: #111111 !important;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    padding: 8px;
-    font-family: 'Segoe UI', sans-serif;
-    border: 1px solid #eee;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important;
+    padding: 16px 14px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    border: 1px solid #eeeeee !important;
+}
+
+body.dark-mode .menu-card {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: #e5e7eb !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28) !important;
 }
 
 .menu-item {
     display: flex;
     align-items: center;
-    padding: 10px 12px;
+    gap: 16px;
+    padding: 11px 12px;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s ease;
-    gap: 12px;
+    background: transparent !important;
 }
 
 .menu-item:hover {
-    background-color: #f5f5f5;
+    background-color: #f5f5f5 !important;
+}
+
+body.dark-mode .menu-item {
+    background: transparent !important;
+}
+
+body.dark-mode .menu-item:hover {
+    background-color: #f3f4f6 !important;
 }
 
 .menu-text {
-    font-size: 14px;
-    color: #333;
+    font-size: 16px;
+    color: #111111 !important;
     font-weight: 500;
+    background: transparent !important;
 }
 
-.icon-circle, .icon-logout {
-    width: 32px;
-    height: 32px;
+body.dark-mode .menu-text,
+body.dark-mode .menu-card span,
+body.dark-mode .menu-card div {
+    color: #111827 !important;
+}
+
+.icon-circle,
+.icon-logout {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .icon-circle {
-    background: #e0e7ff;
-    color: #4f46e5;
+    background: #e6ebff !important;
+    color: #000000 !important;
 }
 
 .icon-logout {
-    background: #fee2e2;
-    color: #ef4444;
+    background: #ffe1e1 !important;
+    color: #000000 !important;
 }
-/* Container for the switch */
+
+body.dark-mode .icon-circle {
+    background: #e6ebff !important;
+    color: #111827 !important;
+}
+
+body.dark-mode .icon-logout {
+    background: #ffe1e1 !important;
+    color: #111827 !important;
+}
+
 .switch {
     position: relative;
     display: inline-block;
-    width: 48px;
-    height: 24px;
+    width: 58px;
+    height: 30px;
+    min-width: 58px;
+    background: transparent !important;
 }
 
 .switch input {
@@ -61,48 +98,50 @@
     height: 0;
 }
 
-/* The Slider Track */
 .slider {
     position: absolute;
     cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc;
+    inset: 0;
+    background-color: #2c3e50 !important;
     transition: .4s;
     border-radius: 34px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 5px;
+    padding: 0 7px;
 }
 
-/* The circular knob */
 .slider:before {
     position: absolute;
     content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #ffffff !important;
     transition: .4s;
     border-radius: 50%;
     z-index: 2;
 }
 
-/* Icon positioning inside switch */
 .slider i {
-    font-size: 12px;
+    font-size: 13px;
     z-index: 1;
+    background: transparent !important;
 }
 
-.icon-sun { color: #f59e0b; }
-.icon-moon { color: #6366f1; }
+.icon-sun {
+    color: #f59e0b !important;
+}
 
-/* Checked State */
+.icon-moon {
+    color: #ffffff !important;
+}
+
 input:checked + .slider {
-    background-color: #2c3e50;
+    background-color: #2c3e50 !important;
 }
 
 input:checked + .slider:before {
-    transform: translateX(24px);
+    transform: translateX(28px);
 }

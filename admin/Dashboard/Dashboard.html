@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Data Overview Dashboard</title>
     <link rel="stylesheet" href="Dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +30,7 @@
 
         <!-- Header -->
         <iframe 
-            src="../Profile/profile.html" 
+             src="http://localhost/SYSTEM_VERSION_!/admin/Profile/profile.html"
             id="headerFrame"
             frameborder="0"
             scrolling="no"
@@ -23,7 +39,7 @@
 
         <!-- Sidebar -->
         <iframe 
-            src="../Nav/navigation.html" 
+            src="http://localhost/SYSTEM_VERSION_!/admin/Nav/navigation.html" 
             id="sidebarFrame"
             frameborder="0"
             scrolling="no"
@@ -41,7 +57,7 @@
 
                     <div class="stats-container">
 
-                        <button class="stat-card stat-button" onclick="window.location.href='./Pending/Pending.html'">
+                        <button class="stat-card stat-button" onclick="window.location.href='/SYSTEM_VERSION_!/admin/Dashboard/Pending/Pending.html'">
                             <h3>PENDING AND NEED FIXES REPORTS</h3>
                             <div class="stat-number" id="pendingCount">0</div>
                             <div class="stat-label">Requires Attention</div>
@@ -75,17 +91,19 @@
                 <div class="development-plan-section">
                     <div class="section-header">
                         <h2>DEPARTMENTS</h2>
-                        <button class="view-all-btn" onclick="window.location.href='./Departments/DEpartments.html'">
+                        <button class="view-all-btn" onclick="window.location.href='./Departments/Departments.html'">
                             <i class="fas fa-external-link-alt"></i> View All
                         </button>
                     </div>
                 </div>
+
+                
         </main>
     </div>
     
-    <script src="darkmode.js"></script>
-    <script src="Dashboard.js"></script>
-    <script src="barangay-table.js"></script>
+    <script src="/SYSTEM_VERSION_!/admin/Dashboard/darkmode.js"></script>
+    <script src="/SYSTEM_VERSION_!/admin/Dashboard/Dashboard.js"></script>
+    <script src="/SYSTEM_VERSION_!/admin/Dashboard/barangay-table.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     

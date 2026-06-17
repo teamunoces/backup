@@ -102,3 +102,48 @@ body.dark-mode .doc-header td:nth-child(2) {
 body.dark-mode .doc-header td.value input:disabled {
     color: #b0b0b0; /* Dimmed text for disabled fields */
 }
+/* ===== FIX WHITE GAPS ===== */
+
+html.dark-mode,
+body.dark-mode{
+    background:#121212 !important;
+}
+
+/* Remove white strip below fixed header and beside sidebar */
+body.dark-mode::before{
+    content:"";
+    position:fixed;
+    top:60px;              /* header height */
+    left:100px;            /* sidebar width */
+    width:calc(100% - 100px);
+    height:calc(100vh - 60px);
+    background:#121212 !important;
+    z-index:-1;
+    pointer-events:none;
+}
+
+/* Remove hidden wrapper white backgrounds */
+body.dark-mode .main,
+body.dark-mode .main-content,
+body.dark-mode .content,
+body.dark-mode .content-wrapper,
+body.dark-mode .wrapper,
+body.dark-mode .dashboard-wrapper,
+body.dark-mode .page-wrapper{
+    background:transparent !important;
+}
+
+/* Keep frames dark */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame{
+    background:#1a1a1a !important;
+}
+
+/* Mobile fix */
+@media (max-width:768px){
+
+    body.dark-mode::before{
+        left:0;
+        width:100%;
+    }
+}

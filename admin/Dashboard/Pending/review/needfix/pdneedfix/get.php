@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 $servername = "localhost";
 $username = "root"; 
 $password = ""; 
-$dbname = "ces_reports_db";
+$dbname = "ces_database";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -29,7 +29,7 @@ if ($rid <= 0) {
 
 try {
     // ===== Fetch main report data =====
-    $main_sql = "SELECT * FROM pd_main WHERE id = ?";
+    $main_sql = "SELECT * FROM report_pd_main WHERE id = ?";
     $stmt = $conn->prepare($main_sql);
     $stmt->bind_param("i", $rid);
     $stmt->execute();
@@ -37,7 +37,7 @@ try {
     if (!$main_result) $main_result = null;
 
     // ===== Fetch related rows =====
-    $details_sql = "SELECT * FROM pd_detail WHERE report_id = ?";
+    $details_sql = "SELECT * FROM report_pd_detail WHERE report_id = ?";
     $stmt_details = $conn->prepare($details_sql);
     $stmt_details->bind_param("i", $rid);
     $stmt_details->execute();

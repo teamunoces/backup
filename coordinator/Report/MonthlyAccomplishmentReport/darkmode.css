@@ -177,3 +177,49 @@ body.dark-mode .table_form .delete-row-btn {
     border: 1px dashed #444 !important;
     margin-bottom: 10px;
 }
+/* ===== FIX WHITE GAPS FOR THIS PAGE ===== */
+
+/* Entire page background */
+html.dark-mode,
+body.dark-mode {
+    background: #000000 !important;
+}
+
+/* Remove white strip beside sidebar and below header */
+body.dark-mode::before {
+    content: "";
+    position: fixed;
+    top: 60px;          /* header height */
+    left: 100px;        /* sidebar width */
+    width: calc(100% - 100px);
+    height: calc(100vh - 60px);
+    background: #000000 !important;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Remove hidden white wrapper backgrounds */
+body.dark-mode .main,
+body.dark-mode .main-content,
+body.dark-mode .content,
+body.dark-mode .content-wrapper,
+body.dark-mode .page-wrapper,
+body.dark-mode .dashboard-main,
+body.dark-mode .wrapper {
+    background: transparent !important;
+}
+
+/* Keep frames dark */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame {
+    background: #1a1a1a !important;
+}
+
+/* Mobile fix */
+@media (max-width:768px){
+
+    body.dark-mode::before{
+        left:0;
+        width:100%;
+    }
+}

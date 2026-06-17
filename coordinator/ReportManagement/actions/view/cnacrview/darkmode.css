@@ -155,3 +155,96 @@ body.dark-mode .form-group {
     background-color: transparent;
     color: #e0e0e0;
 }
+/* ===== FIX WHITE GAPS ===== */
+
+html.dark-mode,
+body.dark-mode{
+    background:#121212 !important;
+}
+
+/* Remove white gap below header and beside sidebar */
+body.dark-mode::before{
+    content:"";
+    position:fixed;
+    top:60px;                 /* header height */
+    left:100px;               /* sidebar width */
+    width:calc(100% - 100px);
+    height:calc(100vh - 60px);
+    background:#121212 !important;
+    z-index:-1;
+    pointer-events:none;
+}
+
+/* Remove hidden white backgrounds */
+body.dark-mode .main,
+body.dark-mode .main-content,
+body.dark-mode .content,
+body.dark-mode .content-wrapper,
+body.dark-mode .dashboard-wrapper,
+body.dark-mode .page-wrapper,
+body.dark-mode .wrapper,
+body.dark-mode .container{
+    background:transparent !important;
+}
+
+/* Keep dark frames */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame{
+    background:#1a1a1a !important;
+}
+
+/* Mobile fix */
+@media (max-width:768px){
+
+    body.dark-mode::before{
+        left:0;
+        width:100%;
+    }
+}
+
+/* ===== FIX WHITE GAPS ===== */
+
+html.dark-mode,
+body.dark-mode{
+    background:#1a1a1a !important;
+}
+
+/* Remove white strip below header and beside sidebar */
+body.dark-mode::before{
+    content:"";
+    position:fixed;
+    top:60px;                 /* header height */
+    left:100px;               /* sidebar width */
+    width:calc(100% - 100px);
+    height:calc(100vh - 60px);
+    background:#1a1a1a !important;
+    z-index:-1;
+    pointer-events:none;
+}
+
+/* Remove hidden white wrapper backgrounds */
+body.dark-mode .main,
+body.dark-mode .main-content,
+body.dark-mode .content,
+body.dark-mode .content-wrapper,
+body.dark-mode .dashboard-wrapper,
+body.dark-mode .page-wrapper,
+body.dark-mode .wrapper,
+body.dark-mode .container{
+    background:transparent !important;
+}
+
+/* Keep iframe areas dark */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame{
+    background:#1a1a1a !important;
+}
+
+/* Mobile fix */
+@media (max-width:768px){
+
+    body.dark-mode::before{
+        left:0;
+        width:100%;
+    }
+}

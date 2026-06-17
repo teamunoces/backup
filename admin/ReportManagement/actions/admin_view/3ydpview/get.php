@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 
-$conn = new mysqli("localhost", "root", "", "ces_reports_db");
+$conn = new mysqli("localhost", "root", "", "ces_database");
 if ($conn->connect_error) {
     echo json_encode(["error" => "Database connection failed"]);
     exit;
@@ -17,7 +17,7 @@ if (!$id) {
 }
 
 // Main report
-$stmt = $conn->prepare("SELECT * FROM `3ydp` WHERE id = ?");
+$stmt = $conn->prepare("SELECT * FROM `report_3ydp` WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $project = $stmt->get_result()->fetch_assoc();
@@ -27,7 +27,7 @@ if (!$project) {
 }
 
 // Programs
-$stmt2 = $conn->prepare("SELECT * FROM `3ydp_programs` WHERE report_id = ?");
+$stmt2 = $conn->prepare("SELECT * FROM `report_3ydp_programs` WHERE report_id = ?");
 $stmt2->bind_param("i", $id);
 $stmt2->execute();
 $result2 = $stmt2->get_result();

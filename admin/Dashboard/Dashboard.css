@@ -17,7 +17,7 @@ body{
    LAYOUT VARIABLES
 ========================================================= */
 :root{
-    --sidebar-width:150px;
+    --sidebar-width:100px;
     --header-height:60px;
 }
 
@@ -419,5 +419,59 @@ body.dark-mode .dashboard-main-content {
 
     .dashboard-header h1{
         font-size:1.3rem;
+    }
+}
+
+/* =========================================================
+   FINAL RESPONSIVE LAYOUT OVERRIDES
+========================================================= */
+@media (min-width: 993px) {
+    :root {
+        --sidebar-width: 100px;
+    }
+
+    .dashboard-main-content {
+        width: calc(100% - var(--sidebar-width));
+        margin-left: var(--sidebar-width);
+        margin-top: var(--header-height);
+        padding: clamp(20px, 2.2vw, 34px);
+    }
+
+    .container {
+        max-width: 1320px;
+    }
+}
+
+@media (max-width: 1366px) and (min-width: 993px) {
+    .dashboard-main-content {
+        padding: 22px;
+    }
+
+    .dashboard-row {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .stats-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .community-assessment-section .chart-container {
+        height: 340px;
+    }
+}
+
+@media (max-width: 992px) {
+    .dashboard-main-content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .assessment-table {
+        min-width: 680px;
+    }
+
+    .community-assessment-section,
+    .development-plan-section {
+        overflow-x: auto;
     }
 }

@@ -171,7 +171,8 @@ function addTableRow(tbody, rowData = {}) {
     
     cellValues.forEach(cellValue => {
         const td = document.createElement('td');
-        td.contentEditable = 'true';
+        td.contentEditable = 'false';
+        td.classList.add('read-only-cell');
         td.textContent = cellValue;
         tr.appendChild(td);
     });

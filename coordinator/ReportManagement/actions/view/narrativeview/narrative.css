@@ -1,0 +1,478 @@
+/* ===== Frames (Layout Shell) ===== */
+#sidebarFrame {
+    width: 100px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 100px;
+    width: calc(100% - 100px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column; /* ✅ IMPORTANT: stack vertically */
+    align-items: center;    /* center both elements */
+    padding: 40px 20px;
+}
+
+/* ===== Admin Comment (FIXED) ===== */
+.admin-comment {
+    width: 850px;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-top: 50px;   /* below header */
+    margin-bottom: 20px;
+}
+
+/* ===== Admin Textarea ===== */
+#admincomment {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    font-style: italic;
+    padding: 20px;
+    font-family: inherit;
+    border-radius: 4px 12px 12px 4px;
+    resize: none;
+}
+
+/* ===== Report Container ===== */
+.report-container {
+    background-color: white;
+    max-width: 850px;
+    width: 100%;
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 0; /* ✅ remove extra gap */
+    pointer-events: none;
+}
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* ===== Office Title ===== */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+/* Roman Numeral List */
+.report-list {
+    list-style-type: upper-roman;
+    padding-left: 40px;
+}
+
+.report-list li {
+    margin-bottom: 30px;
+}
+
+.report-list .label,
+.approvals-container .label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+/* Textarea */
+.line-input {
+    width: 100%;
+    border: none;
+    background: white;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 12px 0;
+    resize: none;
+    overflow-y: hidden;
+    min-height: 60px;
+    line-height: 1.5;
+    font-weight: 300;
+    outline: none;
+    box-shadow: none;
+}
+
+.line-input:focus {
+    border: none;
+    outline: none;
+    background: white;
+    box-shadow: none;
+}
+
+.line-input::placeholder {
+    color: #999;
+    font-style: italic;
+    font-weight: 300;
+}
+
+/* ===== BUTTONS - Positioned Above Container ===== */
+.buttons {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    z-index: 1001;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons button[onclick] {
+    background: linear-gradient(135deg, #59AF29 0%, #254911 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(37, 73, 17, 0.2);
+}
+
+.buttons button[onclick]:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 73, 17, 0.3);
+}
+
+.buttons a {
+    text-decoration: none;
+}
+
+.buttons a button {
+    background-color: transparent;
+    color: #254911;
+    border: 2px solid #59AF29;
+    box-shadow: none;
+}
+
+.buttons a button:hover {
+    background-color: #f0fdf4;
+    border-color: #254911;
+    transform: translateY(-2px);
+}
+
+.buttons button:active {
+    transform: scale(0.96);
+}
+
+
+/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+.approvals-container {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #000;
+  margin-top: 80px;
+}
+
+.approval-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.signature-group {
+  width: 35%; /* Adjust width to match the line lengths in your image */
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 35px; /* Creates space for the signature signature */
+}
+
+.signature-line {
+  border-bottom: 1.5px solid black;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-size: 14px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.left-align {
+  text-align: left;
+  width: 100%;
+}
+
+/* Centered Layout for VP and President */
+.approval-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-block {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.name-underlined {
+  font-weight: bold;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-size: 16px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+/* ===== Document Info Table ===== */
+.document-info {
+    margin-top: 50px;
+    width: 30%;
+}
+
+.doc-header {
+    width: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    border: 1px solid #d1d1d1;
+}
+
+.doc-header td {
+    border: 1px solid #d1d1d1;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.doc-header td.label {
+    background-color: #002060;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
+    font-size: 11px;
+    padding: 6px 8px;
+    line-height: 1.2;
+}
+
+.doc-header td:nth-child(2) {
+    width: 14px;
+    padding: 0 1px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    background: #fff;
+    color: #000;
+}
+
+.doc-header td.value {
+    padding: 6px 10px;
+    min-width: 190px;
+    text-align: left;
+    vertical-align: middle;
+    background: #fff;
+    color: #000;
+    white-space: nowrap;
+}
+
+.doc-header td.value input,
+.doc-header td.value p {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.doc-header td.value input:disabled {
+    color: black;
+    cursor: default;
+}
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+
+
+/* ===== Laptop / Monitor Responsiveness ===== */
+:root {
+    --sidebar-width: 100px;
+    --header-height: 60px;
+    --page-gutter: clamp(16px, 3vw, 40px);
+    --report-max-width: 850px;
+}
+
+body {
+    margin-left: var(--sidebar-width);
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+#sidebarFrame { width: var(--sidebar-width); }
+#headerFrame { left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); }
+
+.report-container,
+.admin-comment {
+    width: var(--report-max-width);
+    max-width: calc(100vw - var(--sidebar-width) - (var(--page-gutter) * 2));
+    box-sizing: border-box;
+}
+
+.college-info { min-width: 0; }
+
+@media (min-width: 1440px) {
+    :root { --page-gutter: 48px; }
+}
+
+@media (max-width: 1200px) {
+    :root { --page-gutter: 24px; }
+    .report-container { padding: 40px; }
+    .logo-left, .logo-left2, .logos-right img { height: 70px; }
+    .college-info h1 { font-size: 23px; }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame { transform: translateX(-100%); }
+    #headerFrame { left: 0; width: 100%; }
+    body { margin-left: 0; padding: calc(var(--header-height) + 20px) var(--page-gutter) 30px var(--page-gutter); }
+    .report-container, .admin-comment { width: calc(100vw - (var(--page-gutter) * 2)); }
+}
+
+.approvals-container,
+.approvals-container * {
+    font-weight: bold !important;
+}
+
+.approvals-container .signature-line {
+    display: inline-block;
+    width: auto;
+    min-width: 180px;
+    max-width: 100%;
+    padding: 0 12px 2px 12px;
+    border-bottom: 1.5px solid #000 !important;
+    text-align: inherit;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}

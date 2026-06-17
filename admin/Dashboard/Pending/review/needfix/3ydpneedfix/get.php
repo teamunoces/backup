@@ -3,7 +3,7 @@
 error_reporting(0); 
 header('Content-Type: application/json');
 
-$conn = new mysqli("localhost", "root", "", "ces_reports_db");
+$conn = new mysqli("localhost", "root", "", "ces_database");
 
 if ($conn->connect_error) {
     echo json_encode(["error" => "Database connection failed"]);
@@ -20,9 +20,8 @@ if (!in_array($table, $allowedTables)) {
     exit;
 }
 
-// Inside the if ($table === '3ydp') block of get.php
 if ($table === '3ydp') {
-    $stmt = $conn->prepare("SELECT * FROM `3ydp` WHERE id = ?");
+    $stmt = $conn->prepare("SELECT * FROM `report_3ydp` WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result()->fetch_assoc();
@@ -32,7 +31,7 @@ if ($table === '3ydp') {
 
 } elseif ($table === '3ydp_programs') {
     // Updated from '3ydp_id' to 'report_id' to match your database
-    $stmt = $conn->prepare("SELECT * FROM `3ydp_programs` WHERE report_id = ?");
+    $stmt = $conn->prepare("SELECT * FROM `report_3ydp_programs` WHERE report_id = ?");
     
     if (!$stmt) {
         echo json_encode(["error" => "Prepare failed: " . $conn->error]);

@@ -1,0 +1,242 @@
+/* ================= DARK MODE STYLES ================= */
+/* Toggle this class on body to enable dark mode */
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* ===== Frames (Layout Shell) ===== */
+body.dark-mode #sidebarFrame {
+    background: #1e1e1e;
+    border-right: 1px solid #333;
+}
+
+body.dark-mode #headerFrame {
+    background: #1e1e1e;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    border-bottom: 1px solid #333;
+}
+
+/* ===== Header Section ===== */
+body.dark-mode .college-info h1 {
+    color: #7aa2f7;
+}
+
+body.dark-mode .college-info p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .college-info a {
+    color: #7aa2f7;
+}
+
+/* ===== Office Title ===== */
+body.dark-mode .office-title {
+    color: #c0c0c0;
+}
+
+body.dark-mode .double-line {
+    border-top-color: #7aa2f7;
+}
+
+/* ===== Evaluation Container ===== */
+body.dark-mode .evaluation-container {
+    background: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+body.dark-mode header h1 {
+    color: #e0e0e0;
+}
+
+/* ===== Input Fields ===== */
+body.dark-mode .full-line,
+body.dark-mode .sig-input,
+body.dark-mode .date-input {
+    border-bottom-color: #555;
+    background-color: transparent;
+    color: #e0e0e0;
+}
+
+body.dark-mode .full-line:focus,
+body.dark-mode .sig-input:focus,
+body.dark-mode .date-input:focus {
+    border-bottom-color: #7aa2f7;
+    outline: none;
+}
+
+/* ===== Checkbox Grid ===== */
+body.dark-mode .checkbox-grid label {
+    color: #e0e0e0;
+}
+
+body.dark-mode input[type="checkbox"] {
+    accent-color: #7aa2f7;
+}
+
+/* ===== Tables ===== */
+body.dark-mode table,
+body.dark-mode th,
+body.dark-mode td {
+    border-color: #444;
+}
+
+body.dark-mode .evaluation-table thead th {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+body.dark-mode td {
+    background-color: #1e1e1e;
+    color: #d0d0d0;
+}
+
+body.dark-mode .category-row {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+}
+
+body.dark-mode tr td em {
+    color: #a0a0a0;
+}
+
+/* ===== Radio Buttons ===== */
+body.dark-mode .radio-cell input {
+    accent-color: #7aa2f7;
+}
+
+/* ===== Action Buttons ===== */
+body.dark-mode .btn-submit {
+    background-color: #0069d9;
+}
+
+body.dark-mode .btn-submit:hover {
+    background-color: #0056b3;
+}
+
+body.dark-mode .btn-reset {
+    background-color: #5a6268;
+}
+
+body.dark-mode .btn-reset:hover {
+    background-color: #4e555b;
+}
+
+body.dark-mode .btn-print {
+    background-color: #1e7e34;
+}
+
+body.dark-mode .btn-print:hover {
+    background-color: #166b2c;
+}
+
+/* ===== Submit Button (Green Gradient) ===== */
+body.dark-mode .submit-button {
+    background: linear-gradient(to right, #4a9e1f, #2d551c);
+    border-color: #555;
+}
+
+body.dark-mode .submit-button:hover {
+    opacity: 0.9;
+}
+
+/* ===== Placeholder Text ===== */
+body.dark-mode input::placeholder,
+body.dark-mode .full-line::placeholder,
+body.dark-mode .sig-input::placeholder {
+    color: #777;
+}
+
+/* ===== Frame Content (for iframe documents) ===== */
+.dark-mode,
+.dark-mode body {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+iframe body.dark-mode {
+    background-color: #121212;
+}
+
+/* ===== Print Override for Dark Mode ===== */
+@media print {
+    body.dark-mode {
+        background-color: white;
+        color: black;
+    }
+    
+    body.dark-mode .evaluation-container {
+        background: white;
+        box-shadow: none;
+    }
+    
+    body.dark-mode table,
+    body.dark-mode th,
+    body.dark-mode td {
+        border-color: black;
+    }
+    
+    body.dark-mode .evaluation-table thead th {
+        background-color: #f0f0f0;
+        color: black;
+    }
+    
+    body.dark-mode td {
+        background-color: white;
+        color: black;
+    }
+    
+    body.dark-mode .category-row {
+        background-color: #e9e9e9;
+        color: black;
+    }
+    
+    body.dark-mode .sig-input,
+    body.dark-mode .full-line {
+        border-bottom-color: black;
+    }
+}
+
+/* ===== Scrollbar Styling for Dark Mode ===== */
+body.dark-mode::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ===== Focus Outlines for Accessibility ===== */
+body.dark-mode button:focus,
+body.dark-mode input:focus,
+body.dark-mode .full-line:focus,
+body.dark-mode .sig-input:focus,
+body.dark-mode .date-input:focus {
+    outline: 2px solid #7aa2f7;
+    outline-offset: 1px;
+}
+
+/* ===== Link Styling ===== */
+body.dark-mode a {
+    color: #7aa2f7;
+}
+
+body.dark-mode a:visited {
+    color: #bb9af7;
+}
+
+/* ===== Horizontal Rule ===== */
+body.dark-mode hr {
+    border-color: #444;
+}

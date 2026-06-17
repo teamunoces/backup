@@ -6,13 +6,14 @@ $barangay = isset($_GET['barangay']) ? htmlspecialchars($_GET['barangay']) : "ac
 <html lang="ceb">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Porma sa Pag-ila sa Panginahanglanon sa Komunidad</title>
     <link rel="stylesheet" href="survey.css">
 </head>
 <body>
      <!-- Header -->
     <iframe 
-        src="../header/profile.php" 
+        src="/SYSTEM_VERSION_!/encoder/header/profile.php" 
         id="headerFrame"
         frameborder="0"
         scrolling="no"

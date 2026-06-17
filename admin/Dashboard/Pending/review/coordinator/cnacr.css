@@ -19,7 +19,7 @@ body {
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -35,7 +35,7 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
     width: calc(100% - 150px);
     z-index: 1000;
@@ -54,6 +54,10 @@ body {
 
 .logo-left {
     height: 90px;
+    width: auto;
+}
+.logo-left2 {
+    height: 80px;
     width: auto;
 }
 
@@ -149,6 +153,7 @@ h1 {
 
 .input-box {
     padding: 8px;
+    pointer-events: none;
 }
 
 .bg-gray {
@@ -278,7 +283,7 @@ footer {
     outline: none;
     transition: all 0.3s ease;
     background-color: #fafafa;
-    pointer-events: none;
+
 }
 
 #admincomment:focus {
@@ -407,3 +412,16 @@ footer {
         padding: 8px 20px;
     }
 }
+/* ===== Laptop / PC Responsive Layout ===== */
+@media (min-width: 769px) {
+    body { margin-left: 0; padding: 80px clamp(18px, 2vw, 32px) 40px calc(100px + clamp(18px, 2vw, 32px)); display: block; }
+    .report-container { width: min(100%, 1100px); margin: 0 auto; box-sizing: border-box; overflow-x: auto; }
+}
+@media (max-width: 1366px) and (min-width: 769px) {
+    .report-container { max-width: 1000px; padding: 32px; }
+    .header-grid { grid-template-columns: 130px minmax(0, 1fr) 130px minmax(0, 1fr); }
+    .logo-left { height: 76px; }
+    .logo-left2, .logos-right img { height: 68px; }
+    .college-info h1 { font-size: 23px; }
+}
+@media (max-width: 1100px) and (min-width: 769px) { .header-grid { grid-template-columns: 130px minmax(0, 1fr); } }

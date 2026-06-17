@@ -1,6 +1,6 @@
 /* ===== 1. VARIABLES & RESET ===== */
 :root {
-  --sidebar-w: 150px; 
+  --sidebar-w: 100px; 
   --header-h: 60px;
   --primary-color: #59af29;
   --secondary-color: #254911;
@@ -79,12 +79,101 @@ body {
   opacity: 0.9;
 }
 
-.table-card select {
-  background: rgba(0, 0, 0, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+#barangaySelect,
+#yearSelect {
+  color-scheme: dark;
+  background: #1f5f13 !important;
+  background-color: #1f5f13 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.42) !important;
   padding: 10px;
   border-radius: 4px;
+}
+
+#barangaySelect option,
+#yearSelect option {
+  background: #1f5f13 !important;
+  background-color: #1f5f13 !important;
+  color: #ffffff !important;
+}
+
+#barangaySelect option:checked,
+#yearSelect option:checked {
+  background: #59af29 !important;
+  background-color: #59af29 !important;
+  color: #ffffff !important;
+}
+
+.native-select-hidden {
+  display: none !important;
+}
+
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 42px 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 4px;
+  background: #1f5f13;
+  color: #ffffff;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+  position: relative;
+}
+
+.custom-select-trigger::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  transform: translateY(-65%) rotate(45deg);
+}
+
+.custom-select-list {
+  display: none;
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: 360px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: #1f5f13;
+  box-shadow: 0 10px 24px rgba(18, 63, 8, 0.35);
+}
+
+.custom-select.open .custom-select-list {
+  display: block;
+}
+
+.custom-select-option {
+  display: block;
+  width: 100%;
+  padding: 9px 14px;
+  border: 0;
+  background: #1f5f13;
+  color: #ffffff;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.custom-select-option:hover,
+.custom-select-option:focus {
+  background: #59af29;
+  color: #ffffff;
+  outline: none;
 }
 
 .button-container {

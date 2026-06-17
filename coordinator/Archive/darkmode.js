@@ -1,5 +1,6 @@
 function applyDarkMode(enable) {
     // Toggle dark mode on main document
+    document.documentElement.classList.toggle('dark-mode', enable);
     document.body.classList.toggle('dark-mode', enable);
 
     // Toggle dark mode for iframes if accessible
@@ -10,10 +11,12 @@ function applyDarkMode(enable) {
 
         // Wait until iframe content is ready
         if (frame.contentDocument?.body) {
+            frame.contentDocument.documentElement.classList.toggle('dark-mode', enable);
             frame.contentDocument.body.classList.toggle('dark-mode', enable);
         } else {
             frame.addEventListener('load', () => {
                 if (frame.contentDocument?.body) {
+                    frame.contentDocument.documentElement.classList.toggle('dark-mode', enable);
                     frame.contentDocument.body.classList.toggle('dark-mode', enable);
                 }
             });

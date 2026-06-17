@@ -1,4 +1,16 @@
 /* ===== Profile Functions ===== */
+const PROFILE_ENDPOINT = "/SYSTEM_VERSION_!/coordinator/Profile/edit/get.php";
+const DEFAULT_PROFILE_PICTURE = "/SYSTEM_VERSION_!/login/images/ces.png";
+
+function updateHeaderProfilePicture(src) {
+    const parentDoc = parent.document;
+    const profilePicture = parentDoc.getElementById("profilePicture") || parentDoc.querySelector(".admin-logo");
+
+    if (profilePicture && src) {
+        profilePicture.src = src;
+    }
+}
+
 async function injectProfileCSS() {
     try {
         const cssText = `
@@ -67,6 +79,66 @@ async function injectProfileCSS() {
         .profile-modal input[readonly] {
             background-color: #f5f5f5;
             cursor: not-allowed;
+        }
+
+        .profile-picture-editor {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .profile-picture-preview {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #55a630;
+            background: #f7f7f7;
+            flex: 0 0 auto;
+        }
+
+        .profile-picture-input {
+            flex: 1;
+        }
+
+        .profile-picture-input input[type="file"] {
+            padding: 8px;
+            background: #fff;
+        }
+
+        .profile-picture-input input[type="file"]::file-selector-button {
+            background: #59AF29;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-right: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .profile-picture-input input[type="file"]::file-selector-button:hover {
+            background: #254911;
+        }
+
+        .profile-picture-input input[type="file"]::-webkit-file-upload-button {
+            background: #59AF29;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-right: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .profile-picture-input input[type="file"]::-webkit-file-upload-button:hover {
+            background: #254911;
         }
 
         /* Style for info display (non-editable fields) */
@@ -147,6 +219,14 @@ function openProfile() {
                 
                 <!-- Hidden ID field (kept for form data) -->
                 <input type="hidden" id="userId">
+
+                <label>Profile Picture</label>
+                <div class="profile-picture-editor">
+                    <img id="profilePicturePreview" class="profile-picture-preview" src="${DEFAULT_PROFILE_PICTURE}" alt="Profile picture preview">
+                    <div class="profile-picture-input">
+                        <input id="profilePictureInput" type="file" accept="image/png,image/jpeg,image/jpg,image/webp,image/gif">
+                    </div>
+                </div>
                 
                 <label>Username</label><input id="username" type="text">
                 <label>Name</label><input id="name" type="text">
@@ -154,10 +234,10 @@ function openProfile() {
                 <label>Password</label><input id="password" type="password" placeholder="Leave blank to keep current">
                 
                 
-                <inputtype="hidden" id="role">
+                <input type="hidden" id="role">
 
                
-                <input type="hidden"" id="department">
+                <input type="hidden" id="department">
                 
                 <button id="saveProfile">Save Changes</button>
                 <button id="cancelProfile">Cancel</button>
@@ -169,6 +249,14 @@ function openProfile() {
         overlay.querySelector("#cancelProfile").addEventListener("click", () => {
             overlay.style.display = "none";
         });
+
+        overlay.querySelector("#profilePictureInput").addEventListener("change", event => {
+            const file = event.target.files[0];
+
+            if (file) {
+                overlay.querySelector("#profilePicturePreview").src = URL.createObjectURL(file);
+            }
+        });
     }
 
     // Show overlay
@@ -176,9 +264,10 @@ function openProfile() {
 
     // Clear password field
     overlay.querySelector("#password").value = "";
+    overlay.querySelector("#profilePictureInput").value = "";
 
     // Fetch profile data
-    fetch("/admin/Profile/edit/get.php")
+    fetch(PROFILE_ENDPOINT)
         .then(res => res.json())
         .then(data => {
             if (data.status === "error") {
@@ -192,6 +281,8 @@ function openProfile() {
             overlay.querySelector("#email").value = data.email;      
             overlay.querySelector("#role").value = data.role;
             overlay.querySelector("#department").value = data.department;
+            overlay.querySelector("#profilePicturePreview").src = data.profile_picture || DEFAULT_PROFILE_PICTURE;
+            updateHeaderProfilePicture(data.profile_picture || DEFAULT_PROFILE_PICTURE);
         })
         .catch(err => {
             console.error("Error fetching profile:", err);
@@ -200,26 +291,32 @@ function openProfile() {
 
     // Save button functionality
     overlay.querySelector("#saveProfile").onclick = () => {
-        const formData = {
-            id: overlay.querySelector("#userId").value,
-            username: overlay.querySelector("#username").value,
-            name: overlay.querySelector("#name").value,
-            email: overlay.querySelector("#email").value,
-            password: overlay.querySelector("#password").value,
-            role: overlay.querySelector("#role").value,
-            department: overlay.querySelector("#department").value
-            // Role and department are intentionally omitted - they won't be updated
-        };
+        const formData = new FormData();
+        const selectedPicture = overlay.querySelector("#profilePictureInput").files[0];
 
-        fetch("/admin/Profile/edit/get.php", {
+        formData.append("id", overlay.querySelector("#userId").value);
+        formData.append("username", overlay.querySelector("#username").value);
+        formData.append("name", overlay.querySelector("#name").value);
+        formData.append("email", overlay.querySelector("#email").value);
+        formData.append("password", overlay.querySelector("#password").value);
+        formData.append("role", overlay.querySelector("#role").value);
+        formData.append("department", overlay.querySelector("#department").value);
+
+        if (selectedPicture) {
+            formData.append("profile_picture", selectedPicture);
+        }
+
+        fetch(PROFILE_ENDPOINT, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
+            body: formData
         })
         .then(res => res.json())
         .then(resp => {
             alert(resp.message);
             if (resp.status === "success") {
+                if (resp.profile_picture) {
+                    updateHeaderProfilePicture(resp.profile_picture);
+                }
                 overlay.style.display = "none";
                 // Optionally refresh the page or update UI
                 location.reload();

@@ -1,7 +1,7 @@
 /* ===== Layout Frames ===== */
 
 #sidebarFrame{
-    width:150px;
+    width:100px;
     height:100vh;
     border:none;
     position:fixed;
@@ -16,8 +16,8 @@
     border:none;
     position:fixed;
     top:0;
-    left:150px;
-    width:calc(100% - 150px);
+    right:0; /* Changed from left:100px to right:0 */
+    width:calc(100% - 100px); /* Adjusted width calculation */
     z-index:1000;
     background:#fff;
     box-shadow:0 2px 6px rgba(0,0,0,0.1);
@@ -96,6 +96,301 @@ body{
     height:400px;
 }
 
+/* ===== 3YDP Progress Dashboard ===== */
+
+.development-plan-section{
+    margin-top:30px;
+    background:#fff;
+    border:1px solid #dfe7dc;
+    border-radius:10px;
+    padding:22px;
+    box-shadow:0 10px 24px rgba(37,73,17,.08);
+    overflow:hidden;
+}
+
+.plan-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    margin-bottom:20px;
+    padding-bottom:14px;
+    border-bottom:1px solid #e7eee3;
+}
+
+.plan-toolbar h2{
+    font-size:1.18rem;
+    color:#254911;
+    letter-spacing:.2px;
+}
+
+.plan-year-filter{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:700;
+}
+
+.plan-year-filter select{
+    min-height:34px;
+    padding:6px 12px;
+    border:1px solid #cbd8c5;
+    border-radius:6px;
+    background:#fff;
+    color:#333;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.plan-status-stage{
+    position:relative;
+    padding:18px 10px 14px;
+    border-radius:10px;
+    background:linear-gradient(180deg,#fbfdf9 0%,#ffffff 100%);
+    border:1px solid #edf2ea;
+    margin-bottom:18px;
+}
+
+.plan-status-title{
+    width:138px;
+    margin:0 auto 26px;
+    padding:10px 18px;
+    border:1px solid #9da89a;
+    border-radius:9px;
+    background:#fff;
+    text-align:center;
+    font-weight:800;
+    color:#2d3a28;
+    box-shadow:0 8px 16px rgba(0,0,0,.13);
+}
+
+.plan-timeline{
+    position:relative;
+    display:flex;
+    justify-content:space-around;
+    align-items:flex-start;
+    gap:24px;
+    min-height:145px;
+    padding:0 12px;
+}
+
+.plan-timeline::before{
+    content:"";
+    position:absolute;
+    top:43px;
+    left:6%;
+    right:6%;
+    height:2px;
+    background:linear-gradient(90deg,transparent,#9ba59a 10%,#9ba59a 90%,transparent);
+}
+
+.plan-node{
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    width:180px;
+    border:none;
+    background:transparent;
+    color:#111;
+    cursor:pointer;
+    font:inherit;
+}
+
+.plan-circle{
+    width:96px;
+    height:96px;
+    border-radius:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:var(--plan-color);
+    border:1px solid #8c9688;
+    box-shadow:0 12px 18px rgba(0,0,0,.2);
+    transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.plan-node:hover .plan-circle{
+    transform:translateY(-2px);
+    box-shadow:0 15px 20px rgba(0,0,0,.22);
+}
+
+.plan-progress-label{
+    max-width:70px;
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+    line-height:1.2;
+    text-align:center;
+}
+
+.plan-node.complete .plan-progress-label,
+.plan-node.progress .plan-progress-label,
+.plan-node.stop .plan-progress-label{
+    color:#fff;
+}
+
+.plan-pill,
+.plan-program-badge{
+    min-width:84px;
+    padding:5px 14px;
+    border:1px solid #a8aea6;
+    border-radius:14px;
+    background:#fff;
+    text-align:center;
+    font-weight:900;
+    font-size:12px;
+    box-shadow:0 5px 10px rgba(0,0,0,.16);
+}
+
+.plan-node.active .plan-pill{
+    background:#f1f8ea;
+    color:#254911;
+}
+
+.plan-node.empty{
+    cursor:default;
+}
+
+.plan-node.empty .empty-circle{
+    background:#fff;
+}
+
+.plan-program-panel{
+    border:1px solid #d2dccd;
+    border-radius:10px;
+    box-shadow:0 12px 22px rgba(0,0,0,.12);
+    overflow:hidden;
+}
+
+.plan-panel-heading{
+    padding:10px 14px;
+    background:linear-gradient(90deg,#2f781b,#69bd2d);
+    color:#fff;
+    font-weight:900;
+    font-size:14px;
+    letter-spacing:.4px;
+}
+
+.plan-program-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    padding:18px;
+    background:#fbfcfb;
+}
+
+.plan-program-group{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.plan-program-card{
+    display:grid;
+    grid-template-columns:88px minmax(150px,190px) minmax(260px,1fr) 126px;
+    align-items:center;
+    min-height:92px;
+    border:1px solid #cad4c5;
+    border-radius:8px;
+    box-shadow:0 8px 16px rgba(0,0,0,.1);
+    background:#fff;
+    overflow:hidden;
+}
+
+.plan-program-card > *{
+    height:100%;
+    padding:10px;
+}
+
+.plan-program-badge{
+    align-self:center;
+    justify-self:center;
+    height:auto;
+}
+
+.plan-program-title{
+    background:#eef1ec;
+    border-left:1px solid #d3ddd0;
+    border-right:1px solid #d3ddd0;
+}
+
+.plan-program-title span,
+.plan-program-objective span{
+    display:block;
+    margin-bottom:9px;
+    font-size:11px;
+    font-weight:900;
+    color:#2d3a28;
+    letter-spacing:.2px;
+}
+
+.plan-program-title strong{
+    display:block;
+    font-size:13px;
+    line-height:1.35;
+    color:#222;
+}
+
+.plan-program-objective p{
+    margin:0;
+    font-size:13px;
+    font-weight:700;
+    line-height:1.45;
+    text-align:center;
+    color:#2f352d;
+}
+
+.plan-program-actions{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:8px;
+}
+
+.program-status-btn{
+    min-height:30px;
+    border:none;
+    border-radius:16px;
+    color:#fff;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+    opacity:.65;
+    transition:opacity .2s ease, transform .2s ease;
+}
+
+.program-status-btn.active,
+.program-status-btn:hover{
+    opacity:1;
+    transform:translateY(-1px);
+}
+
+.program-status-btn.complete{
+    background:#3d8c21;
+}
+
+.program-status-btn.progress{
+    background:#d89b00;
+}
+
+.program-status-btn.stop{
+    background:#9f1f24;
+}
+
+.plan-empty-state{
+    position:relative;
+    z-index:1;
+    width:100%;
+    padding:24px;
+    color:#777;
+    text-align:center;
+    font-weight:700;
+}
+
 /* ===== Card Section ===== */
 
 .card-section{
@@ -121,7 +416,17 @@ body{
 }
 
 .filter-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:12px;
     margin-bottom:15px;
+}
+
+.filter-group{
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
 .type-badge{
@@ -135,6 +440,42 @@ body{
     background:#b37a00;
 }
 
+.filter-row select,
+.filter-row input[type="date"]{
+    min-height:34px;
+    padding:6px 10px;
+    border:1px solid #cfcfcf;
+    border-radius:4px;
+    background:#fff;
+    color:#333;
+    font:inherit;
+    font-size:13px;
+}
+
+/* ===== Filter ===== */
+
+.show-all-btn {
+    min-height: 34px;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 4px;
+    /* Changed from #254911 to #b37a00 to match the other buttons */
+    background: #b37a00; 
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.show-all-btn:hover {
+    /* Slightly darker version of #b37a00 for the hover effect */
+    background: #8c6000; 
+    transform: translateY(-1px);
+}
+
+.show-all-btn:active {
+    transform: scale(.98);
+}
 /* ===== Table ===== */
 
 .report-table{
@@ -217,6 +558,45 @@ body{
     .main {
         padding: 20px;
     }
+
+    .plan-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .plan-timeline {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .plan-node {
+        flex: 0 0 160px;
+    }
+
+    .plan-program-card {
+        grid-template-columns: 78px minmax(140px, 1fr);
+    }
+
+    .plan-program-title,
+    .plan-program-objective,
+    .plan-program-actions {
+        grid-column: 2;
+    }
+
+    .plan-program-badge {
+        grid-row: 1 / span 3;
+    }
+
+    .plan-program-title {
+        border-right: none;
+        border-bottom: 1px solid #333;
+    }
+
+    .plan-program-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 768px) {
@@ -260,8 +640,21 @@ body{
     
     .filter-row {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        align-items:center;
         gap: 10px;
+    }
+
+    .filter-group {
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .filter-row select,
+    .filter-row input[type="date"],
+    .show-all-btn {
+        width: auto;
     }
     
     .type-badge {
@@ -301,6 +694,37 @@ body{
     
     .table-outer {
         padding: 10px;
+    }
+
+    .development-plan-section {
+        padding: 12px;
+    }
+
+    .plan-status-title {
+        width: 120px;
+        font-size: 13px;
+    }
+
+    .plan-program-list {
+        padding: 10px;
+    }
+
+    .plan-program-card {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-program-card > *,
+    .plan-program-title,
+    .plan-program-objective,
+    .plan-program-actions,
+    .plan-program-badge {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .plan-program-title {
+        border-left: none;
+        border-right: none;
     }
 }
 

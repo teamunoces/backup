@@ -2,6 +2,8 @@
     --main-green: #689f38;
     --dark-green: #33691e;
     --main-red: #c62828;
+    --orange-primary: #f97316;
+    --orange-dark: #ea580c;
     --bg-light: #ffffff;
     --border-gray: #ccc;
 }
@@ -29,16 +31,16 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 /* ===== SIDEBAR ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: sticky;
@@ -74,7 +76,7 @@ body {
 }
 
 .header-banner.green { background: #b37a00; }
-.header-banner.red { background: #f59e0b; }
+.header-banner.red { background: var(--orange-primary); }
 
 .mt-20 { margin-top: 20px; }
 
@@ -85,6 +87,10 @@ body {
 
 .filter-row {
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .type-badge {
@@ -95,7 +101,24 @@ body {
 }
 
 .type-badge.green { background: #b37a00; }
-.type-badge.red { background: #f59e0b; }
+.type-badge.red { background: var(--orange-primary); }
+
+.clear-filter-btn {
+    margin-left: auto;
+    border: 0;
+    border-radius: 4px;
+    padding: 7px 14px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.clear-filter-btn.green { background: #b37a00; }
+.clear-filter-btn.red { background: var(--orange-primary); }
+
+.clear-filter-btn:hover {
+    filter: brightness(0.9);
+}
 
 .table-header {
     padding: 8px 15px;
@@ -106,7 +129,7 @@ body {
 }
 
 .green-bg { background: #b37a00; }
-.red-bg { background: #f59e0b; }
+.red-bg { background: var(--orange-primary); }
 
 /* ===== TABLE ===== */
 .report-table {
@@ -125,7 +148,7 @@ body {
 }
 
 .green-text { color: #b37a00; }
-.red-text { color: #f59e0b; }
+.red-text { color: var(--orange-dark); }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
@@ -230,6 +253,6 @@ body.dark-mode .header-banner.green {
 }
 
 body.dark-mode .header-banner.red {
-    background-color: #c62828 !important;
+    background-color: var(--orange-dark) !important;
 }
 

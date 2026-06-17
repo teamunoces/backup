@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const errorMessage = document.getElementById('errorMessage');
+    const BASE_URL = '/SYSTEM_VERSION_!'; // match config.php
+    
+    console.log('BASE_URL is set to:', BASE_URL); // Debug line
 
     loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault(); // prevent normal form submission
+        e.preventDefault();
 
         const formData = new FormData(loginForm);
         const data = {
@@ -21,25 +24,29 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const result = await response.json();
-
+            
+            console.log('Login result:', result); // Debug line
+            
             if (result.success) {
-                // redirect based on role
+                let redirectUrl = '';
+                
                 if (result.role === 'admin') {
-                    window.location.href = '/admin/Dashboard/Dashboard.html';
+                    redirectUrl = `${BASE_URL}/admin/Dashboard/Dashboard.html`;
                 } else if (result.role === 'coordinator') {
-                    window.location.href = '/coordinator/Dashboard/dashboard.html';
-                } else {
-                    window.location.href = '/index.php';
+                    redirectUrl = `${BASE_URL}/coordinator/Dashboard/dashboard.html`;
+                } else if (result.role === 'encoder') {
+                    redirectUrl = `${BASE_URL}/encoder/encoder.html`;
                 }
+                
+                window.location.href = redirectUrl;
             } else {
-                // show error
                 errorMessage.style.display = 'block';
                 errorMessage.textContent = result.message;
             }
         } catch (err) {
             errorMessage.style.display = 'block';
             errorMessage.textContent = 'Server error. Please try again later.';
-            console.error(err);
+            console.error('Error:', err);
         }
     });
 });

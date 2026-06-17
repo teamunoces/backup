@@ -1,5 +1,5 @@
 // API endpoint - files are in the same directory
-const API_BASE_URL = window.location.origin + '/admin/Profile'; // Adjust this path if needed
+const API_BASE_URL = window.location.origin + '/SYSTEM_VERSION_!/admin/Profile'; // Adjust this path if needed
 
 // State management
 let notificationCheckInterval;
@@ -36,10 +36,10 @@ async function loadAndInjectNotificationCSS() {
             .notification-modal {
                 background-color: white;
                 border-radius: 12px;
-                width: 550px;
-                max-width: 90%;
-                max-height: 80vh;
-                overflow-y: auto;
+                width: 560px;
+                max-width: calc(100vw - 32px);
+                max-height: calc(100vh - 32px);
+                overflow: hidden;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
                 animation: slideIn 0.3s ease;
             }
@@ -59,9 +59,9 @@ async function loadAndInjectNotificationCSS() {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 15px 20px;
+                padding: 14px 20px;
                 border-bottom: 1px solid #e0e0e0;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #59af29 0%, #254911 100%);
                 border-radius: 12px 12px 0 0;
             }
 
@@ -96,11 +96,11 @@ async function loadAndInjectNotificationCSS() {
             }
 
             #sendTab {
-                padding: 20px;
+                padding: 16px 20px 18px;
             }
 
             .form-group {
-                margin-bottom: 20px;
+                margin-bottom: 14px;
             }
 
             .form-group label {
@@ -112,7 +112,7 @@ async function loadAndInjectNotificationCSS() {
             }
 
             .form-group label i {
-                color: #667eea;
+                color: #59af29;
                 margin-right: 5px;
             }
 
@@ -128,18 +128,18 @@ async function loadAndInjectNotificationCSS() {
 
             .form-control:focus {
                 outline: none;
-                border-color: #667eea;
-                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+                border-color: #59af29;
+                box-shadow: 0 0 0 3px rgba(89, 175, 41, 0.14);
             }
 
             textarea.form-control {
                 resize: vertical;
-                min-height: 100px;
+                min-height: 78px;
             }
 
             select[multiple] {
-                height: auto;
-                min-height: 180px;
+                height: 132px;
+                min-height: 132px;
                 padding: 8px;
             }
 
@@ -151,11 +151,11 @@ async function loadAndInjectNotificationCSS() {
             }
 
             select[multiple] option:hover {
-                background-color: rgba(102, 126, 234, 0.1);
+                background-color: rgba(89, 175, 41, 0.12);
             }
 
             select[multiple] option:checked {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #59af29 0%, #254911 100%);
                 color: white;
             }
 
@@ -169,7 +169,7 @@ async function loadAndInjectNotificationCSS() {
             .modal-actions {
                 display: flex;
                 gap: 12px;
-                margin-top: 25px;
+                margin-top: 16px;
             }
 
             .btn-send, .btn-cancel {
@@ -188,13 +188,13 @@ async function loadAndInjectNotificationCSS() {
             }
 
             .btn-send {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #59af29 0%, #254911 100%);
                 color: white;
             }
 
             .btn-send:hover:not(:disabled) {
                 transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+                box-shadow: 0 5px 15px rgba(89, 175, 41, 0.32);
             }
 
             .btn-send:disabled {
@@ -213,21 +213,21 @@ async function loadAndInjectNotificationCSS() {
             }
 
             .selected-departments {
-                margin-top: 12px;
-                padding: 12px;
-                background-color: #f8f9fa;
+                margin-top: 8px;
+                padding: 10px 12px;
+                background-color: #f4fbf1;
                 border-radius: 8px;
                 font-size: 13px;
-                border-left: 3px solid #667eea;
-                max-height: 100px;
-                overflow-y: auto;
+                border-left: 3px solid #59af29;
+                max-height: 48px;
+                overflow: hidden;
             }
 
             .selected-departments span {
                 font-weight: 600;
-                color: #667eea;
+                color: #3d8317;
                 display: block;
-                margin-bottom: 5px;
+                margin-bottom: 0;
             }
 
             /* Dark mode support */
@@ -261,7 +261,7 @@ async function loadAndInjectNotificationCSS() {
             .loading-spinner {
                 text-align: center;
                 padding: 30px;
-                color: #667eea;
+                color: #59af29;
             }
 
             .loading-spinner i {

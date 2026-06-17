@@ -10,8 +10,25 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Community
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Community Needs Assessment Report</title>
-    <link rel="stylesheet" href="cnacr.css">
+    <link rel="stylesheet" href="../shared/draft.css?v=20260520a">
+    <link rel="stylesheet" href="cnacr.css?v=20260520a">
     <link rel="stylesheet" href="darkmode.css">
 </head>
 <body>
@@ -42,6 +59,7 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Community
         <header>
             <div class="header-content">
                 <img src="../images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                <img src="../images/Ceslogo.png" alt="CEs Logo" class="logo-left2">
                 <div class="college-info">
                     <h1>Saint Michael College of Caraga</h1>
                     <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
@@ -195,7 +213,9 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Community
 
 
           <div class="form-actions">
-                <button type="submit" class="submit-button" onclick="submitReport()">Submit</button>
+                <button type="button" class="draft-button">Save Draft</button>
+                <button type="button" class="clear-button">Clear</button>
+                <button type="submit" class="submit-button">Submit</button>
           </div>
         
 
@@ -219,7 +239,8 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Community
     </div>
 
     <script src="./darkmode.js"></script>
-    <SCript src="./post.js"></SCript>
+    <script src="../shared/draft-utils.js?v=20260520a"></script>
+    <script src="./post.js?v=20260520a"></script>
     <script src="./actions.js"></script>
 
 </body>

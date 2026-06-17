@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background: linear-gradient(to bottom, #59AF29, #254911);
+    }
+</style>
     <title>Navigation Sidebar</title>
     <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,7 +30,7 @@
                 </a>
                 <a href="../Report/Reports.html" target="_parent" class="nav-link">
                     <i class="fas fa-file-alt"></i>
-                    <span class="nav-text">Report</span>
+                    <span class="nav-text">Forms</span>
                     <span class="active-indicator"></span>
                 </a>
                 <a href="../ReportManagement/ReportManagement.html" target="_parent" class="nav-link">

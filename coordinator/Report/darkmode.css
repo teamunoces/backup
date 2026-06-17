@@ -1,0 +1,410 @@
+/* ================= DARK MODE GLOBAL STYLES ================= */
+/* This file works with darkmode.js to provide a cohesive dark theme
+   for the Report Dashboard and its embedded iframes. */
+
+/* Base dark mode class applied to body */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* ================= DASHBOARD MAIN CONTENT ================= */
+body.dark-mode .dashboard-main {
+    background-color: #121212;
+}
+
+/* Report Cards Row */
+body.dark-mode .row.outer-border {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* Card Styles */
+body.dark-mode .card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: none !important;
+}
+
+body.dark-mode .card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    border-color: transparent;
+}
+
+body.dark-mode .card p {
+    color: #f0f0f0;
+}
+
+/* Card specific colors (preserving brand identity but dimmed) */
+body.dark-mode .card.olive {
+    background: linear-gradient(135deg, #6b8e23, #556b2f);
+}
+
+body.dark-mode .card.red {
+    background: linear-gradient(135deg, #b22234, #8b1a1a);
+}
+
+body.dark-mode .card.purple {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+}
+
+body.dark-mode .card.orange {
+    background: linear-gradient(135deg, #f97316, #c2410c);
+}
+
+body.dark-mode .card.navy {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+}
+
+body.dark-mode .card.green {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+body.dark-mode .card.teal {
+    background: linear-gradient(135deg, #0d9488, #0f766e);
+}
+
+body.dark-mode .card.indigo {
+    background: linear-gradient(135deg, #4338ca, #3730a3);
+}
+
+body.dark-mode .card.cyan {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+
+body.dark-mode .row.outer-border > button:not(.card) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* ================= NEED FIX REPORTS SECTION ================= */
+body.dark-mode .special-focus-area .section-Orange {
+    background-color: #2a2418;
+    border-color: #b85c1a;
+}
+
+body.dark-mode .filter-row {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .filter-row .label {
+    color: #ffb347;
+}
+
+body.dark-mode .filter-row select {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+body.dark-mode .filter-row select:focus {
+    border-color: #ffb347;
+    outline: none;
+}
+
+/* Table Container */
+body.dark-mode .table-container {
+    background-color: #1e1e1e;
+    border-color: #333;
+}
+
+body.dark-mode .table-header.header-Orange {
+    background-color: #4a2e1a;
+    color: #ffb347;
+    border-bottom-color: #b85c1a;
+}
+
+/* Table Styles */
+body.dark-mode table {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+body.dark-mode table thead th {
+    background-color: #2a2a2a;
+    color: #ffb347;
+    border-bottom-color: #444;
+}
+
+body.dark-mode table tbody tr {
+    border-bottom-color: #333;
+}
+
+body.dark-mode table tbody tr:hover {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode table tbody td {
+    color: #d0d0d0;
+    border-color: #333;
+}
+
+/* Action Buttons in Table */
+body.dark-mode .action-btn {
+    background-color: #333;
+    border-color: #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode .action-btn:hover {
+    background-color: #444;
+    color: #ffb347;
+}
+
+body.dark-mode .action-btn.edit-btn:hover {
+    background-color: #2a5a2a;
+    color: #8bc34a;
+}
+
+body.dark-mode .action-btn.delete-btn:hover {
+    background-color: #6a2a2a;
+    color: #ff6b6b;
+}
+
+body.dark-mode .action-btn.view-btn:hover {
+    background-color: #2a4a6a;
+    color: #64b5f6;
+}
+
+/* ================= SECTION DIVIDER ================= */
+body.dark-mode .section-divider {
+    border-color: #333;
+    background-color: #333;
+}
+
+/* ================= IFRAME STYLES (for embedded headers/sidebars) ================= */
+/* These styles are applied to the iframe content documents via darkmode.js,
+   but we also provide base styles here in case the iframe content
+   doesn't have its own dark mode styles. */
+
+body.dark-mode iframe,
+iframe.dark-mode {
+    background-color: #121212;
+}
+
+/* Ensure iframe content inherits dark mode when applicable */
+.dark-mode header,
+.dark-mode .header,
+.dark-mode .sidebar,
+.dark-mode nav {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+
+/* ================= SCROLLBAR STYLES (Dark Theme) ================= */
+body.dark-mode ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 4px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #ffb347;
+}
+
+/* Firefox scrollbar */
+body.dark-mode * {
+    scrollbar-width: thin;
+    scrollbar-color: #444 #1e1e1e;
+}
+
+/* ================= FORM ELEMENTS ================= */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select,
+body.dark-mode button:not(.card):not(.row.outer-border > button) {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    border-color: #ffb347;
+    outline: none;
+}
+
+body.dark-mode button:not(.card):not(.row.outer-border > button) {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border-color: #666;
+}
+
+body.dark-mode button:not(.card):not(.row.outer-border > button):hover {
+    background-color: #4a4a4a;
+    border-color: #ffb347;
+}
+
+/* ================= MODAL / DIALOG OVERRIDES ================= */
+body.dark-mode .modal-content,
+body.dark-mode .dialog-box {
+    background-color: #2d2d2d;
+    border-color: #444;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .dialog-header {
+    background-color: #1e1e1e;
+    border-bottom-color: #444;
+    color: #ffb347;
+}
+
+body.dark-mode .modal-footer,
+body.dark-mode .dialog-footer {
+    border-top-color: #444;
+}
+
+/* ================= STATUS / ALERT MESSAGES ================= */
+body.dark-mode .alert-success {
+    background-color: #1e3a2e;
+    color: #81c784;
+    border-color: #2e7d32;
+}
+
+body.dark-mode .alert-error {
+    background-color: #4a2a2a;
+    color: #ff8a8a;
+    border-color: #c62828;
+}
+
+body.dark-mode .alert-warning {
+    background-color: #4a3a1a;
+    color: #ffb74d;
+    border-color: #ff8f00;
+}
+
+body.dark-mode .alert-info {
+    background-color: #1a3a4a;
+    color: #64b5f6;
+    border-color: #1565c0;
+}
+
+/* ================= PAGINATION STYLES ================= */
+body.dark-mode .pagination {
+    background-color: transparent;
+}
+
+body.dark-mode .pagination a,
+body.dark-mode .pagination span {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark-mode .pagination a:hover {
+    background-color: #ffb347;
+    color: #121212;
+}
+
+body.dark-mode .pagination .active {
+    background-color: #ffb347;
+    color: #121212;
+    border-color: #ffb347;
+}
+
+/* ================= DROPDOWN MENUS ================= */
+body.dark-mode .dropdown-menu {
+    background-color: #2d2d2d;
+    border-color: #444;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .dropdown-menu a,
+body.dark-mode .dropdown-menu button {
+    color: #e0e0e0;
+}
+
+body.dark-mode .dropdown-menu a:hover,
+body.dark-mode .dropdown-menu button:hover {
+    background-color: #3a3a3a;
+    color: #ffb347;
+}
+
+/* ================= CARD IMAGE BOX ================= */
+body.dark-mode .image-box {
+    background-color: #1e1e1e;
+    border-color: #444;
+}
+
+body.dark-mode .image-box img {
+    filter: brightness(0.9);
+    opacity: 0.95;
+}
+
+/* ================= TOOLTIP STYLES ================= */
+body.dark-mode [data-tooltip]:before {
+    background-color: #3a3a3a;
+    color: #ffb347;
+    border-color: #555;
+}
+
+/* ================= LOADING SPINNER ================= */
+body.dark-mode .spinner {
+    border-color: #444;
+    border-top-color: #ffb347;
+}
+
+/* ================= RESPONSIVE ADJUSTMENTS ================= */
+@media (max-width: 768px) {
+    body.dark-mode .card {
+        background-color: #2d2d2d;
+    }
+    
+    body.dark-mode .table-container {
+        overflow-x: auto;
+    }
+    
+    body.dark-mode table {
+        min-width: 600px;
+    }
+}
+
+/* ================= TRANSITIONS ================= */
+body.dark-mode,
+body.dark-mode .card,
+body.dark-mode button,
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode .table-container,
+body.dark-mode .modal-content {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* ===== FIX WHITE GAP BELOW HEADER ===== */
+body.dark-mode .dashboard-main,
+body.dark-mode .dashboard-wrapper,
+body.dark-mode .main-content,
+body.dark-mode .content-wrapper {
+    background-color: #121212 !important;
+}
+
+/* Force top spacing area to dark */
+body.dark-mode::after {
+    content: "";
+    position: fixed;
+    top: 60px; /* header height */
+    left: 100px; /* sidebar width */
+    width: calc(100% - 100px);
+    height: 20px;
+    background: #121212;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Remove accidental white backgrounds */
+body.dark-mode .row,
+body.dark-mode .container,
+body.dark-mode .wrapper {
+    background-color: transparent !important;
+}

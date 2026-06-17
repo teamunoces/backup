@@ -12,7 +12,7 @@ body {
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -28,9 +28,9 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -43,7 +43,7 @@ body {
     max-width: 1100px;
     padding: 40px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    margin-top: 60px; /* Prevents overlap with fixed header */
+    margin-top: 100px; /* Prevents overlap with fixed header */
     margin-bottom: 40px;
     margin-left: auto; /* Center horizontally */
     margin-right: auto; /* Center horizontally */
@@ -62,6 +62,10 @@ body {
 
 .logo-left {
     height: 90px;
+    width: auto;
+}
+.logo-left2 {
+    height: 80px;
     width: auto;
 }
 
@@ -192,6 +196,41 @@ body {
     background-color: #ffffff;
     outline: none; /* Remove default outline when typing */
     padding: 6px;
+}
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures headers wrap nicely */
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    font-size: 0.75rem;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+thead th {
+    background-color: #d1d5db; /* Grey header background */
+    text-align: center;
+    font-weight: bold;
+}
+
+.sub-header th {
+    font-weight: normal;
+    font-size: 0.7rem;
+    padding: 4px;
+}
+
+/* Specific Column Widths */
+.narrow {
+    width: 12%;
+}
+
+tbody td {
+    height: 400px; /* Large empty space as per screenshot */
 }
 
 /* Base style for both buttons */
@@ -387,5 +426,102 @@ footer {
     .form-container {
         width: 95%;
         padding: 15px;
+    }
+}
+
+/* ===== Laptop / Monitor Responsiveness ===== */
+:root {
+    --sidebar-width: 100px;
+    --header-height: 60px;
+    --page-gutter: clamp(16px, 3vw, 40px);
+    --report-max-width: 1100px;
+}
+
+body {
+    margin-left: var(--sidebar-width);
+    overflow-x: hidden;
+}
+
+#sidebarFrame {
+    width: var(--sidebar-width);
+}
+
+#headerFrame {
+    left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+}
+
+.form-container {
+    width: min(var(--report-max-width), calc(100vw - var(--sidebar-width) - (var(--page-gutter) * 2)));
+    max-width: var(--report-max-width);
+    box-sizing: border-box;
+    margin-top: calc(var(--header-height) + 40px);
+}
+
+.college-info {
+    min-width: 0;
+}
+
+.program-table,
+table {
+    width: 100%;
+    max-width: 100%;
+}
+
+th,
+td {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+@media (min-width: 1440px) {
+    :root {
+        --report-max-width: 1200px;
+        --page-gutter: 48px;
+    }
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --report-max-width: 1000px;
+        --page-gutter: 24px;
+    }
+
+    .form-container {
+        padding: 32px;
+    }
+
+    .logo-left {
+        height: 78px;
+    }
+
+    .logo-left2,
+    .logos-right img {
+        height: 70px;
+    }
+
+    .college-info h1 {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+
+    body {
+        margin-left: 0;
+        padding: 0 var(--page-gutter);
+    }
+
+    .form-container {
+        width: calc(100vw - (var(--page-gutter) * 2));
+        margin-top: calc(var(--header-height) + 20px);
     }
 }

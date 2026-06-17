@@ -1,0 +1,13 @@
+[20-May-2026 05:24:54 UTC] PHP Warning:  session_start(): open(c:/wamp64/tmp\sess_773opgmgs31ph48vu4p6g1oj3t, O_RDWR) failed: Permission denied (13) in C:\wamp64\www\SYSTEM_VERSION_!\coordinator\Dashboard\PHP\getPending.php on line 8
+[20-May-2026 05:24:54 UTC] PHP Stack trace:
+[20-May-2026 05:24:54 UTC] PHP   1. {main}() Command line code:0
+[20-May-2026 05:24:54 UTC] PHP   2. {main}() Command line code:0
+[20-May-2026 05:24:54 UTC] PHP   3. session_start() C:\wamp64\www\SYSTEM_VERSION_!\coordinator\Dashboard\PHP\getPending.php:8
+[20-May-2026 05:24:54 UTC] PHP Warning:  session_start(): Failed to read session data: files (path: c:/wamp64/tmp) in C:\wamp64\www\SYSTEM_VERSION_!\coordinator\Dashboard\PHP\getPending.php on line 8
+[20-May-2026 05:24:54 UTC] PHP Stack trace:
+[20-May-2026 05:24:54 UTC] PHP   1. {main}() Command line code:0
+[20-May-2026 05:24:54 UTC] PHP   2. {main}() Command line code:0
+[20-May-2026 05:24:54 UTC] PHP   3. session_start() C:\wamp64\www\SYSTEM_VERSION_!\coordinator\Dashboard\PHP\getPending.php:8
+[20-May-2026 05:24:54 UTC] ERROR in getPending.php: Unauthorized - No user_id in session
+[20-May-2026 05:24:54 UTC] Stack trace: #0 Command line code(1): include()
+#1 {main}

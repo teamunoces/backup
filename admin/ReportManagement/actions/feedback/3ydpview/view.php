@@ -10,6 +10,22 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
   <title><?php echo $reportType; ?></title>
   <link rel="stylesheet" href="view.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -17,10 +33,10 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 <body>
 
   <!-- HEADER -->
-  <iframe src="/admin/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
+  <iframe src="/SYSTEM_VERSION_!/admin/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
 
   <!-- SIDEBAR -->
-  <iframe src="/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+  <iframe src="/SYSTEM_VERSION_!/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
 
   
   <!-- MAIN PRINT CONTAINER -->
@@ -35,7 +51,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
     
                    <header>
                       <div class="header-content">
-                          <img src="/admin/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                          <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
                           <div class="college-info">
                               <h1>Saint Michael College of Caraga</h1>
                               <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
@@ -44,7 +60,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
                               <a href="http://www.smccnasipit.edu.ph">www.smccnasipit.edu.ph</a>
                           </div>
                           <div class="logos-right">
-                              <img src="/admin/ReportManagement/actions/images/ISOlogo.png" alt="SOCOTEC Logo">
+                              <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/ISOlogo.png" alt="SOCOTEC Logo">
                           </div>
                       </div>
                       <h2 class="office-title">OFFICE OF THE COMMUNITY EXTENSION SERVICES</h2>
@@ -134,7 +150,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
     <!-- FOOTER -->
     <footer>
       <div class="footer-bottom">
-        <img src="../../images/footerlogo.png" alt="Org Logo">
+        <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/footerlogo.png" alt="Org Logo">
       </div>
     </footer>
 
@@ -147,7 +163,7 @@ $reportType = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "3-year D
 
   </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="get.js"></script>
+  <script src="./get.js"></script>
 
 
 

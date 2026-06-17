@@ -12,7 +12,7 @@ error_reporting(E_ALL);
    DATABASE CONFIG
 ========================================== */
 $host = 'localhost';
-$dbname = 'approval_db';
+$dbname = 'ces_database';
 $username = 'root';
 $password = '';
 
@@ -48,8 +48,8 @@ function fetchRow($pdo, $sql) {
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
 
-        // ---------- LATEST APPROVALS ----------
-        $approvals = fetchRow($pdo, "
+        // ---------- LATEST APPROVAL SETTINGS ----------
+        $result = fetchRow($pdo, "
             SELECT 
                 ces_head,
                 ces_head_suffix,
@@ -59,10 +59,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 vp_admin_suffix,
                 school_president,
                 school_president_suffix
-            FROM approvals
+            FROM approvals_admin
             ORDER BY updated_at DESC
             LIMIT 1
         ");
+
+        $result = array_merge([
+            'ces_head' => '',
+            'ces_head_suffix' => '',
+            'vp_acad' => '',
+            'vp_acad_suffix' => '',
+            'vp_admin' => '',
+            'vp_admin_suffix' => '',
+            'school_president' => '',
+            'school_president_suffix' => ''
+        ], $result);
 
         // ---------- LATEST DOCUMENT INFO ----------
         $documentInfo = fetchRow($pdo, "
@@ -71,15 +82,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 revision_number,
                 date_effective,
                 approved_by
-            FROM document_info
+            FROM approvals_document_info
             ORDER BY updated_at DESC
             LIMIT 1
         ");
 
-        $result = array_merge(
-            $approvals ?? [],
-            $documentInfo ?? []
-        );
+        $result = array_merge($result, [
+            'issue_status' => '',
+            'revision_number' => '',
+            'date_effective' => '',
+            'approved_by' => ''
+        ], $documentInfo);
 
         echo json_encode($result);
 
@@ -119,9 +132,9 @@ if (!$data || !is_array($data)) {
 try {
     $pdo->beginTransaction();
 
-    /* ---------- APPROVALS TABLE ---------- */
+    /* ---------- APPROVALS ADMIN TABLE ---------- */
     $stmt = $pdo->prepare("
-        INSERT INTO approvals (
+        INSERT INTO approvals_admin (
             id,
             ces_head, ces_head_suffix,
             vp_acad, vp_acad_suffix,
@@ -157,9 +170,9 @@ try {
         ':school_president_suffix'=> $data['school_president_suffix'] ?? ''
     ]);
 
-    /* ---------- DOCUMENT INFO TABLE ---------- */
+    /* ---------- APPROVALS DOCUMENT INFO TABLE ---------- */
     $stmt = $pdo->prepare("
-        INSERT INTO document_info (
+        INSERT INTO approvals_document_info (
             id,
             issue_status,
             revision_number,

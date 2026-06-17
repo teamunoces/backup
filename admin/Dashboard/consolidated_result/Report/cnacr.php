@@ -7,6 +7,22 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Barangay Profile Report</title>
     <link rel="stylesheet" href="cnacr.css">
 </head>
@@ -14,7 +30,7 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
 
   <!-- Header -->
         <iframe 
-            src="/admin/Profile/profile.html" 
+            src="/SYSTEM_VERSION_!/admin/Profile/profile.html" 
             id="headerFrame"
             frameborder="0"
             scrolling="no"
@@ -23,7 +39,7 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
 
         <!-- Sidebar -->
         <iframe 
-            src="/admin/Nav/navigation.html" 
+            src="/SYSTEM_VERSION_!/admin/Nav/navigation.html" 
             id="sidebarFrame"
             frameborder="0"
             scrolling="no"
@@ -39,7 +55,7 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
                                                 <div class="table-card">
                                                     <label for="barangaySelect">Select Barangay:</label>
                                                     <select id="barangaySelect">
-                                                        <option value="Select" selected>Select</option>
+                                                        <option value="----" selected>----</option>
                                                         <option value="camagong">BRGY. CAMAGONG</option>
                                                         <option value="aclan">BRGY. ACLAN</option>
                                                         <option value="amontay">BRGY. AMONTAY</option>
@@ -61,10 +77,29 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
                                                         <option value="triangulo">BRGY. TRIANGULO</option>
                                                     </select>
                                                 </div>
+                                                <!-- Add Year Filter -->
+                                                <div class="table-card">
+                                                    <label for="yearSelect">Select SURVEY Year:</label>
+                                                    <select id="yearSelect">
+                                                        <option value="all" selected>----</option>
+                                                        <option value="2025">2025</option>
+                                                        <option value="2026">2026</option>
+                                                        <option value="2027">2027</option>
+                                                        <option value="2028">2028</option>
+                                                        <option value="2029">2029</option>
+                                                        <option value="2030">2030</option>
+                                                        <option value="2031">2031</option>
+                                                        <option value="2032">2032</option>
+                                                        <option value="2033">2033</option>
+                                                        <option value="2034">2034</option>
+                                                        <option value="2035">2035</option>
+                                                    </select>
+                                                </div>
                                                  <div class="table-card">
                                                     <label for="semesterSelect">Select Semester:</label>
                                                     <select id="semesterSelect">
-                                                        <option value="First Semester" selected>First Semester</option>
+                                                        <option value="----" selected>----</option>
+                                                        <option value="First Semester">First Semester</option>
                                                         <option value="Second Semester">Second Semester</option>
                                                     </select>
                                                 </div>
@@ -72,7 +107,12 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
                                                 <div class="table-card">
                                                     <label for="schoolYearSelect">Select School Year:</label>
                                                     <select id="schoolYearSelect">
-                                                        <option value="2025-2026" selected>2025-2026</option>
+                                                        <option value="----" selected>----</option>
+                                                        <option value="2029-2030">2029-2030</option>
+                                                        <option value="2028-2029">2028-2029</option>
+                                                        <option value="2027-2028">2027-2028</option>
+                                                        <option value="2026-2027">2026-2027</option>
+                                                        <option value="2025-2026">2025-2026</option>
                                                         <option value="2024-2025">2024-2025</option>
                                                         <option value="2023-2024">2023-2024</option>
                                                     </select>
@@ -87,25 +127,35 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
                                 <!-- ================= HEADER ================= -->
 
                                  <header class="report-header">
-                                    <img src="/admin/Report/images/smcclogo.png" alt="SMCC Logo" class="logo left">
+                                    <img src="/SYSTEM_VERSION_!/admin/Report/images/smcclogo.png" alt="SMCC Logo" class="logo left">
                                     <div class="header-text">
                                         <h1>Saint Michael College of Caraga</h1>
                                         <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
                                         <p>Tel. Nos. +63 085 343-3251 / Fax No. +63 085 808-0892</p>
                                         <p class="website">www.smccnasipit.edu.ph</p>
                                         <h2>OFFICE OF THE COMMUNITY EXTENSION SERVICE</h2>
-                                        <p id="psemester">First Semester, A.Y. 2025-2026</p>
                                     </div>
-                                    <img src="/admin/Report/images/ISOlogo.png" alt="Extension Logo" class="logo right">
+                                    <img src="/SYSTEM_VERSION_!/admin/Report/images/ISOlogo.png" alt="Extension Logo" class="logo right">
                                 </header>
 
 
                                 <div class="header_content">
                                        <header class="intro-header" id="communityHeader">
                                                 <h1 id="titleH1">COMMUNITY NEEDS ASSESMENT CONSOLIDATED RESULTS</h1>
-                                                <h2 id="titleH2">Barangay Camagong, NASIPIT, AGUSAN DEL NORTE</h2>
-                                                <h3 id="titleH3Semester">First Semester, A.Y. 2025-2026</h3>
-                                                <h3 id="titleH3Date">Conducted on February 25, 2026</h3>
+                                                <h2>
+                                                    <span id="barangayName"></span>, NASIPIT, AGUSAN DEL NORTE
+                                                    </h2>
+                                                <h3 id="titleH3Semester">
+                                                   <span id="semestertext"></span>, A.Y. <span id="schoolYearText"></span>
+                                                </h3>
+                                                <h3 id="titleH3Date">
+                                                Conducted on <span id="dateText"></span>
+                                                </h3>
+
+                                                <div class="table-card">
+                                                <label for="dateInput">Select Date:</label>
+                                                <input type="date" id="dateInput">
+                                                </div>
                                         </header>
                                         <textarea type="textarea" id="introText" class="intro-textarea" placeholder="Enter the introduction text here..."></textarea>
                                 </div>
@@ -542,7 +592,7 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
         <footer>
             <div class="footer-bottom">
                 <div class="footer-logos">
-                    <img src="/admin/Report/images/footerlogo.png" alt="Org Logo 1">
+                    <img src="/SYSTEM_VERSION_!/admin/Report/images/footerlogo.png" alt="Org Logo 1">
                 </div>
             </div>
         </footer>
@@ -559,6 +609,24 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
             // Get references to the select and the td
             const barangaySelect = document.getElementById('barangaySelect');
             const barangayNameTd = document.getElementById('barangayName');
+            const schoolYearDropdown = document.getElementById("schoolYearSelect");
+            const schoolYearDisplay = document.getElementById("schoolYearText");
+            const semesterDropdown = document.getElementById("semesterSelect");
+            const semesterDisplay = document.getElementById("semestertext");
+            const dateInput = document.getElementById("dateInput");
+            const dateText = document.getElementById("dateText");
+
+            dateInput.addEventListener("change", function () {
+                const date = new Date(this.value);
+
+                const formattedDate = date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                });
+
+                dateText.textContent = formattedDate;
+            });
 
             // Listen for changes on the select
             barangaySelect.addEventListener('change', function() {
@@ -568,6 +636,19 @@ $repottype = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : "Consolida
                 // Update the td
                 barangayNameTd.textContent = selectedText;
             });
+                // show default value on page load
+                schoolYearDisplay.textContent = schoolYearDropdown.value;
+
+                // update when user selects
+                schoolYearDropdown.addEventListener("change", function () {
+                    schoolYearDisplay.textContent = this.value;
+                });
+                semesterDisplay.textContent = semesterDropdown.value;
+
+                // update when user selects
+                semesterDropdown.addEventListener("change", function () {
+                    semesterDisplay.textContent = this.value;
+                });
             </script>
        
 

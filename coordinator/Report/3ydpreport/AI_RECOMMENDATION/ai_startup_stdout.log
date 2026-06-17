@@ -1,0 +1,21 @@
+Loading model...
+Model loaded on cpu
+Loading recommendations and computing embeddings...
+ * Serving Flask app 'AI'
+ * Debug mode: off
+Loaded 758 recommendations in 77.19 seconds
+Recommendation completed in 4.345 seconds
+Recommendation completed in 10.319 seconds
+Recommendation completed in 9.123 seconds
+Recommendation completed in 7.977 seconds
+Recommendation completed in 9.905 seconds
+Recommendation completed in 10.295 seconds
+Recommendation completed in 9.677 seconds
+Recommendation completed in 9.292 seconds
+Recommendation completed in 18.285 seconds
+Recommendation completed in 19.222 seconds
+Recommendation completed in 15.802 seconds
+Recommendation completed in 14.534 seconds
+Recommendation completed in 15.089 seconds
+Recommendation completed in 19.149 seconds
+Recommendation completed in 14.045 seconds

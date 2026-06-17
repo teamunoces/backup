@@ -1,281 +1,1201 @@
 /**
- * download.js - Handles PDF download functionality for Monthly Accomplishment Report
- * Uses html2pdf library to convert the report to PDF while maintaining ALL colors
+ * download.js - Handles PDF download functionality
+ * Generates a multi-page PDF with header and footer repeated on every page.
+ * Automatically loads html2canvas and jsPDF if they are not already available.
  */
 
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if html2pdf is available, if not load it dynamically
-    if (typeof html2pdf === 'undefined') {
-        loadHtml2PdfLibrary();
-    }
-    
-    // Add event listener to download button
+document.addEventListener('DOMContentLoaded', function () {
     const downloadBtn = document.getElementById('downloadPDF');
     if (downloadBtn) {
         downloadBtn.addEventListener('click', downloadAsPDF);
     }
 });
 
-/**
- * Dynamically load html2pdf library if not present
- */
-function loadHtml2PdfLibrary() {
-    return new Promise((resolve, reject) => {
-        // Check if already loaded
-        if (window.html2pdf) {
-            resolve();
-            return;
-        }
-        
-        // Create script element
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
-        script.integrity = 'sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==';
-        script.crossOrigin = 'anonymous';
-        script.referrerPolicy = 'no-referrer';
-        
-        script.onload = () => {
-            console.log('html2pdf library loaded successfully');
-            resolve();
-        };
-        
-        script.onerror = () => {
-            console.error('Failed to load html2pdf library');
-            reject(new Error('Failed to load html2pdf'));
-        };
-        
-        document.head.appendChild(script);
-    });
-}
+let __pdfWorkspace = null;
+let __pdfStyleEl = null;
+let __pdfHiddenState = null;
+let __pdfLibrariesPromise = null;
 
-/**
- * Main function to download report as PDF with ALL colors preserved
- */
 async function downloadAsPDF() {
     try {
-        // Show loading indicator
-        showLoadingIndicator();
-        
-        // Ensure html2pdf is loaded
-        await loadHtml2PdfLibrary();
-        
-        // Get the report container element
-        const element = document.querySelector('.report-container');
-        
-        if (!element) {
-            throw new Error('Report container not found');
+        showLoadingIndicator('Loading PDF tools...');
+
+        await ensurePdfLibraries();
+
+        const html2canvasLib = window.html2canvas;
+        const jsPDFCtor = getJsPDFConstructor();
+
+        if (!html2canvasLib) throw new Error('html2canvas failed to load.');
+        if (!jsPDFCtor) throw new Error('jsPDF failed to load.');
+
+        showLoadingIndicator('Preparing PDF...');
+
+        const mainContent =
+            document.querySelector('#main_content') ||
+            document.querySelector('.form-container') ||
+            document.querySelector('form');
+
+        if (!mainContent) throw new Error('Main content not found.');
+
+        __pdfHiddenState = hideScreenOnlyElements();
+
+        const pdf = new jsPDFCtor({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4',
+            compress: true
+        });
+
+        const pageWidthMm = pdf.internal.pageSize.getWidth();
+        const pageHeightMm = pdf.internal.pageSize.getHeight();
+
+        const marginTopMm = 8;
+        const marginRightMm = 8;
+        const marginBottomMm = 8;
+        const marginLeftMm = 8;
+
+        const printableWidthMm = pageWidthMm - marginLeftMm - marginRightMm;
+        const printableHeightMm = pageHeightMm - marginTopMm - marginBottomMm;
+
+        const renderWidthPx = 1200;
+        const pxPerMm = renderWidthPx / printableWidthMm;
+        const renderPageHeightPx = Math.round(printableHeightMm * pxPerMm);
+
+        createPdfWorkspace(renderWidthPx);
+        buildWorkspaceContent(mainContent);
+
+        await waitForImages(__pdfWorkspace);
+        await waitForFonts(document);
+
+        const headerNode = __pdfWorkspace.querySelector('#pdf-header');
+        const footerNode = __pdfWorkspace.querySelector('#pdf-footer');
+        const bodyNode = __pdfWorkspace.querySelector('#pdf-body');
+
+        if (!headerNode || !footerNode || !bodyNode) {
+            throw new Error('Failed to build PDF header, body, or footer.');
         }
-        
-        // Clone the element to avoid modifying the original during PDF generation
-        const clonedElement = element.cloneNode(true);
-        
-        // Remove any buttons or unwanted elements from clone
-        removeUnwantedElements(clonedElement);
-        
-        // Apply PDF-specific styling to preserve ALL colors
-        applyPDFStyles(clonedElement);
-        
-        // Create a temporary container for the clone
-        const tempContainer = document.createElement('div');
-        tempContainer.style.position = 'absolute';
-        tempContainer.style.left = '-9999px';
-        tempContainer.style.top = '0';
-        tempContainer.style.zIndex = '-1';
-        tempContainer.appendChild(clonedElement);
-        document.body.appendChild(tempContainer);
-        
-        // Configure PDF options with color preservation
-        const opt = {
-            margin:        [0.5, 0.5, 0.5, 0.5], // top, right, bottom, left margins in inches
-            filename:      generateFileName(),
-            image:         { type: 'jpeg', quality: 1.0 },
-            html2canvas:   { 
-                scale: 2,
-                letterRendering: true,
-                useCORS: true,
-                logging: false,
-                backgroundColor: '#FFFFFF',
-                allowTaint: false,
-                foreignObjectRendering: false, // Better color preservation
-                onclone: function(clonedDoc) {
-                    // Ensure colors are preserved in the cloned document
-                    const clonedElement = clonedDoc.querySelector('.report-container');
-                    if (clonedElement) {
-                        // Force color preservation
-                        clonedElement.style.setProperty('-webkit-print-color-adjust', 'exact', 'important');
-                        clonedElement.style.setProperty('print-color-adjust', 'exact', 'important');
-                        clonedElement.style.setProperty('color-adjust', 'exact', 'important');
-                    }
-                }
-            },
-            jsPDF:         { 
-                unit: 'in', 
-                format: 'a4', 
-                orientation: 'portrait',
-                compress: true,
-                precision: 16
-            },
-            pagebreak:     { 
-                mode: ['css', 'legacy'],
-                before: '.page-break-before',
-                after: '.page-break-after',
-                avoid: ['tr', 'thead', 'tfoot']
-            }
-        };
-        
-        // Prepare element for PDF (handle inputs, etc.)
-        prepareElementForPDF(clonedElement);
-        
-        // Generate PDF with color preservation
-        await html2pdf()
-            .from(clonedElement)
-            .set(opt)
-            .save();
-        
-        // Clean up
-        document.body.removeChild(tempContainer);
-        
-        // Hide loading indicator
+
+        showLoadingIndicator('Rendering PDF pages...');
+
+        const canvasScale = 2;
+
+        const headerCanvas = await html2canvasLib(headerNode, {
+            scale: canvasScale,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            logging: false
+        });
+
+        const footerCanvas = await html2canvasLib(footerNode, {
+            scale: canvasScale,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            logging: false
+        });
+
+        const headerHeightPx = Math.ceil(headerNode.getBoundingClientRect().height);
+        const footerHeightPx = Math.ceil(footerNode.getBoundingClientRect().height);
+        const usableBodyHeightPx = renderPageHeightPx - headerHeightPx - footerHeightPx;
+
+        if (usableBodyHeightPx <= 0) {
+            throw new Error('Header/footer are too large for the page.');
+        }
+
+        const bodyCanvas = await html2canvasLib(bodyNode, {
+            scale: canvasScale,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            logging: false,
+            windowWidth: renderWidthPx,
+            windowHeight: Math.max(bodyNode.scrollHeight, bodyNode.offsetHeight)
+        });
+
+        const headerHeightMm = headerHeightPx / pxPerMm;
+        const footerHeightMm = footerHeightPx / pxPerMm;
+        const bodySliceHeightMm = usableBodyHeightPx / pxPerMm;
+
+        const bodyCanvasPageSlicePx = Math.floor(
+            bodyCanvas.width * (bodySliceHeightMm / printableWidthMm)
+        );
+
+        if (bodyCanvasPageSlicePx <= 0) {
+            throw new Error('Failed to calculate body slice height.');
+        }
+
+        const headerImage = headerCanvas.toDataURL('image/jpeg', 1.0);
+        const footerImage = footerCanvas.toDataURL('image/jpeg', 1.0);
+
+        let sourceY = 0;
+        let pageIndex = 0;
+
+        while (sourceY < bodyCanvas.height) {
+            const remainingHeight = bodyCanvas.height - sourceY;
+            const currentSliceHeightPx = Math.min(bodyCanvasPageSlicePx, remainingHeight);
+
+            const sliceCanvas = document.createElement('canvas');
+            sliceCanvas.width = bodyCanvas.width;
+            sliceCanvas.height = currentSliceHeightPx;
+
+            const ctx = sliceCanvas.getContext('2d');
+            if (!ctx) throw new Error('Unable to create PDF canvas context.');
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+
+            ctx.drawImage(
+                bodyCanvas,
+                0,
+                sourceY,
+                bodyCanvas.width,
+                currentSliceHeightPx,
+                0,
+                0,
+                sliceCanvas.width,
+                currentSliceHeightPx
+            );
+
+            const sliceImage = sliceCanvas.toDataURL('image/jpeg', 1.0);
+            const sliceHeightMm = printableWidthMm * (currentSliceHeightPx / sliceCanvas.width);
+
+            if (pageIndex > 0) pdf.addPage();
+
+            pdf.addImage(headerImage, 'JPEG', marginLeftMm, marginTopMm, printableWidthMm, headerHeightMm, undefined, 'FAST');
+
+            pdf.addImage(
+                sliceImage,
+                'JPEG',
+                marginLeftMm,
+                marginTopMm + headerHeightMm,
+                printableWidthMm,
+                sliceHeightMm,
+                undefined,
+                'FAST'
+            );
+
+            pdf.addImage(
+                footerImage,
+                'JPEG',
+                marginLeftMm,
+                pageHeightMm - marginBottomMm - footerHeightMm,
+                printableWidthMm,
+                footerHeightMm,
+                undefined,
+                'FAST'
+            );
+
+            sourceY += currentSliceHeightPx;
+            pageIndex += 1;
+        }
+
+        pdf.save(generateFileName());
+
+        cleanupPdfWorkspace();
+        restoreHiddenElements();
         hideLoadingIndicator();
-        
+
     } catch (error) {
         console.error('PDF generation failed:', error);
+        cleanupPdfWorkspace();
+        restoreHiddenElements();
         hideLoadingIndicator();
         alert('Failed to generate PDF. Please try again.');
     }
 }
 
-/**
- * Apply PDF-specific styles to preserve ALL colors
- */
-function applyPDFStyles(element) {
-    // Add a style element to the cloned document
-    const style = document.createElement('style');
-    style.textContent = `
-        /* Force color preservation for all elements */
-        * {
+async function ensurePdfLibraries() {
+    if (window.html2canvas && getJsPDFConstructor()) return;
+
+    if (!__pdfLibrariesPromise) {
+        __pdfLibrariesPromise = (async () => {
+            if (!window.html2canvas) {
+                await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+            }
+
+            if (!getJsPDFConstructor()) {
+                await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+            }
+
+            if (!window.html2canvas) throw new Error('html2canvas is still unavailable after loading.');
+            if (!getJsPDFConstructor()) throw new Error('jsPDF is still unavailable after loading.');
+        })().catch(error => {
+            __pdfLibrariesPromise = null;
+            throw error;
+        });
+    }
+
+    return __pdfLibrariesPromise;
+}
+
+function getJsPDFConstructor() {
+    if (window.jspdf && window.jspdf.jsPDF) return window.jspdf.jsPDF;
+    if (window.jsPDF) return window.jsPDF;
+    return null;
+}
+
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const existing = document.querySelector(`script[data-pdf-lib="${src}"], script[src="${src}"]`);
+
+        if (existing) {
+            if (existing.dataset.loaded === 'true') {
+                resolve();
+                return;
+            }
+
+            existing.addEventListener('load', () => resolve(), { once: true });
+            existing.addEventListener('error', () => reject(new Error(`Failed to load script: ${src}`)), { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        script.defer = true;
+        script.dataset.pdfLib = src;
+
+        script.onload = () => {
+            script.dataset.loaded = 'true';
+            resolve();
+        };
+
+        script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+
+        document.head.appendChild(script);
+    });
+}
+
+function createPdfWorkspace(renderWidthPx) {
+    cleanupPdfWorkspace();
+
+    __pdfWorkspace = document.createElement('div');
+    __pdfWorkspace.id = 'pdf-workspace';
+    __pdfWorkspace.style.cssText = `
+        position: fixed;
+        left: -20000px;
+        top: 0;
+        width: ${renderWidthPx}px;
+        background: white;
+        z-index: -1;
+        opacity: 0;
+        pointer-events: none;
+    `;
+    document.body.appendChild(__pdfWorkspace);
+
+    __pdfStyleEl = document.createElement('style');
+    __pdfStyleEl.setAttribute('data-pdf-runtime', 'true');
+
+    __pdfStyleEl.textContent = `
+        #pdf-workspace,
+        #pdf-workspace * {
+            box-sizing: border-box;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
             color-adjust: exact !important;
         }
-        
-        /* Ensure navy blue background in document info section */
-        .doc-header td.label {
-            background-color: #002060 !important;
-            color: white !important;
+
+        #pdf-workspace {
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+            line-height: 1.35;
+            color: #000;
+            background: #fff;
         }
-        
-        /* Preserve header colors */
-        .college-info h1 {
+
+        #pdf-workspace .pdf-header,
+        #pdf-workspace .pdf-footer,
+        #pdf-workspace .pdf-render-body {
+            width: 100%;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #fff !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        #pdf-workspace .report-container,
+        #pdf-workspace .evaluation-container,
+        #pdf-workspace #main_content,
+        #pdf-workspace .form-container,
+        #pdf-workspace .pdf-body-wrapper,
+        #pdf-workspace .print-approval-section,
+        #pdf-workspace .print-document-info-section {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #fff !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            overflow: visible !important;
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+        }
+
+        #pdf-workspace #main_content,
+        #pdf-workspace #main_content > *:first-child,
+        #pdf-workspace .pdf-body-wrapper > *:first-child {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        #pdf-workspace #main_content h1,
+        #pdf-workspace .pdf-body-wrapper h1 {
+            font-family: "Century Gothic", Arial, sans-serif !important;
+            font-size: 13pt !important;
+            font-weight: normal !important;
+            text-align: center !important;
+            text-transform: uppercase !important;
+            color: #000 !important;
+            margin: 0 0 12px 0 !important;
+        }
+
+        #pdf-workspace #headerFrame,
+        #pdf-workspace #sidebarFrame,
+        #pdf-workspace .buttons,
+        #pdf-workspace #downloadPDF,
+        #pdf-workspace .admin-comment,
+        #pdf-workspace .no-print,
+        #pdf-workspace .print-hide,
+        #pdf-workspace .action-buttons,
+        #pdf-workspace .wrapper,
+        #pdf-workspace [data-no-print="true"],
+        #pdf-workspace button,
+        #pdf-workspace script,
+        #pdf-workspace noscript {
+            display: none !important;
+        }
+
+        #pdf-workspace .print-page-header {
+            width: 100%;
+            margin: 0 !important;
+            padding: 0 0 10px 0 !important;
+            background: #fff !important;
+        }
+
+        #pdf-workspace .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            width: 100%;
+            gap: 12px;
+            flex-wrap: nowrap;
+        }
+
+        #pdf-workspace .logo-left {
+            height: 90px;
+            width: auto;
+            flex: 0 0 auto;
+        }
+
+        #pdf-workspace .logos-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex: 0 0 auto;
+        }
+
+        #pdf-workspace .logos-right img {
+            height: 80px;
+            width: auto;
+        }
+
+        #pdf-workspace .college-info {
+            text-align: center;
+            flex: 1 1 auto;
+            padding: 0 10px;
+        }
+
+        #pdf-workspace .college-info h1 {
+            font-family: "Times New Roman", Times, serif !important;
             color: #4f81bd !important;
+            font-size: 26px !important;
+            margin: 0;
+            font-weight: normal;
+            line-height: 1.2;
         }
-        
-        .office-title {
+
+        #pdf-workspace .college-info p {
+            font-family: Arial, sans-serif !important;
+            font-size: 11px;
+            margin: 2px 0;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        #pdf-workspace .college-info a {
+            font-family: Arial, sans-serif !important;
+            font-size: 13px;
+            color: #0000EE !important;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
+        #pdf-workspace .office-title {
+            font-family: Arial, sans-serif !important;
+            text-align: center;
+            font-size: 18px;
             color: #595959 !important;
+            font-weight: bold;
+            margin: 5px 0;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
-        
-        .double-line {
+
+        #pdf-workspace .double-line {
             border-top: 4px double #4f81bd !important;
+            margin-bottom: 15px;
         }
-        
-        /* Table header colors */
-        .main-table th {
+
+        #pdf-workspace .form-type {
+            font-family: "Courier New", Courier, monospace !important;
+            text-align: center !important;
+            margin: 0 0 30px 0 !important;
+            font-size: 13pt !important;
+            font-weight: bold !important;
+            letter-spacing: 2px !important;
+            text-transform: uppercase !important;
+            color: #000 !important;
+        }
+
+        #pdf-workspace .input-fields,
+        #pdf-workspace .header-info {
+            width: 100% !important;
+            margin-top: 0 !important;
+            margin-bottom: 48px !important;
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+        }
+
+        #pdf-workspace .input-fields .field,
+        #pdf-workspace .input-group {
+            display: grid !important;
+            grid-template-columns: 150px 1fr !important;
+            align-items: center !important;
+            column-gap: 10px !important;
+            margin-bottom: 14px !important;
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+        }
+
+        #pdf-workspace .input-fields .field label,
+        #pdf-workspace .input-group label {
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+            color: #000 !important;
+            white-space: nowrap !important;
+            text-align: left !important;
+        }
+
+        #pdf-workspace .input-fields .field input,
+        #pdf-workspace .input-fields .field textarea,
+        #pdf-workspace .input-fields .field select,
+        #pdf-workspace .input-fields .field .printable-field,
+        #pdf-workspace .input-group input,
+        #pdf-workspace .input-group textarea,
+        #pdf-workspace .input-group select,
+        #pdf-workspace .input-group .printable-field {
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+            width: 100% !important;
+            min-height: 20px !important;
+            border: none !important;
+            border-bottom: 1px solid #cfcfcf !important;
+            padding: 2px 10px 3px 10px !important;
+            background: transparent !important;
+            color: #000 !important;
+            text-align: left !important;
+            line-height: 1.2 !important;
+        }
+
+        #pdf-workspace .table_form,
+        #pdf-workspace .program-table {
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin-top: 0 !important;
+            margin-bottom: 20px !important;
+            color: #000 !important;
+        }
+
+        #pdf-workspace .table_form {
+            display: block !important;
+            overflow: visible !important;
+        }
+
+        #pdf-workspace .table_form table,
+        #pdf-workspace .program-table {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        #pdf-workspace .table_form th,
+        #pdf-workspace .table_form td,
+        #pdf-workspace .program-table th,
+        #pdf-workspace .program-table td {
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+            border: 1px solid #9e9e9e !important;
+            padding: 7px 6px !important;
+            font-weight: normal !important;
+            text-align: center !important;
+            vertical-align: top !important;
+            color: #000 !important;
+            word-break: normal !important;
+            overflow-wrap: break-word !important;
+            line-height: 1.25 !important;
+        }
+
+        #pdf-workspace .table_form th,
+        #pdf-workspace .program-table th {
+            background-color: #d9d9d9 !important;
+            font-weight: normal !important;
+            vertical-align: middle !important;
+        }
+
+        #pdf-workspace .table_form td,
+        #pdf-workspace .program-table td {
+            background-color: #fff !important;
+            min-height: 28px !important;
+        }
+
+        #pdf-workspace .header-table,
+        #pdf-workspace .main-table,
+        #pdf-workspace table {
+            width: 100% !important;
+            max-width: 100% !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            background: #fff;
+        }
+
+        #pdf-workspace .main-table th,
+        #pdf-workspace .main-table td,
+        #pdf-workspace .header-table td {
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+            white-space: normal !important;
+        }
+
+        #pdf-workspace .main-table th {
             background-color: #e0e0e0 !important;
             color: #333 !important;
-        }
-        
-        /* Ensure borders are visible */
-        table, th, td {
             border: 1px solid #000 !important;
+            padding: 6px 4px !important;
+            text-align: center;
+            font-weight: normal;
         }
-        
-        /* Signature lines */
-        .signature-line {
-            border-bottom: 1.5px solid black !important;
+
+        #pdf-workspace .main-table td {
+            border: 1px solid #000 !important;
+            padding: 6px 4px !important;
+            vertical-align: top;
         }
-        
-        .name-underlined {
-            text-decoration: underline !important;
+
+        #pdf-workspace .print-approval-section {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        #pdf-workspace .approvals-container,
+        #pdf-workspace .approval-section,
+        #pdf-workspace .prepared-block,
+        #pdf-workspace .signature-block {
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+            color: #000 !important;
+        }
+
+        #pdf-workspace .approvals-container {
+            width: 100% !important;
+            margin-top: 70px !important;
+        }
+
+        #pdf-workspace .prepared-block {
+            width: 200px !important;
+            margin-bottom: 38px !important;
+        }
+
+        #pdf-workspace .approvals-container .label,
+        #pdf-workspace .approval-section .label,
+        #pdf-workspace .prepared-name,
+        #pdf-workspace .prepared-title,
+        #pdf-workspace .signature-block .name,
+        #pdf-workspace .signature-block .title {
+            font-family: "Calibri Light", Calibri, Arial, sans-serif !important;
+            font-size: 10pt !important;
+            color: #000 !important;
+        }
+
+        #pdf-workspace .approvals-container .label,
+        #pdf-workspace .approval-section .label {
+            font-weight: normal !important;
+            margin-bottom: 2px !important;
+            text-align: left !important;
+        }
+
+        #pdf-workspace .prepared-name {
+            width: 200px !important;
+            border-bottom: 1px solid #000 !important;
+            text-transform: uppercase !important;
+            min-height: 20px !important;
+            line-height: 20px !important;
+            text-align: left !important;
+        }
+
+        #pdf-workspace .prepared-title {
+            font-weight: bold !important;
+            text-align: left !important;
+        }
+
+        #pdf-workspace .approval-section {
+            width: 100% !important;
+            margin-top: 38px !important;
+        }
+
+        #pdf-workspace .approval-section.recommending .label,
+        #pdf-workspace .approval-section.approved-section .label {
+            margin-bottom: 65px !important;
+        }
+
+        #pdf-workspace .approval-section.approved-section {
+            margin-top: 15px !important;
+        }
+
+        #pdf-workspace .signature-block {
+            width: 420px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            text-align: center !important;
+        }
+
+        #pdf-workspace .signature-block .name {
+            display: block !important;
+            width: 100% !important;
+            border-bottom: 1px solid #000 !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
+            min-height: 20px !important;
+            line-height: 20px !important;
+        }
+
+        #pdf-workspace .signature-block .title {
+            display: block !important;
+            text-align: center !important;
+            margin-top: 3px !important;
+        }
+
+        #pdf-workspace .print-document-info-section {
+            margin-top: 8px !important;
+            width: 100% !important;
+            display: block !important;
+            clear: both !important;
+        }
+
+        #pdf-workspace .document-info {
+            width: 34% !important;
+            max-width: 34% !important;
+            margin: 0 !important;
+        }
+
+        #pdf-workspace .doc-header {
+            width: 100% !important;
+            border-collapse: collapse;
+            table-layout: fixed !important;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            border: none !important;
+        }
+
+        #pdf-workspace .doc-header td.label {
+            width: 38% !important;
+            padding: 4px 6px !important;
+            background-color: #002060 !important;
+            color: white !important;
+            font-weight: bold !important;
+            border: 1px solid #d1d1d1 !important;
+            text-align: left !important;
+            white-space: nowrap !important;
+        }
+
+        #pdf-workspace .doc-header td:nth-child(2) {
+            width: 4% !important;
+            padding: 0 1px !important;
+            font-weight: bold !important;
+            border-top: 1px solid #d1d1d1 !important;
+            border-bottom: 1px solid #d1d1d1 !important;
+        }
+
+        #pdf-workspace .doc-header td.value {
+            width: 58% !important;
+            padding: 4px 8px !important;
+            border: 1px solid #d1d1d1 !important;
+        }
+
+        #pdf-workspace .print-footer-inner,
+        #pdf-workspace footer {
+            width: 100%;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            background: #fff !important;
+        }
+
+        #pdf-workspace .footer-bottom,
+        #pdf-workspace .footer-logos {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            width: 100%;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        #pdf-workspace .footer-logos img,
+        #pdf-workspace .print-footer-logo {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            object-fit: contain;
+        }
+
+        #pdf-workspace input,
+        #pdf-workspace textarea,
+        #pdf-workspace select {
+            border: none !important;
+            background: transparent !important;
+            color: inherit !important;
+            font-family: inherit !important;
+            font-size: inherit !important;
+        }
+
+        #pdf-workspace .printable-field {
+            display: block;
+            width: 100%;
+            min-height: 1em;
+            white-space: pre-wrap;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            border: none !important;
+            background: transparent !important;
+            color: inherit;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        #pdf-workspace .table_form .printable-field,
+        #pdf-workspace .program-table .printable-field {
+            text-align: center !important;
+        }
+
+        #pdf-workspace .printable-checkbox {
+            display: inline-block;
+        }
+
+        #pdf-workspace img {
+            max-width: 100%;
+            height: auto;
         }
     `;
-    
-    element.appendChild(style);
+
+    document.head.appendChild(__pdfStyleEl);
 }
 
-/**
- * Remove elements that shouldn't appear in PDF
- */
-function removeUnwantedElements(container) {
-    // Remove buttons if they were cloned
-    const buttons = container.querySelectorAll('.buttons');
-    buttons.forEach(btn => btn.remove());
-    
-    // Remove any download buttons
-    const downloadBtns = container.querySelectorAll('#downloadPDF');
-    downloadBtns.forEach(btn => btn.remove());
-    
-    // Remove any iframes
-    const iframes = container.querySelectorAll('iframe');
-    iframes.forEach(iframe => iframe.remove());
-    
-    // Add PDF-specific class
-    container.classList.add('pdf-version');
+function buildWorkspaceContent(mainContent) {
+    const header = document.createElement('div');
+    header.id = 'pdf-header';
+    header.className = 'pdf-header pdf-render-page';
+    header.innerHTML = buildPrintHeaderHtml();
+
+    const footer = document.createElement('div');
+    footer.id = 'pdf-footer';
+    footer.className = 'pdf-footer pdf-render-page';
+    footer.innerHTML = buildPrintFooterHtml();
+
+    const body = document.createElement('div');
+    body.id = 'pdf-body';
+    body.className = 'pdf-render-body pdf-render-body-only';
+
+    const bodyWrapper = document.createElement('div');
+    bodyWrapper.className = 'pdf-body-wrapper';
+
+    const mainClone = mainContent.cloneNode(true);
+
+    mainClone.querySelectorAll(
+        'header, .print-page-header, .header-content, .office-title, .double-line, footer, .footer-bottom, .footer-logos'
+    ).forEach(el => el.remove());
+
+    removeNonPrintable(mainClone);
+    syncFormValues(mainContent, mainClone);
+    syncEditableCells(mainContent, mainClone);
+    convertFormControlsToPrintable(mainClone);
+    convertEditableCellsToPrintable(mainClone);
+    bodyWrapper.appendChild(mainClone);
+
+    const approvalSource =
+        document.querySelector('.approvals-container') ||
+        document.querySelector('.approvals') ||
+        document.querySelector('.approval-row')?.closest('section, div');
+
+    if (approvalSource && !bodyWrapper.querySelector('.approvals-container, .approvals')) {
+        const approvalClone = approvalSource.cloneNode(true);
+
+        removeNonPrintable(approvalClone);
+        syncFormValues(approvalSource, approvalClone);
+        syncEditableCells(approvalSource, approvalClone);
+        convertFormControlsToPrintable(approvalClone);
+        convertEditableCellsToPrintable(approvalClone);
+
+        const approvalWrap = document.createElement('div');
+        approvalWrap.className = 'print-approval-section';
+        approvalWrap.appendChild(approvalClone);
+        bodyWrapper.appendChild(approvalWrap);
+    }
+
+    const documentInfoSource =
+        document.querySelector('.document-info') ||
+        document.querySelector('.doc-header')?.closest('.document-info, div');
+
+    if (documentInfoSource && !bodyWrapper.querySelector('.document-info')) {
+        const docInfoClone = documentInfoSource.cloneNode(true);
+
+        removeNonPrintable(docInfoClone);
+        syncFormValues(documentInfoSource, docInfoClone);
+        syncEditableCells(documentInfoSource, docInfoClone);
+        convertFormControlsToPrintable(docInfoClone);
+        convertEditableCellsToPrintable(docInfoClone);
+
+        const docInfoWrap = document.createElement('div');
+        docInfoWrap.className = 'print-document-info-section';
+        docInfoWrap.appendChild(docInfoClone);
+        bodyWrapper.appendChild(docInfoWrap);
+    }
+
+    body.appendChild(bodyWrapper);
+
+    __pdfWorkspace.appendChild(header);
+    __pdfWorkspace.appendChild(body);
+    __pdfWorkspace.appendChild(footer);
 }
 
-/**
- * Prepare element for PDF generation
- */
-function prepareElementForPDF(element) {
-    // Ensure all inputs show their values
-    const inputs = element.querySelectorAll('input[type="text"]');
-    inputs.forEach(input => {
-        if (input.value && !input.disabled) {
-            // Create a span with the input value
-            const span = document.createElement('span');
-            span.className = 'pdf-text-value';
-            span.textContent = input.value;
-            span.style.fontFamily = 'Arial, sans-serif';
-            span.style.fontSize = window.getComputedStyle(input).fontSize;
-            span.style.padding = '0 5px';
-            input.parentNode.replaceChild(span, input);
+function cleanupPdfWorkspace() {
+    if (__pdfStyleEl) {
+        __pdfStyleEl.remove();
+        __pdfStyleEl = null;
+    }
+
+    if (__pdfWorkspace) {
+        __pdfWorkspace.remove();
+        __pdfWorkspace = null;
+    }
+}
+
+function buildPrintHeaderHtml() {
+    const leftLogo = document.querySelector('.logo-left')?.src || '';
+
+    const rightLogos = Array.from(document.querySelectorAll('.logos-right img'))
+        .map(img => img.src)
+        .filter(Boolean);
+
+    const officeTitle =
+        document.querySelector('.office-title')?.textContent?.trim() ||
+        'Monthly Accomplishment Report';
+
+    const collegeInfoNode = document.querySelector('.college-info');
+
+    const collegeInfoHtml = collegeInfoNode
+        ? collegeInfoNode.innerHTML
+        : `
+            <h1>SAINT MICHAEL COLLEGE OF CARAGA</h1>
+            <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
+            <p>District 8, Brgy. Triangulo, Nasipit, Agusan del Norte, Philippines</p>
+            <p>Tel Nos. +63 085 343-3251 / +63 085 283-3113</p>
+            <p><a href="https://www.smccnasipit.edu.ph">www.smccnasipit.edu.ph</a></p>
+        `;
+
+    return `
+        <div class="print-page-header">
+            <div class="header-content">
+                ${leftLogo ? `<img src="${escapeHtml(leftLogo)}" alt="Logo" class="logo-left">` : '<div></div>'}
+                <div class="college-info">${collegeInfoHtml}</div>
+                <div class="logos-right">
+                    ${rightLogos.map(src => `<img src="${escapeHtml(src)}" alt="Logo">`).join('')}
+                </div>
+            </div>
+            <div class="office-title">${escapeHtml(officeTitle)}</div>
+            <div class="double-line"></div>
+        </div>
+    `;
+}
+
+function buildPrintFooterHtml() {
+    const footerImg =
+        document.querySelector('.footer-bottom img')?.src ||
+        document.querySelector('.footer-logos img')?.src ||
+        document.querySelector('footer img')?.src ||
+        '';
+
+    return `
+        <div class="print-footer-inner">
+            ${footerImg ? `<img src="${escapeHtml(footerImg)}" alt="Footer Logo" class="print-footer-logo">` : ''}
+        </div>
+    `;
+}
+
+function hideScreenOnlyElements() {
+    const targets = [
+        document.getElementById('sidebarFrame'),
+        document.getElementById('headerFrame'),
+        document.querySelector('.buttons'),
+        document.querySelector('.admin-comment')
+    ].filter(Boolean);
+
+    __pdfHiddenState = {
+        targets: targets.map(node => ({
+            node,
+            display: node.style.display
+        })),
+        bodyMarginLeft: document.body.style.marginLeft,
+        bodyBackgroundColor: document.body.style.backgroundColor
+    };
+
+    targets.forEach(node => {
+        node.style.display = 'none';
+    });
+
+    document.body.style.marginLeft = '0';
+    document.body.style.backgroundColor = 'white';
+
+    return __pdfHiddenState;
+}
+
+function restoreHiddenElements() {
+    if (__pdfHiddenState) {
+        __pdfHiddenState.targets.forEach(item => {
+            if (item.node) item.node.style.display = item.display;
+        });
+
+        document.body.style.marginLeft = __pdfHiddenState.bodyMarginLeft;
+        document.body.style.backgroundColor = __pdfHiddenState.bodyBackgroundColor;
+    }
+
+    __pdfHiddenState = null;
+}
+
+function removeNonPrintable(root) {
+    const selectors = [
+        '#headerFrame',
+        '#sidebarFrame',
+        '.buttons',
+        '#downloadPDF',
+        '.admin-comment',
+        '.no-print',
+        '.print-hide',
+        '.action-buttons',
+        '.wrapper',
+        '[data-no-print="true"]',
+        'button',
+        'script',
+        'noscript'
+    ];
+
+    selectors.forEach(selector => {
+        root.querySelectorAll(selector).forEach(el => el.remove());
+    });
+}
+
+function syncFormValues(sourceRoot, clonedRoot) {
+    const sourceFields = sourceRoot.querySelectorAll('input, textarea, select');
+    const clonedFields = clonedRoot.querySelectorAll('input, textarea, select');
+
+    sourceFields.forEach((sourceField, index) => {
+        const clonedField = clonedFields[index];
+        if (!clonedField) return;
+
+        const tag = sourceField.tagName.toLowerCase();
+
+        if (tag === 'textarea') {
+            clonedField.value = sourceField.value;
+            clonedField.textContent = sourceField.value;
+            return;
+        }
+
+        if (tag === 'select') {
+            clonedField.value = sourceField.value;
+
+            Array.from(clonedField.options).forEach(opt => {
+                opt.selected = opt.value === sourceField.value;
+            });
+
+            return;
+        }
+
+        if (tag === 'input') {
+            const type = (sourceField.type || '').toLowerCase();
+
+            if (type === 'checkbox' || type === 'radio') {
+                clonedField.checked = sourceField.checked;
+
+                if (sourceField.checked) {
+                    clonedField.setAttribute('checked', 'checked');
+                } else {
+                    clonedField.removeAttribute('checked');
+                }
+            } else {
+                clonedField.value = sourceField.value;
+                clonedField.setAttribute('value', sourceField.value);
+            }
         }
     });
-    
-    // Preserve contenteditable content
-    const editableCells = element.querySelectorAll('td[contenteditable="true"]');
-    editableCells.forEach(cell => {
-        cell.setAttribute('contenteditable', 'false');
-    });
-    
-    // Force color preservation on the container
-    element.style.setProperty('-webkit-print-color-adjust', 'exact', 'important');
-    element.style.setProperty('print-color-adjust', 'exact', 'important');
-    element.style.setProperty('color-adjust', 'exact', 'important');
 }
 
-/**
- * Generate filename with current date
- */
+function syncEditableCells(sourceRoot, clonedRoot) {
+    const sourceCells = sourceRoot.querySelectorAll('[contenteditable="true"]');
+    const clonedCells = clonedRoot.querySelectorAll('[contenteditable="true"]');
+
+    sourceCells.forEach((sourceCell, index) => {
+        const clonedCell = clonedCells[index];
+        if (!clonedCell) return;
+
+        clonedCell.innerHTML = sourceCell.innerHTML;
+        clonedCell.textContent = sourceCell.textContent;
+    });
+}
+
+function convertEditableCellsToPrintable(root) {
+    if (!root) return;
+
+    root.querySelectorAll('[contenteditable="true"]').forEach(cell => {
+        cell.removeAttribute('contenteditable');
+        cell.style.outline = 'none';
+        cell.style.background = '#fff';
+    });
+}
+
+function convertFormControlsToPrintable(root) {
+    if (!root) return;
+
+    const fields = root.querySelectorAll('input, textarea, select');
+
+    fields.forEach(field => {
+        const tag = field.tagName.toLowerCase();
+        const replacement = document.createElement('div');
+        replacement.className = 'printable-field';
+
+        if (tag === 'textarea') {
+            replacement.textContent = field.value || '';
+            field.replaceWith(replacement);
+            return;
+        }
+
+        if (tag === 'select') {
+            const selectedText = field.options[field.selectedIndex]
+                ? field.options[field.selectedIndex].text
+                : (field.value || '');
+
+            replacement.textContent = selectedText;
+            field.replaceWith(replacement);
+            return;
+        }
+
+        if (tag === 'input') {
+            const type = (field.type || 'text').toLowerCase();
+
+            if (['hidden', 'button', 'submit', 'reset', 'file'].includes(type)) {
+                field.remove();
+                return;
+            }
+
+            if (type === 'checkbox') {
+                replacement.innerHTML = `<span class="printable-checkbox">${field.checked ? '&#10003;' : '&#9633;'}</span>`;
+                field.replaceWith(replacement);
+                return;
+            }
+
+            if (type === 'radio') {
+                replacement.innerHTML = `<span class="printable-checkbox">${field.checked ? '&#9679;' : '&#9675;'}</span>`;
+                field.replaceWith(replacement);
+                return;
+            }
+
+            replacement.textContent = field.value || '';
+            field.replaceWith(replacement);
+        }
+    });
+}
+
+function waitForImages(root) {
+    const images = Array.from(root.querySelectorAll('img'));
+
+    if (!images.length) return Promise.resolve();
+
+    return Promise.all(
+        images.map(img => {
+            if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+
+            return new Promise(resolve => {
+                const done = () => {
+                    img.removeEventListener('load', done);
+                    img.removeEventListener('error', done);
+                    resolve();
+                };
+
+                img.addEventListener('load', done, { once: true });
+                img.addEventListener('error', done, { once: true });
+
+                setTimeout(done, 4000);
+            });
+        })
+    );
+}
+
+async function waitForFonts(doc) {
+    try {
+        if (doc.fonts && doc.fonts.ready) await doc.fonts.ready;
+    } catch (_) {}
+
+    await new Promise(resolve => requestAnimationFrame(() => resolve()));
+    await new Promise(resolve => requestAnimationFrame(() => resolve()));
+}
+
 function generateFileName() {
     const date = new Date();
-    const formattedDate = date.toISOString().slice(0, 10); // YYYY-MM-DD
-    const month = document.getElementById('month')?.value || 'Month';
-    const department = document.getElementById('department')?.value || 'Department';
-    
-    // Clean filename (remove special characters)
-    const cleanMonth = month.replace(/[^a-zA-Z0-9]/g, '_');
-    const cleanDept = department.replace(/[^a-zA-Z0-9]/g, '_');
-    
-    return `MAR_${cleanDept}_${cleanMonth}_${formattedDate}.pdf`;
+    const formattedDate = date.toISOString().slice(0, 10);
+
+    const month =
+        document.getElementById('month')?.value ||
+        document.getElementById('program_month')?.value ||
+        'Month';
+
+    const department =
+        document.getElementById('department')?.value ||
+        document.querySelector('.department')?.value ||
+        'Department';
+
+    const cleanMonth = String(month).replace(/[^a-zA-Z0-9]/g, '_');
+    const cleanDept = String(department).replace(/[^a-zA-Z0-9]/g, '_');
+
+    return `REPORT_${cleanDept}_${cleanMonth}_${formattedDate}.pdf`;
 }
 
-/**
- * Show loading indicator
- */
-function showLoadingIndicator() {
-    if (!document.getElementById('pdf-loading-overlay')) {
-        const overlay = document.createElement('div');
+function showLoadingIndicator(message = 'Generating PDF...') {
+    let overlay = document.getElementById('pdf-loading-overlay');
+
+    if (!overlay) {
+        overlay = document.createElement('div');
         overlay.id = 'pdf-loading-overlay';
         overlay.style.cssText = `
             position: fixed;
@@ -289,8 +1209,9 @@ function showLoadingIndicator() {
             align-items: center;
             z-index: 9999;
         `;
-        
+
         const loader = document.createElement('div');
+        loader.id = 'pdf-loading-text';
         loader.style.cssText = `
             background: white;
             padding: 20px 40px;
@@ -302,22 +1223,33 @@ function showLoadingIndicator() {
             color: #002060;
             border-left: 4px solid #002060;
         `;
-        loader.textContent = 'Generating PDF...';
-        
+
         overlay.appendChild(loader);
         document.body.appendChild(overlay);
     }
+
+    const loaderText = document.getElementById('pdf-loading-text');
+
+    if (loaderText) {
+        loaderText.textContent = message;
+    }
 }
 
-/**
- * Hide loading indicator
- */
 function hideLoadingIndicator() {
     const overlay = document.getElementById('pdf-loading-overlay');
+
     if (overlay) {
         overlay.remove();
     }
 }
 
-// Make functions globally available
+function escapeHtml(value) {
+    return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 window.downloadAsPDF = downloadAsPDF;

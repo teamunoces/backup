@@ -15,7 +15,7 @@ if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
 $host = "localhost";
 $user = "root";
 $pass = "";
-$dbname = "ces_reports_db";
+$dbname = "ces_database";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
@@ -76,7 +76,7 @@ if ($file_size > 10 * 1024 * 1024) {
 }
 
 // Create upload directory if it doesn't exist
-$upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/admin/ReportManagement/uploads/report_files/";
+$upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/SYSTEM_VERSION_!/admin/ReportManagement/uploads/report_files/";
 if (!file_exists($upload_dir)) {
     if (!mkdir($upload_dir, 0755, true)) {
         echo json_encode(["success" => false, "error" => "Failed to create upload directory"]);
@@ -110,7 +110,7 @@ if ($existing_file_id && $existing_file_id !== '') {
     
     if ($old_file) {
         // Delete old physical file
-        $old_file_path = $_SERVER['DOCUMENT_ROOT'] . "/admin/ReportManagement/" . $old_file['file_path'];
+        $old_file_path = $_SERVER['DOCUMENT_ROOT'] . "/SYSTEM_VERSION_!/admin/ReportManagement/" . $old_file['file_path'];
         if (file_exists($old_file_path)) {
             unlink($old_file_path);
         }

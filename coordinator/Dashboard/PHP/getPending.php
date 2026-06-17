@@ -1,7 +1,7 @@
 <?php
 // Enable error reporting for debugging
 error_reporting(E_ALL);
-ini_set('display_errors', 1); // Temporarily show errors
+ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', 'pending_errors.log');
 
@@ -25,7 +25,7 @@ try {
     $host = "localhost";
     $user = "root";
     $pass = "";
-    $dbname = "ces_reports_db";
+    $dbname = "ces_database";
 
     $conn = new mysqli($host, $user, $pass, $dbname);
 
@@ -36,19 +36,31 @@ try {
     error_log("Database connected successfully");
 
     // Status filter
+    $allowedStatuses = ['pending', 'need fix'];
     $statusParam = $_GET['status'] ?? 'pending';
-    $statusArray = array_map('trim', explode(',', $statusParam));
+    $statusArray = array_map(
+        fn($status) => strtolower(trim($status)),
+        explode(',', $statusParam)
+    );
+    $statusArray = array_values(array_intersect($allowedStatuses, $statusArray));
+    if (empty($statusArray)) {
+        $statusArray = ['pending'];
+    }
     $placeholders = implode(',', array_fill(0, count($statusArray), '?'));
 
     error_log("Status filter: " . $statusParam);
     error_log("Status array: " . print_r($statusArray, true));
 
     $tables = [
-        '3ydp' => ['id','type','title_of_project AS title','created_by_name AS name','department','created_at AS date','status'],
-        'pd_main' => ['id','type','title_of_activity AS title','created_by_name AS name','department','created_at AS date','status'],
-        'dpir' => ['id','type','title_of_program AS title','created_by_name AS name','department','created_at AS date','status'],
-        'mar_header' => ['id','type','title_act AS title','created_by_name AS name','department','created_at AS date','status'],
-        'coordinator_cnacr' => ['id','type','title_of_program AS title','created_by_name AS name','department','created_at AS date','status']
+        'report_3ydp' => ['id','type','title_of_project AS title','created_by_name AS name','department','created_at AS date','status'],
+        'report_pd_main' => ['id','type','title_of_activity AS title','created_by_name AS name','department','created_at AS date','status'],
+        'report_mar_header' => ['id','type','title_act AS title','created_by_name AS name','department','created_at AS date','status'],
+        'report_coordinator_cnacr' => ['id','type','title_of_program AS title','created_by_name AS name','department','created_at AS date','status'],
+        'report_program_monitoring_form' => ['id', 'type', 'program_title AS title', 'created_by_name AS name', 'department', 'created_at AS date','status'],
+        'report_evaluation' => ['id', 'type', 'implementing_department AS title', 'created_by_name AS name', 'department', 'created_at AS date','status'],
+        'report_cert_appearance' => ['id', 'type', 'activity_name AS title', 'created_by_name AS name', 'department', 'created_at AS date','status'],
+        'report_reflection_paper' => ['id', 'type', 'beneficiary_name AS title', 'created_by_name AS name', 'department', 'created_at AS date','status'],
+        'report_narrative' => ['id', 'type', 'department AS title', 'created_by_name AS name', 'department', 'created_at AS date','status']
     ];
 
     $allReports = [];
@@ -58,7 +70,8 @@ try {
         error_log("Processing table: " . $table);
         
         // Check if table exists
-        $tableCheck = $conn->query("SHOW TABLES LIKE '$table'");
+        $tableLike = $conn->real_escape_string($table);
+        $tableCheck = $conn->query("SHOW TABLES LIKE '$tableLike'");
         if (!$tableCheck) {
             $errors[] = "Error checking table $table: " . $conn->error;
             $allReports[$table] = [];
@@ -73,10 +86,13 @@ try {
 
         $columnList = implode(', ', $columns);
 
+        $escapedTable = "`" . str_replace("`", "``", $table) . "`";
+
         $query = "
         SELECT $columnList
-        FROM $table
+        FROM $escapedTable
         WHERE status IN ($placeholders)
+        AND status <> 'draft'
         AND user_id = ?
         ";
 

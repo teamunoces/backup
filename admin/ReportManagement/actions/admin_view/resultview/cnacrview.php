@@ -5,6 +5,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Barangay Profile Report</title>
     <link rel="stylesheet" href="cnacrview.css">
    
@@ -13,7 +29,7 @@
 
      <!-- Header -->
         <iframe 
-            src="/admin/Profile/profile.html" 
+            src="/SYSTEM_VERSION_!/admin/Profile/profile.html" 
             id="headerFrame"
             frameborder="0"
             scrolling="no"
@@ -22,7 +38,7 @@
 
         <!-- Sidebar -->
         <iframe 
-            src="/admin/Nav/navigation.html" 
+            src="/SYSTEM_VERSION_!/admin/Nav/navigation.html" 
             id="sidebarFrame"
             frameborder="0"
             scrolling="no"
@@ -45,7 +61,7 @@
                                 <!-- ================= HEADER ================= -->
 
                                 <header class="report-header">
-                                    <img src="/admin/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo left">
+                                    <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo left">
                                     <div class="header-text">
                                         <h1>Saint Michael College of Caraga</h1>
                                         <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
@@ -54,7 +70,7 @@
                                         <h2>OFFICE OF THE COMMUNITY EXTENSION SERVICE</h2>
                                         <p id="psemester">First Semester, A.Y. 2025-2026</p>
                                     </div>
-                                    <img src="/admin/ReportManagement/actions/images/ISOlogo.png" alt="Extension Logo" class="logo right">
+                                    <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/ISOlogo.png" alt="Extension Logo" class="logo right">
                                 </header>
 
 
@@ -559,7 +575,7 @@
 
                            
 
-                            <section class="form-section">
+                            <section class="form-section" hidden>
                                 
                                 <div class="input-row">
                                     <table class="doc-header">
@@ -613,7 +629,7 @@
                         <footer>
                             <div class="footer-bottom">
                                 <div class="footer-logos">
-                                    <img src="/admin/ReportManagement/actions/images/footerlogo.png" alt="Org Logo 1">
+                                    <img src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/images/footerlogo.png" alt="Org Logo 1">
                                 </div>
                             </div>
                         </footer>
@@ -629,7 +645,8 @@
 <!-- ================= JAVASCRIPT FILE ================= -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="./viewget.js"></script>
-<script src="/admin/ReportManagement/actions/js/download.js"></script>
+<script src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/js/download.js"></script>
+<script src="/SYSTEM_VERSION_!/admin/ReportManagement/actions/js/getapproval.js"></script>
 
 
 </body>

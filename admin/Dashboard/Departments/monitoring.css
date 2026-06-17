@@ -1,0 +1,229 @@
+/* Title header styling - Updated to Lighter Green */
+        .title-header {
+            background: #6CC24A; /* Lighter, vibrant green */
+            color: #fff;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+            margin: 0;
+        }
+
+        .title-header p {
+            color: #E8F5E0; /* Softer light green tint */
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        .table-container {
+            margin-top: 40px;
+            max-width: 100%;
+            width: 100%;
+            background: white;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            padding: 0.5rem 0 1rem 0;
+        }
+
+        /* Department filter buttons integrated in header row */
+        .dept-filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            padding: 0.6rem 1rem;
+            background: #F4F9EF; /* Lighter green tint */
+            border-bottom: 2px solid #6CC24A;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #3A6B1F;
+            background: #E2F0D9;
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .dept-btn {
+            background: #ffffff;
+            border: 1px solid #6CC24A;
+            padding: 0.35rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #3A6B1F;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .dept-btn:hover {
+            background: #6CC24A;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .dept-btn.active {
+            background: #3A6B1F;
+            color: white;
+            border-color: #3A6B1F;
+            box-shadow: 0 2px 6px rgba(58, 107, 31, 0.25);
+        }
+
+        .submission-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.72rem;
+            min-width: auto;
+        }
+
+        /* Header styling - Top Row */
+        .submission-table thead tr:first-child th {
+            background: #3A6B1F; /* Medium-dark green - balanced */
+            color: white;
+            font-weight: 600;
+            padding: 0.7rem 0.25rem;
+            text-align: center;
+            border-right: 1px solid #5A9E2E;
+            font-size: 0.75rem;
+        }
+
+        /* Sticky first column header */
+        .submission-table th:first-child {
+            text-align: left;
+            background: #2C5518; /* Slightly darker for depth but not too dark */
+            position: sticky;
+            left: 0;
+            z-index: 3;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Department header cell (clickable) */
+        .dept-header {
+            background: #6CC24A;
+            color: white;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.6rem 0.25rem;
+            text-align: center;
+            border-bottom: 2px solid #3A6B1F;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dept-header:hover {
+            background: #5CB03A;
+        }
+
+        /* Month sub-header cells */
+        .month-header {
+            color: white;
+            background: #5A9E2E; /* Mid-tone green - brighter */
+            font-weight: 500;
+            font-size: 0.65rem;
+            padding: 0.4rem 0.2rem;
+            border-right: 1px solid #7FCC58;
+        }
+
+        /* Row header (first column - documents) */
+        .submission-table td:first-child {
+            font-weight: 700;
+            text-align: left;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-right: 1px solid #E2F0D9;
+            color: #3A6B1F;
+            font-size: 0.8rem;
+            position: sticky;
+            left: 0;
+            background: #ffffff;
+            z-index: 2;
+            white-space: normal;
+            word-break: keep-all;
+        }
+
+        /* Regular cell styling */
+        .submission-table td {
+            padding: 0.7rem 0.2rem;
+            text-align: center;
+            border-bottom: 1px solid #F4F9EF;
+            border-right: 1px solid #F4F9EF;
+            vertical-align: middle;
+            background-color: #ffffff;
+        }
+
+        /* Status styling - Submitted state */
+        .status-submitted {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: #ffffff;
+            font-weight: 600;
+            background: #6CC24A; /* Lighter vibrant green for positive status */
+            padding: 0.22rem 0.55rem;
+            border-radius: 30px;
+            font-size: 0.68rem;
+            white-space: nowrap;
+        }
+
+        /* Hover effect for better readability */
+        .submission-table tbody tr:hover td {
+            background-color: #F9FFF2;
+        }
+
+        .submission-table tbody tr:hover td:first-child {
+            background-color: #F0F8E8;
+        }
+
+        .legend {
+            background: #3A6B1F;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        footer {
+            margin-top: 1.2rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #6CC24A;
+            border-top: 1px solid #E2F0D9;
+            padding-top: 0.8rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        .note {
+            font-size: 0.7rem;
+            color: #7FA065;
+            text-align: right;
+            padding-right: 1rem;
+            margin-top: 0.5rem;
+        }
+
+  
+
+        @media (max-width: 1000px) {
+            body { padding: 1rem; }
+            .status-submitted { padding: 0.18rem 0.45rem; font-size: 0.62rem; }
+            .submission-table td, .submission-table th { padding: 0.5rem 0.15rem; }
+            .dept-btn { padding: 0.25rem 0.7rem; font-size: 0.7rem; }
+            .filter-label { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
+        }

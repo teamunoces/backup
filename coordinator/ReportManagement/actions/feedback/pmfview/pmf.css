@@ -1,0 +1,324 @@
+/* ===== Frames (Layout Shell) ===== */
+#sidebarFrame {
+    width: 100px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 100px;
+    width: calc(100% - 100px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Updated: Added pointer-events: none to prevent user interaction */
+.form-container {
+    background: #fff;
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+
+.admin-comment {
+    width: 100%; 
+    max-width: 990px;
+    box-sizing: border-box;
+    display: block;
+    margin: 50px auto 40px auto;
+}
+
+#admincomment {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    font-style: italic;
+    padding: 20px;
+    font-family: inherit;
+    border-radius: 4px 12px 12px 4px;
+    resize: none;
+}
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: capitalize;
+}
+
+h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.header-info {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 8px;
+    align-items: flex-end;
+}
+
+.input-group label {
+    font-weight: bold;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.input-group input {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    outline: none;
+    background: transparent;
+    color: #000;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    font-size: 0.9em;
+    vertical-align: top;
+    color: #000;
+}
+
+th {
+    background-color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.center-text {
+    text-align: center;
+}
+
+tbody tr {
+    height: 30px;
+}
+
+/* Removed :disabled styling to keep colors original */
+input[type="checkbox"] {
+    cursor: default;
+}
+
+.checkbox-cell {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.followUp {
+    width: 70px;
+    padding: 4px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: #000;
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 0.9em;
+    resize: none;
+    background: transparent;
+    color: #000;
+}
+
+/* Paper Lines Textarea Styling */
+.paper-lines {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+    line-height: 30px;
+    padding: 0;
+    background-attachment: local;
+    background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
+    background-size: 100% 30px;
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.footer-notes {
+    margin-top: 20px;
+}
+
+@media print {
+    .no-print { display: none; }
+    body { background-color: white; padding: 0; }
+    .form-container { box-shadow: none; width: 100%; max-width: none; }
+    .paper-lines {
+        background-image: linear-gradient(to bottom, transparent 29px, #000 29px);
+        background-size: 100% 30px;
+        border: none;
+    }
+}
+
+#feedbackTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+#feedbackTable th, #feedbackTable td {
+    border: 1px solid #000;
+    padding: 10px;
+}
+
+.feedbackSummary, .feedbackAction {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    padding: 8px;
+    font-family: inherit;
+    font-size: 0.9em;
+    display: block;
+    overflow: hidden;
+    min-height: 50px;
+}
+
+#otherIssues {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    padding: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    display: block;
+    overflow: hidden;
+    min-height: 38px;
+}
+
+
+/* Submit Button */
+.submit-button {
+    display: block;
+    padding: 6px 30px;
+    border-radius: 50px;
+    border: 1px solid #1a1a1a;
+    background: linear-gradient(to right, #63b32e, #3d7025);
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    margin-left: auto; /* Align right */
+    width: fit-content;
+}
+
+.submit-button:hover {
+    opacity: 0.9;
+}

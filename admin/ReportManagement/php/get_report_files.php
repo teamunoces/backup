@@ -15,7 +15,7 @@ if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
 $host = "localhost";
 $user = "root";
 $pass = "";
-$dbname = "ces_reports_db";
+$dbname = "ces_database";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
@@ -53,15 +53,21 @@ if (!$stmt->execute()) {
 $result = $stmt->get_result();
 $files = [];
 
+// Base path for file URLs
+$base_url = "/SYSTEM_VERSION_!/admin/ReportManagement/";
+
 while ($row = $result->fetch_assoc()) {
     // Ensure file exists on disk
-    $full_path = $_SERVER['DOCUMENT_ROOT'] . "/admin/ReportManagement/" . $row['file_path'];
+    $full_path = $_SERVER['DOCUMENT_ROOT'] . $base_url . $row['file_path'];
     $file_exists = file_exists($full_path);
+    
+    // Build the full URL path for frontend access
+    $full_url = $base_url . $row['file_path'];
     
     $files[] = [
         'id' => (int)$row['id'],
         'file_name' => $row['file_name'],
-        'file_path' => $row['file_path'],
+        'file_path' => $full_url, // Return the full URL path
         'uploaded_at' => $row['created_at'],
         'file_exists' => $file_exists,
         'file_size' => $file_exists ? filesize($full_path) : 0

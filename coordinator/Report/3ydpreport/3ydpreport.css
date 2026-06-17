@@ -1,12 +1,19 @@
 /* ===== Header ===== */
+:root {
+    --sidebar-width: 100px;
+    --header-height: 60px;
+    --page-gutter: clamp(16px, 3vw, 40px);
+    --report-max-width: 1100px;
+}
+
 #headerFrame {
-    height: 60px;
+    height: var(--header-height);
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: var(--sidebar-width);
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - var(--sidebar-width));
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -14,7 +21,7 @@
 
 /* ===== Sidebar ===== */
 #sidebarFrame {
-    width: 150px;
+    width: var(--sidebar-width);
     height: 100vh;
     border: none;
     position: fixed;
@@ -40,7 +47,10 @@
     height: 90px;
     width: auto;
 }
-
+.logo-left2 {
+    height: 80px;
+    width: auto;
+}
 .logos-right {
     display: flex;
     gap: 20px;
@@ -55,6 +65,7 @@
 .college-info {
     text-align: center;
     flex-grow: 1;
+    min-width: 0;
     padding: 0 20px;
 }
 
@@ -98,19 +109,21 @@
 
 /* ===== General Styles ===== */
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
     letter-spacing: -0.011em;
     line-height: 1.6;
     color: #1a202c;
     background-color: #f4f7f9;
     margin: 0;
     padding: 0;
-    margin-left: 150px; /* Add margin to account for sidebar */
+    margin-left: var(--sidebar-width);
+    overflow-x: hidden;
 }
 
 .container {
-    max-width: 1100px;
-    margin: 80px auto 40px auto; /* Centered with auto margins */
+    width: min(var(--report-max-width), calc(100vw - var(--sidebar-width) - (var(--page-gutter) * 2)));
+    max-width: var(--report-max-width);
+    margin: calc(var(--header-height) + 40px) auto 40px auto;
     background: #fff;
     padding: 40px;
     border-radius: 8px;
@@ -168,40 +181,42 @@ input[type="text"]:focus, textarea:focus {
 
 /* ===== Table Section Fixes ===== */
 .table-wrapper {
-    overflow-x: visible; /* Remove horizontal scroll */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     background: #fff;
     border: 1px solid #e2e8f0;
     margin-bottom: 30px;
     width: 100%;
 }
 
+table thead th {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+    background-color: #e5e7eb; /* light gray like screenshot */
+    color: #000;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 6px 4px;
+    border: 1px solid #000;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.4;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    /* Removed min-width: 1200px to prevent sliding */
-    table-layout: fixed; /* Keeps columns equal width so they don't "jump" */
-    word-wrap: break-word; /* Ensures long text breaks to new lines */
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif;
+    table-layout: fixed;
 }
 
-table thead th {
-    font-weight: bold;
-    background-color: #f8fafc;
-    color: #475569;
-    font-size: 0.9rem; /* Smaller font to help 9 columns fit better */
-    padding: 8px 4px;
-    border: 1px solid #cbd5e1;
-    text-transform: uppercase;
-    text-align: center;
-    word-wrap: break-word;
+table th, table td {
+    border: 1px solid #000;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
-
-table td {
-    border: 1px solid #cbd5e1;
-    padding: 0;
-    vertical-align: top;
-}
-
 table td textarea {
+    font-family: Calibri, "Calibri (Body)", Arial, sans-serif !important;
+    font-size: 14px;
     field-sizing: content; 
     width: 100% !important;
     min-height: 60px; 
@@ -209,7 +224,6 @@ table td textarea {
     padding: 10px 5px !important;
     background: transparent !important; /* Ensure no gradient background */
     background-image: none !important;  /* Explicitly remove any inherited lines */
-    font-size: 0.85rem;
     color: #1e293b;
     line-height: 1.4;
     display: block;
@@ -283,31 +297,57 @@ table td:first-child textarea {
 /* ===== Form Buttons ===== */
 .form-actions {
     margin-top: 40px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 180px 180px 180px 270px;
+    align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 28px;
+    flex-wrap: nowrap;
+    width: 100%;
 }
 
 .btn {
-    padding: 12px 40px;
-    font-size: 1.1rem;
-    font-weight: bold;
+    width: 100%;
+    min-width: 0;
+    height: 47px;
+    padding: 0 22px;
+    font-size: 16px;
+    font-weight: 800;
     color: white;
-    border-radius: 50px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    min-width: 180px;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
     border: none;
+    letter-spacing: 0;
+    white-space: nowrap;
 }
 
-.btn-submit {
-    background: linear-gradient(to right, #64c233, #45752f);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+.btn-submit,
+.form-actions.report-action-bar .btn-submit,
+.form-actions.report-action-bar .submit-button {
+    grid-column: 3;
+    justify-self: stretch;
+    height: 47px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(90deg, #59AF29 0%, #3f7f2d 100%);
+    box-shadow: 0 5px 11px rgba(37, 73, 17, 0.28);
 }
 
-.recommendation-btn {
-    background: linear-gradient(to right, #00b4db, #2b32b2);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+.btn-draft,
+.form-actions.report-action-bar .btn-draft,
+.form-actions.report-action-bar .draft-button {
+    grid-column: 1;
+    justify-self: stretch;
+    background: linear-gradient(90deg, #f59f0b 0%, #d18700 100%);
+    box-shadow: 0 5px 11px rgba(148, 96, 0, 0.25);
+}
+
+.recommendation-btn,
+.form-actions.report-action-bar .recommendation-btn {
+    grid-column: 4;
+    justify-self: stretch;
+    background: linear-gradient(90deg, #08acd4 0%, #2736c9 100%);
+    box-shadow: 0 6px 13px rgba(37, 54, 201, 0.35);
 }
 
 .btn:hover {
@@ -319,11 +359,15 @@ table td:first-child textarea {
     transform: translateY(0);
 }
 
-.btn-clear {
-    background: linear-gradient(to right, #e0e0e0, #bdbdbd);
+.btn-clear,
+.form-actions.report-action-bar .btn-clear,
+.form-actions.report-action-bar .clear-button {
+    grid-column: 2;
+    justify-self: stretch;
+    background: linear-gradient(90deg, #e3e3e3 0%, #bebebe 100%);
     color: #444;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 5px 11px rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .btn-clear-outline {
@@ -498,25 +542,64 @@ table td:first-child textarea {
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 1200px) {
-    body {
-        margin-left: 150px;
+@media (min-width: 1440px) {
+    :root {
+        --report-max-width: 1200px;
+        --page-gutter: 48px;
     }
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --report-max-width: 1000px;
+        --page-gutter: 24px;
+    }
+
     .container {
-        max-width: 1000px;
+        padding: 32px;
+    }
+
+    .logo-left {
+        height: 78px;
+    }
+
+    .logo-left2,
+    .logos-right img {
+        height: 70px;
+    }
+
+    .college-info h1 {
+        font-size: 23px;
     }
 }
 
 @media (max-width: 900px) {
-    body {
-        margin-left: 150px;
+    :root {
+        --page-gutter: 20px;
     }
+
     .container {
-        max-width: 90%;
-        padding: 30px;
+        padding: 28px;
     }
+
+    .header-content {
+        gap: 12px;
+    }
+
+    .college-info {
+        padding: 0 10px;
+    }
+
+    .college-info h1 {
+        font-size: 20px;
+    }
+
+    .office-title {
+        font-size: 16px;
+    }
+
     table {
-        min-width: 700px;
+        min-width: 760px;
     }
 }
 
@@ -532,38 +615,81 @@ table td:first-child textarea {
         margin-left: 0; /* Remove margin when sidebar is hidden */
     }
     .container {
-        margin-top: 80px;
-        width: 90%;
+        margin-top: calc(var(--header-height) + 20px);
+        width: calc(100vw - (var(--page-gutter) * 2));
         padding: 20px;
         margin-left: auto;
         margin-right: auto;
     }
     .form-actions {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
+        align-items: stretch;
     }
     .btn {
+        justify-self: stretch;
         width: 100%;
         min-width: unset;
     }
+    .btn-draft,
+    .btn-clear,
+    .btn-submit,
+    .recommendation-btn {
+        grid-column: 1;
+    }
     table {
-        min-width: 600px;
+        min-width: 720px;
     }
 }
 
 @media (max-width: 600px) {
+    :root {
+        --page-gutter: 12px;
+    }
+
+    .header-content {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .logo-left,
+    .logo-left2,
+    .logos-right img {
+        height: 54px;
+    }
+
+    .college-info {
+        order: 3;
+        flex-basis: 100%;
+        padding: 0;
+    }
+
+    .college-info h1 {
+        font-size: 18px;
+    }
+
+    .college-info p {
+        font-size: 10px;
+    }
+
     .form-actions {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
+        align-items: stretch;
     }
     .btn {
+        justify-self: stretch;
         width: 100%;
     }
+    .btn-draft,
+    .btn-clear,
+    .btn-submit,
+    .recommendation-btn {
+        grid-column: 1;
+    }
     table {
-        min-width: 500px;
+        min-width: 680px;
     }
     .container {
-        width: 95%;
+        width: calc(100vw - (var(--page-gutter) * 2));
         padding: 15px;
     }
 }

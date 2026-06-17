@@ -19,6 +19,11 @@ function getDBConnection() {
     }
 }
 
+
+function mergeApprovalDocumentInfo($pdo, $row) {
+    return $row;
+}
+
 // Check if mar_id is provided
 if (isset($_GET['mar_id']) && !empty($_GET['mar_id'])) {
     $mar_id = $_GET['mar_id'];
@@ -32,8 +37,8 @@ if (isset($_GET['mar_id']) && !empty($_GET['mar_id'])) {
             $headerStmt = $pdo->prepare("SELECT * FROM mar_header WHERE id = :mar_id");
             $headerStmt->execute([':mar_id' => $mar_id]);
             $headerData = $headerStmt->fetch(PDO::FETCH_ASSOC);
-            
             if ($headerData) {
+                $headerData = mergeApprovalDocumentInfo($pdo, $headerData);
                 // Fetch detail data from mar_table - using correct column names
                 // Note: report_id in mar_table references id in mar_header
                 $detailStmt = $pdo->prepare("SELECT * FROM mar_table WHERE report_id = :mar_id");

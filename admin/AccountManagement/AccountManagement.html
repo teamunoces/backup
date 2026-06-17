@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Account Management System</title>
     <link rel="stylesheet" href="AccMan.css">
     <link rel="stylesheet" href="darkmode.css">
@@ -92,14 +108,17 @@
                     <div class="form-group">
                         <label>Department:</label>
                         <select name="department" required>
-                            <option value="CCIS">CCIS</option>
-                            <option value="CTHM">CTHM</option>
-                            <option value="CAS">CAS</option>
-                            <option value="CBM">CBM</option>
-                            <option value="JHS">JHS</option>
+                            <option value="ELEMENTARY">ELEMENTARY</option>
                             <option value="SHS">SHS</option>
-                            <option value="CTE">CTE</option>
+                            <option value="JHS">JHS</option>
+                            <option value="CBMA">CBMA</option>
+                            <option value="CTHM">CTHM</option>
+                            <option value="CCIS">CCIS</option>
                             <option value="CCJE">CCJE</option>
+                            <option value="CAS">CAS</option>
+                            <option value="CTE">CTE</option>
+                            <option value="CSF">CSF</option>
+                            <option value="LRC">LRC</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -112,7 +131,7 @@
         </div>
     </div>
 
-    <script src="AccMan.js"></script>
-    <script src="darkmode.js"></script>
+    <script src="/SYSTEM_VERSION_!/admin/AccountManagement/AccMan.js"></script>
+    <script src="/SYSTEM_VERSION_!/admin/AccountManagement/darkmode.js"></script>
 </body>
 </html>

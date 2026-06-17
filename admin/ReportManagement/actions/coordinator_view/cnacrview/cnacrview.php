@@ -12,6 +12,22 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Community Needs Assessment Report</title>
     <link rel="stylesheet" href="cnacrview.css">
     <link rel="stylesheet" href="darkmode.css">
@@ -21,17 +37,32 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
 
 
-   <!-- HEADER -->
-  <iframe src="/admin/Profile/profile.html" id="headerFrame" frameborder="0" scrolling="no" title="Header"></iframe>
+  <iframe 
+        src="http://localhost/SYSTEM_VERSION_!/admin/Profile/profile.html"
+        id="headerFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Header">
+    </iframe>
 
-  <!-- SIDEBAR -->
-  <iframe src="/admin/Nav/navigation.html" id="sidebarFrame" frameborder="0" scrolling="no" title="Navigation Sidebar"></iframe>
+    <!-- Sidebar -->
+    <iframe 
+        src="http://localhost/SYSTEM_VERSION_!/admin/Nav/navigation.html" 
+        id="sidebarFrame"
+        frameborder="0"
+        scrolling="no"
+        title="Navigation Sidebar">
+    </iframe>
+
              <!-- ACTION BUTTONS -->
                         <div class="buttons">
-                            <button  onclick="printReport()">Print this Page</button>
-                            <button id="downloadPDF" type="button">Download PDF</button>
+                            <button onclick="printReport()">Print</button>
+                         <!--   <button id="downloadPDF" type="button">Download PDF</button>-->
                         </div>
-
+                                    <div class="admin-comment">
+                                          <label for="admincomment" class="admin-comment-label" style="font-weight: bold;">Admin Feedback</label>
+                                          <textarea id="admincomment" placeholder="Enter admin comments here..." rows="5"></textarea>
+                                    </div>
 
                  
     <div class="report-container">
@@ -39,7 +70,8 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                       
         <header>
             <div class="header-content">
-                <img src="/coordinator/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                <img src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                <img src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/images/Ceslogo.png" alt="CES Logo" class="logo-left2">
                 <div class="college-info">
                     <h1>Saint Michael College of Caraga</h1>
                     <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
@@ -48,7 +80,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                     <a href="http://www.smccnasipit.edu.ph">www.smccnasipit.edu.ph</a>
                 </div>
                 <div class="logos-right">
-                    <img src="/coordinator/ReportManagement/actions/images/ISOlogo.png" alt="SOCOTEC Logo">
+                    <img src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/images/ISOlogo.png" alt="SOCOTEC Logo">
                 </div>
             </div>
             <h2 class="office-title">OFFICE OF THE COMMUNITY EXTENSION SERVICES</h2>
@@ -61,30 +93,30 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
         <div class="header-grid">
             <div class="label-box bg-gray">Department</div>
-            <input type="text" name="department" id="department"  placeholder="Type here..." >
+            <input type="text" name="department" id="department" readonly placeholder="Type here..." >
             <div class="label-box bg-gray">Date Submitted</div>
-            <input type="text" name="date" id="date_submitted" placeholder="Type here..." >
+            <input type="text" name="date" id="date_submitted" readonly placeholder="Type here..." >
         </div>
 
         <div class="section-content">
             <div class="form-group">
                 <label>A. Community Needs Assessment Date of Conduct:</label>
                 <div class="line-input">
-                    <textarea name="date_conduct" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="date_conduct" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>B. Participants:</label>
                 <div class="line-input">
-                    <textarea name="participants" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="participants" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>C. Location/Purok/district:</label>
                 <div class="line-input">
-                    <textarea name="location" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="location" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
         </div>
@@ -96,19 +128,19 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             <div class="form-group">
                 <label>A. Family Profile:</label>
                 <div class="line-input">
-                    <textarea name="family_profile" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="family_profile" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>B. Community Concerns:</label>
                <div class="line-input">
-                    <textarea name="community_concern" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="community_concern" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>C. Other Identified Needs:</label>
                 <div class="line-input">
-                    <textarea name="other_identified_needs" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="other_identified_needs" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
         </div>
@@ -120,31 +152,31 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             <div class="form-group">
                 <label>1. Kabayani ng Panginoon</label>
                 <div class="line-input">
-                    <textarea name="kabayani_ng_panginoon" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_panginoon" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>2. Kabayani ng Kalikasan Kabayani ng Buhay</label>
                 <div class="line-input">
-                    <textarea name="kabayani_ng_kalikasan" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_kalikasan" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
              <div class="form-group">
                 <label>3. Kabayani ng Buhay</label>
                   <div class="line-input">
-                    <textarea name="kabayani_ng_buhay" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_buhay" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>4. Kabayani ng Turismo</label>
                 <div class="line-input">
-                    <textarea name="kabayani_ng_turismo" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_turismo" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>5. Kabayani ng Kultura –</label>
                 <div class="line-input">
-                    <textarea name="kabayani_ng_kultura" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="kabayani_ng_kultura" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
         </div>
@@ -156,19 +188,19 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             <div class="form-group">
                 <label>Title of the Program:</label>
                 <div class="line-input">
-                    <textarea name="title_of_program" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="title_of_program" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>Objectives:</label>
                <div class="line-input">
-                    <textarea name="objectives" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="objectives" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>Beneficiaries:</label>
                 <div class="line-input">
-                    <textarea name="beneficiaries" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="beneficiaries" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
         </div>
@@ -180,13 +212,13 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             <div class="form-group">
                 <label>From the School:</label>
                 <div class="line-input">
-                    <textarea name="from_school" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="from_school" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label>From the Community:</label>
                <div class="line-input">
-                    <textarea name="from_community" class="paper-lines" oninput="autoExpand(this)" rows="1" placeholder="Type here..."></textarea>
+                    <textarea name="from_community" class="paper-lines" oninput="autoExpand(this)" readonly rows="1" placeholder="Type here..."></textarea>
                 </div>
             </div>
         </div>
@@ -200,7 +232,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                         <div class="approval-row">
                             <div class="signature-group">
                             <div class="label">Prepared by:</div>
-                            <div class="signature-line"><?php echo htmlspecialchars($userName); ?></div>
+                            <div class="signature-line" id="created_by_name"></div>
                             <div class="title bold">CES Coordinator</div>
                             </div>
                         </div>
@@ -208,7 +240,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                         <div class="label" style="margin-top: 20px;">Noted by:</div>
                         <div class="approval-row">
                             <div class="signature-group">
-                            <div class="signature-line"><?php echo htmlspecialchars($userDean); ?></div>
+                            <div class="signature-line"  id="dean"></div>
                             <div class="title bold">Dean</div>
                             </div>
                             <div class="signature-group">
@@ -277,7 +309,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                          <footer>
                             <div class="footer-bottom">
                                 <div class="footer-logos">
-                                    <img src="/coordinator/ReportManagement/actions/images/footerlogo.png" alt="Org Logo 1">
+                                    <img src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/images/footerlogo.png" alt="Org Logo 1">
                                 </div>
                             </div>
                         </footer>
@@ -308,11 +340,12 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="./print.js"></script>
+
     <SCript src="./viewget.js"></SCript>
-    <script src="/admin/ReportManagement/actions/js/getapproval.js"></script>
+    <script src="/SYSTEM_VERSION_!/coordinator//ReportManagement/actions/js/getapproval.js"></script>
     <script src="./darkmode.js"></script>
     <script src="./download.js"></script>
+    <script src="/SYSTEM_VERSION_!/coordinator/ReportManagement/actions/view/cnacrview/print.js"></script>
 
 </body>
 </html>

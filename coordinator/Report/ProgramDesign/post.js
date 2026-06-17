@@ -1,79 +1,18 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const submitBtn = document.querySelector(".submit-button");
-    const addRowBtn = document.querySelector(".add-row-btn");
-    const deleteRowBtn = document.querySelector(".delete-row-btn");
-    const tableBody = document.querySelector(".program-table tbody");
-
-    // ===== Add Row Function =====
-    addRowBtn.addEventListener("click", () => {
-        const newRow = document.createElement("tr");
-        // Create 11 editable cells
-        for (let i = 0; i < 11; i++) {
-            const td = document.createElement("td");
-            td.contentEditable = "true";
-            newRow.appendChild(td);
-        }
-        tableBody.appendChild(newRow);
-    });
-           // ===== Delete Row Function =====
-    deleteRowBtn.addEventListener("click", () => {
-        const rows = tableBody.querySelectorAll("tr");
-
-        if (rows.length > 1) {
-            tableBody.removeChild(rows[rows.length - 1]); // remove last row
-        } else {
-            alert("No rows to delete.");
-        }
-    });
-
-    // ===== Submit Form via AJAX =====
-    submitBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-
-        // 1. Collect Main Fields from the top of the page
-        formData.append('type', typeof reportType !== 'undefined' ? reportType : 'Program Design');
-        formData.append('department', document.getElementById("department").value);
-        formData.append('title_of_activity', document.getElementById("title_of_activity").value);
-        formData.append('participants', document.getElementById("participants").value);
-        formData.append('location', document.getElementById("location").value);
-        formData.append('feedback', '');
-        formData.append('status', 'pending');
-
-        // 2. Collect Table Data
-        tableBody.querySelectorAll("tr").forEach((row) => {
-            const cells = row.querySelectorAll("td");
-            if (cells.length === 11) {
-                formData.append(`program[]`, cells[0].innerText.trim());
-                formData.append(`milestones[]`, cells[1].innerText.trim());
-                formData.append(`duration[]`, cells[2].innerText.trim());
-                formData.append(`objectives[]`, cells[3].innerText.trim());
-                formData.append(`persons_involved[]`, cells[4].innerText.trim());
-                formData.append(`school_resources[]`, cells[5].innerText.trim());
-                formData.append(`community_resources[]`, cells[6].innerText.trim());
-                formData.append(`collaborating_agencies[]`, cells[7].innerText.trim());
-                formData.append(`budget[]`, cells[8].innerText.trim());
-                formData.append(`means_of_verification[]`, cells[9].innerText.trim());
-                formData.append(`remarks[]`, cells[10].innerText.trim());
-            }
-        });
-
-        // 3. Send to PHP
-        fetch("post.php", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            alert(data);
-            if(data.toLowerCase().includes("successfully")) {
-                location.reload(); // Clear form on success
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("Error submitting report.");
-        });
-    });
+﻿function showSuccessBanner(message = 'Report submitted successfully!') {
+    let banner = document.getElementById('submissionSuccessBanner');
+    if (!banner) { banner = document.createElement('div'); banner.id = 'submissionSuccessBanner'; banner.setAttribute('role', 'status'); banner.style.position = 'fixed'; banner.style.top = '78px'; banner.style.right = '24px'; banner.style.zIndex = '10000'; banner.style.maxWidth = '420px'; banner.style.padding = '14px 18px'; banner.style.borderRadius = '8px'; banner.style.background = 'linear-gradient(135deg, #59AF29 0%, #254911 100%)'; banner.style.color = '#fff'; banner.style.boxShadow = '0 10px 24px rgba(37, 73, 17, 0.28)'; banner.style.fontFamily = 'Inter, Segoe UI, Arial, sans-serif'; banner.style.fontSize = '14px'; banner.style.fontWeight = '700'; banner.style.lineHeight = '1.4'; banner.style.opacity = '0'; banner.style.transform = 'translateY(-10px)'; banner.style.transition = 'opacity 0.2s ease, transform 0.2s ease'; document.body.appendChild(banner); }
+    banner.textContent = message; requestAnimationFrame(() => { banner.style.opacity = '1'; banner.style.transform = 'translateY(0)'; }); clearTimeout(window.submissionSuccessBannerTimer); window.submissionSuccessBannerTimer = setTimeout(() => { banner.style.opacity = '0'; banner.style.transform = 'translateY(-10px)'; }, 3500);
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const tableBody = document.querySelector('.program-table tbody');
+    const columns = ['program','objectives','program_content_and_activities','service_delivery','partnerships_and_stakeholders','facilitators_and_trainers','program_start_and_end_dates','frequency_of_activities','community_resources','school_resources','risk_management_and_contingency_plans','sustainability_and_follow_up','promotion_and_awareness'];
+    function addBlankRow(values = {}) { const row = document.createElement('tr'); columns.forEach(key => { const cell = document.createElement('td'); cell.contentEditable = 'true'; cell.innerText = values[key] || ''; row.appendChild(cell); }); tableBody.appendChild(row); }
+    document.querySelector('.add-row-btn')?.addEventListener('click', () => addBlankRow());
+    document.querySelector('.delete-row-btn')?.addEventListener('click', () => { if (tableBody.rows.length > 1) tableBody.deleteRow(tableBody.rows.length - 1); else alert('No rows to delete.'); });
+    function collectProgramDesign() { return { type: window.reportType || 'Program Design', department: document.getElementById('department')?.value || '', title_of_activity: document.getElementById('title_of_activity')?.value || '', participants: document.getElementById('participants')?.value || '', location: document.getElementById('location')?.value || '', rows: Array.from(tableBody.rows).map(row => { const cells = row.querySelectorAll('td'); const data = {}; columns.forEach((key, index) => data[key] = cells[index]?.innerText.trim() || ''); return data; }) }; }
+    function fillProgramDesign(data) { ['department','title_of_activity','participants','location'].forEach(id => { const el = document.getElementById(id); if (el) el.value = data[id] || ''; }); tableBody.innerHTML = ''; const rows = Array.isArray(data.rows) && data.rows.length ? data.rows : [{}]; rows.forEach(addBlankRow); }
+    function clearProgramDesign() { ['title_of_activity','participants','location'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; }); tableBody.innerHTML = ''; addBlankRow(); }
+    const draftManager = ReportDrafts.create({ storageKey: 'program_design', collect: collectProgramDesign, fill: fillProgramDesign, clear: clearProgramDesign });
+    draftManager.checkDatabaseDraft();
+    document.querySelector('.submit-button')?.addEventListener('click', async event => { event.preventDefault(); const data = draftManager.applySubmitMeta(collectProgramDesign()); try { const response = await fetch('post.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); const result = await response.json(); if (!response.ok || !result.success) throw new Error(result.message || 'Submission failed.'); draftManager.completeSubmit(); showSuccessBanner(result.message || 'Report submitted successfully!'); clearProgramDesign(); } catch (error) { alert(`Error: ${error.message}`); } });
 });

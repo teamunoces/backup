@@ -15,7 +15,7 @@ if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
 $host = "localhost";
 $user = "root";
 $pass = "";
-$dbname = "ces_reports_db";
+$dbname = "ces_database";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
@@ -32,10 +32,44 @@ if (empty($reportId) || empty($table)) {
     exit;
 }
 
-// Sanitize table name to prevent SQL injection
-$allowedTables = ['coordinator_cnacr', '3ydp', 'pd_main', 'mar_header', 'dpir'];
-if (!in_array($table, $allowedTables)) {
+// Sanitize and map table name to prevent SQL injection
+$tableAliases = [
+    '3ydp' => 'report_3ydp',
+    'cert_appearance' => 'report_cert_appearance',
+    'cnacr' => 'report_cnacr',
+    'coordinator_cnacr' => 'report_coordinator_cnacr',
+    'mar_header' => 'report_mar_header',
+    'narrative_report' => 'report_narrative',
+    'program_monitoring_form' => 'report_program_monitoring_form',
+    'reflection_paper' => 'report_reflection_paper',
+    'evaluation_reports' => 'report_evaluation',
+    'pd_main' => 'report_pd_main'
+];
+
+$allowedTables = [
+    'report_3ydp',
+    'report_cert_appearance',
+    'report_cnacr',
+    'report_coordinator_cnacr',
+    'report_mar_header',
+    'report_narrative',
+    'report_program_monitoring_form',
+    'report_reflection_paper',
+    'report_evaluation',
+    'report_pd_main'
+];
+
+$originalTable = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
+$table = $tableAliases[$originalTable] ?? $originalTable;
+
+if (!in_array($table, $allowedTables, true)) {
     echo json_encode(["success" => false, "error" => "Invalid table"]);
+    exit;
+}
+
+$checkTable = $conn->query("SHOW TABLES LIKE '$table'");
+if (!$checkTable || $checkTable->num_rows === 0) {
+    echo json_encode(["success" => false, "error" => "Table not found"]);
     exit;
 }
 
@@ -71,11 +105,11 @@ if ($checkHistoryTable && $checkHistoryTable->num_rows > 0) {
     $stmt = $conn->prepare("
         SELECT feedback_text, created_at 
         FROM feedback_history 
-        WHERE report_id = ? AND report_table = ? 
+        WHERE report_id = ? AND report_table IN (?, ?)
         ORDER BY created_at DESC
     ");
     if ($stmt) {
-        $stmt->bind_param("is", $reportId, $table);
+        $stmt->bind_param("iss", $reportId, $table, $originalTable);
         $stmt->execute();
         $result = $stmt->get_result();
         

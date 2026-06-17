@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'ces_reports_db';
+$database = 'ces_database';
 
 $conn = new mysqli($host, $username, $password, $database);
 
@@ -18,7 +18,7 @@ $conn->set_charset("utf8");
 if (isset($_GET['id'])) {
     $reportId = intval($_GET['id']);
     // Replace 'cnacr_reports' with your actual table name if different
-    $stmt = $conn->prepare("SELECT * FROM coordinator_cnacr WHERE id = ?"); 
+    $stmt = $conn->prepare("SELECT * FROM report_coordinator_cnacr WHERE id = ?"); 
     $stmt->bind_param("i", $reportId);
     $stmt->execute();
     $result = $stmt->get_result();

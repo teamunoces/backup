@@ -35,6 +35,7 @@ try {
     $stmt->execute();
     $main_result = $stmt->get_result()->fetch_assoc();
     if (!$main_result) $main_result = null;
+    if ($main_result) $main_result = mergeApprovalDocumentInfo($conn, $main_result);
 
     // ===== Fetch related rows =====
     $details_sql = "SELECT * FROM pd_detail WHERE report_id = ?";

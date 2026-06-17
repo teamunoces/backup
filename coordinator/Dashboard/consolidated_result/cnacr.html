@@ -3,10 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Barangay Profile Report</title>
-    <link rel="stylesheet" href="cnacr.css">
+    <link rel="stylesheet" href="cnacr.css?v=20260520a">
     <link rel="stylesheet" href="print.css" media="print">
-    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="darkmode.css?v=20260520a">
 
 </head>
 <body>
@@ -57,7 +73,24 @@
                                                         <option value="triangulo">BRGY. TRIANGULO</option>
                                                     </select>
                                                 </div>
-                                        
+                                                 <!-- Add Year Filter -->
+                                            <div class="table-card">
+                                                <label for="yearSelect">Select Year:</label>
+                                                <select id="yearSelect">
+                                                    <option value="all" selected>SELECT</option>
+                                                    <option value="2025">2025</option>
+                                                    <option value="2026">2026</option>
+                                                    <option value="2027">2027</option>
+                                                    <option value="2028">2028</option>
+                                                    <option value="2029">2029</option>
+                                                    <option value="2030">2030</option>
+                                                    <option value="2031">2031</option>
+                                                    <option value="2032">2032</option>
+                                                    <option value="2033">2033</option>
+                                                    <option value="2034">2034</option>
+                                                    <option value="2035">2035</option>
+                                                </select>
+                                            </div>
 
                                                 <div class="button-container">                                                
                                                     <button id="downloadPdf">Download PDF</button>
@@ -475,14 +508,18 @@
             // Get references to the select and the td
             const barangaySelect = document.getElementById('barangaySelect');
             const barangayNameTd = document.getElementById('barangayName');
+            const yearSelect = document.getElementById('yearSelect');
+
 
             // Listen for changes on the select
             barangaySelect.addEventListener('change', function() {
                 // Get the selected option's text (not value)
                 const selectedText = barangaySelect.options[barangaySelect.selectedIndex].text;
+                const selectedYear = yearSelect.options[yearSelect.selectedIndex].text;
                 
                 // Update the td
                 barangayNameTd.textContent = selectedText;
+                
             });
             </script>
 
@@ -490,9 +527,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="./js/get.js"></script>
-<script src="./js/download.js"></script>
+<script src="./js/get.js?v=20260520a"></script>
 <script src="./darkmode.js"></script>
+<script src="./js/download.js"></script>
 
 </body>
 </html>

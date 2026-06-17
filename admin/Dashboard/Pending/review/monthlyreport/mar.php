@@ -8,6 +8,22 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="anti-fouc">
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #f4f7f9;
+    }
+
+    #headerFrame {
+        background-color: #ffffff;
+    }
+
+    #sidebarFrame {
+        background-color: #254911;
+    }
+</style>
     <title>Monthly Accomplishment Report</title>
     <link rel="stylesheet" href="mar.css">
     <link rel="stylesheet" href="darkmode.css">
@@ -16,7 +32,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
   <!-- Header -->
    <iframe 
-        src="/admin/Profile/profile.html" 
+        src="http://localhost/SYSTEM_VERSION_!/admin/Profile/profile.html" 
         id="headerFrame"
         frameborder="0"
         scrolling="no"
@@ -25,7 +41,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
     <!-- Sidebar -->
     <iframe 
-        src="/admin/Nav/navigation.html" 
+        src="http://localhost/SYSTEM_VERSION_!/admin/Nav/navigation.html" 
         id="sidebarFrame"
         frameborder="0"
         scrolling="no"
@@ -39,6 +55,7 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
            <header>
             <div class="header-content">
                 <img src="../images/smcclogo.png" alt="SMCC Logo" class="logo-left">
+                <img src="../images/Ceslogo.png" alt="CES Logo" class="logo-left2">
                 <div class="college-info">
                     <h1>Saint Michael College of Caraga</h1>
                     <p>Brgy. 4, Nasipit, Agusan del Norte, Philippines</p>
@@ -102,14 +119,14 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
                     </thead>
                     <tbody>
                         <tr>
-                            <td contenteditable="true"></td>
-                            <td contenteditable="true"></td>
-                            <td contenteditable="true"></td>
-                            <td contenteditable="true"></td>
-                            <td contenteditable="true"></td>
-                            <td contenteditable="true"></td>
-                            <td contenteditable="true"></td>
-                            <td contenteditable="true"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
             
@@ -144,11 +161,11 @@ $reportId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
     
     </div>
 
-      <input type="hidden" id="currentReportId" value="<?php echo htmlspecialchars($_GET['id'] ?? ''); ?>">
+       <input type="hidden" id="currentReportId" value="<?php echo htmlspecialchars($_GET['id'] ?? ''); ?>">
        <input type="hidden" id="currentReportType" value="<?php echo $reportType; ?>">
       <script>const reportType = "<?php echo $reportType; ?>";console.log(reportType);</script>
       <script src="./get.js" ></script>
-      <script src="/admin/Dashboard/Pending/review/action/action.js"></script>
+      <script src="/SYSTEM_VERSION_!/admin/Dashboard/Pending/review/action/action.js"></script>
       <script src="./darkmode.js"></script>
 
 </body>

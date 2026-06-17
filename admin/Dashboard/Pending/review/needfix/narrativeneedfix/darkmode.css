@@ -1,0 +1,154 @@
+/* ================= NARRATIVE REPORT DARK MODE ================= */
+
+/* ===== BODY ===== */
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+}
+
+/* ===== HEADER & SIDEBAR ===== */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(255,255,255,0.05) !important;
+}
+
+/* ===== REPORT CONTAINER ===== */
+body.dark-mode .report-container {
+    background-color: #1e1e1e !important;
+    color: #f1f1f1 !important;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6) !important;
+}
+
+/* ===== ADMIN COMMENT ===== */
+body.dark-mode #admincomment {
+    background-color: #2b2b2b !important;
+    color: #ffd166 !important;
+    border: 2px solid #f59e0b !important;
+    border-left: 8px solid #f59e0b !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4) !important;
+}
+
+/* ===== TEXT ===== */
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode div,
+body.dark-mode label,
+body.dark-mode li,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #f1f1f1 !important;
+}
+
+/* ===== COLLEGE INFO ===== */
+body.dark-mode .college-info h1 {
+    color: #7fb7ff !important;
+}
+
+body.dark-mode .college-info p,
+body.dark-mode .college-info a {
+    color: #dcdcdc !important;
+}
+
+/* ===== OFFICE TITLE ===== */
+body.dark-mode .office-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .double-line {
+    border-top: 4px double #7fb7ff !important;
+}
+
+/* ===== LABELS ===== */
+body.dark-mode .label {
+    color: #ffffff !important;
+}
+
+/* ===== TEXTAREA ===== */
+body.dark-mode .line-input {
+    background-color: #2b2b2b !important;
+    color: #ffffff !important;
+    border: 1px solid #555 !important;
+    border-radius: 6px;
+    padding: 12px !important;
+}
+
+/* ===== TEXTAREA FOCUS ===== */
+body.dark-mode .line-input:focus {
+    background-color: #333333 !important;
+    border: 1px solid #7fb7ff !important;
+    box-shadow: 0 0 8px rgba(127,183,255,0.3) !important;
+}
+
+/* ===== PLACEHOLDER ===== */
+body.dark-mode .line-input::placeholder {
+    color: #bdbdbd !important;
+    font-style: italic;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+body.dark-mode .submit-button {
+    background: linear-gradient(to right, #4caf50, #2e7d32) !important;
+    border: 1px solid #66bb6a !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .submit-button:hover {
+    opacity: 0.95;
+    box-shadow: 0 4px 15px rgba(255,255,255,0.12) !important;
+}
+
+/* ===== LINKS ===== */
+body.dark-mode a {
+    color: #90caf9 !important;
+}
+
+/* ===== SCROLLBAR ===== */
+body.dark-mode ::-webkit-scrollbar {
+    width: 10px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ===== PRINT MODE ===== */
+@media print {
+    body.dark-mode {
+        background: white !important;
+        color: black !important;
+    }
+
+    body.dark-mode .report-container {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+
+    body.dark-mode .line-input {
+        background: white !important;
+        color: black !important;
+        border: none !important;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    body.dark-mode .report-container {
+        background-color: #1e1e1e !important;
+    }
+}

@@ -1,0 +1,156 @@
+/* ================= DARK MODE ================= */
+
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #e8e8e8 !important;
+}
+
+/* Frames */
+body.dark-mode #sidebarFrame,
+body.dark-mode #headerFrame {
+    background-color: #121212 !important;
+}
+
+/* Main container */
+body.dark-mode .form-container {
+    background-color: #1e1e1e !important;
+    color: #e8e8e8 !important;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Header text */
+body.dark-mode .college-info h1 {
+    color: #8bb8e8 !important;
+}
+
+body.dark-mode .college-info p,
+body.dark-mode .office-title,
+body.dark-mode .form-type,
+body.dark-mode label,
+body.dark-mode .approvals,
+body.dark-mode .signature-block,
+body.dark-mode .ces-head-block {
+    color: #e8e8e8 !important;
+}
+
+body.dark-mode .college-info a {
+    color: #9ecbff !important;
+}
+
+body.dark-mode .double-line {
+    border-top-color: #8bb8e8 !important;
+}
+
+/* Inputs */
+body.dark-mode input,
+body.dark-mode textarea {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border-bottom-color: #777 !important;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #aaa !important;
+}
+
+/* Program table */
+body.dark-mode .program-table {
+    color: #e8e8e8 !important;
+}
+
+body.dark-mode .program-table th {
+    background-color: #2f2f2f !important;
+    color: #ffffff !important;
+    border-color: #666 !important;
+}
+
+body.dark-mode .program-table td {
+    background-color: #1f1f1f !important;
+    color: #ffffff !important;
+    border-color: #666 !important;
+}
+
+body.dark-mode .program-table td[contenteditable="true"] {
+    background-color: #252525 !important;
+    color: #ffffff !important;
+}
+
+/* Buttons */
+body.dark-mode .buttons a button {
+    background-color: #1e1e1e !important;
+    color: #8ee36a !important;
+    border-color: #59AF29 !important;
+}
+
+body.dark-mode .buttons a button:hover {
+    background-color: #263824 !important;
+}
+
+/* Approvals underline */
+body.dark-mode #ces_head,
+body.dark-mode .signature-block .name {
+    border-bottom-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .signature-block .title,
+body.dark-mode .ces-head {
+    color: #e8e8e8 !important;
+}
+
+/* Document info */
+body.dark-mode .document-info,
+body.dark-mode .doc-header {
+    color: #ffffff !important;
+}
+
+body.dark-mode .doc-header td {
+    background-color: #1f1f1f !important;
+    color: #ffffff !important;
+    border-color: #666 !important;
+}
+
+body.dark-mode .doc-header td.label,
+body.dark-mode .doc-header .label {
+    background-color: #002060 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .doc-header td.value,
+body.dark-mode .doc-header .value {
+    background-color: #1f1f1f !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .doc-header td.value input,
+body.dark-mode .doc-header td.value p,
+body.dark-mode .doc-header .value input,
+body.dark-mode .doc-header .value p {
+    color: #ffffff !important;
+    background-color: transparent !important;
+}
+
+/* Footer */
+body.dark-mode footer {
+    background-color: transparent !important;
+    color: #e8e8e8 !important;
+}
+
+/* Prevent print from using dark mode */
+@media print {
+    body.dark-mode,
+    body.dark-mode * {
+        background-color: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+
+    body.dark-mode .doc-header td.label,
+    body.dark-mode .doc-header .label {
+        background-color: #002060 !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}

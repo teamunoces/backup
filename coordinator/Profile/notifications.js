@@ -1,5 +1,12 @@
 // API endpoint - files are in the same directory
-const API_BASE_URL = window.location.origin + '/coordinator/Profile'; // Adjust this path if needed
+const API_BASE_URL = window.location.origin + '/SYSTEM_VERSION_!/coordinator/Profile'; // Adjust this path if needed
+const notificationsDebug = new URLSearchParams(window.location.search).has('debug');
+const notificationsLog = (...args) => {
+    if (notificationsDebug) console.log(...args);
+};
+const notificationsWarn = (...args) => {
+    if (notificationsDebug) console.warn(...args);
+};
 
 // State management
 let notificationCheckInterval;
@@ -63,11 +70,12 @@ async function loadAndInjectNotificationCSS() {
                 background-color: white;
                 border-radius: 12px;
                 width: 600px;
-                max-width: 90%;
-                height: 600px;
-                max-height: 80vh;
+                max-width: calc(100vw - 32px);
+                height: min(560px, calc(100vh - 32px));
+                max-height: calc(100vh - 32px);
                 display: flex;
                 flex-direction: column;
+                overflow: hidden;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
                 animation: slideIn 0.3s ease;
             }
@@ -87,9 +95,9 @@ async function loadAndInjectNotificationCSS() {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 15px 20px;
+                padding: 14px 20px;
                 border-bottom: 1px solid #e0e0e0;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #59af29 0%, #254911 100%);
                 border-radius: 12px 12px 0 0;
                 flex-shrink: 0;
             }
@@ -139,13 +147,14 @@ async function loadAndInjectNotificationCSS() {
 
             .notification-filters {
                 display: flex;
-                padding: 15px 20px;
+                padding: 12px 20px;
                 gap: 10px;
                 border-bottom: 1px solid #e0e0e0;
                 background-color: #f8f9fa;
                 flex-shrink: 0;
-                overflow-x: auto;
-                white-space: nowrap;
+                overflow: hidden;
+                white-space: normal;
+                flex-wrap: wrap;
             }
 
             .filter-btn {
@@ -166,13 +175,13 @@ async function loadAndInjectNotificationCSS() {
             }
 
             .filter-btn.active {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #59af29 0%, #254911 100%);
                 color: white;
                 border-color: transparent;
             }
 
             .notifications-list {
-                padding: 15px;
+                padding: 12px 15px;
                 overflow-y: auto;
                 flex: 1;
                 min-height: 0;
@@ -195,8 +204,8 @@ async function loadAndInjectNotificationCSS() {
             }
 
             .notification-item.unread {
-                background-color: #e8f0fe;
-                border-left-color: #667eea;
+                background-color: #f4fbf1;
+                border-left-color: #59af29;
             }
 
             .notification-item.urgent {
@@ -210,7 +219,7 @@ async function loadAndInjectNotificationCSS() {
             .notification-icon-side {
                 margin-right: 12px;
                 font-size: 20px;
-                color: #667eea;
+                color: #59af29;
                 flex-shrink: 0;
             }
 
@@ -244,7 +253,7 @@ async function loadAndInjectNotificationCSS() {
 
             .notification-sender i {
                 font-size: 10px;
-                color: #667eea;
+                color: #59af29;
             }
 
             .notification-time {
@@ -295,7 +304,7 @@ async function loadAndInjectNotificationCSS() {
             .loading-spinner {
                 text-align: center;
                 padding: 60px 20px;
-                color: #667eea;
+                color: #59af29;
             }
 
             .loading-spinner i {
@@ -343,7 +352,7 @@ async function loadAndInjectNotificationCSS() {
             }
 
             body.dark-mode .notification-item.unread {
-                background-color: #1e2a3a;
+                background-color: #1f2e1c;
             }
 
             body.dark-mode .notification-message {
@@ -386,11 +395,11 @@ async function loadAndInjectNotificationCSS() {
                 style.textContent = cssText;
                 parent.document.head.appendChild(style);
                 notificationStylesInjected = true;
-                console.log('Notification styles injected into parent');
+                notificationsLog('Notification styles injected into parent');
             }
         }
     } catch (error) {
-        console.error('Failed to load notification CSS:', error);
+        notificationsWarn('Failed to load notification CSS:', error);
     }
 }
 
@@ -481,7 +490,7 @@ function attachNotificationPanelListeners(panelOverlay) {
 
 /* ================= SHOW NOTIFICATION PANEL ================= */
 function showNotificationPanel() {
-    console.log('Showing notification panel');
+    notificationsLog('Showing notification panel');
     
     // Load and inject CSS if not already done
     loadAndInjectNotificationCSS();
@@ -499,7 +508,7 @@ function showNotificationPanel() {
 
 /* ================= HIDE NOTIFICATION PANEL ================= */
 function hideNotificationPanel() {
-    console.log('Hiding notification panel');
+    notificationsLog('Hiding notification panel');
     
     if (parent && parent.document) {
         const panelOverlay = parent.document.getElementById('notificationPanelOverlay');
@@ -538,7 +547,7 @@ function loadNotifications(filter = 'all') {
         return response.json();
     })
     .then(notifications => {
-        console.log('Notifications loaded:', notifications);
+        notificationsLog('Notifications loaded:', notifications);
         
         if (!notifications || notifications.length === 0) {
             notificationsList.innerHTML = `
@@ -595,7 +604,7 @@ function loadNotifications(filter = 'all') {
         checkUnreadMessages();
     })
     .catch(error => {
-        console.error('Error loading notifications:', error);
+        notificationsWarn('Error loading notifications:', error);
         notificationsList.innerHTML = `
             <div class="empty-notifications">
                 <i class="fa-solid fa-exclamation-circle"></i>
@@ -607,7 +616,7 @@ function loadNotifications(filter = 'all') {
 
 /* ================= MARK NOTIFICATION AS READ ================= */
 function markNotificationAsRead(notificationId) {
-    console.log('Marking notification as read:', notificationId);
+    notificationsLog('Marking notification as read:', notificationId);
     
     fetch(`${API_BASE_URL}/notifications.php?action=mark-read&id=${notificationId}`, {
         method: 'POST',
@@ -618,7 +627,7 @@ function markNotificationAsRead(notificationId) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Marked as read response:', data);
+        notificationsLog('Marked as read response:', data);
         
         if (data.success) {
             // Immediately update the unread count
@@ -633,7 +642,7 @@ function markNotificationAsRead(notificationId) {
         }
     })
     .catch(error => {
-        console.error('Error marking as read:', error);
+        notificationsWarn('Error marking as read:', error);
     });
 }
 
@@ -653,7 +662,6 @@ async function checkUnreadMessages() {
         }
         
         const data = await response.json();
-        console.log('Unread count:', data);
         
         // Update badge in header
         updateNotificationBadge(data.count || 0);
@@ -672,7 +680,7 @@ async function checkUnreadMessages() {
         }
         
     } catch (error) {
-        console.error('Failed to fetch unread messages:', error);
+        notificationsWarn('Failed to fetch unread messages:', error);
         updateNotificationBadge(0);
     }
 }
@@ -735,14 +743,12 @@ if (parent) {
 
 /* ================= INITIALIZATION ================= */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Initializing notifications receiver...');
-    
     // Add click event to notification bell
     const notificationBell = document.getElementById('notificationBell');
     if (notificationBell) {
         notificationBell.addEventListener('click', showNotificationPanel);
     } else {
-        console.error('Notification bell not found');
+        notificationsWarn('Notification bell not found');
     }
     
     // Check for unread messages on load

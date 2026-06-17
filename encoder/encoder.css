@@ -9,6 +9,11 @@
     --text-dark: #2d3436;
     --shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Mobile font sizes */
+    --font-mobile-base: 16px;
+    --font-mobile-header: 24px;
+    --font-mobile-title: 20px;
+    --font-mobile-button: 14px;
 }
 
 * {
@@ -24,15 +29,32 @@ body {
     color: var(--text-dark);
     min-height: 100vh;
     padding-bottom: 60px;
+    font-size: var(--font-mobile-base);
+    line-height: 1.5;
+    position: relative;
 }
 
-/* --- Header --- */
+/* Iframe Container Styles */
+#headerFrame {
+    width: 100%;
+    height: 70px;
+    min-height: 10px;
+    border: none;
+    margin-bottom: 20px;
+    background: transparent;
+    display: block;
+    position: relative;
+    z-index: 1000;
+    overflow: visible;
+}
+
+/* --- Header (Fallback if no iframe) --- */
 header {
     background-color: var(--dark-color);
     color: white;
     padding: 2rem 1rem;
     text-align: center;
-    font-size: 2rem;
+    font-size: var(--font-mobile-header);
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -53,7 +75,7 @@ header {
     border: none;
     padding: 14px 28px;
     border-radius: 8px;
-    font-size: 1.1rem;
+    font-size: var(--font-mobile-button);
     font-weight: 600;
     cursor: pointer;
     display: flex;
@@ -74,15 +96,25 @@ header {
     background: var(--card-bg);
     max-width: 850px;
     margin: 0 auto 30px auto;
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
     box-shadow: var(--shadow);
     border-left: 8px solid var(--primary-color);
+    position: relative;
+    z-index: 10;
 }
 
 .section-header h2, .saved-data-header h3 {
     color: var(--dark-color);
-    font-size: 1.5rem;
+    font-size: var(--font-mobile-title);
+}
+
+.saved-data-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
 /* --- Forms --- */
@@ -95,15 +127,16 @@ label {
     margin-bottom: 8px;
     font-weight: 600;
     color: #444;
+    font-size: 14px;
 }
 
-input, select {
+input, select, p {
     width: 100%;
     padding: 14px;
     border: 2px solid #dae2d7;
     border-radius: 8px;
     background-color: white;
-    font-size: 1rem;
+    font-size: var(--font-mobile-base);
     transition: var(--transition);
 }
 
@@ -127,6 +160,7 @@ button {
     cursor: pointer;
     font-weight: 700;
     transition: var(--transition);
+    font-size: var(--font-mobile-button);
 }
 
 .btn-save { background-color: var(--primary-color); color: white; }
@@ -138,6 +172,7 @@ button {
     font-size: 2.5rem;
     color: #bbb;
     line-height: 0.5;
+    padding: 6px;
 }
 
 /* --- Table --- */
@@ -151,19 +186,21 @@ table {
     width: 100%;
     border-collapse: collapse;
     background: white;
+    font-size: 14px;
 }
 
 th {
     background-color: var(--dark-color);
     color: white;
-    padding: 15px;
+    padding: 12px 8px;
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: 12px;
 }
 
 td {
-    padding: 15px;
+    padding: 12px 8px;
     border-bottom: 1px solid #eee;
+    font-size: 13px;
 }
 
 /* --- Barangay Cards Grid --- */
@@ -195,6 +232,7 @@ td {
     font-weight: 700;
     text-align: center;
     line-height: 1.3;
+    font-size: var(--font-mobile-base);
 }
 
 .card:hover {
@@ -207,32 +245,14 @@ td {
     color: white;
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 15px;
-    }
-    
-    .data-entry-section {
-        margin: 10px;
-        padding: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    header { font-size: 1.5rem; padding: 1.5rem 1rem; }
-    .btn-toggle { width: 90%; }
-    .button-group button { width: 100%; }
-}
-
 /* --- Enhanced Data Entry Section --- */
 .data-entry-section {
     background: rgba(255, 255, 255, 0.9); /* Slight transparency */
     backdrop-filter: blur(10px); /* Modern blur effect */
     max-width: 900px;
-    margin: 20px auto;
-    padding: 40px;
+    width: calc(100% - 40px);
+    margin: 20px auto 30px;
+    padding: 20px;
     border-radius: 20px;
     border: 1px solid rgba(89, 175, 41, 0.2);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -256,11 +276,13 @@ td {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .section-header h2 {
     color: var(--dark-color);
-    font-size: 1.8rem;
+    font-size: var(--font-mobile-title);
     font-weight: 800;
     letter-spacing: -0.5px;
 }
@@ -269,7 +291,7 @@ td {
 #barangayDataForm {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two columns */
-    gap: 25px;
+    gap: 20px;
 }
 
 /* Make the 'Select Barangay' dropdown span full width */
@@ -283,10 +305,10 @@ td {
 }
 
 .form-group label {
-    font-size: 0.9rem;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #555;
     font-weight: 700;
 }
@@ -296,9 +318,9 @@ td {
 .form-group select {
     background-color: #ffffff;
     border: 2px solid #e1e8df;
-    padding: 15px;
+    padding: 12px;
     border-radius: 12px;
-    font-size: 1rem;
+    font-size: var(--font-mobile-base);
     color: var(--dark-color);
     transition: all 0.3s ease;
 }
@@ -320,13 +342,13 @@ td {
     grid-column: span 2; /* Full width for buttons */
     display: grid;
     grid-template-columns: 2fr 1fr 1.5fr; /* Dynamic widths */
-    gap: 15px;
+    gap: 12px;
     margin-top: 15px;
 }
 
 .button-group button {
-    height: 55px;
-    font-size: 1rem;
+    height: 48px;
+    font-size: var(--font-mobile-button);
     text-transform: uppercase;
     letter-spacing: 1px;
     border-radius: 12px;
@@ -357,18 +379,130 @@ td {
 .btn-view:hover { background: #1a330c; transform: translateY(-2px); }
 .btn-clear:hover { background: #e2e5e1; }
 
+/* --- Iframe Dropdown Override --- */
+/* These styles ensure dropdown from iframe appears above all content */
+iframe#headerFrame {
+    pointer-events: auto;
+}
+
+/* Ensure dropdown from iframe has highest z-index */
+.dropdown {
+    z-index: 10001 !important;
+}
+
+/* Adjust main content to make room for dropdown */
+.main-content {
+    position: relative;
+    z-index: 1;
+}
+
 /* --- Responsive Layout for Tablets/Phones --- */
 @media (max-width: 768px) {
+    :root {
+        --font-mobile-base: 15px;
+        --font-mobile-header: 22px;
+        --font-mobile-title: 18px;
+        --font-mobile-button: 13px;
+    }
+    
+    #headerFrame {
+        height: 65px;
+    }
+    
     #barangayDataForm {
         grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 15px;
     }
     
     .form-group:first-child {
         grid-column: span 1;
+    }
+    
+    .form-group input, 
+    .form-group select {
+        padding: 14px;
     }
 
     .button-group {
         grid-column: span 1;
         grid-template-columns: 1fr; /* Stack buttons on mobile */
     }
+    
+    .button-group button {
+        height: 44px;
+    }
+    
+    .data-entry-section {
+        width: auto;
+        margin: 15px;
+        padding: 20px;
+    }
+    
+    .section-header h2 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --font-mobile-base: 14px;
+        --font-mobile-header: 20px;
+        --font-mobile-title: 16px;
+        --font-mobile-button: 12px;
+    }
+    
+    #headerFrame {
+        height: 60px;
+    }
+    
+    header { 
+        font-size: 20px; 
+        padding: 1.2rem 1rem; 
+    }
+    
+    .btn-toggle { 
+        width: 90%;
+        font-size: 13px;
+        padding: 12px 20px;
+    }
+    
+    .button-group button { 
+        width: 100%;
+        height: 42px;
+    }
+    
+    .data-entry-section {
+        width: auto;
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .form-group input, 
+    .form-group select {
+        padding: 12px;
+    }
+    
+    table, th, td {
+        font-size: 12px;
+    }
+    
+    th, td {
+        padding: 10px 6px;
+    }
+    
+    .card a {
+        font-size: 14px;
+        min-height: 100px;
+        padding: 15px;
+    }
+    
+    .container {
+        gap: 15px;
+        padding: 15px;
+    }
+}
+
+/* Ensure dropdown menu doesn't get cut off by iframe boundaries */
+iframe {
+    overflow: visible !important;
 }

@@ -13,7 +13,7 @@ body {
     margin: 0;
     color: var(--text-color);
     padding-top: 80px;      /* header */
-    padding-left: 150px;    /* sidebar */
+    padding-left: 100px;    /* sidebar */
     box-sizing: border-box;
 }
 
@@ -23,9 +23,9 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -33,7 +33,7 @@ body {
 
 /* ===== Sidebar ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -392,4 +392,47 @@ tbody td:first-child {
     padding: 8px;
     background-color: white;
     color: var(--text-color);
+}
+
+/* ===== LAPTOP / DESKTOP RESPONSIVE POLISH ===== */
+@media (min-width: 769px) {
+    body {
+        padding-top: 80px;
+        padding-left: 100px;
+    }
+
+    .container {
+        width: min(100% - 40px, 1400px);
+        padding: 20px;
+    }
+}
+
+@media (max-width: 1366px) and (min-width: 769px) {
+    .container {
+        width: min(100% - 32px, 1180px);
+        padding: 16px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+    th,
+    td {
+        padding: 12px 10px;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+    .filter-bar {
+        gap: 12px;
+    }
+
+    .type-filter {
+        flex: 1 1 260px;
+    }
+
+    .search-box {
+        flex: 1 1 260px;
+    }
 }

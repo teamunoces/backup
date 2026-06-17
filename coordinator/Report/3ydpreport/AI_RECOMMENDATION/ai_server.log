@@ -1,0 +1,679 @@
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+Loading model...
+Model loaded on cpu
+Loading recommendations and computing embeddings...
+Batches:   0%|          | 0/12 [00:00<?, ?it/s]Batches:   8%|8         | 1/12 [00:00<00:05,  1.95it/s]Batches:  17%|#6        | 2/12 [00:00<00:04,  2.09it/s]Batches:  25%|##5       | 3/12 [00:01<00:04,  2.18it/s]Batches:  33%|###3      | 4/12 [00:01<00:03,  2.18it/s]Batches:  42%|####1     | 5/12 [00:02<00:03,  2.30it/s]Batches:  50%|#####     | 6/12 [00:02<00:02,  2.33it/s]Batches:  58%|#####8    | 7/12 [00:03<00:02,  2.32it/s]Batches:  67%|######6   | 8/12 [00:03<00:01,  2.35it/s]Batches:  75%|#######5  | 9/12 [00:03<00:01,  2.44it/s]Batches:  83%|########3 | 10/12 [00:04<00:00,  2.50it/s]Batches:  92%|#########1| 11/12 [00:04<00:00,  2.67it/s]Batches: 100%|##########| 12/12 [00:04<00:00,  3.15it/s]Batches: 100%|##########| 12/12 [00:04<00:00,  2.51it/s]
+Loaded 371 recommendations in 4.86 seconds
+ * Serving Flask app 'AI'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+127.0.0.1 - - [19/May/2026 09:31:37] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:31:37] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:31:37] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:31:44] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:31:44] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:31:44] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:31:56] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:31:56] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:31:56] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:04] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:06] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:06] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:09] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:09] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:09] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:12] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:12] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:33] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:33] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:32:33] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:33:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:33:04] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:33:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:33:13] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:33:13] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:33:13] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:34:37] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:34:37] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 09:34:37] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:28] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:28] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:28] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:31] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:31] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:34] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:34] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:34] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:43] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:43] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 11:14:43] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:03:09] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:03:09] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:03:09] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:03:32] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:03:32] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:03:32] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:37:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:37:04] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:37:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 14:02:12] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 14:02:12] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 14:02:12] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 14:31:08] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 14:31:08] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 14:31:08] "POST /recommend HTTP/1.1" 200 -
+Loading model...
+Model loaded on cpu
+Loading recommendations and computing embeddings...
+Batches:   0%|          | 0/12 [00:00<?, ?it/s]Batches:   8%|8         | 1/12 [00:00<00:09,  1.19it/s]Batches:  17%|#6        | 2/12 [00:01<00:05,  1.67it/s]Batches:  25%|##5       | 3/12 [00:01<00:04,  1.97it/s]Batches:  33%|###3      | 4/12 [00:02<00:03,  2.12it/s]Batches:  42%|####1     | 5/12 [00:02<00:03,  2.25it/s]Batches:  50%|#####     | 6/12 [00:02<00:02,  2.44it/s]Batches:  58%|#####8    | 7/12 [00:03<00:02,  2.32it/s]Batches:  67%|######6   | 8/12 [00:03<00:01,  2.39it/s]Batches:  75%|#######5  | 9/12 [00:04<00:01,  2.48it/s]Batches:  83%|########3 | 10/12 [00:04<00:00,  2.48it/s]Batches:  92%|#########1| 11/12 [00:04<00:00,  2.45it/s]Batches: 100%|##########| 12/12 [00:05<00:00,  2.86it/s]Batches: 100%|##########| 12/12 [00:05<00:00,  2.35it/s]
+Loaded 373 recommendations in 5.21 seconds
+ * Serving Flask app 'AI'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+127.0.0.1 - - [19/May/2026 21:19:12] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 21:19:12] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 21:19:13] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 23:47:01] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 23:47:01] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 23:47:02] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 09:32:14] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 09:32:14] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 09:32:15] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 09:45:23] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 09:45:23] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 09:45:24] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 09:49:27] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 09:49:27] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 09:49:27] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:16:29] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:16:29] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:16:29] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:16:53] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:16:53] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:16:53] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:47:53] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:47:53] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:47:53] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 11:20:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 11:20:30] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 11:20:30] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 14:55:33] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 14:55:33] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 14:55:33] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:15:59] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:15:59] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:15:59] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:16:28] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:16:28] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:16:29] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:17:37] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:17:37] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:17:37] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:01] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:01] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:01] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:18] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:18] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:18] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:30] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:30] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:31] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:31] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:36] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:36] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:36] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:37] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:37] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:38] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:38] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:40] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:40] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:42] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:42] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:42] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:44] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:19:45] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:21:00] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:21:00] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:21:00] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:21:05] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:21:05] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:24:23] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:24:23] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:24:23] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:24:35] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:24:35] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:24:35] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:24:37] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:24:37] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:16] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:16] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:16] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:19] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:19] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:22] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:22] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:22] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:40] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:40] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:40] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:50] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:50] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:50] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:53] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:53] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:58] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:58] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:29:58] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:06] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:06] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:06] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:10] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:10] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:12] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:12] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:12] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:14] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:14] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:16] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:16] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:27] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:27] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:27] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:31] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:32] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:34] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:34] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:30:34] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:31:44] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:31:44] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:31:44] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:31:46] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:31:46] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:31:51] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:31:51] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:31:51] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:09] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:09] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:09] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:12] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:12] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:16] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:16] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:16] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:20] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:20] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:22] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:22] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:32:22] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:41:08] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:41:08] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:41:08] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:41:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:41:30] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:41:30] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:41:33] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:41:33] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:42:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:42:04] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:42:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:42:05] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:42:05] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:42:09] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:42:09] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:42:09] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:48:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:48:30] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:48:30] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:48:34] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:48:34] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:48:36] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:48:36] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:48:36] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:54:38] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:54:38] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 22:54:38] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:02:17] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:02:17] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:02:17] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:02:45] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:02:45] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:02:45] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:20] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:21] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:21] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:26] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:26] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:26] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:29] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:29] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:36] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:36] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:36] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:40] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:03:40] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:04:14] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:04:14] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:04:14] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:13:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:13:30] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:13:30] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:02] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:02] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:02] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:07] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:07] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:22] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:22] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:14:22] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:10] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:10] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:10] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:29] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:29] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:29] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:33] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:33] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:35] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:35] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:35] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:46] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:46] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:46] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:51] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:51] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:17:51] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:17] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:17] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:17] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:33] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:33] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:33] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:52] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:52] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:52] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:55] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:55] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:58] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:58] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:21:58] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:24:55] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:24:55] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:24:55] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:25:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:25:04] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:25:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:26:59] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:26:59] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:26:59] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:01] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:01] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:08] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:08] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:08] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:42] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:42] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:27:42] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:05] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:05] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:05] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:07] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:07] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:10] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:10] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:10] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:56] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:56] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:28:56] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:32:13] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:32:13] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:32:13] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:33:26] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:33:26] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:33:26] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:33:49] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:33:49] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:33:49] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:34:54] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:34:54] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:34:54] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:37:26] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:37:26] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:37:26] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:37:38] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:37:38] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:37:38] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:38:00] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:38:00] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:38:00] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:39:07] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:39:07] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:39:07] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:41:53] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:41:53] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:41:53] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:42:12] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:42:12] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:42:12] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:43:23] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:43:23] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:43:23] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:45:32] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:45:32] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:45:32] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:50:44] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:50:44] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:50:44] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:50:57] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:50:57] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:50:57] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:51:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:51:04] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:51:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:52:57] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:52:57] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:52:57] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:55:32] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:55:32] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:55:32] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:55:40] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:55:40] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:55:40] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:56:48] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:56:48] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:56:48] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:56:59] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:56:59] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:56:59] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:57:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:57:04] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:57:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:57:12] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:57:12] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:57:12] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:58:52] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:58:52] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:58:52] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:58:56] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:58:56] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:59:21] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:59:21] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:59:21] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:59:33] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:59:33] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:59:34] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:59:41] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:59:41] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 23:59:41] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:00:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:00:30] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:00:30] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:00:42] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:00:42] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:00:42] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:01:02] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:01:02] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:01:02] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:05:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:05:30] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:05:30] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:05:36] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:05:36] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:05:36] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:05:47] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:05:47] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:05:47] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:06:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:06:04] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:06:04] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:07:31] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:07:31] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:07:32] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:07:42] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:07:42] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:07:43] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:08:41] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:08:41] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:08:41] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:09:55] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:09:55] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:09:55] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:09:57] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:09:57] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:10:45] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:10:45] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:10:45] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:10:56] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:10:56] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:10:56] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:10:59] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:10:59] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:12:14] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:12:14] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:12:14] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:12:17] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:12:17] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:36] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:36] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:36] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:42] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:42] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:42] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:44] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:44] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:53] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:53] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:15:53] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:16:01] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:16:01] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:16:01] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:41:48] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:41:48] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:41:48] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:41:57] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:41:57] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:41:57] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:42:05] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:42:05] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:42:05] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:45:11] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:45:11] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:45:11] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:45:34] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:45:34] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:45:34] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:45:39] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:45:39] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:45:39] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:46:18] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:46:19] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:46:19] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:50:44] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:50:45] "GET / HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 00:50:45] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:10] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:10] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:10] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:25] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:25] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:25] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:27] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:27] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:30] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:30] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:36] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:36] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:36] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:37] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:37] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:39] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:39] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:40] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:40] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:42] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:42] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:51:42] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:52:11] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:52:11] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:52:11] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:52:13] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:52:13] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:54:09] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:54:09] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:54:09] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:54:14] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:54:14] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:54:14] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:54:27] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:54:27] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 00:54:27] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 06:44:59] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 06:44:59] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 06:44:59] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 06:45:02] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 06:45:02] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 08:48:44] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 08:48:44] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 08:48:44] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 08:49:20] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 08:49:20] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 08:49:20] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 09:05:07] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 09:05:07] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 09:05:07] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 09:44:45] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 09:44:45] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 09:44:45] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 11:36:22] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 11:36:22] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 11:36:22] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 13:06:34] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 13:06:34] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 13:06:34] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 14:41:05] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 14:41:05] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 14:41:05] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 14:44:23] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 14:44:23] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 14:44:23] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 14:44:25] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 14:44:25] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:14:16] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:43:42] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:43:42] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:43:42] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:44:46] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:44:46] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:44:46] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:45:03] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:45:03] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:45:03] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:45:35] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:45:35] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:45:36] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:45:38] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:45:38] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:52:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:52:30] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 13:52:30] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:17:16] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:17:16] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:17:16] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:17:26] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:17:26] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:17:26] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:21:18] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:21:18] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:21:18] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:21:41] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:21:41] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:21:41] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:21:56] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:21:57] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:21:57] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:22:02] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:22:02] "OPTIONS /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [26/May/2026 14:22:02] "POST /recommend HTTP/1.1" 200 -
+Loading model...
+Model loaded on cpu
+Loading recommendations and computing embeddings...
+Batches:   0%|          | 0/24 [00:00<?, ?it/s]Batches:   4%|4         | 1/24 [00:04<01:36,  4.18s/it]Batches:   8%|8         | 2/24 [00:08<01:35,  4.34s/it]Batches:  12%|#2        | 3/24 [00:13<01:35,  4.56s/it]Batches:  17%|#6        | 4/24 [00:18<01:36,  4.80s/it]Batches:  21%|##        | 5/24 [00:23<01:29,  4.71s/it]Batches:  25%|##5       | 6/24 [00:27<01:23,  4.64s/it]Batches:  29%|##9       | 7/24 [00:31<01:17,  4.53s/it]Batches:  33%|###3      | 8/24 [00:36<01:11,  4.50s/it]Batches:  38%|###7      | 9/24 [00:40<01:07,  4.47s/it]Batches:  42%|####1     | 10/24 [00:45<01:03,  4.51s/it]Batches:  46%|####5     | 11/24 [00:49<00:58,  4.48s/it]Batches:  50%|#####     | 12/24 [00:54<00:53,  4.48s/it]Batches:  54%|#####4    | 13/24 [00:58<00:49,  4.49s/it]Batches:  58%|#####8    | 14/24 [01:03<00:44,  4.45s/it]Batches:  62%|######2   | 15/24 [01:07<00:39,  4.39s/it]Batches:  67%|######6   | 16/24 [01:11<00:34,  4.37s/it]Batches:  71%|#######   | 17/24 [01:16<00:30,  4.37s/it]Batches:  75%|#######5  | 18/24 [01:20<00:26,  4.39s/it]Batches:  79%|#######9  | 19/24 [01:24<00:21,  4.39s/it]Batches:  83%|########3 | 20/24 [01:29<00:17,  4.34s/it]Batches:  88%|########7 | 21/24 [01:33<00:12,  4.32s/it]Batches:  92%|#########1| 22/24 [01:37<00:08,  4.31s/it]Batches:  96%|#########5| 23/24 [01:41<00:04,  4.26s/it]Batches: 100%|##########| 24/24 [01:44<00:00,  3.87s/it]Batches: 100%|##########| 24/24 [01:44<00:00,  4.37s/it]
+Batches:   0%|          | 0/24 [00:00<?, ?it/s]Batches:   4%|4         | 1/24 [00:04<01:33,  4.08s/it]Batches:   8%|8         | 2/24 [00:06<01:08,  3.13s/it]Batches:  12%|#2        | 3/24 [00:09<01:01,  2.93s/it]Batches:  17%|#6        | 4/24 [00:11<00:55,  2.75s/it]Batches:  21%|##        | 5/24 [00:14<00:51,  2.71s/it]Batches:  25%|##5       | 6/24 [00:16<00:46,  2.61s/it]Batches:  29%|##9       | 7/24 [00:19<00:44,  2.62s/it]Batches:  33%|###3      | 8/24 [00:21<00:40,  2.53s/it]Batches:  38%|###7      | 9/24 [00:24<00:37,  2.50s/it]Batches:  42%|####1     | 10/24 [00:26<00:33,  2.39s/it]Batches:  46%|####5     | 11/24 [00:28<00:29,  2.30s/it]Batches:  50%|#####     | 12/24 [00:30<00:26,  2.24s/it]Batches:  54%|#####4    | 13/24 [00:32<00:24,  2.21s/it]Batches:  58%|#####8    | 14/24 [00:34<00:21,  2.12s/it]Batches:  62%|######2   | 15/24 [00:36<00:17,  1.97s/it]Batches:  67%|######6   | 16/24 [00:37<00:14,  1.87s/it]Batches:  71%|#######   | 17/24 [00:39<00:12,  1.77s/it]Batches:  75%|#######5  | 18/24 [00:40<00:10,  1.73s/it]Batches:  79%|#######9  | 19/24 [00:42<00:08,  1.65s/it]Batches:  83%|########3 | 20/24 [00:44<00:06,  1.63s/it]Batches:  88%|########7 | 21/24 [00:45<00:04,  1.59s/it]Batches:  92%|#########1| 22/24 [00:46<00:03,  1.54s/it]Batches:  96%|#########5| 23/24 [00:48<00:01,  1.49s/it]Batches: 100%|##########| 24/24 [00:49<00:00,  1.36s/it]Batches: 100%|##########| 24/24 [00:49<00:00,  2.06s/it]
+Loaded 758 recommendations in 2490.41 seconds
+ * Serving Flask app 'AI'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+Traceback (most recent call last):
+  File "C:\wamp64\www\SYSTEM_VERSION_!\coordinator\Report\3ydpreport\AI_RECOMMENDATION\AI.py", line 1, in <module>
+    from flask import Flask, request, jsonify
+ModuleNotFoundError: No module named 'flask'
+Loading model...
+Model loaded on cpu
+Loading recommendations and computing embeddings...
+ * Serving Flask app 'AI'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+127.0.0.1 - - [15/Jun/2026 14:05:35] "GET /health HTTP/1.1" 503 -
+127.0.0.1 - - [15/Jun/2026 14:05:45] "GET /health HTTP/1.1" 503 -
+127.0.0.1 - - [15/Jun/2026 14:05:55] "GET /health HTTP/1.1" 503 -
+Batches:   0%|          | 0/24 [00:00<?, ?it/s]Batches:   4%|4         | 1/24 [00:01<00:34,  1.48s/it]Batches:   8%|8         | 2/24 [00:02<00:29,  1.32s/it]Batches:  12%|#2        | 3/24 [00:03<00:26,  1.24s/it]Batches:  17%|#6        | 4/24 [00:05<00:26,  1.34s/it]Batches:  21%|##        | 5/24 [00:06<00:25,  1.33s/it]127.0.0.1 - - [15/Jun/2026 14:06:05] "GET /health HTTP/1.1" 503 -
+Batches:  25%|##5       | 6/24 [00:07<00:23,  1.29s/it]Batches:  29%|##9       | 7/24 [00:09<00:22,  1.35s/it]Batches:  33%|###3      | 8/24 [00:10<00:22,  1.39s/it]Batches:  38%|###7      | 9/24 [00:12<00:20,  1.34s/it]Batches:  42%|####1     | 10/24 [00:13<00:18,  1.30s/it]Batches:  46%|####5     | 11/24 [00:14<00:16,  1.28s/it]Batches:  50%|#####     | 12/24 [00:15<00:15,  1.26s/it]Batches:  54%|#####4    | 13/24 [00:16<00:13,  1.26s/it]127.0.0.1 - - [15/Jun/2026 14:06:15] "GET /health HTTP/1.1" 503 -
+Batches:  58%|#####8    | 14/24 [00:18<00:12,  1.23s/it]Batches:  62%|######2   | 15/24 [00:19<00:10,  1.22s/it]Batches:  67%|######6   | 16/24 [00:20<00:09,  1.21s/it]Batches:  71%|#######   | 17/24 [00:21<00:08,  1.18s/it]Batches:  75%|#######5  | 18/24 [00:22<00:07,  1.19s/it]Batches:  79%|#######9  | 19/24 [00:23<00:05,  1.18s/it]Batches:  83%|########3 | 20/24 [00:25<00:04,  1.17s/it]Batches:  88%|########7 | 21/24 [00:26<00:03,  1.16s/it]Batches:  92%|#########1| 22/24 [00:27<00:02,  1.20s/it]127.0.0.1 - - [15/Jun/2026 14:06:25] "GET /health HTTP/1.1" 503 -
+Batches:  96%|#########5| 23/24 [00:28<00:01,  1.19s/it]Batches: 100%|##########| 24/24 [00:29<00:00,  1.06s/it]Batches: 100%|##########| 24/24 [00:29<00:00,  1.23s/it]
+Batches:   0%|          | 0/24 [00:00<?, ?it/s]Batches:   4%|4         | 1/24 [00:01<00:29,  1.29s/it]Batches:   8%|8         | 2/24 [00:03<00:37,  1.71s/it]Batches:  12%|#2        | 3/24 [00:07<01:02,  2.98s/it]127.0.0.1 - - [15/Jun/2026 14:06:35] "GET /health HTTP/1.1" 503 -
+Batches:  17%|#6        | 4/24 [00:11<01:01,  3.10s/it]Batches:  21%|##        | 5/24 [00:12<00:50,  2.65s/it]Batches:  25%|##5       | 6/24 [00:13<00:37,  2.10s/it]Batches:  29%|##9       | 7/24 [00:15<00:30,  1.77s/it]Batches:  33%|###3      | 8/24 [00:15<00:23,  1.46s/it]Batches:  38%|###7      | 9/24 [00:16<00:18,  1.26s/it]Batches:  42%|####1     | 10/24 [00:17<00:15,  1.10s/it]127.0.0.1 - - [15/Jun/2026 14:06:45] "GET /health HTTP/1.1" 503 -
+Batches:  46%|####5     | 11/24 [00:18<00:13,  1.02s/it]Batches:  50%|#####     | 12/24 [00:19<00:11,  1.05it/s]Batches:  54%|#####4    | 13/24 [00:19<00:09,  1.16it/s]Batches:  58%|#####8    | 14/24 [00:20<00:07,  1.30it/s]Batches:  62%|######2   | 15/24 [00:20<00:06,  1.45it/s]Batches:  67%|######6   | 16/24 [00:21<00:05,  1.55it/s]Batches:  71%|#######   | 17/24 [00:21<00:04,  1.58it/s]Batches:  75%|#######5  | 18/24 [00:22<00:03,  1.57it/s]Batches:  79%|#######9  | 19/24 [00:23<00:03,  1.61it/s]Batches:  83%|########3 | 20/24 [00:23<00:02,  1.66it/s]Batches:  88%|########7 | 21/24 [00:24<00:01,  1.78it/s]Batches:  92%|#########1| 22/24 [00:24<00:01,  1.91it/s]Batches:  96%|#########5| 23/24 [00:25<00:00,  2.03it/s]Batches: 100%|##########| 24/24 [00:25<00:00,  2.22it/s]Batches: 100%|##########| 24/24 [00:25<00:00,  1.06s/it]
+Loaded 758 recommendations in 84.49 seconds
+127.0.0.1 - - [15/Jun/2026 14:06:55] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [15/Jun/2026 14:07:12] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [15/Jun/2026 14:08:16] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [15/Jun/2026 14:08:16] "OPTIONS /recommend HTTP/1.1" 200 -
+Recommendation completed in 18.209 seconds
+127.0.0.1 - - [15/Jun/2026 14:08:34] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [15/Jun/2026 14:09:02] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [15/Jun/2026 14:09:02] "OPTIONS /recommend HTTP/1.1" 200 -
+Recommendation completed in 16.889 seconds
+127.0.0.1 - - [15/Jun/2026 14:09:19] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [15/Jun/2026 14:25:57] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [15/Jun/2026 14:25:57] "OPTIONS /recommend HTTP/1.1" 200 -
+Recommendation completed in 17.403 seconds
+127.0.0.1 - - [15/Jun/2026 14:26:14] "POST /recommend HTTP/1.1" 200 -
+Loading model...
+Model loaded on cpu
+Loading recommendations and computing embeddings...
+ * Serving Flask app 'AI'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+Batches:   0%|          | 0/24 [00:00<?, ?it/s]Batches:   4%|4         | 1/24 [00:02<00:53,  2.32s/it]Batches:   8%|8         | 2/24 [00:04<00:50,  2.28s/it]Batches:  12%|#2        | 3/24 [00:06<00:46,  2.22s/it]Batches:  17%|#6        | 4/24 [00:08<00:43,  2.18s/it]Batches:  21%|##        | 5/24 [00:10<00:40,  2.14s/it]Batches:  25%|##5       | 6/24 [00:13<00:39,  2.17s/it]Batches:  29%|##9       | 7/24 [00:15<00:37,  2.22s/it]Batches:  33%|###3      | 8/24 [00:17<00:35,  2.21s/it]Batches:  38%|###7      | 9/24 [00:19<00:32,  2.19s/it]Batches:  42%|####1     | 10/24 [00:21<00:30,  2.18s/it]Batches:  46%|####5     | 11/24 [00:24<00:28,  2.17s/it]Batches:  50%|#####     | 12/24 [00:26<00:25,  2.17s/it]Batches:  54%|#####4    | 13/24 [00:28<00:23,  2.16s/it]Batches:  58%|#####8    | 14/24 [00:30<00:21,  2.10s/it]Batches:  62%|######2   | 15/24 [00:32<00:18,  2.05s/it]Batches:  67%|######6   | 16/24 [00:34<00:16,  2.05s/it]Batches:  71%|#######   | 17/24 [00:36<00:14,  2.02s/it]Batches:  75%|#######5  | 18/24 [00:38<00:11,  2.00s/it]Batches:  79%|#######9  | 19/24 [00:40<00:10,  2.01s/it]Batches:  83%|########3 | 20/24 [00:42<00:08,  2.05s/it]Batches:  88%|########7 | 21/24 [00:44<00:06,  2.05s/it]Batches:  92%|#########1| 22/24 [00:46<00:04,  2.03s/it]Batches:  96%|#########5| 23/24 [00:48<00:02,  2.04s/it]Batches: 100%|##########| 24/24 [00:49<00:00,  1.84s/it]Batches: 100%|##########| 24/24 [00:49<00:00,  2.08s/it]
+Batches:   0%|          | 0/24 [00:00<?, ?it/s]Batches:   4%|4         | 1/24 [00:02<00:52,  2.29s/it]Batches:   8%|8         | 2/24 [00:03<00:39,  1.79s/it]Batches:  12%|#2        | 3/24 [00:05<00:35,  1.67s/it]Batches:  17%|#6        | 4/24 [00:06<00:30,  1.55s/it]Batches:  21%|##        | 5/24 [00:08<00:29,  1.53s/it]Batches:  25%|##5       | 6/24 [00:09<00:26,  1.50s/it]Batches:  29%|##9       | 7/24 [00:11<00:25,  1.50s/it]Batches:  33%|###3      | 8/24 [00:12<00:23,  1.46s/it]Batches:  38%|###7      | 9/24 [00:13<00:21,  1.47s/it]Batches:  42%|####1     | 10/24 [00:15<00:19,  1.42s/it]Batches:  46%|####5     | 11/24 [00:16<00:17,  1.37s/it]Batches:  50%|#####     | 12/24 [00:17<00:15,  1.30s/it]Batches:  54%|#####4    | 13/24 [00:18<00:13,  1.23s/it]Batches:  58%|#####8    | 14/24 [00:19<00:11,  1.18s/it]Batches:  62%|######2   | 15/24 [00:20<00:09,  1.10s/it]Batches:  67%|######6   | 16/24 [00:21<00:08,  1.04s/it]Batches:  71%|#######   | 17/24 [00:22<00:06,  1.02it/s]Batches:  75%|#######5  | 18/24 [00:23<00:05,  1.05it/s]Batches:  79%|#######9  | 19/24 [00:24<00:04,  1.14it/s]Batches:  83%|########3 | 20/24 [00:24<00:03,  1.13it/s]Batches:  88%|########7 | 21/24 [00:25<00:02,  1.11it/s]Batches:  92%|#########1| 22/24 [00:26<00:01,  1.10it/s]Batches:  96%|#########5| 23/24 [00:27<00:00,  1.11it/s]Batches: 100%|##########| 24/24 [00:28<00:00,  1.19it/s]Batches: 100%|##########| 24/24 [00:28<00:00,  1.18s/it]
+Loaded 758 recommendations in 122.04 seconds
+127.0.0.1 - - [16/Jun/2026 11:54:01] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2026 11:54:01] "OPTIONS /recommend HTTP/1.1" 200 -
+Recommendation completed in 16.509 seconds
+127.0.0.1 - - [16/Jun/2026 11:54:18] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2026 14:18:40] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2026 14:18:40] "OPTIONS /recommend HTTP/1.1" 200 -
+Recommendation completed in 18.594 seconds
+127.0.0.1 - - [16/Jun/2026 14:18:59] "POST /recommend HTTP/1.1" 200 -
+127.0.0.1 - - [17/Jun/2026 11:32:21] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [17/Jun/2026 11:32:21] "OPTIONS /recommend HTTP/1.1" 200 -
+Recommendation completed in 15.406 seconds
+127.0.0.1 - - [17/Jun/2026 11:32:36] "POST /recommend HTTP/1.1" 200 -

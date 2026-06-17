@@ -1,0 +1,355 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background-color: #f0f0f0;
+    color: #000;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===== Frames (Layout Shell) ===== */
+#sidebarFrame {
+    width: 100px;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#headerFrame {
+    height: 60px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 100px;
+    width: calc(100% - 100px);
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Wrapper - contains the admin comment */
+.wrapper {
+  margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+/* ===== Certificate Container ===== */
+.certificate-container {
+    background-color: #fff;
+    width: 850px;
+    padding: 60px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+/* OR - Alternative approach using negative margin */
+.wrapper .admin-comment {
+    margin-bottom: -30px;  /* Pull the certificate container up */
+    position: relative;
+    z-index: 1;
+}
+
+.certificate-container {
+    position: relative;
+    z-index: 0;
+    padding-top: 50px;  /* Add space for the admin comment */
+
+}
+
+/* ===== Header Section ===== */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.logo-left {
+    height: 90px;
+    width: auto;
+}
+.logo-left2 {
+    height: 80px;
+    width: auto;
+}
+
+.logos-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logos-right img {
+    height: 80px;
+    width: auto;
+}
+
+.college-info {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0 20px;
+}
+
+.college-info h1 {
+    font-family: "Times New Roman", Times, serif;
+    color: #4f81bd;
+    font-size: 26px;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.college-info p {
+    font-size: 11px;
+    margin: 2px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.college-info a {
+    font-size: 13px;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+/* ===== Office Title ===== */
+.office-title {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.double-line {
+    border-top: 4px double #4f81bd;
+    margin-bottom: 25px;
+}
+
+/* Force all text to normal weight */
+p, span, div, h1, .office-title {
+    font-weight: normal !important; 
+}
+
+header h1 {
+    text-align: center;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+/* Form Inputs as Lines */
+input[type="text"] {
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 1rem;
+    padding: 0 5px;
+    outline: none;
+    background: transparent;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.line-wrap {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.sub-label {
+    font-size: 0.85rem;
+    margin-top: 1px;
+}
+
+.sub-label-center {
+    text-align: center;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+/* Specific Line Widths */
+.short-line { width: 60px; margin-top: 20px;}
+.med-line   { width: 100%; }
+.long-line  { width: 280px; }
+.full-line  { width: 90%;  }
+
+.full-width-line-group {
+    margin: 20px 0;
+}
+
+/* Signature Section */
+.signatures {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.sig-line {
+    margin-top: 30px;
+    width: 300px;
+}
+
+.sig-line input {
+    width: 100%;
+}
+
+/* Footer Section */
+footer {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.footer-logos img {
+    height: 40px;
+    width: auto;
+}
+
+
+/*__________________________________________________BUTTON___________________________________________*/
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(18px, 7vw, 90px);
+    flex-wrap: wrap;
+    margin-top: 30px; /* spacing from top */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Keep individual button styling */
+.rejectbtn, .approvebtn, .needFixes{
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: none;
+    color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 4px 15px rgba(61, 112, 37, 0.3);
+    width: clamp(150px, 20%, 180px);
+    min-width: 0;
+}
+
+/* Optional: different colors for reject/approve */
+
+.rejectbtn {
+    background: linear-gradient(to right, #d9534f, #c12d2d); /* red gradient */
+}
+.needFixes {
+    background: linear-gradient(to right, #f0ad4e, #d58512); /* orange gradient */
+}
+.approvebtn {
+    background: linear-gradient(to right, #63b32e, #3d7025); /* green gradient */
+}
+
+/* Hover effect */
+.button-container button:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+    box-shadow: 0 6px 20px rgba(61, 112, 37, 0.4);
+}
+
+.admin-comment-label{
+  font-weight: bold;
+  font-size: 35px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  
+}
+#admincomment{
+    display: block; 
+    width: 100%;          /* Increased slightly for better paragraph width */
+    max-width: 1000px; 
+    margin: 20px auto; 
+    min-height: 150px;   /* Increased height to invite paragraph entry */
+    padding: 15px;
+    
+    /* Typography for Paragraphs */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;    /* Essential for reading long paragraphs */
+    text-align: justify; /* Optional: gives a clean "block" look to paragraphs */
+    color: #333;
+
+    /* Behavior */
+    white-space: pre-wrap; /* Ensures line breaks and spaces are preserved */
+    overflow-wrap: break-word;
+    
+    /* Aesthetics */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical; 
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fafafa; /* Subtle background color change */
+}
+
+section{
+    pointer-events: none; /* Prevents user interaction with the entire section */
+}
+
+/* ===== Laptop / PC Responsive Layout ===== */
+@media (min-width: 769px) {
+    body { display: block; padding: 80px clamp(18px, 2vw, 32px) 40px calc(100px + clamp(18px, 2vw, 32px)); }
+    .wrapper, .certificate-container { width: min(100%, 850px); margin-left: auto; margin-right: auto; }
+    .wrapper { margin-top: 0; margin-bottom: 24px; }
+    .certificate-container { box-sizing: border-box; }
+}
+@media (max-width: 1366px) and (min-width: 769px) {
+    .certificate-container { padding: 46px; }
+    .logo-left { height: 76px; }
+    .logo-left2, .logos-right img { height: 68px; }
+    .college-info h1 { font-size: 23px; }
+}
+@media (max-width: 900px) {
+    #sidebarFrame { transform: translateX(-100%); }
+    #headerFrame { left: 0; width: 100%; }
+    body { display: block; padding: 80px 14px 28px; }
+    .wrapper, .certificate-container { width: 100%; }
+    .certificate-container { padding: 28px; }
+    .header-content { flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .college-info { order: -1; flex-basis: 100%; padding: 0; }
+    .button-container { gap: 16px; }
+    .rejectbtn, .approvebtn, .needFixes { width: min(100%, 180px); }
+}
+
+@media (max-width: 560px) {
+    .button-container { flex-direction: column; }
+    .rejectbtn, .approvebtn, .needFixes { width: 100%; }
+}

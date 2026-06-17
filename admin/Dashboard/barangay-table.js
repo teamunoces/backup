@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(demoData => {
 
-            fetch('get_barangays.php?action=survey')
+            fetch('/SYSTEM_VERSION_!/admin/Dashboard/get_barangays.php?action=survey')
                 .then(res => res.json())
                 .then(surveyData => {
 

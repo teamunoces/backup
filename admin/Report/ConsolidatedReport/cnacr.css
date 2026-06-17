@@ -17,7 +17,7 @@ body {
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -33,9 +33,9 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -52,6 +52,10 @@ body {
 
 .logo-left {
     height: 90px;
+    width: auto;
+}
+.logo-left2 {
+    height: 80px;
     width: auto;
 }
 
@@ -237,10 +241,32 @@ h1 {
     font-style: italic;
 }
 
+/* Report Actions */
+.form-actions {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 30px 0 40px;
+}
+
+.form-actions .draft-button {
+    justify-self: start;
+}
+
+.form-actions .clear-button {
+    justify-self: center;
+}
+
+.form-actions .submit-button {
+    justify-self: end;
+}
+
 /* Submit Button */
 .submit-button {
-    display: block;
-    padding: 6px 30px;
+    display: inline-block;
+    padding: 12px 30px;
     border-radius: 50px;
     border: 1px solid #1a1a1a;
     background: linear-gradient(to right, #63b32e, #3d7025);
@@ -251,14 +277,25 @@ h1 {
     text-align: center;
     transition: opacity 0.2s ease;
     cursor: pointer;
-    margin-top: 30px;
-    margin-bottom: 40px;
-    margin-left: auto;
-    width: fit-content;
+    margin: 0;
+    min-width: 150px;
 }
 
 .submit-button:hover {
     opacity: 0.9;
+}
+
+@media (max-width: 640px) {
+    .form-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions .draft-button,
+    .form-actions .clear-button,
+    .form-actions .submit-button {
+        justify-self: stretch;
+        width: 100%;
+    }
 }
 
 /* Footer Section */
@@ -285,4 +322,82 @@ footer {
 .footer-logos img {
     height: 40px;
     width: auto;
+}
+
+/* ===== Laptop / PC Responsive Layout ===== */
+@media (min-width: 769px) {
+    body {
+        margin-left: 0;
+        padding: 80px clamp(18px, 2vw, 32px) 40px calc(100px + clamp(18px, 2vw, 32px));
+        display: block;
+    }
+
+    .report-container {
+        width: min(100%, 1000px);
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 1366px) and (min-width: 769px) {
+    .report-container {
+        max-width: 940px;
+        padding: 32px;
+    }
+
+    .header-grid {
+        grid-template-columns: 130px minmax(0, 1fr) 130px minmax(0, 1fr);
+    }
+
+    .logo-left {
+        height: 76px;
+    }
+
+    .logo-left2,
+    .logos-right img {
+        height: 68px;
+    }
+
+    .college-info h1 {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+    .header-grid {
+        grid-template-columns: 130px minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebarFrame {
+        transform: translateX(-100%);
+    }
+
+    #headerFrame {
+        left: 0;
+        width: 100%;
+    }
+
+    body {
+        margin-left: 0;
+        padding: 80px 14px 28px;
+    }
+
+    .report-container {
+        width: 100%;
+        padding: 22px;
+    }
+
+    .header-content {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .college-info {
+        order: -1;
+        flex-basis: 100%;
+        padding: 0;
+    }
 }

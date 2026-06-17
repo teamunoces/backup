@@ -1,0 +1,192 @@
+/* ================= PMF DARK MODE ================= */
+
+/* ===== BODY ===== */
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+}
+
+/* ===== FRAMES ===== */
+body.dark-mode #headerFrame,
+body.dark-mode #sidebarFrame {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(255,255,255,0.05) !important;
+}
+
+/* ===== FORM CONTAINER ===== */
+body.dark-mode .form-container {
+    background: #1e1e1e !important;
+    color: #f1f1f1 !important;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6) !important;
+}
+
+/* ===== ADMIN COMMENT ===== */
+body.dark-mode #admincomment {
+    background-color: #2b2b2b !important;
+    color: #ffd166 !important;
+    border: 2px solid #f59e0b !important;
+    border-left: 8px solid #f59e0b !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4) !important;
+}
+
+/* ===== TEXT ===== */
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode div,
+body.dark-mode label,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode td,
+body.dark-mode th {
+    color: #f1f1f1 !important;
+}
+
+/* ===== COLLEGE INFO ===== */
+body.dark-mode .college-info h1 {
+    color: #7fb7ff !important;
+}
+
+body.dark-mode .college-info p,
+body.dark-mode .college-info a {
+    color: #dcdcdc !important;
+}
+
+/* ===== OFFICE TITLE ===== */
+body.dark-mode .office-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .double-line {
+    border-top: 4px double #7fb7ff !important;
+}
+
+/* ===== INPUTS ===== */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: #2b2b2b !important;
+    color: #ffffff !important;
+    border: 1px solid #555 !important;
+}
+
+/* ===== UNDERLINE INPUTS ===== */
+body.dark-mode .input-group input,
+body.dark-mode .followUp,
+body.dark-mode .feedbackSummary,
+body.dark-mode .feedbackAction,
+body.dark-mode #otherIssues {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-bottom: 1px solid #ffffff !important;
+}
+
+/* ===== TABLES ===== */
+body.dark-mode table,
+body.dark-mode th,
+body.dark-mode td,
+body.dark-mode #feedbackTable th,
+body.dark-mode #feedbackTable td {
+    border: 1px solid #666 !important;
+}
+
+/* ===== TABLE HEADERS ===== */
+body.dark-mode th {
+    background-color: #2f2f2f !important;
+    color: #ffffff !important;
+}
+
+/* ===== TEXTAREAS ===== */
+body.dark-mode textarea {
+    background-color: #2b2b2b !important;
+    color: #ffffff !important;
+}
+
+/* ===== PAPER LINES ===== */
+body.dark-mode .paper-lines {
+    color: #ffffff !important;
+    background-image: linear-gradient(to bottom, transparent 29px, #777 29px) !important;
+    background-color: transparent !important;
+}
+
+/* ===== CHECKBOX ===== */
+body.dark-mode input[type="checkbox"] {
+    accent-color: #4caf50;
+}
+
+/* ===== FOLLOWUP ===== */
+body.dark-mode .followUp {
+    text-align: center !important;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+body.dark-mode .submit-button {
+    background: linear-gradient(to right, #4caf50, #2e7d32) !important;
+    border: 1px solid #66bb6a !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .submit-button:hover {
+    opacity: 0.95;
+    box-shadow: 0 4px 15px rgba(255,255,255,0.12) !important;
+}
+
+/* ===== LINKS ===== */
+body.dark-mode a {
+    color: #90caf9 !important;
+}
+
+/* ===== SCROLLBAR ===== */
+body.dark-mode ::-webkit-scrollbar {
+    width: 10px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ===== PRINT MODE ===== */
+@media print {
+    body.dark-mode {
+        background: white !important;
+        color: black !important;
+    }
+
+    body.dark-mode .form-container {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+
+    body.dark-mode table,
+    body.dark-mode td,
+    body.dark-mode th {
+        border: 1px solid #000 !important;
+        color: black !important;
+    }
+
+    body.dark-mode .paper-lines {
+        background-image: linear-gradient(to bottom, transparent 29px, #000 29px) !important;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    body.dark-mode .form-container {
+        background-color: #1e1e1e !important;
+    }
+}

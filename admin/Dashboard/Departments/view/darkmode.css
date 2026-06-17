@@ -5,7 +5,7 @@ body.dark-mode * {
     transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease;
 }
 
-/* Apply to main content and iframes */
+/* Apply to main content ONLY (iframes excluded) */
 body.dark-mode,
 body.dark-mode .content-area,
 body.dark-mode .main-wrapper,
@@ -13,7 +13,6 @@ body.dark-mode .reports-container {
     background: #1a1a1a;
     color: #e0e0e0 !important;
 }
-
 /* ===== FILTER SECTION - STRONG OVERRIDES ===== */
 body.dark-mode .filters-container,
 body.dark-mode .filters-wrapper,
@@ -21,6 +20,7 @@ body.dark-mode .filter-row,
 body.dark-mode [class*="filter"] {
     background-color: #0f172a !important;
 }
+
 
 body.dark-mode .filters-wrapper {
     background-color: #0f172a !important;
@@ -396,4 +396,59 @@ body.dark-mode .card,
 body.dark-mode [class*="card"] {
     background-color: #16213e !important;
     border-color: #2a2a4a !important;
+}
+/* ===== EXCLUDE DROPDOWN MENUS FROM DARK MODE ===== */
+/* Prevent dark mode from applying to dropdown menus */
+body.dark-mode .dropdown-menu,
+body.dark-mode .dropdown-content,
+body.dark-mode [class*="dropdown"],
+body.dark-mode [class*="user-menu"],
+body.dark-mode [class*="profile-menu"],
+body.dark-mode .nav-dropdown,
+body.dark-mode .menu-dropdown,
+body.dark-mode [class*="user"] [class*="dropdown"],
+body.dark-mode [class*="profile"] [class*="dropdown"] {
+    background-color: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+    color: #333333 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Dropdown items/links - light theme */
+body.dark-mode .dropdown-menu a,
+body.dark-mode .dropdown-content a,
+body.dark-mode [class*="dropdown"] a,
+body.dark-mode [class*="dropdown"] button,
+body.dark-mode .dropdown-item,
+body.dark-mode .menu-card {
+    color: #333333 !important;
+    background-color: #ffffff !important;
+}
+
+body.dark-mode .dropdown-menu a:hover,
+body.dark-mode .dropdown-content a:hover,
+body.dark-mode [class*="dropdown"] a:hover,
+body.dark-mode .dropdown-item:hover,
+body.dark-mode .menu-item:hover {
+    background-color: #f5f5f5 !important;
+    color: #000000 !important;
+}
+
+/* Dropdown dividers */
+body.dark-mode .dropdown-divider {
+    border-top-color: #e0e0e0 !important;
+    background-color: #e0e0e0 !important;
+}
+
+/* Dropdown headers */
+body.dark-mode .dropdown-header {
+    color: #666666 !important;
+    background-color: #ffffff !important;
+}
+
+/* Override any forced dark mode styles */
+body.dark-mode .dropdown-menu *,
+body.dark-mode .dropdown-content *,
+body.dark-mode [class*="dropdown"] * {
+    color: inherit !important;
 }

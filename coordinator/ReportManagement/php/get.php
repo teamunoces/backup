@@ -18,7 +18,7 @@ $currentRole = $_SESSION['role']; // e.g., "coordinator", "admin"
 $host = "localhost";
 $user = "root";
 $pass = "";
-$dbname = "ces_reports_db";
+$dbname = "ces_database";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
@@ -26,35 +26,31 @@ if ($conn->connect_error) {
     exit;
 }
 
-$reports = [];
-
-// Get all tables
-$tablesResult = $conn->query("SHOW TABLES");
-if (!$tablesResult) {
-    echo json_encode(["error" => "Failed to get tables: " . $conn->error]);
-    exit;
-}
-
 // Define tables allowed for coordinators
 $coordinatorTables = [
-    "coordinator_cnacr",
-    "3ydp",
-    "pd_main",
-    "mar_header",
-    "dpir",
+    "report_3ydp",
+    "report_cert_appearance",
+    "report_coordinator_cnacr",
+    "report_mar_header",
+    "report_narrative",
+    "report_program_monitoring_form",
+    "report_reflection_paper",
+    "report_evaluation",
+    "report_pd_main",
 ];
 
-while ($tableRow = $tablesResult->fetch_array()) {
-    $tableName = $tableRow[0];
+$reports = [];
+
+foreach ($coordinatorTables as $tableName) {
+    $tableName = preg_replace('/[^a-zA-Z0-9_]/', '', $tableName);
+    if (empty($tableName)) continue;
+
+    $checkTable = $conn->query("SHOW TABLES LIKE '$tableName'");
+    if (!$checkTable || $checkTable->num_rows === 0) continue;
 
     // Skip tables that don't have a status column
     $checkStatus = $conn->query("SHOW COLUMNS FROM `$tableName` LIKE 'status'");
     if (!$checkStatus || $checkStatus->num_rows === 0) continue;
-
-    // If user is coordinator, skip tables not assigned to them
-    if ($currentRole === "coordinator" && !in_array($tableName, $coordinatorTables)) {
-        continue;
-    }
 
     // Check for archived column
     $checkArchived = $conn->query("SHOW COLUMNS FROM `$tableName` LIKE 'archived'");
@@ -85,7 +81,7 @@ while ($tableRow = $tablesResult->fetch_array()) {
     while ($row = $result->fetch_assoc()) {
         // Detect title
         $title = "N/A";
-        foreach (['title', 'title_of_project', 'title_of_activity', 'title_of_program', 'title_act', 'report_title', 'project_title'] as $field) {
+        foreach (['title','implementing_department', 'activity_name','program_title','title_of_project', 'title_of_activity', 'title_of_program', 'title_act', 'report_title', 'project_title'] as $field) {
             if (isset($row[$field]) && !empty($row[$field])) {
                 $title = $row[$field];
                 break;
@@ -115,6 +111,7 @@ while ($tableRow = $tablesResult->fetch_array()) {
             "title" => $title,
             "department" => $department,
             "created_at" => $created_at,
+            "type" => $row['type'] ?? '',
             "status" => $row['status'] ?? 'unknown',
             "source_table" => $tableName
         ];

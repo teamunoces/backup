@@ -1,6 +1,6 @@
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -16,8 +16,8 @@
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
-    width: calc(100% - 150px);
+    left: 100px;
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -54,6 +54,11 @@ body {
 
 .logo-left {
     height: 90px;
+    width: auto;
+}
+
+.logo-left2 {
+    height: 80px;
     width: auto;
 }
 
@@ -144,6 +149,7 @@ th, td {
 
 .header-table .value {
     width: 65%;
+    pointer-events: none;
 }
 
 /* Main Table */
@@ -205,12 +211,21 @@ th, td {
 }
 
 /* Table Styling */
+.table_form {
+    pointer-events: none;
+}
+
+.table_form * {
+    pointer-events: none;
+}
+
 .main-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
     font-size: 11px;
     table-layout: fixed; /* Ensures columns fit the container width */
+    pointer-events: none;
 }
 
 .main-table th, 
@@ -229,11 +244,11 @@ th, td {
     padding: 10px 4px;
 }
 
-/* Editable table cells */
-.main-table td[contenteditable="true"] {
+.main-table td {
     background-color: #ffffff;
     outline: none; /* Remove default outline when typing */
     padding: 6px;
+    pointer-events: none;
 }
 
 
@@ -341,3 +356,16 @@ footer {
     transition: all 0.3s ease;
     background-color: #fafafa; /* Subtle background color change */
 }
+
+/* ===== Laptop / PC Responsive Layout ===== */
+@media (min-width: 769px) {
+    body { margin-left: 0; margin-top: 0; padding: 80px clamp(18px, 2vw, 32px) 40px calc(100px + clamp(18px, 2vw, 32px)); }
+    .report-container { width: min(100%, 1100px); margin: 0 auto; box-sizing: border-box; overflow-x: auto; }
+}
+@media (max-width: 1366px) and (min-width: 769px) {
+    .report-container { max-width: 1000px; padding: 26px; }
+    .logo-left { height: 76px; }
+    .logo-left2, .logos-right img { height: 68px; }
+    .college-info h1 { font-size: 23px; }
+}
+@media (max-width: 1100px) and (min-width: 769px) { .main-table, .header-table { min-width: 900px; } }

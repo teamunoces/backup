@@ -165,11 +165,11 @@ function viewSavedData() {
 
             tableBody.innerHTML += `
             <tr>
-                <td>${entry.barangay}</td>
+                <td>${entry.barangay_label || entry.barangay}</td>
                 <td>${Number(entry.population).toLocaleString()}</td>
                 <td>${Number(entry.households).toLocaleString()}</td>
                 <td>
-                    <button onclick="editEntry('${entry.barangay}',${entry.population},${entry.households})">Edit</button>
+                    <button onclick="editEntry('${entry.barangay_key || entry.barangay}',${entry.population},${entry.households})">Edit</button>
                    
                 </td>
             </tr>

@@ -1,0 +1,361 @@
+/* ================= DARK MODE STYLES ================= */
+
+/* Smooth transitions for all elements */
+body, 
+body *,
+.report-container,
+.container,
+input,
+button,
+table,
+td,
+th,
+.signature-line,
+.name-underlined,
+textarea,
+.line-input,
+.paper-lines {
+    transition: background-color 0.3s ease, 
+                color 0.2s ease, 
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+/* Base Dark Mode */
+body.dark-mode {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+
+/* ===== Frames (Layout Shell) ===== */
+body.dark-mode #sidebarFrame {
+    background: #1e1e1e !important;
+    border-right: 1px solid #333 !important;
+}
+
+body.dark-mode #headerFrame {
+    background: #1e1e1e !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+    border-bottom: 1px solid #333 !important;
+}
+
+/* ===== Report Container ===== */
+body.dark-mode .report-container {
+    background-color: #2d2d2d !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3) !important;
+    color: #e0e0e0 !important;
+}
+
+/* ===== Header Section ===== */
+body.dark-mode .header-content {
+    border-bottom-color: #404040 !important;
+}
+
+body.dark-mode .college-info h1 {
+    color: #7aa2f7 !important;
+}
+
+body.dark-mode .college-info p,
+body.dark-mode .college-info a {
+    color: #b0b0b0 !important;
+}
+
+body.dark-mode .office-title {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .double-line {
+    border-top-color: #7aa2f7 !important;
+}
+
+/* ===== Main Titles ===== */
+body.dark-mode header h1 {
+    color: #ffffff !important;
+}
+
+/* ===== Report List ===== */
+body.dark-mode .report-list {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .report-list li {
+    color: #d0d0d0 !important;
+}
+
+body.dark-mode .label {
+    color: #ffffff !important;
+}
+
+/* ===== Textarea Input ===== */
+body.dark-mode .line-input {
+    background: #3d3d3d !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .line-input:focus {
+    background: #4a4a4a !important;
+}
+
+body.dark-mode .line-input::placeholder {
+    color: #888 !important;
+}
+
+/* ===== Action Buttons ===== */
+body.dark-mode .buttons button {
+    background-color: #3d3d3d !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #555 !important;
+}
+
+body.dark-mode .buttons button:hover {
+    background-color: #4d4d4d !important;
+    border-color: #666 !important;
+    transform: translateY(-2px) !important;
+}
+
+body.dark-mode .buttons button[onclick] {
+    background: linear-gradient(135deg, #3d6b2a 0%, #2d4d1a 100%) !important;
+    color: white !important;
+}
+
+body.dark-mode .buttons button[onclick]:hover {
+    filter: brightness(1.1) !important;
+}
+
+body.dark-mode .buttons a button {
+    background-color: transparent !important;
+    color: #7aa2f7 !important;
+    border: 2px solid #4a9e1f !important;
+}
+
+body.dark-mode .buttons a button:hover {
+    background-color: rgba(74, 158, 31, 0.2) !important;
+    border-color: #7aa2f7 !important;
+}
+
+/* ===== Approvals Section ===== */
+body.dark-mode .approvals-container {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .signature-group {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .signature-line {
+    border-bottom: 1.5px solid #555 !important;
+}
+
+body.dark-mode .title {
+    color: #b0b0b0 !important;
+}
+
+body.dark-mode .bold {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .admin-block {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .name-underlined {
+    color: #ffffff !important;
+    text-decoration-color: #7aa2f7 !important;
+}
+
+/* ===== Document Info Table ===== */
+body.dark-mode .doc-header {
+    border-color: #404040 !important;
+}
+
+body.dark-mode .doc-header td {
+    border-color: #404040 !important;
+}
+
+body.dark-mode .doc-header td.label {
+    background-color: #0a2a5e !important;
+    color: white !important;
+}
+
+body.dark-mode .doc-header td.value {
+    background-color: #3d3d3d !important;
+    color: #e0e0e0 !important;
+    border-color: #404040 !important;
+}
+
+body.dark-mode .doc-header td.value input,
+body.dark-mode .doc-header td.value p {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .doc-header td.value input::placeholder {
+    color: #888 !important;
+}
+
+/* ===== ADMIN COMMENT - EXCLUDED FROM DARK MODE ===== */
+/* Preserving original styling exactly - remains centered and yellow */
+.admin-comment {
+    width: 950px;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+#admincomment {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db;
+    color: #856404;
+    border: 2px solid #f59e0b;
+    border-left: 8px solid #f59e0b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+    font-style: italic;
+    padding: 20px;
+    font-family: inherit;
+    border-radius: 4px 12px 12px 4px;
+    resize: none;
+}
+
+/* Ensure dark mode does NOT affect admin comment */
+body.dark-mode .admin-comment {
+    width: 950px;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    background: transparent;
+}
+
+body.dark-mode #admincomment {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 10px;
+    background-color: #fff9db !important;
+    color: #856404 !important;
+    border: 2px solid #f59e0b !important;
+    border-left: 8px solid #f59e0b !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    font-weight: 600 !important;
+    font-style: italic !important;
+    padding: 20px !important;
+    font-family: inherit !important;
+    border-radius: 4px 12px 12px 4px !important;
+    resize: none !important;
+}
+
+/* ===== Scrollbar for Dark Mode ===== */
+body.dark-mode::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 6px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* ===== Focus Outlines for Accessibility ===== */
+body.dark-mode button:focus,
+body.dark-mode .line-input:focus {
+    outline: 2px solid #7aa2f7;
+    outline-offset: 2px;
+}
+
+/* ===== Link Styling ===== */
+body.dark-mode a {
+    color: #7aa2f7 !important;
+}
+
+body.dark-mode a:visited {
+    color: #bb9af7 !important;
+}
+
+/* ===== Horizontal Rule ===== */
+body.dark-mode hr {
+    border-color: #404040 !important;
+}
+
+/* ===== Print Styles - Preserve Original Print Appearance ===== */
+@media print {
+    body.dark-mode {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+    
+    body.dark-mode .report-container {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+    }
+    
+    body.dark-mode .line-input {
+        background: white !important;
+        color: black !important;
+    }
+    
+    body.dark-mode .line-input::placeholder {
+        color: #999 !important;
+    }
+    
+    body.dark-mode .college-info h1 {
+        color: #4f81bd !important;
+    }
+    
+    body.dark-mode .double-line {
+        border-top-color: #4f81bd !important;
+    }
+    
+    body.dark-mode .buttons,
+    body.dark-mode #sidebarFrame,
+    body.dark-mode #headerFrame {
+        display: none !important;
+    }
+    
+    body.dark-mode .signature-line {
+        border-bottom: 1.5px solid #000000 !important;
+    }
+    
+    body.dark-mode .name-underlined {
+        color: #000000 !important;
+        text-decoration-color: #000000 !important;
+    }
+    
+    body.dark-mode .doc-header td.label {
+        background-color: #002060 !important;
+        color: white !important;
+    }
+    
+    body.dark-mode .doc-header td.value {
+        color: #000000 !important;
+    }
+    
+    /* Admin comment retains original print styles */
+    body.dark-mode .admin-comment {
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+    
+    body.dark-mode #admincomment {
+        background-color: #fff9db !important;
+        color: #856404 !important;
+        border: 2px solid #f59e0b !important;
+        border-left: 8px solid #f59e0b !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                    0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    }
+}

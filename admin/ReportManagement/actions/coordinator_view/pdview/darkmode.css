@@ -100,6 +100,40 @@ body.dark-mode .field input::placeholder {
     color: #888 !important;
 }
 
+/* Admin Feedback */
+body.dark-mode .admin-comment {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+body.dark-mode .admin-comment-label {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+body.dark-mode #admincomment {
+    background-color: #fff9db !important;
+    color: #5f4300 !important;
+    border: 2px solid #f59e0b !important;
+    border-left: 8px solid #f59e0b !important;
+    border-radius: 4px 12px 12px 4px !important;
+    box-shadow: none !important;
+    font-weight: 600 !important;
+    font-style: italic !important;
+    padding: 20px 22px !important;
+}
+
+body.dark-mode #admincomment:focus {
+    background-color: #fff9db !important;
+    border-color: #f59e0b !important;
+    border-left-color: #f59e0b !important;
+    outline: none !important;
+}
+
+body.dark-mode #admincomment::placeholder {
+    color: #856404 !important;
+}
+
 /* Labels */
 body.dark-mode label,
 body.dark-mode .form-group label,

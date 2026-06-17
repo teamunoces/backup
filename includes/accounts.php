@@ -2,7 +2,7 @@
 require_once 'config.php';
 
 $host = 'localhost';
-$dbname = 'accounts';
+$dbname = 'ces_database';
 $username = 'root';
 $password = '';
 

@@ -12,12 +12,12 @@ function updateStatus(status) {
     const feedback = feedbackEl.value.trim();
     const reportType = reportTypeEl.value;
 
-    if (feedback === "") {
-        alert("Please enter admin feedback before updating the status.");
+    if (status !== "approve" && feedback === "") {
+        alert("Please enter admin feedback before rejecting or marking the report as need fix.");
         return;
     }
 
-    fetch('/admin/Dashboard/Pending/review/action/action.php', { 
+    fetch('/SYSTEM_VERSION_!/admin/Dashboard/Pending/review/action/action.php', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -37,9 +37,9 @@ function updateStatus(status) {
             // Clear the feedback field
             document.getElementById('admincomment').value = '';
             // Redirect to the pending page
-            window.location.href = '/admin/Dashboard/Pending/pending.html'; // Adjust this path as needed
+            window.location.href = '/SYSTEM_VERSION_!/admin/Dashboard/Pending/Pending.html';
         } else {
-            alert('Failed to update: ' + data.message);
+            alert('Failed to update: ' + (data.message || 'Unknown error'));
         }
     })
     .catch(err => {

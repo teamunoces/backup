@@ -4,7 +4,7 @@ body {
     background-color: #f5f5f5;
     margin: 0;
     padding: 0;
-    margin-left: 150px; /* Account for fixed sidebar */
+    margin-left: 100px; /* Account for fixed sidebar */
     display: flex;
     justify-content: center;
     min-height: 100vh;
@@ -12,7 +12,7 @@ body {
 
 /* ===== Frames (Layout Shell) ===== */
 #sidebarFrame {
-    width: 150px;
+    width: 100px;
     height: 100vh;
     border: none;
     position: fixed;
@@ -27,9 +27,9 @@ body {
     border: none;
     position: fixed;
     top: 0;
-    left: 150px;
+    left: 100px;
     right: 0;
-    width: calc(100% - 150px);
+    width: calc(100% - 100px);
     z-index: 1000;
     background: #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -50,7 +50,7 @@ body {
 
 /* Ensure the table doesn't get squashed */
 .form-container table {
-    width: 95%;
+    width: 100%;
     border-collapse: collapse;
     table-layout: fixed; /* Helps keep columns aligned */
 }
@@ -72,6 +72,10 @@ body {
 
 .logo-left {
     height: 90px;
+    width: auto;
+}
+.logo-left2 {
+    height: 80px;
     width: auto;
 }
 
@@ -299,139 +303,177 @@ footer {
     transform: scale(0.96);
 }
 
-/* ===== 3. Approvals Section (The "Professional" Look) ===== */
+/* ===== 3. Approvals Section ===== */
 .approvals {
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-    margin-top: 50px;
     width: 100%;
-}
-
-.approval-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-}
-
-.signature-block {
-    flex: 1;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center names/titles */
+    gap: 45px;
+    font-family: "Calibri", "Calibri Light", Arial, sans-serif;
+    font-size: 12pt;
+}
+
+/* labels: Prepared by, Recommending Approval, Approved by */
+.approvals .label,
+.signature-block .label {
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+/* prepared by block stays on the left */
+.ces-head-block {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+/* ===== CES HEAD (Prepared by) ===== */
+#ces_head {
+    display: inline-block;
+    border-bottom: 1px solid #000;
+
+    font-weight: normal;
+    text-transform: uppercase;
+
+    padding: 0 12px;
+    min-width: 180px;   /* short but visible */
+    max-width: 260px;   /* prevents long line */
+    width: auto;
+}
+
+/* ===== TITLE ===== */
+.ces-head {
+    display: block;
+    margin-top: 6px;
+    font-weight: bold;
+    border: none !important;
+}
+
+/* ===== CENTER SIGNATURES ===== */
+.signature-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
-.signature-block .label {
-    align-self: flex-start; /* "Noted by" stays left */
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-
+/* ===== NAME (Recommending / Approved) ===== */
 .signature-block .name {
-    width: 80%;
-    border-bottom: 1px solid #000; /* Signature Line */
+    display: inline-block;   /* key for short line */
+    border-bottom: 1px solid #000;
+
     font-weight: bold;
     text-transform: uppercase;
+
+    padding: 0 15px;
+    min-width: 260px;   /* shorter than before */
+    max-width: 340px;   /* prevents over-stretch */
+    width: auto;
+
     margin-bottom: 5px;
-    min-height: 20px;
 }
 
+/* ===== TITLE ===== */
 .signature-block .title {
-    font-size: 0.9rem;
+    margin-top: 6px;
     font-weight: bold;
 }
-.name{
-    border-bottom: 1px solid #000;
-    width: 200px; /* adjust size */
+
+/* remove old conflicting rule */
+.name {
+    width: auto;
 }
-/* ===== 4. Document Info Table (The Navy Blue Style) ===== */
+
+/* ===== 4. Document Info Table ===== */
+.document-info {
+    margin-top: 25px;
+    width: 215px;
+    max-width: 215px;
+}
+
+/* Table */
 .doc-header {
-    width: auto; /* Shrinks the table to fit the content */
-    margin-right: auto; /* Keeps it pushed to the left */
+    width: 215px;
+    max-width: 215px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    border: none;
 }
 
+/* All cells */
 .doc-header td {
-    border: 1px solid #000;
-    padding: 5px 10px;
+    border: 1px solid #d1d1d1;
+    padding: 2px 3px;
+    height: 15px;
+    line-height: 1.05;
+    vertical-align: middle;
 }
 
+/* Blue label */
+.doc-header td.label,
 .doc-header .label {
     background-color: #002060;
     color: #fff;
-    width: 25%;
-    font-size: 11px;
-}
-
-.doc-header .value {
-    /* Reduced from 75% to 50% or 30% depending on how narrow you want it */
-    width: 70%; 
-    font-size: 11px;
-    /* This ensures the text stays aligned left within that narrower space */
-    text-align: left; 
-}
-/*------------------------------------------ Container positioning */
-.document-info {
-    margin-top: 50px; /* Adjust based on space needed after approvals */
-    width: 30%;
-}
-
-/* Table Styling */
-.doc-header {
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    font-size: 11px; /* Matches the compact look of the screenshot */
-    border: 1px solid #d1d1d1;
-}
-
-/* The first column (Dark Blue Background) */
-.doc-header td.label {
-    background-color: #002060; /* Dark Navy Blue */
-    color: white;
     font-weight: bold;
-    padding: 4px 8px;
-    border: 1px solid #d1d1d1;
-    text-align: left;
+    font-size: 9px;
     white-space: nowrap;
-    width: 100px;
+    width: 78px;
+    max-width: 78px;
+    padding: 2px 3px;
+    text-align: left;
 }
 
-/* The middle colon column */
+/* Colon column */
 .doc-header td:nth-child(2) {
-    width: 2%;
-    padding: 0 1px;
+    width: 8px;
+    max-width: 8px;
+    padding: 0;
     font-weight: bold;
+    text-align: center;
     border-top: 1px solid #d1d1d1;
     border-bottom: 1px solid #d1d1d1;
 }
 
-/* The value column */
-.doc-header td.value {
-    padding: 4px 10px;
+/* Value column */
+.doc-header td.value,
+.doc-header .value {
+    width: 129px;
+    max-width: 129px;
+    padding: 2px 4px;
+    font-size: 9px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
     border: 1px solid #d1d1d1;
-    min-width: 120px;
 }
 
-/* Styling the inputs/text inside the value cell */
-.doc-header td.value input, 
-.doc-header td.value p {
+/* Input/text inside value */
+.doc-header td.value input,
+.doc-header td.value p,
+.doc-header .value input,
+.doc-header .value p {
     border: none;
     background: transparent;
     font-family: inherit;
     font-size: inherit;
-    color: #333;
+    color: #000;
     margin: 0;
     padding: 0;
     width: 100%;
+    line-height: 1.05;
 }
 
-/* Remove default focus outline for disabled inputs */
+/* Disabled input */
 .doc-header td.value input:disabled {
-    color: black;
+    color: #000;
     cursor: default;
+    opacity: 1;
 }
-
-
 
 /* ===== Responsive Adjustments ===== */
 @media screen and (max-width: 768px) {
@@ -459,4 +501,21 @@ footer {
         flex-direction: column;
         align-items: flex-start;
     }
+}
+.approvals,
+.approvals * {
+    font-weight: bold !important;
+}
+
+.approvals #ces_head,
+.approvals .signature-block .name {
+    display: inline-block;
+    width: auto;
+    min-width: 180px;
+    max-width: 100%;
+    padding: 0 12px 2px 12px;
+    border-bottom: 1px solid #000 !important;
+    text-decoration: none !important;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
