@@ -60,7 +60,7 @@ if (isset($_SESSION['user_id'])) {
     }
     exit();
 } else {
-    header("Location: " . BASE_URL . "/login/login.html");
+    header("Location: " . BASE_URL . "/login1/login.html");
     exit();
 }
 ?>
